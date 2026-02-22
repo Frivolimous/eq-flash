@@ -1,0 +1,262 @@
+﻿package ui.main{
+	import flash.display.Sprite;
+	import flash.display.Bitmap;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
+	import ui.assets.NumberButton;
+	import ui.StatusUI;
+	import ui.windows.ExportWindow;
+	import flash.display.MovieClip;
+	import ui.assets.FadeTransition;
+	import ui.main.assets.PopLoadUI;
+	import utils.KongregateAPI;
+	import ui.windows.ExportWindow;
+	import utils.GameData;
+	import utils.PlayfabAPI;
+	import tournament.TournamentData;
+
+	public class TournamentDuelUI extends BaseUI{
+		var charView0:SpriteModel=new SpriteModel();
+		var charView1:SpriteModel=new SpriteModel();
+		
+		var duelButtons:Sprite=new Sprite;
+		var popLoadUI:PopLoadUI;
+		
+		var leaveLoad:int;
+		
+		var transType:int=0;
+		var topChallenge:Boolean;
+		var transTo:BaseUI;
+		
+		public function TournamentDuelUI(_transTo:BaseUI){
+			transTo=_transTo;
+			challengeB.update(StringData.CHALLENGE,switchChallenge,true);
+			practiceB.update("Practice",switchPractice,true);
+			duelB.update(StringData.DUEL,switchDuel,true);
+			
+			doneB.update(StringData.DONE,goMenu);
+			soundB.update(null,muteSound,true);
+			fightB.update(StringData.FIGHT,goFight);
+			
+			load2B.update(StringData.LOAD_CHAR,popLoad);
+			stats1B.update(StringData.STATUS,goStatistics);
+			stats1B.index=0;
+			stats2B.update(StringData.STATUS,goStatistics);
+			stats2B.index=1;
+			importB.update(StringData.IMPORT,popImport);
+			challengeLoadB.update(StringData.LOAD_CHAR,popLoadChallenge);
+			
+			charView0.view.x=145;
+			charView0.view.y=280;
+			addChild(charView0.view);
+			
+			charView1.view.x=510;
+			charView1.view.y=280;
+			addChild(charView1.view);
+			
+			duelButtons.addChild(load2B);
+			duelButtons.addChild(importB);
+			
+			switchPractice();
+		}
+		
+		var popping:Boolean=false;
+		public function popLoad(){
+			if (popping) return;
+			
+			if (popLoadUI!=null){
+				removeChild(popLoadUI);
+			}
+			popping=true;
+			GameData.getCharacterArray(popLoad2);
+		}
+		
+		public function popLoad2(a:Array){
+			popLoadUI=new PopLoadUI(a,loadChar,1);
+			popLoadUI.x=406.6;
+			popLoadUI.y=84.5;
+			addChild(popLoadUI);
+			popping=false;
+		}
+		
+		function popLoadChallenge(){
+			if (popLoadUI!=null){
+				removeChild(popLoadUI);
+			}
+			if (challengeB.toggled){
+				popLoadUI=new PopLoadUI(Facade.saveC._Challenge,loadChar,1,5);
+			}else{
+				popLoadUI=new PopLoadUI(TournamentData.exhibitionTest,loadPractice,1,0);
+			}
+			popLoadUI.x=406.6;
+			popLoadUI.y=84.5;
+			addChild(popLoadUI);
+		}
+		
+		public function loadChar(i:int,player:int=1){
+			Facade.saveC.startLoadChar(Facade.gameM.enemyM,i,false,null,finishLoadChar);
+		}
+		
+		public function loadPractice(i:int,player:int=1){
+			Facade.saveC.loadShort(Facade.gameM.enemyM,TournamentData.exhibitionTest[i],-1,false);
+			finishLoadChar();
+		}
+				
+		function finishLoadChar(){
+			display(Facade.gameM.enemyM,1);
+			
+			if (popLoadUI!=null){
+				removeChild(popLoadUI);
+				popLoadUI=null;
+			}
+		}
+		
+		
+		function popImport(){
+			if (KongregateAPI.disabled){
+				new ExportWindow(null,finishImport);
+			}else{
+				utils.KongregateAPI.shareBrowse();
+			}
+		}
+		
+		public function finishImport(s:String){
+			if (Facade.currentUI==this){
+				Facade.saveC.importSave(Facade.gameM.enemyM,s);
+				display(Facade.gameM.enemyM,1)
+			}
+		}
+		
+		public function switchChallenge(){
+			challengeB.toggled=true;
+			practiceB.toggled=false;
+			duelB.toggled=false;
+			if (contains(duelButtons)){
+				removeChild(duelButtons);
+			}
+			if (popLoadUI!=null){
+				removeChild(popLoadUI);
+				popLoadUI=null;
+			}
+			addChild(challengeLoadB);
+			loadChar(5);
+		}
+		
+		public function switchPractice(){
+			challengeB.toggled=false;
+			practiceB.toggled=true;
+			duelB.toggled=false;
+			if (contains(duelButtons)){
+				removeChild(duelButtons);
+			}
+			if (popLoadUI!=null){
+				removeChild(popLoadUI);
+				popLoadUI=null;
+			}
+			addChild(challengeLoadB);
+			loadPractice(0);
+		}
+		
+		public function switchDuel(){
+			challengeB.toggled=false;
+			practiceB.toggled=false;
+			duelB.toggled=true;
+			addChild(duelButtons);
+			if (popLoadUI!=null){
+				removeChild(popLoadUI);
+				popLoadUI=null;
+			}
+			if (contains(challengeLoadB)){
+				removeChild(challengeLoadB);
+			}
+			loadChar(0);
+		}
+		
+		public function goStatistics(i:int){
+			transType=-1;
+			if (i==0){
+				new FadeTransition(this,new StatusUI(this,Facade.gameM.playerM));
+			}else{
+				new FadeTransition(this,new StatusUI(this,Facade.gameM.enemyM,false));
+			}
+			
+		}
+		
+		public function goMenu(){
+			Facade.gameUI.background.clear();
+			transType=0;
+			new FadeTransition(this,transTo);
+		}
+		
+		public function goFight(){
+			Facade.gameUI.background.clear();
+			Facade.gameUI.background.loadBacks(Math.floor(Math.random()*13),Math.floor(Math.random()*3));
+			Facade.gameM.duel=true;
+			Facade.gameUI.transTo=this;
+			transType=1;
+			new FadeTransition(this,Facade.gameUI);
+		}
+		
+		var _tempSave:Array;
+		
+		override public function closeWindow(){
+			Facade.gameUI.background.clear();
+			if (transType==0){
+				//back to main menu
+				Facade.gameM.enemyM.exists=false;
+			}else if (transType==1){
+				//to DuelUI
+				_tempSave=Facade.saveC.getArray(Facade.gameM.playerM);
+				Facade.saveC.saveTemp(0,Facade.gameM.playerM);
+				Facade.saveC.saveTemp(1,Facade.gameM.enemyM);
+				Facade.saveC.loadTemps();
+			}else if (transType==-1){
+				//to Statistics
+			}
+		}
+		
+		override public function openWindow(){
+			soundB.toggled=Facade.soundC.mute;
+			
+			if (transType==0){
+				//from Menu
+				switchPractice();
+			}else if (transType==1){
+				//from Duel
+				Facade.saveC.loadTemps();
+				if (_tempSave!=null){
+				Facade.saveC.startLoadChar(Facade.gameM.playerM,-100,false,_tempSave);
+					_tempSave=null;
+				}
+			}else if (transType==-1){
+				//from Statistics
+			}
+			
+			display(Facade.gameM.playerM,0);
+			display(Facade.gameM.enemyM,1);
+			
+			Facade.gameM.duel=false;
+		}
+		
+		function display(_v:SpriteModel,i:int){
+			var s:String=_v.label+" "+_v.title+"\n<font size='18'>"+StringData.level(_v.level)+"</font>";
+			
+			if (i==0){
+				Facade.saveC.loadShort(charView0,Facade.saveC.getShortArray(_v));
+				charView0.view.makeSepia(1.5);
+				
+				nameTitle0.htmlText=s;
+			}else{
+				Facade.saveC.loadShort(charView1,Facade.saveC.getShortArray(_v));
+				charView1.view.makeSepia(1.5);
+			
+				nameTitle1.htmlText=s;
+			}
+		}
+		
+		public function muteSound(){
+			Facade.soundC.mute=!Facade.soundC.mute;
+			soundB.toggled=Facade.soundC.mute;
+		}
+	}
+}
