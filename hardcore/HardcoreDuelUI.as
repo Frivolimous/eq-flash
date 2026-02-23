@@ -1,12 +1,10 @@
 ﻿package hardcore{
 	import flash.display.Sprite;
 	import ui.StatusUI;
-	import ui.windows.ExportWindow;
 	import flash.display.MovieClip;
 	import ui.assets.FadeTransition;
 	import ui.main.assets.PopLoadUI;
 	import utils.KongregateAPI;
-	import ui.windows.ExportWindow;
 	import utils.GameData;
 	import utils.PlayfabAPI;
 	import ui.main.BaseUI;

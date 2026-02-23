@@ -180,7 +180,6 @@
 		}
 		
 		public static var numCharacters:int=0;
-		public static var oldSaveChecked:int=0;
 		public static var versionChecked:int=0;
 		public static var dataUpdated:int=0;
 		
@@ -498,7 +497,7 @@
 //===============CONSTANTLY RUN======================
 
 		public static function get BUSY():Boolean{
-			if (SaveControl.BUSY>0 || queue.length>0 || PlayfabAPI.SUBMITTING>0 || DELETING>0){
+			if (SaveControl.BUSY>0 || queue.length>0 || DELETING>0){
 				return true;
 			}
 			return false;
@@ -509,9 +508,7 @@
 		}
 		
 		static var timerExpired:int=0;
-		public static function checkBusy(e:Event){
-			if (PlayfabAPI.expired) return;
-			
+		public static function checkBusy(e:Event){			
 			submitDataPerTick();
 			if (ready && BUSY){
 				//BUSY=true;
@@ -619,18 +616,12 @@
 				Facade.setQuality(_Save.data.quality);
 			}
 			Facade.stage.addEventListener(Event.ENTER_FRAME,waiting);
-			if (!KongregateAPI.upload){
-				PlayfabAPI.initNoKong();
-				Facade.stage.addEventListener(Event.ENTER_FRAME,waitingPlayfab);
-			}else{
-				KongregateAPI.init();
-				Facade.stage.addEventListener(Event.ENTER_FRAME,waitingKong);
-			}
+
+			PlayfabAPI.init();
+			Facade.stage.addEventListener(Event.ENTER_FRAME,waitingPlayfab);
+
 			Facade.stage.addEventListener(Event.ENTER_FRAME,checkBusy);
 			loading=new LoadingOrb;
-			/*loading.x=578;
-			loading.y=325;
-			loading.width=loading.height=41;*/
 			loading.x=616.6;
 			loading.y=397.35;
 			loading.width=loading.height=20;
@@ -644,16 +635,8 @@
 		}
 		
 		public static function waiting(e:Event){
-			if (PlayfabAPI.SUBMITTING>0) return;
-			if (!KongregateAPI.connected && KongregateAPI.upload) return;
 			if (!PlayfabAPI.connected) return;
-			
-			if (oldSaveChecked==0){
-				oldSaveChecked=1;
-				getOldSave();
-				return;
-			}else if (oldSaveChecked<2) return;
-			
+						
 			if (dataUpdated==0){
 				dataUpdated=1;
 				updateData();
@@ -663,19 +646,14 @@
 			if (versionChecked<2) return;
 			
 			ready=true;
-			KongregateAPI.postConnection();
 			Facade.stage.removeEventListener(Event.ENTER_FRAME,waiting);
 		}
 		
 		public static function waitingKong(e:Event){
 			if (KongregateAPI.connected){
-				if (!KongregateAPI.upload){
-					Facade.addLine("Offline Mode Enabled");
-					PlayfabAPI.initNoKong();
-				}else{
-					Facade.addLine("Kong Connected! Trying Playfab...");
-					PlayfabAPI.init();
-				}
+				Facade.addLine("Offline Mode Enabled");
+				PlayfabAPI.init();
+
 				Facade.stage.removeEventListener(Event.ENTER_FRAME,waitingKong);
 				Facade.stage.addEventListener(Event.ENTER_FRAME,waitingPlayfab);
 			}
@@ -693,13 +671,6 @@
 		}
 		
 		public static function finishUpdateData(_Data:Object){
-			if (_Data.logins==null){
-				PlayfabAPI.loginCount=1;
-			}else{
-				PlayfabAPI.loginCount=int(_Data.logins.Value)+1;
-			}
-			submitDataQueue([["logins",PlayfabAPI.loginCount]],true);
-		
 			if (_Data.version == null && _Data.firstVersion == null){
 				Facade.addLine("New Game!");
 				resetPlayerData();
@@ -1404,7 +1375,6 @@
 			}
 			stash[0][1]=false;
 			overflow=[];
-			PlayfabAPI.loginCount=1;
 			numCharacters=0;
 			lastChar=0;
 			cosmetics=[[],[],[],[],[],[]]
@@ -1417,127 +1387,11 @@
 			while(achievements.length<23){
 				achievements.push(false);
 			}
-			submitDataQueue([["version",VERSION],["firstVersion",VERSION],["logins",1],
+			submitDataQueue([["version",VERSION],["firstVersion",VERSION],
 							 ["cosmetics",cosmetics],["achievements",achievements], ["flags",flags],["artifacts",artifacts],["stash",stash],["overflow",overflow],["scores",scores],["lastChar",lastChar],
 							 ["player0",null],["player1",null],["player2",null],["player3",null],["player4",null]],true);
 							 
 			//RESET CHARACTER DATA AS WELL
-		}
-		
-		//==============OLD SAVE EXPORT IMPORT==========================================
-		
-		public static function saveAsk(){
-			new ConfirmWindow("Do you want to export your save data for use in Eternal Quest: Ascended?",50,50,saveOldData,0,dontSaveData);
-		}
-		
-		public static function saveOldData(i:int=0){
-			var a:Array=new Array(10);
-			
-			PlayfabAPI.submitOldSave(arrayToString(a),onSaveComplete);
-		}
-		
-		public static function dontSaveData(i:int=0){
-			new ConfirmWindow("You can save your data from your HOME.  Save Transfers are only available for a limited time!");
-		}
-		
-		public static function onSaveComplete(){
-			new ConfirmWindow("Old Save Submitted Successfully!\nPlease load Eternal Quest: Ascended to continue.");
-		}
-		
-		//START LOAD HERE!
-		public static function getOldSave(){
-			PlayfabAPI.getOldSave(oldSaveQuery);
-		}
-		
-		static var _OldSave:Array;
-		public static function oldSaveQuery(s:String){
-			if (s==null){ //NOTHING SAVED
-				endOldSave();
-			}else{
-				_OldSave=stringToArray(s);
-				new ConfirmWindow("Old Save Detected!\n\n"+getPlayerNames(_OldSave)+"\nReplace all your game data with this save?",50,50,loadOldSave,0,refuseOldSave,3);
-			}
-		}
-		
-		public static function refuseOldSave(i:int=0){
-			new ConfirmWindow("Delete this data permanently?",50,50,deleteOldSave,0,endOldSave);
-		}
-		
-		public static function deleteOldSave(i:int=0){
-			PlayfabAPI.clearOldSave(deleteConfirmed);
-		}
-		
-		public static function deleteConfirmed(){
-			new ConfirmWindow("Data deleted successfully.");
-			endOldSave();
-		}
-		
-		public static function endOldSave(i:int=0){
-			oldSaveChecked=2;
-		}
-		
-		public static function loadOldSave(i:int=0){
-			var a:Array=_OldSave;
-			/*achievements=a[0];
-			kreds=a[1];
-			stash=a[2];
-			scores=a[3];
-			firstVersion=a[4];
-			var _player0:Array=a[5];
-			var _player1:Array=a[6];
-			var _player2:Array=a[7];
-			var _player3:Array=a[8];
-			var _player4:Array=a[9];*/
-			
-			/*souls=0;
-			tutorialComplete=true;
-			newMessage=false;
-			lastChar=0;
-			boost=0;
-			cosmetics=[];*/
-			
-			artifacts=new Array(50);
-			for (var i:int=0;i<artifacts.length;i+=1){
-				artifacts[i]=-1;
-			}
-			
-			a[2][4]=[];
-			
-			if (a[4]<39){
-				cosmetics=[[],[],[],[],[],[1]];
-				a[2][4].push([Math.floor(64+Math.random()*28),0,-1,-1,0]);
-			}else{
-				cosmetics=[[],[],[],[],[],[]];
-			}
-			stash=a[2];
-			scores=a[3].concat([0,0,0,a[1],0]);
-			lastChar=0;
-			flags=[true,false,true,false,false,false,false,false,false];
-			achievements=a[0];
-			
-			saveAllPlayerData(true);
-			
-			submitDataQueue([["version",VERSION],["firstVersion",a[4]],["player0",a[5]],["player1",a[6]],["player2",a[7]],["player3",a[8]],["player4",a[9]]],true);
-			PlayfabAPI.clearOldSave(finishLoadOldSave);
-		}
-		
-		public static function finishLoadOldSave(){
-			if (cosmetics.length>0){
-				new ConfirmWindow("Old Save Data loaded successfully!\n As a founder you are rewarded with the first ever cosmetic item!");
-			}else{
-				new ConfirmWindow("Old Save Data loaded successfully! Enjoy the game!");
-			}
-			oldSaveChecked=2;
-		}
-		
-		public static function getPlayerNames(a:Array):String{
-			var m:String="";
-			for (var i:int=5;i<a.length;i+=1){
-				if (a[i]!=null){
-					m+=a[i][0]+" Lvl."+String(a[i][1])+"\n";
-				}
-			}
-			return m;
 		}
 		
 //============================SUBFUNCS=======================
@@ -1582,10 +1436,7 @@
 		public static var delay:int=0;
 		public static const DELAY:int=40;
 		public static function submitDataPerTick(){
-			if (PlayfabAPI.SUBMITTING>0){
-				delay=DELAY;
-				return;
-			}else if (delay>0){
+			if (delay>0){
 				delay-=1;
 				return;
 			}

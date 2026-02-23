@@ -17,7 +17,6 @@
 			}else{
 				removeChild(importB);
 				display.text=_code;
-				utils.PlayfabAPI.submitArena(_code);
 			}
 			Facade.stage.addChild(this);
 		}

@@ -127,12 +127,6 @@
 					img.push(book[page+1].images[i]);
 				}
 			}
-			/*trace(pageTitle.text);
-			trace(subTitle.text);
-			trace(leftPage.text);
-			trace(subTitle2.text);
-			trace(rightPage.text);*/
-			
 			
 			leftNum.text=String(page+2);
 			rightNum.text=String(page+3);

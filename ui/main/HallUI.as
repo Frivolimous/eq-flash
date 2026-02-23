@@ -72,10 +72,8 @@
 		}
 		
 		public function waitTransfer(e:Event){
-			if (utils.PlayfabAPI.SUBMITTING==0){
-				removeEventListener(Event.ENTER_FRAME,waitTransfer);
-				new FadeTransition(this,new HomeUI);
-			}
+			removeEventListener(Event.ENTER_FRAME,waitTransfer);
+			new FadeTransition(this,new HomeUI);
 		}
 		
 		public function muteSound(){

@@ -118,7 +118,7 @@
 		}
 
 		public function addText(s:String){
-			Facade.addLine(s); /****/
+			// Facade.addLine(s); /****/
 			for (var i:int=(lines.length-1);i>0;i-=1){
 				lines[i].text=lines[i-1].text;
 			}
@@ -132,7 +132,7 @@
 		}
 		
 		public function appendText(s:String){
-			Facade.addLine(s); /****/
+			// Facade.addLine(s); /****/
 			lines[0].appendText(s);
 			if (updateSubtitle){
 				Facade.gameUI.subtitle1.appendText(s);

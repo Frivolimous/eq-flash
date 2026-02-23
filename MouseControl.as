@@ -104,7 +104,6 @@
 				if (e.ctrlKey && e.shiftKey && KongregateAPI.disabled){
 					Facade.gameM.playerM.xp+=5;
 					
-					//utils.PlayfabAPI.getArenaCharacters();
 					/*if (Facade.currentUI==Facade.menuUI){
 						gameM.souls+=1000;
 						Facade.menuUI.popPrestige();

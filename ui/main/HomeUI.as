@@ -21,7 +21,6 @@
 			stashB.update(StringData.STASH,popStash);
 			doneB.update(StringData.LETSGO,navOut,true);
 			soundB.update(null,muteSound,true);
-			//exportB.update(StringData.EXPORT,utils.GameData.saveAsk);
 			
 			addChild(listUI);
 			cOpen=listUI;

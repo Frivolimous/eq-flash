@@ -26,12 +26,12 @@
 		
 		public static var api:*; // Kongregate API reference
 		
-		public static var connected:Boolean=false;
+		public static var connected:Boolean=true;
 		public static var apiPath:String;
 		
 		public static var disabled:Boolean=false;
 		
-		public static var upload:Boolean=true;
+		public static var upload:Boolean=false;
 		
 		public static function init(){
 			if (!upload){

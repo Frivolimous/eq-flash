@@ -5,7 +5,6 @@
 	import flash.text.TextFormat;
 	import ui.assets.NumberButton;
 	import ui.StatusUI;
-	import ui.windows.ExportWindow;
 	import flash.display.MovieClip;
 	import ui.assets.FadeTransition;
 	import ui.main.assets.PopLoadUI;

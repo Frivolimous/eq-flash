@@ -10,8 +10,7 @@
 	import ui.assets.FadeTransition;
 	import ui.main.assets.PopLoadUI;
 	import utils.KongregateAPI;
-	import ui.windows.ExportWindow;
-	import utils.GameData;
+=	import utils.GameData;
 	import utils.PlayfabAPI;
 	import tournament.TournamentData;
 

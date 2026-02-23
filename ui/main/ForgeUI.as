@@ -8,7 +8,6 @@
 	import items.StatisticsInventoryUI;
 	import skills.SkillUI;
 	import ui.windows.ActionWindow;
-	import ui.windows.ExportWindow;
 	import ui.assets.FadeTransition;
 	import ui.windows.StatusWindow2;
 	import ui.assets.GraphicButton;

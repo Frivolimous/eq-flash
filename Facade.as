@@ -20,6 +20,7 @@
 	import flash.events.FocusEvent;
 	import flash.events.Event;
 	import ui.main.HomeUI;
+	import ui.windows.ConfirmWindow;
 	
 	public class Facade{
 		public static const YELLOW:uint=0xFFF43F,
@@ -71,8 +72,6 @@
 			gameUI.init();
 			menuUI.init();
 			
-			//worldC.init();
-			//duelC.init();
 			mouseC.init();
 			soundC.init();
 			
@@ -84,7 +83,6 @@
 		}
 		
 		public static function postRender(_muted:Boolean=false){
-			//KongregateAPI.init();
 			postAuthenticate();
 			if (_muted){
 				soundC.mute=true;
@@ -154,6 +152,7 @@
 		public static function addLine(s:String){
 			//if (DEBUG && stage!=null) trace(s);
 			//trace(s);
+			new ConfirmWindow(s);
 		}
 		
 		public static function unfocus(e:Event){
