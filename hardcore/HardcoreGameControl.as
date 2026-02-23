@@ -18,7 +18,7 @@
 	import system.actions.ActionBase;
 	import system.effects.EffectBase;
 	import system.effects.EffectData;
-	import utils.PlayfabAPI;
+	import utils.SteamAPI;
 	import utils.KongregateAPI;
 	import ui.assets.AchievementDisplay;
 	
@@ -40,7 +40,7 @@
 			if (!running) return;
 			//You Die!
 			
-			PlayfabAPI.deletePlayerData(["player-100"]);
+			SteamAPI.deletePlayerData(["player-100"]);
 			Facade.gameM.playerM.saveSlot=-1;
 			if (gameUI.goingTown){
 				gameUI.navOut();

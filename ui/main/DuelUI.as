@@ -11,7 +11,6 @@
 	import utils.KongregateAPI;
 	import ui.windows.ExportWindow;
 	import utils.GameData;
-	import utils.PlayfabAPI;
 
 	public class DuelUI extends BaseUI{
 		var charView0:SpriteModel=new SpriteModel();

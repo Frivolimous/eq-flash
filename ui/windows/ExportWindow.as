@@ -1,7 +1,6 @@
 ﻿package ui.windows{
 	import flash.display.Sprite;
 	import flash.display.Bitmap;
-	import utils.PlayfabAPI;
 	
 	public class ExportWindow extends Sprite{
 		var importFunction:Function;

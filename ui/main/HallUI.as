@@ -4,7 +4,6 @@
 	import ui.assets.FadeTransition;
 	import flash.events.Event;
 	import utils.GameData;
-	import utils.PlayfabAPI;
 	
 	public class HallUI extends BaseUI{
 		var achieveA:Array=new Array(10);

@@ -12,7 +12,6 @@
 	import ui.assets.FadeTransition;
 	import ui.main.BaseUI;
 	import flash.display.Sprite;
-	import utils.KongregateAPI;
 	import utils.GameData;
 	import ui.assets.Tooltip;
 	import utils.SpriteSheets;
@@ -52,18 +51,11 @@
 		public static function initialize(_s:Stage){
 			stage=_s;
 			stage.frameRate=FRAMERATE;
-			
-			if (!DEBUG && !KongregateAPI.sitelock()){
-				while(stage.numChildren>0){
-					stage.removeChild(stage.getChildAt(0));
-				}
-				stage.addChild(new SITELOCKED);
-				return;
-			}
+
 			GameData.init();
 			SpriteSheets.init();
 		}
-		
+
 		public static function postAuthenticate(){
 			gameUI=new GameUI();
 			
@@ -149,10 +141,21 @@
 			popV.update(_label,_description,_o,instant,_type,_level);
 		}
 		
+		public static var traceCW:ConfirmWindow;
 		public static function addLine(s:String){
+			if (DEBUG) {
+				if (traceCW) {
+					traceCW.display.appendText("\n" + s);
+				} else {
+					traceCW = new ConfirmWindow(s, 50, 50, removeTraceWindow);
+				}
+			}
 			//if (DEBUG && stage!=null) trace(s);
 			//trace(s);
-			new ConfirmWindow(s);
+		}
+
+		public static function removeTraceWindow(i: int) {
+			traceCW = null;
 		}
 		
 		public static function unfocus(e:Event){

@@ -6,7 +6,6 @@
 	import ui.main.assets.PopLoadUI;
 	import utils.KongregateAPI;
 	import utils.GameData;
-	import utils.PlayfabAPI;
 	import ui.main.BaseUI;
 	import ui.assets.ScrollAnnounce;
 

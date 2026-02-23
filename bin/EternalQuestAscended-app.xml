@@ -10,10 +10,12 @@
         <content>EternalQuest.swf</content>
         <visible>true</visible>
         <width>640</width>
-        <height>480</height>
+        <height>450</height>
 
         <fullScreen>false</fullScreen>
         <renderMode>direct</renderMode>
+        <resizable>false</resizable>
+        <maximizable>false</maximizable>
     </initialWindow>
 
     <supportedProfiles>desktop extendedDesktop</supportedProfiles>

@@ -8,7 +8,7 @@
 	import artifacts.ArtifactModel;
 	import utils.GameData;
 	import flash.events.Event;
-	import utils.PlayfabAPI;
+	import utils.SteamAPI;
 	import limits.LimitModel;
 	import limits.LimitData;
 	
@@ -149,8 +149,7 @@
 			}
 			
 			if (playerToUpdate==null || _save==null || _save[0]==null){
-				PlayfabAPI.expiredSession();
-				PlayfabAPI.expiredMC.display.text="An error has occurred loading your character.  Please refresh the page to continue.";
+				SteamAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
 				return;
 			}
 			

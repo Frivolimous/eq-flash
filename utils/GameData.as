@@ -125,7 +125,7 @@
 			}
 		}
 		public static function saveHardcore(){
-			PlayfabAPI.submitHighscoreScript(hardcore);
+			SteamAPI.submitHighscoreScript(hardcore);
 			submitDataQueue([[HARDCORE,hardcore]]);
 			pingServer();
 		}
@@ -339,11 +339,11 @@
 		}
 		
 		public static function checkArenaSubmit(f:Function){
-			PlayfabAPI.retrievePlayerData(["T1Submit"],function (_Data:Object){ f(_Data.T1Submit==null?false:_Data.T1Submit.Value) });
+			SteamAPI.retrievePlayerData(["T1Submit"],function (_Data:Object){ f(_Data.T1Submit==null?false:_Data.T1Submit.Value) });
 		}
 		
 		public static function getCharacterArray(f:Function){
-			PlayfabAPI.retrievePlayerData(["player0","player1","player2","player3","player4"],function (_Data:Object){ finishGetCharacterArray(_Data,f); });
+			SteamAPI.retrievePlayerData(["player0","player1","player2","player3","player4"],function (_Data:Object){ finishGetCharacterArray(_Data,f); });
 		}
 		
 		public static function finishGetCharacterArray(_Data:Object,f:Function){
@@ -369,7 +369,7 @@
 			var doneDeleting:Function=function (e:Event){
 				if (!BUSY){
 					if (j>0){
-						PlayfabAPI.deletePlayerData(["player"+String(numCharacters)]);
+						SteamAPI.deletePlayerData(["player"+String(numCharacters)]);
 						j=-1;
 					}else{
 						Facade.stage.removeEventListener(Event.ENTER_FRAME,doneDeleting);
@@ -386,7 +386,7 @@
 		}
 		
 		public static function loadCharacter(i:int,f:Function){ //returns a character array to be converted into a character for use in the game
-			PlayfabAPI.retrievePlayerData(["player"+String(i)],function(_Data:Object){
+			SteamAPI.retrievePlayerData(["player"+String(i)],function(_Data:Object){
 										  if (_Data["player"+String(i)]!=null){
 										  	f(stringToArray(_Data["player"+String(i)].Value));
 										  }else{
@@ -469,8 +469,7 @@
 				/ (8) On Character Creation
 				*/
 			if (a[0]==null || !(a[0] is String) || (a[0] is String && a[0].length==0)){
-				PlayfabAPI.expiredSession();
-				PlayfabAPI.expiredMC.display.text="There was an issue saving your character.  Please refresh the game to continue.";
+				SteamAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
 				return;
 			}
 			submitDataQueue([["player"+String(_slot),a]],_override);
@@ -515,8 +514,7 @@
 				Facade.stage.addChild(loading);
 				timerExpired+=1;
 				if (timerExpired>1000) {
-					PlayfabAPI.expiredSession();
-					PlayfabAPI.expiredMC.display.text="A save request has taken much longer than expected causing a fatal error.  Please refresh your browser to continue.";
+					SteamAPI.expiredSession("A save request has taken much longer than expected causing a fatal error.  Please refresh your browser to continue.");
 				}
 				
 			}else{
@@ -527,7 +525,7 @@
 		}
 		
 		public static function pingServer(){
-			PlayfabAPI.getTime(getPong);
+			SteamAPI.getTime(getPong);
 		}
 		
 		public static function getPong(_date:String){
@@ -537,7 +535,7 @@
 		}
 		
 		public static function pingForClocks(){
-			PlayfabAPI.getTime(pongClocks);
+			SteamAPI.getTime(pongClocks);
 		}
 		
 		public static function pongClocks(_date:String,_now:Boolean=false){
@@ -617,8 +615,8 @@
 			}
 			Facade.stage.addEventListener(Event.ENTER_FRAME,waiting);
 
-			PlayfabAPI.init();
-			Facade.stage.addEventListener(Event.ENTER_FRAME,waitingPlayfab);
+			SteamAPI.init();
+			Facade.stage.addEventListener(Event.ENTER_FRAME,waitingSteam);
 
 			Facade.stage.addEventListener(Event.ENTER_FRAME,checkBusy);
 			loading=new LoadingOrb;
@@ -635,7 +633,7 @@
 		}
 		
 		public static function waiting(e:Event){
-			if (!PlayfabAPI.connected) return;
+			if (!SteamAPI.connected) return;
 						
 			if (dataUpdated==0){
 				dataUpdated=1;
@@ -649,25 +647,15 @@
 			Facade.stage.removeEventListener(Event.ENTER_FRAME,waiting);
 		}
 		
-		public static function waitingKong(e:Event){
-			if (KongregateAPI.connected){
-				Facade.addLine("Offline Mode Enabled");
-				PlayfabAPI.init();
-
-				Facade.stage.removeEventListener(Event.ENTER_FRAME,waitingKong);
-				Facade.stage.addEventListener(Event.ENTER_FRAME,waitingPlayfab);
-			}
-		}
-		
-		public static function waitingPlayfab(e:Event){
-			if (PlayfabAPI.connected){
-				Facade.addLine("Playfab Connected!");
-				Facade.stage.removeEventListener(Event.ENTER_FRAME,waitingPlayfab);
+		public static function waitingSteam(e:Event){
+			if (SteamAPI.connected){
+				Facade.addLine("Steam Connected!");
+				Facade.stage.removeEventListener(Event.ENTER_FRAME,waitingSteam);
 			}
 		}
 		
 		public static function updateData(){
-			PlayfabAPI.retrieveAllPlayerData(finishUpdateData);
+			SteamAPI.retrieveAllPlayerData(finishUpdateData);
 		}
 		
 		public static function finishUpdateData(_Data:Object){
@@ -789,7 +777,7 @@
 							m["player"+String(i)]=_Data["player"+String(i)].Value;
 						}
 					}
-					PlayfabAPI.submitPlayerData(m,true);
+					SteamAPI.submitPlayerData(m,true);
 				}
 					
 					
@@ -824,7 +812,7 @@
 					flags=[stringToValue(_Data.tutorialComplete.Value),false,stringToValue(_Data.newMessage.Value),false];
 					scores=scores.concat([_Data.boost!=null?stringToValue(_Data.boost.Value):0,_Data.suns!=null?stringToValue(_Data.suns.Value):0,
 										  stringToValue(_Data.souls.Value),stringToValue(_Data.kreds.Value),0]);
-					PlayfabAPI.deletePlayerData(["boost","kreds","newMessage","souls","suns","tutorialComplete"]);
+					SteamAPI.deletePlayerData(["boost","kreds","newMessage","souls","suns","tutorialComplete"]);
 				}
 				/*if (_version<=41){
 					options=[0.8,0.2,false,false,false,false,false,false,false];
@@ -1025,7 +1013,7 @@
 					
 					_Save.data.bundlePopped=false;
 					m["player-100"]=null;
-					//PlayfabAPI.deletePlayerData(["player-100"]);
+					//SteamAPI.deletePlayerData(["player-100"]);
 				}
 				
 				if (_version<95){
@@ -1033,7 +1021,7 @@
 					m["player-100"]=null;
 					hardcore=0;
 					submitDataQueue([[HARDCORE,hardcore]]);
-					//PlayfabAPI.deletePlayerData(["player-100"]);
+					//SteamAPI.deletePlayerData(["player-100"]);
 				}
 				
 				if (_version<99){
@@ -1070,7 +1058,7 @@
 					resetSave();
 					_Save=SharedObject.getLocal("OPTIONS");
 				}
-				if (_resubmit) PlayfabAPI.submitPlayerData(m,true);
+				if (_resubmit) SteamAPI.submitPlayerData(m,true);
 				
 				new ScrollAnnounce(getVersionLog());
 				Facade.addLine("Version "+_version.toString()+" is not current, updating now...");
@@ -1447,7 +1435,7 @@
 					var _pair:Array=overQueue.shift();
 					m[_pair[0]]=valueToJSON(_pair[1]);
 				}
-				PlayfabAPI.submitPlayerData(m,true);
+				SteamAPI.submitPlayerData(m,true);
 				delay=DELAY;
 			}else if (queue.length>0){
 				var m:Object=new Object;
@@ -1455,7 +1443,7 @@
 					_pair=queue.shift();
 					m[_pair[0]]=valueToJSON(_pair[1]);
 				}
-				PlayfabAPI.submitPlayerData(m,false);
+				SteamAPI.submitPlayerData(m,false);
 				delay=DELAY;
 			}
 		}
