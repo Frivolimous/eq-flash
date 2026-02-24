@@ -1,6 +1,5 @@
 ﻿package gameEvents {
 	import flash.events.Event;
-	import utils.KongregateAPI;
 	
 	public class GameEventManager {
 		public static var listeners:Array=new Array;
@@ -9,7 +8,6 @@
 		public static function init(){
 			Facade.stage.addEventListener(Event.ENTER_FRAME,onTick);
 			listeners.push(Autopause);
-			listeners.push(utils.KongregateAPI);
 		}
 		
 		public static function register(_v:*){

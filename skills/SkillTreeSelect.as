@@ -2,7 +2,6 @@
 	import flash.display.Sprite;
 	import ui.windows.ConfirmWindow;
 	import utils.GameData;
-	import utils.KongregateAPI;
 	import ui.assets.PopAcolyte;
 	import ui.assets.PopPaladin;
 	import ui.assets.PopRogue;

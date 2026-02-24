@@ -21,89 +21,11 @@
 							TOURNAMENT1_REACHED:String="tournament1Reached",
 							ASCEND_REACHED:String="numAscends",
 							EPIC_REACHED:String="epicReached";
-		
-		public static const contentCharacter:String="Character";
-		
-		public static var api:*; // Kongregate API reference
-		
-		public static var connected:Boolean=true;
-		public static var apiPath:String;
-		
-		public static var disabled:Boolean=false;
-		
-		public static var upload:Boolean=false;
-		
-		public static function init(){
-			if (!upload){
-				connected=true;
-				return;
-			}
-			
-			//return;
-			// Pull the API path from the FlashVars
-			var paramObj:Object = LoaderInfo(Facade.stage.loaderInfo).parameters;
-			Facade.addLine(String(paramObj));
-			
-			// The API path. The "shadow" API will load if testing locally. 
-			apiPath = paramObj.kongregate_api_path || "http://cdn1.kongregate.com/flash/API_AS3_Local.swf";
-			
-			if (apiPath=="http://cdn1.kongregate.com/flash/API_AS3_Local.swf"){
-				upload=false;
-				connected=true;
-				return;
-			}
-			
-			// Allow the API access to this SWF
-			Security.allowDomain(apiPath);
-			
-			// Load the API
-			var request:URLRequest = new URLRequest(apiPath);
-			var loader:Loader = new Loader();
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadComplete);
-			loader.load(request);
-			Facade.stage.addChild(loader);
-		}
-		
-		// This function is called when loading is complete
-		static function loadComplete(e:Event) {
-			
-			// Save Kongregate API reference
-			api = e.target.content;
-		
-			// Connect to the back-end
-			api.services.connect();
-			api.sharedContent.addLoadListener(contentCharacter,loadContent);
-			Facade.stage.addEventListener(MouseEvent.CLICK,onClick);
-			
-			if (api.services.isGuest()){
-				loginWindow=new LoginWindow;
-				Facade.stage.addChild(loginWindow);
-				api.services.addEventListener("login", onLogin);
-			}else{
-				connected=true;
-			}
-		}
-		
-		static var loginWindow:LoginWindow;
-		static function onLogin(e:Event){
-			connected=true;
-			if (loginWindow!=null){
-				loginWindow.parent.removeChild(loginWindow);
-				loginWindow=null;
-			}
-		}
-		
-		public static function popLogin(){
-			api.services.showRegistrationBox();
-		}
-		
-		public static function postConnection(){
-			if (!upload) return;
-			api.mtx.requestUserItemList(null, consumeToKreds);
-		}
+								
+		public static var disabled:Boolean = true;
 		
 		public static function submitAll(){
-			if (!upload) return;
+			if (disabled) return;
 			
 			submit(AREA_REACHED);
 			submit(LEVEL_REACHED);
@@ -116,7 +38,7 @@
 		}
 		
 		public static function submit(s:String){
-			if (!upload) return;
+			if (disabled) return;
 			
 			var i:int=0;
 			switch(s){
@@ -156,7 +78,7 @@
 					i=GameData.epics[0];
 					break;
 			}
-			api.stats.submit(s,i);
+			// api.stats.submit(s,i);
 		}
 		
 		public static function checkEvent(e:GameEvent){
@@ -179,28 +101,6 @@
 			}
 			if (i>=800){
 				GameData.achieve(GameData.ACHIEVE_ROGUE);
-			}
-		}
-		
-		public static function sitelock():Boolean{
-			//if (!upload) return true;
-			
-			/*if (InputControl._DevMode){
-				return true;
-			}*/
-			var url:String=Facade.stage.loaderInfo.url;
-			Facade.addLine("URL: "+url);
-			var urlStart:Number=url.indexOf("://")+3;
-			var urlEnd:Number=url.indexOf("/",urlStart);
-			var domain:String=url.substring(urlStart,urlEnd);
-			var LastDot:Number=domain.lastIndexOf(".")-1;
-			var domEnd:Number=domain.lastIndexOf(".",LastDot)+1;
-			domain=domain.substring(domEnd,domain.length);
-			
-			if (domain=="kongregate.com"){
-				return true;
-			}else{
-				return false;
 			}
 		}
 		
@@ -294,16 +194,16 @@
 		public static function buyTokens(rSuccess:Function,amount:int){
 			_Success=rSuccess;
 			
-			if (!upload){
+			if (disabled){
 				checkIngamePurchase(0);
 			}else{
-				api.mtx.purchaseItems(["tokens"+String(amount)],checkPurchase);
+				// api.mtx.purchaseItems(["tokens"+String(amount)],checkPurchase);
 			}
 		}
 		
 		public static function checkPurchase(result:Object) {
 			if (result.success){
-				api.mtx.requestUserItemList(null, consumeItem);
+				// api.mtx.requestUserItemList(null, consumeItem);
 			}else{
 				_Success=null;
 			}
@@ -317,7 +217,7 @@
 						case "tokens55": case "tokens120": case "tokens260": case "tokens700": case "tokens150": case "tokens15":
 							_Success();
 							_Success=null;
-							api.mtx.useItemInstance(_item.id,nullFunction);
+							// api.mtx.useItemInstance(_item.id,nullFunction);
 							GameData.achieve(GameData.ACHIEVE_HOLY);
 							break;
 					}
@@ -334,27 +234,27 @@
 					switch(_item.identifier){
 						case "tokens55":
 							_kreds+=55;
-							api.mtx.useItemInstance(_item.id,nullFunction);
+							// api.mtx.useItemInstance(_item.id,nullFunction);
 							break;
 						case "tokens120":
 							_kreds+=120;
-							api.mtx.useItemInstance(_item.id,nullFunction);
+							// api.mtx.useItemInstance(_item.id,nullFunction);
 							break;
 						case "tokens260":
 							_kreds+=260;
-							api.mtx.useItemInstance(_item.id,nullFunction);
+							// api.mtx.useItemInstance(_item.id,nullFunction);
 							break;
 						case "tokens700":
 							_kreds+=700;
-							api.mtx.useItemInstance(_item.id,nullFunction);
+							// api.mtx.useItemInstance(_item.id,nullFunction);
 							break;
 						case "tokens1500":
 							_kreds+=1500;
-							api.mtx.useItemInstance(_item.id,nullFunction);
+							// api.mtx.useItemInstance(_item.id,nullFunction);
 							break;
 						case "tokens15":
 							_kreds+=15;
-							api.mtx.useItemInstance(_item.id,nullFunction);
+							// api.mtx.useItemInstance(_item.id,nullFunction);
 							break;
 					}
 				}
@@ -366,62 +266,16 @@
 			}
 		}
 		
-		public static function shareSave(s:String,_level:int,_display:DisplayObject){
-			if (!upload) return;
-			
-			api.sharedContent.save(contentCharacter,s,nullFunction,_display,"Level "+(_level).toString());
-		}
-		
-		public static function shareBrowse(){
-			if (!upload) return;
-			
-			api.sharedContent.browse(contentCharacter);
-		}
-		
-		public static function loadContent(result:Object){
-			Facade.menuUI.duelUI.finishImport(result.content);
-		}
-		
-		public static function submitAvatar(_display:DisplayObject){
-			if (!upload) return;
-			
-			api.images.submitAvatar(_display,nullFunction);
-		}
-		
 		public static function nullFunction(result:Object=null){
 			
 		}
 		
-		public static function onClick(e:MouseEvent){
-			if (!upload) return;
-			
-			if (e.shiftKey){
-				submitAvatar(e.target as DisplayObject);
-			}
-		}
-		
 		public static function getName():String{
-			if (!upload){
+			// if (disabled){
 				return "OfflineMode4";
-			}else{
-				return api.services.getUsername();
-			}
-		}
-		
-		public static function getUserID():int{
-			if (!upload){
-				return 01234;
-			}else{
-				return api.services.getUserId();
-			}
-		}
-		
-		public static function getGameAuthToken():String{
-			if (!upload){
-				return "AUTH";
-			}else{
-				return api.services.getGameAuthToken();
-			}			
+			// }else{
+			// 	return api.services.getUsername();
+			// }
 		}
 	}	
 }

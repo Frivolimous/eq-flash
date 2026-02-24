@@ -6,7 +6,6 @@
 	import flash.display.MovieClip;
 	import ui.windows.ConfirmWindow;
 	import utils.GameData;
-	import utils.KongregateAPI;
 	import flash.display.Sprite;
 	import hardcore.*;
 	import ui.StatusUI;
@@ -18,7 +17,7 @@
 		var treasureIndex:int;
 		var blinkT:Timer=new Timer(1000);
 		
-		var SPECIAL_EVENT:Boolean=true;
+		var SPECIAL_EVENT:Boolean=false;
 		
 		public function init(){
 			soundB.update(null,muteSound,true);
@@ -41,8 +40,7 @@
 			setupButton(epicB,goEpic);
 			setupButton(stashB,popStash);
 			
-			if (SPECIAL_EVENT && GameData.getFlag(GameData.FLAG_TUTORIAL)){
-			//if (KongregateAPI.disabled){
+			if (Facade.DEBUG || (SPECIAL_EVENT && GameData.getFlag(GameData.FLAG_TUTORIAL))){
 				setupButton(tentB,popEvent);
 			}else{
 				removeChild(tentB);

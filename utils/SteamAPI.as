@@ -30,7 +30,7 @@
                 steam = new FRESteamWorks();
                 if (steam.init()) {
                     connected = true;
-                    Facade.addLine("Steam Connected: " + steam.getPersonaName());
+                    // Facade.addLine("Steam Connected: " + steam.getPersonaName());
                 }
             } catch (e:Error) {
                 Facade.addLine("Steam Init Failed: " + e.message);
@@ -44,7 +44,7 @@
             var cloudExists:Boolean = false;
             if (connected) {
                 cloudExists = steam.fileExists(SAVE_FILE_NAME);
-                Facade.addLine("Steam Cloud Exists: " + cloudExists);
+                // Facade.addLine("Steam Cloud Exists: " + cloudExists);
             }
 
             if (cloudExists) {
@@ -75,6 +75,8 @@
                         Facade.addLine("Data Corrupt: " + e.message);
                     }
                 }
+            } else {
+                Facade.addLine("No Cloud Save");
             }
             
             // Default fallback

@@ -108,7 +108,6 @@
 			return m;
 		}
 		
-		
 		public static function spawnItem(_level:int,_index:int,_charges:int=-1):ItemModel{
 			if (_index<=63){
 				switch (_index){
@@ -2364,7 +2363,7 @@
 					Level -1, Acc +10% (Gr. Only)
 					RChem -15% (Gr. Only)
 					Purge Buff x1 (on Enemy, Gr. Only)
-*/
+					*/
 				}
 			}else if (_index<=111){
 				switch(_index){

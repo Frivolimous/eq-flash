@@ -77,16 +77,9 @@
 			if (GameData.refreshes>=1){
 				GameData.refreshes-=1;
 				restockAll();
-			}else if (Facade.gameM.kreds>0){
-				new ConfirmWindow("Use 1 Power Token to refresh the store slots?",50,50,restockPT);
 			}else{
-				new ConfirmWindow("Not enough Refreshes or Power Tokens to refresh.")
+				new ConfirmWindow("Not enough Refreshes. Get more by completing Zones.");
 			}
-		}
-		
-		function restockPT(i:int=0){
-			Facade.gameM.kreds-=1;
-			restockAll();
 		}
 		
 		public function restock(){

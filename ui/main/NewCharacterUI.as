@@ -8,7 +8,6 @@
 	import skills.SkillData;
 	import ui.assets.*;
 	import flash.text.TextField;
-	import utils.KongregateAPI;
 	import utils.GameData;
 	import ui.StatusUI;
 	import skills.SkillTreeWindow;
@@ -131,7 +130,7 @@
 		
 		
 		public function finishSave(){
-			if (KongregateAPI.disabled){
+			if (Facade.DEBUG){
 				if (inputName.text.substr(0,4)=="TEST"){
 					gameM.playerM.skillBlock.skillPoints=60;
 					gameM.playerM.level=60;
@@ -326,16 +325,10 @@
 		}
 		
 		public function popRename(){
-			if (GameData.kreds<1){
-				new ConfirmWindow("Not enough Power Tokens.");
-			}else{
-				new ConfirmWindow("Rename your character for 1 Power Token?",50,50,finishRename);
-			}
+			new ConfirmWindow("Rename your character?",50,50,finishRename);
 		}
 		
 		public function finishRename(i:int=0){
-			GameData.kreds-=1;
-			
 			removeChild(displayName);
 			removeChild(renameB);
 			
@@ -377,7 +370,7 @@
 				if (contains(inputName)) removeChild(inputName);
 				
 				renameB.update("Rename",popRename);
-				renameB.setDesc("Rename Character","Rename your character for 1 Power Token");
+				renameB.setDesc("Rename Character","Give your new character a new name?");
 			}
 			
 			display(gameM.playerM);

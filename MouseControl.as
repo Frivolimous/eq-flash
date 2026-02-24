@@ -15,7 +15,6 @@
 	import flash.display.SimpleButton;
 	import flash.ui.Mouse;
 	import ui.assets.SymbolPair;
-	import utils.KongregateAPI;
 	import flash.ui.Keyboard;
 	import flash.events.KeyboardEvent;
 	import flash.desktop.Clipboard;
@@ -30,7 +29,6 @@
 	import limits.LimitData;
 	import limits.LimitView;
 	import utils.GameData;
-	import ui.main.ForgeUI;
 	
 	public class MouseControl{
 		var gameM:GameModel;
@@ -100,7 +98,7 @@
 					//Facade.achieve(9);
 				}
 			}else if (e.keyCode==Keyboard.P){
-				if (e.ctrlKey && e.shiftKey && KongregateAPI.disabled){
+				if (e.ctrlKey && e.shiftKey && Facade.DEBUG){
 					Facade.gameM.playerM.xp+=5;
 					
 					/*if (Facade.currentUI==Facade.menuUI){
@@ -121,13 +119,12 @@
 		}
 		
 		public function mouseClick(e:MouseEvent){
-			if (utils.KongregateAPI.disabled){
+			if (Facade.DEBUG){
 				if (e.shiftKey){
 					Facade.gameM.enemyM.view.toIdle();
 					Facade.gameM.enemyM.setHealth(-5);
 					//Facade.gameM.playerM.levelup();
 					//Facade.gameM.playerM.challenge+=1;
-					//utils.KongregateAPI.submit(KongregateAPI.CHALLENGE_REACHED);
 					//Facade.gameM.playerM.increaseBeltStack(1);
 					//Facade.gameM.playerM.addOverflowItem(ItemData.shadowItem());
 					//Facade.gameUI.addItem(new ItemView(ItemData.spawnItem(0,31,1)));

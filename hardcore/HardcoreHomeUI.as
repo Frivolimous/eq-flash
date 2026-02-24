@@ -10,7 +10,6 @@
 	import ui.assets.InstantTransition;
 	import utils.GameData;
 	import ui.assets.ScrollAnnounce;
-	import utils.KongregateAPI;
 	import ui.main.NewCharacterUI;
 	import ui.main.BaseUI;
 	import ui.main.ArtifactUI;

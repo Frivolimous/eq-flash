@@ -3,7 +3,6 @@
 	import items.ItemModel;
 	import items.ItemData;
 	import ui.windows.ConfirmWindow;
-	import utils.KongregateAPI;
 	import artifacts.ArtifactData;
 	import artifacts.ArtifactModel;
 	import utils.GameData;
@@ -202,7 +201,7 @@
 				
 				Facade.gameUI.background.clear();
 			}
-			KongregateAPI.submitAll();
+			// Check all achievements on player load
 			if (_player.level>=60) GameData.maxLevel(_player);
 		}
 		

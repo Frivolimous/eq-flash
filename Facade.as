@@ -1,5 +1,4 @@
 ﻿package{
-	
 	import flash.display.Stage;
 	import flash.text.TextFormat;
 	import ui.*;
@@ -85,6 +84,9 @@
 		}
 		
 		public static function startGame(v:*){
+			if (DEBUG) {
+				GameData.setFlag(GameData.FLAG_TUTORIAL, true);
+			}
 			//***in order to go straight to the exhibition, comment the following line and uncomment the next one***
 			new FadeTransition(v,new HomeUI);
 			//new InstantTransition(null,menuUI.homeUI);			

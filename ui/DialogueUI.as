@@ -470,7 +470,7 @@
 					makeBox("I AM THE MASTER OF TIME AND SPACE!",2,1);
 					addContinue();break;
 				case 704:
-					makeBox("You have the Flux Transister don't you...",0,1);
+					makeBox("You have the Flex Transister don't you...",0,1);
 					addContinue();break;
 				case 750:
 					makeBox("Alright I beat you, now give me what I came for.",0,1);

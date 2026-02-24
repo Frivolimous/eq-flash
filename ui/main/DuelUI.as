@@ -8,7 +8,6 @@
 	import flash.display.MovieClip;
 	import ui.assets.FadeTransition;
 	import ui.main.assets.PopLoadUI;
-	import utils.KongregateAPI;
 	import ui.windows.ExportWindow;
 	import utils.GameData;
 
@@ -269,20 +268,19 @@
 		}
 		
 		public function popExport(){
-			if (KongregateAPI.disabled){
 				new ExportWindow(Facade.saveC.exportSave(Facade.gameM.playerM));
-			}else{
-				var _toSave:SpriteModel=Facade.gameM.playerM;
-				KongregateAPI.shareSave(Facade.saveC.exportSave(_toSave),_toSave.level,_toSave.view);
-			}
+
+			// STEAM SHARE?
+
+				// var _toSave:SpriteModel=Facade.gameM.playerM;
+				// *.shareSave(Facade.saveC.exportSave(_toSave),_toSave.level,_toSave.view);
 		}
 		
 		function popImport(){
-			if (KongregateAPI.disabled){
-				new ExportWindow(null,finishImport);
-			}else{
-				utils.KongregateAPI.shareBrowse();
-			}
+			new ExportWindow(null,finishImport);
+
+			// STEAM IMPORT?
+			//*.shareBrowse();
 		}
 		
 		public function finishImport(s:String){

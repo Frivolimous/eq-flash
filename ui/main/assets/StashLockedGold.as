@@ -1,6 +1,5 @@
 ﻿package ui.main.assets {
 	import flash.display.Sprite;
-	import utils.KongregateAPI;
 	import utils.GameData;
 	import ui.windows.ConfirmWindow;
 	

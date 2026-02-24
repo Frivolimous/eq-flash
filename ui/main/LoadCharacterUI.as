@@ -7,7 +7,6 @@
 	import items.StatusInventoryUI;
 	import ui.windows.ConfirmWindow;
 	import ui.assets.FadeTransition;
-	import utils.KongregateAPI;
 	import utils.GameData;
 	
 	public class LoadCharacterUI extends BaseUI{

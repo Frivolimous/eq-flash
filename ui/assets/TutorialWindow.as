@@ -7,7 +7,6 @@
 	import items.ItemModel;
 	import items.ItemData;
 	import skills.SkillData;
-	import utils.KongregateAPI;
 	import utils.GameData;
 	import items.ItemBox;
 	import system.actions.ActionPriorities;

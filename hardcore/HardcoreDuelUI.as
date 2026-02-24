@@ -4,7 +4,6 @@
 	import flash.display.MovieClip;
 	import ui.assets.FadeTransition;
 	import ui.main.assets.PopLoadUI;
-	import utils.KongregateAPI;
 	import utils.GameData;
 	import ui.main.BaseUI;
 	import ui.assets.ScrollAnnounce;

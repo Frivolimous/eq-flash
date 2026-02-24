@@ -25,8 +25,6 @@
 	import ui.assets.QualityBar;
 	import system.buffs.BuffBase;
 	import system.buffs.BuffData;
-	import hardcore.HardcoreDuelUI;
-	import hardcore.HardcoreDuelControl;
 	import hardcore.HardcoreGameControl;
 	
 	public class GameUI extends BaseUI{
@@ -427,7 +425,7 @@
 			}else{
 				if (Facade.gameC is EpicGameControl){
 					GameData.setupZone(GameData.epics[0],false);
-				}else if (Facade.gameC is hardcore.HardcoreGameControl){
+				}else if (Facade.gameC is HardcoreGameControl){
 					gameM.eTotal=2;
 				}else{
 					if (GameData.boost>0){

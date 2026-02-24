@@ -297,7 +297,7 @@
 		
 		public static function achieve(i:int){
 			if (i==313){
-				for (var j:int=0;j<10;j+=1){
+				for (var j:int=0;j<28;j+=1){
 					if (!achievements[j]){
 						achievements[j]=true;
 						new AchievementDisplay(i);

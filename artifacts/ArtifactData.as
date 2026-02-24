@@ -72,13 +72,6 @@
 				
 		public static function zoneToSoul(_zone:int,_start:int,_noLow:Boolean=true):int{
 			if (_noLow && _zone<101) return 0;
-			//var m:int=GameData.scores[GameData.SCORE_ASCENDS]*100;
-			//m==400/(Math.exp((5-GameData.scores[GameData.SCORE_ASCENDS])/4)+1)
-			/**/
-			//var m:int=(GameData.scores[GameData.SCORE_ASCENDS])/(GameData.scores[GameData.SCORE_ASCENDS]+10)*1200;
-			//var m:int=1000;
-			//var m:int=21*Math.exp(_zone/44);
-			//if (m>400000) m=400000;
 			
 			var m:int=calc(_zone);
 			if (_start>=100){
@@ -96,10 +89,6 @@
 			}
 		}
 		
-		public static function soulToZone(_soul:int):int{
-			return 44*Math.log(_soul/21);
-		}
-		
 		public static function getDesc(s:String):String{
 			switch(s){
 				case PHOENIX: return "The eternal cycle of rebirth; as sure as the arrival of death is the promise of life.  The Artifacts of the Phoenix attest to the ascension of purpose independent from reincarnation.";
@@ -114,6 +103,5 @@
 				default: return "";
 			}
 		}
-		
 	}
 }

@@ -6,7 +6,6 @@
 	import system.effects.EffectData;
 	import ui.windows.ConfirmWindow;
 	import ui.assets.FadeTransition;
-	import utils.KongregateAPI;
 	import utils.GameData;
 	import ui.assets.PopBundles;
 	import ui.assets.PopBundles2;
@@ -67,28 +66,15 @@
 			powerT.updateDisplay();
 		}
 		
-		var alreadyPaid:Boolean=false;
 		function tryRestock(){
 			if (GameData.refreshes>=1){
 				GameData.refreshes-=1;
 				restockAll();
-			}else if (Facade.gameM.kreds>0){
-				if (alreadyPaid){
-					restockPT();
-				}else{
-					new ConfirmWindow("Use 1 Power Token to refresh the store slots?",50,50,restockPT);
-				}
 			}else{
-				new ConfirmWindow("Not enough Refreshes or Power Tokens to refresh.")
+				new ConfirmWindow("Not enough Refreshes. Get more by completing Zones.");
 			}
 		}
 		
-		function restockPT(i:int=0){
-			Facade.gameM.kreds-=1;
-			alreadyPaid=true;
-			restockAll();
-			GameData.saveThis(GameData.SCORES);
-		}
 		
 		public function restock(){
 			remainText.text=String(GameData.refreshes);

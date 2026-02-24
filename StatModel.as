@@ -637,13 +637,13 @@
 				
 			}else{
 				mpower=50+0.85*_level;
-				poteff=0.5+_level*0.0005;
-				throweff=0.5+_level*0.0005;
+				poteff=0.5+_level*0.005;
+				throweff=0.5+_level*0.005;
 			}
 		}
 		
 		function damageCapped():Boolean{
-			if (Facade.gameC!=null && Facade.gameC is hardcore.HardcoreGameControl){
+			if (Facade.gameC!=null && Facade.gameC is HardcoreGameControl){
 				return true;
 			}
 			return false;
