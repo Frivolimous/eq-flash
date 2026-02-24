@@ -7,7 +7,7 @@
 	import artifacts.ArtifactModel;
 	import utils.GameData;
 	import flash.events.Event;
-	import utils.SteamAPI;
+	import utils.NoSteamXAPI;
 	import limits.LimitModel;
 	import limits.LimitData;
 	
@@ -148,7 +148,7 @@
 			}
 			
 			if (playerToUpdate==null || _save==null || _save[0]==null){
-				SteamAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
+				NoSteamXAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
 				return;
 			}
 			

@@ -157,7 +157,7 @@
 									flags[DISABLE]=true;
 									GameData.setFlag(GameData.FLAG_TUTORIAL,true);
 									Facade.gameUI.addItem(new ItemView(ItemData.spawnPremium(0)));
-									return "You can now head back to town using this handy button!\nYour hero will only travel during his next 'SAFE' action.\n\nYou're on your own from here... and take a Premium Item as a gift!\n(Check your Inventory)";
+									return "You can now head back to town using this handy button!\nYour hero will only travel during his next 'SAFE' action.\n\nYou're on your own from here... and take a Mythic Item as a gift!\n(Check your Inventory)";
 				
 				case GIFT:			makeArrow(Facade.stage,273,10,180);
 									//displayArrow.scaleX=displayArrow.scaleY=0.6;
@@ -170,7 +170,7 @@
 									toTrack=null;
 									graphics.beginFill(0,0.2);
 									graphics.drawRect(0,0,Facade.stage.stageWidth,Facade.stage.stageHeight+20);
-									return "You've been given a free Premium Item as a thank you for playing!  \nGo ahead and pick it up from the Overflow Tab in your Stash!!!";
+									return "You've been given a free Mythic Item as a thank you for playing!  \nGo ahead and pick it up from the Overflow Tab in your Stash!!!";
 				case GIFT3:			GameData.boost+=500;
 									return "You have made it far... but you have further to go!\nTake 500 extra Boosts to help you on your way to glory!";
 				default: return "";

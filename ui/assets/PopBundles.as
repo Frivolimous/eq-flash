@@ -1,6 +1,6 @@
 ﻿package ui.assets {
 	import flash.display.Sprite;
-	import utils.KongregateAPI;
+	import utils.PurchaseManager;
 	import utils.GameData;
 	import items.ItemData;
 	import ui.windows.ConfirmWindow;
@@ -49,7 +49,7 @@
 		var buying:int;
 		function buyTree(i:int){
 			buying=i;
-			KongregateAPI.buySpecial(finishBuyTree,KongregateAPI.PREMIUM_BUNDLE);
+			PurchaseManager.buySpecial(finishBuyTree,PurchaseManager.PREMIUM_BUNDLE);
 		}
 		
 		function update(){

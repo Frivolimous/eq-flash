@@ -1,6 +1,6 @@
 ﻿package ui.main.assets {
 	import flash.display.Sprite;
-	import utils.KongregateAPI;
+	import utils.PurchaseManager;
 	
 	public class StashLocked extends Sprite{
 		var refresh:Function;
@@ -15,7 +15,7 @@
 		
 		public function startPurchase(){
 			if (refresh!=null){
-				KongregateAPI.buyItem(endPurchase,20,refresh)
+				PurchaseManager.buyItem(endPurchase,20,refresh)
 			}
 		}
 		
@@ -28,7 +28,5 @@
 				}
 			}
 		}
-
 	}
-	
 }

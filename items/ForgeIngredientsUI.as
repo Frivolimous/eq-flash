@@ -32,7 +32,6 @@
 			forgeB.disabled=true;
 			
 			removeChild(previewB);
-			previewB.update(null,showPreview);
 		}
 		
 		override public function addItem(_item:ItemView):Boolean{
@@ -92,7 +91,7 @@
 				previewAmount=1;
 			}
 			
-			previewB.setDesc("Crafting Preview","Click here to see a Crafting Preview for "+previewAmount.toString()+" Power Tokens");
+			previewB.setDesc("Craftable", "This combination has a recipe! What will you get..?");
 			addChild(previewB);
 		}
 		

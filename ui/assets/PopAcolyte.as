@@ -5,7 +5,7 @@
 	import items.ItemView;
 	import items.ItemModel;
 	import utils.GameData;
-	import utils.KongregateAPI;
+	import utils.PurchaseManager;
 	import ui.windows.ConfirmWindow;
 	
 	public class PopAcolyte extends Sprite{
@@ -43,7 +43,7 @@
 		}
 		
 		function buySkillTree(){
-			KongregateAPI.buySpecial(finishBuyTree,KongregateAPI.PREMIUM_CLASS);
+			PurchaseManager.buySpecial(finishBuyTree,PurchaseManager.PREMIUM_CLASS);
 		}
 		
 		function finishBuyTree(){
@@ -54,7 +54,7 @@
 		}
 		
 		function buyBundle(i:int){
-			KongregateAPI.buySpecial(finishBuyBundle,KongregateAPI.PREMIUM_BUNDLE);
+			PurchaseManager.buySpecial(finishBuyBundle,PurchaseManager.PREMIUM_BUNDLE);
 		}
 		
 		function finishBuyBundle(){
@@ -71,7 +71,7 @@
 		}
 		
 		function buyPack(){
-			KongregateAPI.buySpecial(finishBuyPack,KongregateAPI.MINI_BUNDLE2);
+			PurchaseManager.buySpecial(finishBuyPack,PurchaseManager.MINI_BUNDLE2);
 		}
 		
 		function finishBuyPack(){

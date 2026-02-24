@@ -6,16 +6,10 @@
 	import ui.main.MiniShopUI;
 	import utils.GameData;
 	
-	public class EndWindow extends Sprite{
-		
+	public class EndWindow extends Sprite{		
 		var timerT:Timer=new Timer(1000,15);
 		
-		var scoreL:int=0;
-		var scoreR:int=0;
-		
 		var continueF:Function;
-		var progressF:Function;
-		var progressCost:int;
 		var menuF:Function;
 		
 		var extra:*;
@@ -49,17 +43,6 @@
 				}
 				display.text=s;
 				
-				if (_progressCost<=0){
-					removeChild(deathMerchant);
-				}else{
-					deathMerchant.powerT.updateDisplay();
-					deathMerchant.powerT.disabled=true;
-					deathMerchant.continue2B.update(String(_progressCost)+" Tokens",goProgress);
-					deathMerchant.continue2B.setDesc("Revive at Current Progress","Revives you and leaves the Progress Counter (top right) intact, allowing you to resume your current progress.");
-					progressCost=_progressCost;
-					progressF=_progressF;
-				}
-				
 				Facade.gameC.pauseGame(true);
 				Facade.stage.addChild(this);
 			}
@@ -80,23 +63,6 @@
 			if (parent==null) {clear(); return;}
 			close();
 			continueF();
-		}
-		
-		function goProgress(){
-			timerT.stop();
-			if (GameData.kreds>=progressCost){
-				new ConfirmWindow("You sure you want to spend "+progressCost.toString()+" PTs?",50,50,finishGoProgress,0,continueTimer);
-			}else{
-				new TokenWindow(continueTimer);
-				//new ConfirmWindow("You don't have enough Power Tokens to do this action; please purchase ",50,50,finishGoProgress,0,continueTimer);
-			}
-		}
-		
-		function finishGoProgress(i:int=0){
-			if (parent==null) {clear(); return;}
-			close();
-			GameData.kreds-=progressCost;
-			progressF();
 		}
 		
 		function continueTimer(i:int=0){

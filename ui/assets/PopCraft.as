@@ -1,6 +1,6 @@
 ﻿package ui.assets {
 	import flash.display.Sprite;
-	import utils.KongregateAPI;
+	import utils.PurchaseManager;
 	import utils.GameData;
 	import items.ItemData;
 	import ui.windows.ConfirmWindow;
@@ -42,14 +42,14 @@
 		
 		function buyMegaBundle(){
 			if (!GameData.hasAchieved(GameData.ACHIEVE_FORGE)){
-				KongregateAPI.buyItem(finishBuyMega,200);
+				PurchaseManager.buyItem(finishBuyMega,200);
 			}else{
-				KongregateAPI.buyItem(finishBuyMega,150);
+				PurchaseManager.buyItem(finishBuyMega,150);
 			}
 		}
 		
 		function buyMiniBundle(){
-			KongregateAPI.buyItem(finishBuyMini,50);
+			PurchaseManager.buyItem(finishBuyMini,50);
 		}
 		
 		function finishBuyMega(){

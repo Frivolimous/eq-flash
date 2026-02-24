@@ -7,8 +7,6 @@
 	import ui.assets.FadeTransition;
 	import ui.assets.InstantTransition;
 	import utils.GameData;
-	import ui.assets.PopCraft;
-	import ui.assets.PopRelicBundles;
 	
 	public class HomeUI extends BaseUI{
 		var listUI:Sprite=new Sprite;
@@ -65,11 +63,6 @@
 				}else{
 					finishOpen2();
 				}
-			}
-			if (!GameData._Save.data.bundlePopped && GameData.getFlag(GameData.FLAG_TUTORIAL)){
-				var _pop:PopRelicBundles=new PopRelicBundles();
-				Facade.stage.addChild(_pop);
-				GameData._Save.data.bundlePopped=true;
 			}
 		}
 		

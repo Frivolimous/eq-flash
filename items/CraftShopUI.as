@@ -3,7 +3,7 @@
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import utils.GameData;
-	import utils.KongregateAPI;
+	import utils.PurchaseManager;
 	
 	public class CraftShopUI extends BaseInventoryUI{
 		public var dropTo:BaseInventoryUI;
@@ -35,9 +35,9 @@
 				return false;
 			}
 			if (_item.model.cost<=-1000){
-				KongregateAPI.buyItemSouls(finishRemoveItem,-_item.model.cost,alsoUpdate);
+				PurchaseManager.buyItemSouls(finishRemoveItem,-_item.model.cost,alsoUpdate);
 			}else{
-				KongregateAPI.buyItem(finishRemoveItem,-_item.model.cost,alsoUpdate);
+				PurchaseManager.buyItem(finishRemoveItem,-_item.model.cost,alsoUpdate);
 			}
 			
 			return false;
@@ -94,19 +94,19 @@
 			}else{
 				if (!itemA[0].hasItem()){
 					addItemAt(new ItemView(ItemData.enchantItem(ItemData.spawnItem(15,135),0)),0);
-					itemA[0].stored.model.cost=-10;
+					itemA[0].stored.model.cost=-7;
 				}
 				if (!itemA[1].hasItem()){
 					addItemAt(new ItemView(ItemData.spawnItem(15,135)),1);
-					itemA[1].stored.model.cost=-20;
+					itemA[1].stored.model.cost=-12;
 				}
 				if (!itemA[2].hasItem()){
 					addItemAt(new ItemView(ItemData.enchantItem(ItemData.spawnItem(15,135),1)),2);
-					itemA[2].stored.model.cost=-15;
+					itemA[2].stored.model.cost=-9;
 				}
 				if (!itemA[3].hasItem()){
 					addItemAt(new ItemView(ItemData.spawnItem(15,136)),3);
-					itemA[3].stored.model.cost=-15;
+					itemA[3].stored.model.cost=-8;
 				}
 			}
 		}

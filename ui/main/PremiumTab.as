@@ -7,45 +7,20 @@
 	import ui.windows.ConfirmWindow;
 	import ui.assets.FadeTransition;
 	import utils.GameData;
-	import ui.assets.PopBundles;
-	import ui.assets.PopBundles2;
-	import ui.assets.PopCraft;
-	import ui.assets.PopHairBundles;
-	import ui.assets.PopRelicBundles;
 	
 	public class PremiumTab extends Sprite{
 		public var inventory:StoreInventoryUI;
 		var restockAll:Function;
 		
 		public function PremiumTab(){
-			bundleB.update("Paladin/Acolyte",popBundle);
-			bundle2B.update("Rogue/Ranger",popBundle2);
-			hairPackB.update("Hair Packs",popPacks);
-			relicPackB.update("Relic Packs",popRelic);
-			craftPackB.update("Crafting Packs",popCraft);
+			// bundleB.update("Paladin/Acolyte",popBundle);
+			// bundle2B.update("Rogue/Ranger",popBundle2);
+			// hairPackB.update("Hair Packs",popPacks);
+			// relicPackB.update("Relic Packs",popRelic);
+			// craftPackB.update("Crafting Packs",popCraft);
 			refreshB.update(StringData.REFRESH,tryRestock);
 		}
-		
-		public function popBundle(){
-			Facade.stage.addChild(new PopBundles);
-		}
-		
-		public function popBundle2(){
-			Facade.stage.addChild(new PopBundles2);
-		}
-		
-		public function popPacks(){
-			new PopHairBundles;
-		}
-		
-		public function popRelic(){
-			new PopRelicBundles;
-		}
-		
-		public function popCraft(){
-			Facade.stage.addChild(new PopCraft);
-		}
-		
+				
 		public function init(_inventory:StoreInventoryUI,_restock:Function){
 			inventory=_inventory;
 			gambleUI.alsoUpdate=powerT.updateDisplay;
@@ -85,9 +60,9 @@
 					gambleUI.addItemAt(new ItemView(ItemData.spawnPremium(0,true)),i);
 				}while(((i>0) && (gambleUI.itemA[i].stored.model.index==gambleUI.itemA[i-1].stored.model.index))||((i>1) && (gambleUI.itemA[i].stored.model.index==gambleUI.itemA[i-2].stored.model.index)))				
 				if (gambleUI.itemA[i].stored.model.hasTag(EffectData.SUPER_PREMIUM)){
-					gambleUI.itemA[i].stored.model.cost=-20;
+					gambleUI.itemA[i].stored.model.cost=-8;
 				}else{
-					gambleUI.itemA[i].stored.model.cost=-15;
+					gambleUI.itemA[i].stored.model.cost=-6;
 				}
 			}
 		}
@@ -115,9 +90,9 @@
 				if (_a[i]!=null && _a[i]!=-1){
 					gambleUI.addItemAt(new ItemView(ItemData.spawnItem(0,_a[i])),i);
 					if (gambleUI.itemA[i].stored.model.hasTag(EffectData.SUPER_PREMIUM)){
-						gambleUI.itemA[i].stored.model.cost=-20;
+						gambleUI.itemA[i].stored.model.cost=-8;
 					}else{
-						gambleUI.itemA[i].stored.model.cost=-15;
+						gambleUI.itemA[i].stored.model.cost=-6;
 					}
 				}
 			}

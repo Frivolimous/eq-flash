@@ -5,7 +5,6 @@
 	import ui.windows.ConfirmWindow;
 	import items.ItemData;
 	import ui.assets.ScrollAnnounce;
-	import ui.assets.PopBundles;
 	import items.ItemModel;
 	//import tournament.TournamentData;
 	import sprites.BallHead;
@@ -23,7 +22,7 @@
 	****************/
 	
 	public class GameData {
-		public static const VERSION:int=101;
+		public static const VERSION:int=102;
 		
 		public static const FLAG_TUTORIAL:int=0,
 							FLAG_ARTIFACTS:int=1,
@@ -82,7 +81,7 @@
 							ACHIEVE_HOLY:int=6,
 							ACHIEVE_WILD:int=7,
 							ACHIEVE_NOBLE:int=8,
-							ACHIEVE_TURBO:int=9,
+							// ACHIEVE_TURBO:int=9,
 							ACHIEVE_ACOLYTE:int=10,
 							ACHIEVE_PALADIN:int=11,
 							ACHIEVE_ORDINARY_COSMO:int=12,
@@ -125,7 +124,7 @@
 			}
 		}
 		public static function saveHardcore(){
-			SteamAPI.submitHighscoreScript(hardcore);
+			NoSteamXAPI.submitHighscoreScript(hardcore);
 			submitDataQueue([[HARDCORE,hardcore]]);
 			pingServer();
 		}
@@ -255,7 +254,7 @@
 		
 		public static function addRefresh(){
 			scores[SCORE_REFRESH]+=1;
-			if (scores[SCORE_REFRESH]>100) scores[SCORE_REFRESH]=100;
+			if (scores[SCORE_REFRESH]>150) scores[SCORE_REFRESH]=150;
 		}
 		
 		public static function get clocks():int{
@@ -339,11 +338,11 @@
 		}
 		
 		public static function checkArenaSubmit(f:Function){
-			SteamAPI.retrievePlayerData(["T1Submit"],function (_Data:Object){ f(_Data.T1Submit==null?false:_Data.T1Submit.Value) });
+			NoSteamXAPI.retrievePlayerData(["T1Submit"],function (_Data:Object){ f(_Data.T1Submit==null?false:_Data.T1Submit.Value) });
 		}
 		
 		public static function getCharacterArray(f:Function){
-			SteamAPI.retrievePlayerData(["player0","player1","player2","player3","player4"],function (_Data:Object){ finishGetCharacterArray(_Data,f); });
+			NoSteamXAPI.retrievePlayerData(["player0","player1","player2","player3","player4"],function (_Data:Object){ finishGetCharacterArray(_Data,f); });
 		}
 		
 		public static function finishGetCharacterArray(_Data:Object,f:Function){
@@ -369,7 +368,7 @@
 			var doneDeleting:Function=function (e:Event){
 				if (!BUSY){
 					if (j>0){
-						SteamAPI.deletePlayerData(["player"+String(numCharacters)]);
+						NoSteamXAPI.deletePlayerData(["player"+String(numCharacters)]);
 						j=-1;
 					}else{
 						Facade.stage.removeEventListener(Event.ENTER_FRAME,doneDeleting);
@@ -386,7 +385,7 @@
 		}
 		
 		public static function loadCharacter(i:int,f:Function){ //returns a character array to be converted into a character for use in the game
-			SteamAPI.retrievePlayerData(["player"+String(i)],function(_Data:Object){
+			NoSteamXAPI.retrievePlayerData(["player"+String(i)],function(_Data:Object){
 										  if (_Data["player"+String(i)]!=null){
 										  	f(stringToArray(_Data["player"+String(i)].Value));
 										  }else{
@@ -469,7 +468,7 @@
 				/ (8) On Character Creation
 				*/
 			if (a[0]==null || !(a[0] is String) || (a[0] is String && a[0].length==0)){
-				SteamAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
+				NoSteamXAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
 				return;
 			}
 			submitDataQueue([["player"+String(_slot),a]],_override);
@@ -514,7 +513,7 @@
 				Facade.stage.addChild(loading);
 				timerExpired+=1;
 				if (timerExpired>1000) {
-					SteamAPI.expiredSession("A save request has taken much longer than expected causing a fatal error.  Please refresh your browser to continue.");
+					NoSteamXAPI.expiredSession("A save request has taken much longer than expected causing a fatal error.  Please refresh your browser to continue.");
 				}
 				
 			}else{
@@ -525,7 +524,7 @@
 		}
 		
 		public static function pingServer(){
-			SteamAPI.getTime(getPong);
+			NoSteamXAPI.getTime(getPong);
 		}
 		
 		public static function getPong(_date:String){
@@ -535,7 +534,7 @@
 		}
 		
 		public static function pingForClocks(){
-			SteamAPI.getTime(pongClocks);
+			NoSteamXAPI.getTime(pongClocks);
 		}
 		
 		public static function pongClocks(_date:String,_now:Boolean=false){
@@ -615,7 +614,7 @@
 			}
 			Facade.stage.addEventListener(Event.ENTER_FRAME,waiting);
 
-			SteamAPI.init();
+			NoSteamXAPI.init();
 			Facade.stage.addEventListener(Event.ENTER_FRAME,waitingSteam);
 
 			Facade.stage.addEventListener(Event.ENTER_FRAME,checkBusy);
@@ -633,7 +632,7 @@
 		}
 		
 		public static function waiting(e:Event){
-			if (!SteamAPI.connected) return;
+			if (!NoSteamXAPI.connected) return;
 						
 			if (dataUpdated==0){
 				dataUpdated=1;
@@ -648,14 +647,14 @@
 		}
 		
 		public static function waitingSteam(e:Event){
-			if (SteamAPI.connected){
+			if (NoSteamXAPI.connected){
 				Facade.addLine("Steam Connected!");
 				Facade.stage.removeEventListener(Event.ENTER_FRAME,waitingSteam);
 			}
 		}
 		
 		public static function updateData(){
-			SteamAPI.retrieveAllPlayerData(finishUpdateData);
+			NoSteamXAPI.retrieveAllPlayerData(finishUpdateData);
 		}
 		
 		public static function finishUpdateData(_Data:Object){
@@ -665,7 +664,6 @@
 				versionChecked=2;
 				dataUpdated=2;
 			}else{				
-				if (_Data.DevMode) KongregateAPI.disabled=true;
 				if (_Data.scores==null){
 					scores=[0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 				}else{
@@ -700,10 +698,10 @@
 					stash=stringToValue(_Data.stash.Value);
 					for (i=0;i<8;i+=1){
 						if (stash[i]==null || stash[i].length==0){
-							stash[i]=["Shared Stash "+String(i+1),true,new Array(20)];
+							stash[i]=["Shared Stash "+String(i+1),false,new Array(20)];
 						}
 						if (stash[i].length==1){
-							stash[i].push(true);
+							stash[i].push(false);
 						}
 						if (stash[i].length==2){
 							stash[i].push(new Array(20));
@@ -723,7 +721,7 @@
 					overflow=stringToValue(_Data.overflow.Value);
 				}
 				if (_Data.flags==null){
-					flags=[true,false,true,false,false,false,false,false,false];
+					flags=[true,false,false,false,false,false,false,false,false];
 				}else{
 					flags=stringToValue(_Data.flags.Value);
 					while (flags.length<9){
@@ -777,7 +775,7 @@
 							m["player"+String(i)]=_Data["player"+String(i)].Value;
 						}
 					}
-					SteamAPI.submitPlayerData(m,true);
+					NoSteamXAPI.submitPlayerData(m,true);
 				}
 					
 					
@@ -808,257 +806,41 @@
 			
 			if (_version<VERSION){
 				//UPDATES SINCE LAST VERSION
-				if (_version<=40){
-					flags=[stringToValue(_Data.tutorialComplete.Value),false,stringToValue(_Data.newMessage.Value),false];
-					scores=scores.concat([_Data.boost!=null?stringToValue(_Data.boost.Value):0,_Data.suns!=null?stringToValue(_Data.suns.Value):0,
-										  stringToValue(_Data.souls.Value),stringToValue(_Data.kreds.Value),0]);
-					SteamAPI.deletePlayerData(["boost","kreds","newMessage","souls","suns","tutorialComplete"]);
-				}
-				/*if (_version<=41){
-					options=[0.8,0.2,false,false,false,false,false,false,false];
-				}*/
+				// if (_version<99){
+				// 	if (_Data.Hardcore!=null){
+				// 		hardcore=_Data.Hardcore.Value;
+				// 		if (hardcore>=0){
+				// 			var _rank:int=HardcoreGameControl.getEliminatedPosition();
+				// 			if (_rank==1){
+				// 				rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,30],[-1,[119,1,-1,_rank]],[-1,[136,15,-1,-1]],[-1,[135,15,2,-1]],[-1,[135,15,3,1]]]);
+				// 			}else if (_rank==2){
+				// 				rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,25],[-1,[119,1,-1,_rank]],[-1,[135,15,2,-1]],[-1,[135,15,2,1]]]);
+				// 			}else if (_rank==3){
+				// 				rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,20],[-1,[119,1,-1,_rank]],[-1,[135,15,-1,-1]],[-1,[135,15,2,1]]]);
+				// 			}else if (_rank<=10){
+				// 				rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[-1,[119,1,-1,_rank]],[-1,[135,15,2,1]]]);
+				// 			}else if (_rank<=25){
+				// 				rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[-1,[119,1,-1,_rank]],[-1,[135,15,-1,1]]]);
+				// 			}else if (_rank<=50){
+				// 				rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[-1,[118,1,-1,-1]],[-1,[135,15,-1,2]]]);
+				// 			}else{
+				// 				rewards.push(["Congratulations!  Hardcore Challenge has ended!  Thank you for participating!",[-1,[118,1,-1,-1]]]);
+				// 			}
+				// 		}
+				// 	}
+				// }
 				
-				if (_version<43){
-					var _artBoost:int=0;
-					for (var i:int=0;i<artifacts.length;i+=1){
-						if (artifacts[i]>_artBoost-1) _artBoost=artifacts[i]+1
-					}
-					scores[SCORE_ASCENDS]=_artBoost;
-				}
-				
-				if (_version<45){
-					scores[SCORE_GOLD]=0;
-					for (i=0;i<5;i+=1){
-						if (_Data["player"+String(i)]!=null){
-							scores[SCORE_GOLD]+=stringToArray(_Data["player"+String(i)].Value)[7];
-						}
-					}
-				}
-				if (_version<46){
-					_Save.data.pause=[false,false,false,false,false,false,false,false,false,true,false,false,false];
-				}
-				
-				if (_version<55){
-					_resubmit=true;
-					if (_Data.firstVersion!=null && _Data.firstVersion.Value<39){
-						cosmetics=[[],[],[],[],[],[1]];
-					}else{
-						cosmetics=[[],[],[],[],[],[]];
-					}
-					for (i=0;i<5;i+=1){
-						if (_Data["player"+String(i)]==null){
-							m["player"+String(i)]=null;
-						}else{
-							var _player:Array=stringToArray(_Data["player"+String(i)].Value);
-							
-							for (var j:int=25;j<35;j+=1){
-								_player[5][j]=0;
-							}
-							_player[4]=[true,true,true,true,true,false,false];
-							_player[20]=[-1,-1,-1,-1,-1,-1];
-							_player[21]=0;
-							m["player"+String(i)]=arrayToString(_player);
-						}
-					}
-				}
-				
-				if (_version<56){
-					if (scores[SCORE_FURTHEST]>200) achieve(ACHIEVE_ACOLYTE);
-					if (scores[SCORE_FURTHEST]>300) achieve(ACHIEVE_PALADIN);
-				}
-				
-				if (_version<59){
-					_Save.data.sell=[false,false,false,false,false,false,false,false];
-				}
-				
-				if (_version<60){
-					/*if (_Data.T1Submit!=null){
-						if (TournamentData.isEliminated()){
-							var _rank:int=TournamentData.getEliminatedPosition();
-							if (_rank==1){
-								rewards.push(["Congratulations!  Season 1 Tournament has ended!\n\nTournament Reward: Rank #"+String(_rank)+"\n\n - Create Your Own Arena Champion! (ThePeasant will contact you with details).",[SCORE_SOULS,5000],[SCORE_KREDS,100],[-1,[119,1,-1,_rank,0]]]);
-							}else if (_rank==2){
-								rewards.push(["Congratulations!  Season 1 Tournament has ended!\n\nTournament Reward: Rank #"+String(_rank)+"\n\n - Create Your Own Arena Champion! (ThePeasant will contact you with details).",[SCORE_SOULS,4000],[SCORE_KREDS,50],[-1,[119,1,-1,_rank,0]]]);
-							}else if (_rank==3){
-								rewards.push(["Congratulations!  Season 1 Tournament has ended!\n\nTournament Reward: Rank #"+String(_rank)+"\n\n - Create Your Own Arena Champion! (ThePeasant will contact you with details).",[SCORE_SOULS,3000],[SCORE_KREDS,20],[-1,[119,1,-1,_rank,0]]]);
-							}else if (_rank>=7){
-								rewards.push(["Congratulations!  Season 1 Tournament has ended!\n\nTournament Reward: Rank #"+String(_rank)+"\n\n - Create Your Own Arena Champion! (ThePeasant will contact you with details).",[SCORE_SOULS,2000],[-1,[119,1,-1,_rank,0]]]);
-							}else if (_rank>=16){
-								rewards.push(["Congratulations!  Season 1 Tournament has ended!\n\nTournament Reward: Rank #"+String(_rank),[SCORE_SOULS,1250],[-1,[119,1,-1,_rank,0]]]);
-							}else{
-								rewards.push(["Congratulations!  Season 1 Tournament has ended!\n\nTournament Reward: Playoffs\n",[SCORE_SOULS,1000],[-1,[118,1,-1,-1,0]]]);
-							}
-						}else if (TournamentData.isChampion()){
-							rewards.push(["Congratulations!  Season 1 Tournament has ended!\n\nTournament Reward: Champion Tier!\n",[SCORE_SOULS,750],[-1,[118,1,-1,-1,0]]]);
-						}else{
-							rewards.push(["Congratulations!  Season 1 Tournament has ended!\n\nTournament Reward: Participant!\n",[SCORE_SOULS,500],[-1,[118,1,-1,-1,0]]]);
-						}
-					}*/
-				}
-				
-				if (_version<65){
-					scores[SCORE_REFRESH]=0;
-				}
-				
-				if (_version<71){
-					_resubmit=true;
-					for (i=0;i<5;i+=1){
-						if (_Data["player"+String(i)]==null){
-							m["player"+String(i)]=null;
-						}else{
-							if (m["player"+String(i)]!=null){
-								_player=stringToArray(m["player"+String(i)]);
-							}else{
-								_player=stringToArray(_Data["player"+String(i)].Value);
-							}
-							for (j=35;j<40;j+=1){
-								_player[5][j]=0;
-							}
-							_player[4][7]=false;
-							_player[14]=[_player[14],0];
-							m["player"+String(i)]=arrayToString(_player);
-						}
-					}
-					achievements[ACHIEVE_ROGUE]=false;
-					_Save.data.bundlePopped=false;
-					clocks=0;
-				}
-				
-				if (_version<73){
-					_resubmit=true;
-					for (i=0;i<5;i+=1){
-						if (_Data["player"+String(i)]==null){
-							m["player"+String(i)]=null;
-						}else{
-							if (m["player"+String(i)]!=null){
-								_player=stringToArray(m["player"+String(i)]);
-							}else{
-								_player=stringToArray(_Data["player"+String(i)].Value);
-							}
-							if (_player[4].length<8) _player[4][7]=false;
-							m["player"+String(i)]=arrayToString(_player);
-						}
-					}
-				}
-				
-				/*if (_version<80){
-					/*if (_Data.Hardcore!=null){
-						hardcore=_Data.Hardcore.Value;
-						if (hardcore>=0){
-							var _rank:int=HardcoreDuelControl.getEliminatedPosition();
-							if (_rank==1){
-								rewards.push(["Congratulations!  Hardcore Arena has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,100],[-1,[119,1,-1,_rank,0]],[-1,[136,15,-1,-1]]]);
-							}else if (_rank==2){
-								rewards.push(["Congratulations!  Hardcore Arena has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,50],[-1,[119,1,-1,_rank,0]],[-1,[136,15,-1,-1]]]);
-							}else if (_rank==3){
-								rewards.push(["Congratulations!  Hardcore Arena has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,30],[-1,[119,1,-1,_rank,0]],[-1,[136,15,-1,-1]]]);
-							}else if (_rank>=10){
-								rewards.push(["Congratulations!  Hardcore Arena has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,15],[-1,[119,1,-1,_rank,0]],[-1,[135,15,-1,-1]]]);
-							}else if (_rank>=25){
-								rewards.push(["Congratulations!  Hardcore Arena has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,10],[-1,[118,1,-1,-1,0]],[-1,[135,15,-1,-1]]]);
-							}else if (_rank>=50){
-								rewards.push(["Congratulations!  Hardcore Arena has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,5],[-1,[118,1,-1,-1,0]]]);
-							}else{
-								rewards.push(["Congratulations!  Hardcore Arena has ended!  Thank you for participating!",[-1,[118,1,-1,-1,0]]]);
-							}
-						}
-					}
-				}*/
-				
-				/*if (_version<91){
-					if (_Data.Hardcore!=null){
-						hardcore=_Data.Hardcore.Value;
-						if (hardcore>=0){
-							var _rank:int=HardcoreGameControl.getEliminatedPosition();
-							if (_rank==1){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,60],[-1,[119,1,-1,_rank,0]],[-1,[136,15,-1,-1]],[-1,[135,15,3,-1]],[-1,[135,15,5,1]]]);
-							}else if (_rank==2){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,40],[-1,[119,1,-1,_rank,0]],[-1,[135,15,2,-1]],[-1,[135,15,3,1]]]);
-							}else if (_rank==3){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,20],[-1,[119,1,-1,_rank,0]],[-1,[135,15,-1,-1]],[-1,[135,15,2,1]]]);
-							}else if (_rank<=10){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[-1,[119,1,-1,_rank,0]],[-1,[135,15,2,1]]]);
-							}else if (_rank<=25){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[-1,[119,1,-1,_rank,0]],[-1,[135,15,-1,1]]]);
-							}else if (_rank<=50){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[-1,[118,1,-1,-1,0]],[-1,[135,15,-1,1]]]);
-							}else{
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  Thank you for participating!",[-1,[118,1,-1,-1,0]]]);
-							}
-						}
-					}
-				}*/
-				
-				if (_version<93){
-					_resubmit=true;
-					for (i=0;i<5;i+=1){
-						if (_Data["player"+String(i)]==null){
-							m["player"+String(i)]=null;
-						}else{
-							if (m["player"+String(i)]!=null){
-								_player=stringToArray(m["player"+String(i)]);
-							}else{
-								_player=stringToArray(_Data["player"+String(i)].Value);
-							}
-							for (j=41;j<44;j+=1){
-								_player[5][j]=0;
-							}
-							_player[4][8]=false;
-							m["player"+String(i)]=arrayToString(_player);
-						}
-					}
-					achievements[ACHIEVE_BERSERKER]=false;
-				}
-				if (_version<94){
-					
-					_Save.data.bundlePopped=false;
-					m["player-100"]=null;
-					//SteamAPI.deletePlayerData(["player-100"]);
-				}
-				
-				if (_version<95){
-					_resubmit=true;
-					m["player-100"]=null;
-					hardcore=0;
-					submitDataQueue([[HARDCORE,hardcore]]);
-					//SteamAPI.deletePlayerData(["player-100"]);
-				}
-				
-				if (_version<99){
-					if (_Data.Hardcore!=null){
-						hardcore=_Data.Hardcore.Value;
-						if (hardcore>=0){
-							var _rank:int=HardcoreGameControl.getEliminatedPosition();
-							if (_rank==1){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,30],[-1,[119,1,-1,_rank]],[-1,[136,15,-1,-1]],[-1,[135,15,2,-1]],[-1,[135,15,3,1]]]);
-							}else if (_rank==2){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,25],[-1,[119,1,-1,_rank]],[-1,[135,15,2,-1]],[-1,[135,15,2,1]]]);
-							}else if (_rank==3){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[SCORE_KREDS,20],[-1,[119,1,-1,_rank]],[-1,[135,15,-1,-1]],[-1,[135,15,2,1]]]);
-							}else if (_rank<=10){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[-1,[119,1,-1,_rank]],[-1,[135,15,2,1]]]);
-							}else if (_rank<=25){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[-1,[119,1,-1,_rank]],[-1,[135,15,-1,1]]]);
-							}else if (_rank<=50){
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  You have reached Rank #"+_rank+"!",[-1,[118,1,-1,-1]],[-1,[135,15,-1,2]]]);
-							}else{
-								rewards.push(["Congratulations!  Hardcore Challenge has ended!  Thank you for participating!",[-1,[118,1,-1,-1]]]);
-							}
-						}
-					}
-				}
-				
-				if (_version<100){
-					_resubmit=true;
-					m["player-100"]=null;
-					hardcore=0;
-					submitDataQueue([[HARDCORE,hardcore]]);
-					achievements[ACHIEVE_LEVEL_70]=false;
-					_Save=SharedObject.getLocal("HC_OPTIONS");
-					resetSave();
-					_Save=SharedObject.getLocal("OPTIONS");
-				}
-				if (_resubmit) SteamAPI.submitPlayerData(m,true);
+				// if (_version<100){
+				// 	_resubmit=true;
+				// 	m["player-100"]=null;
+				// 	hardcore=0;
+				// 	submitDataQueue([[HARDCORE,hardcore]]);
+				// 	achievements[ACHIEVE_LEVEL_70]=false;
+				// 	_Save=SharedObject.getLocal("HC_OPTIONS");
+				// 	resetSave();
+				// 	_Save=SharedObject.getLocal("OPTIONS");
+				// }
+				if (_resubmit) NoSteamXAPI.submitPlayerData(m,true);
 				
 				new ScrollAnnounce(getVersionLog());
 				Facade.addLine("Version "+_version.toString()+" is not current, updating now...");
@@ -1131,7 +913,7 @@
 		
 		public static function getAnnounceText():String{
 			var m:String="";
-			m+="<p align='center'><font size='25'>Reddit is Up!</font></p>\nWe have a new fan-created Subreddit! Find all the information you need, including FAQ, previews, spoilers and updates  <a href='https://www.reddit.com/r/EternalAscended/'><font color='#5555ff'><u>on the subredit!</u></font></a> (right click and select 'new window' if u have ad-blocker).\n\n";
+			m+="<p align='center'><font size='25'>Version Updates</font></p>\nThis probably won't change very much, since this is just a STEAM REVIVAL of an old flash game. But here you go, update notes!\n\n";
 			m+="\n\n"
 			m+=getVersionLog();
 			return m;
@@ -1140,215 +922,15 @@
 		public static function getVersionLog(_numBack:int=10):String{
 			var m:String="";
 			var i:int=0;
-			m+="<b>Warrior Challenge Patch 101</b>\nMecha Police Visor now works correctly\nFixed at least 1 bug connected to Sapien Hair\nReduced difficulty of Warrior Challenge at early levels\nFixed a crash bug connected to Warrior Challenge\nSpecified in current line of patch notes that z1000 one-time reward is raising your level cap to 70. Earned by completing any single zone higher than z1000.";
+			m+="<b>Steam Release Update 102</b>\nThe game is finally updated, and released on STEAM! It has been 9 years since the final FLASH update\nI hope you enjoy the game, and if we get a bunch of players I'll do more updates!.";
 			i+=1;
 			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Warrior Challenge Update 100</b>- Warrior Challenge Event is now Released!\n- Enemy Damage Dealt is now significantly reduced from z1000+\n- New z1000 Shadow Boss, including one-time reward and farmable reward.\n- Enemy Resistances now only scale up to 90% and the scaling values are slightly modified each level.\n- Certain other runaway stats will be capped.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>End of the Wizard Update 99</b>-Fixed not working recipe for: Plumber Gloves, Dark Half Hood, Poison Bolt\n-Shucked some code to an external swf file. This will hopefully have no impact on gameplay, but if it works properly may improve performance slightly (and will make things easier on me).\n-Wizard Challenge ended! Rewards are granted to all participants";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Potion Crafting Update 98</b>\n- Potion Crafting! z300 and z400 recipes are now available!";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Random Fixes Update 97</b>\n- Reduced the values of Mecha Visor\n- of Initiation now reduces buff duration by 2\n- Whispered Bug fixed\n- DARK is temporarily added to Crown Chakra\n- of the Nail effect reduced\n- Goblin Warrior block is now truly capped in all cases";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Wizard Challenge Update 96</b>\n- Wizard Challenge is released!\n-Reduced the values of Mecha Visor\n- BBM now displays correctly.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Dark Patch 95</b>\n- Added in higher ascension zones: 1001, 2001, 3001\n- Tweaked the soul costs of all ascensions\n- Did some work on the SAVE code to fix some overload errors\n- Items in your Personal and Shared Stashes no longer have their priorities saved\n- SBBM effect now displays correctly\n- Tooltips corrected on a few items\n- Effects of Silencing, Screamer and Whisperer slightly reduced";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Dark Update 94</b>\n- 4 new Premiums and 4 new Super Premiums are added to the game in two new bundles!\n- DARK Damage was added as a damage type for players.\n- The following skills were altered: Monk Tree, Acolyte Tree, Hollow Eccho\n- The following items were altered: Dark Half Hood, Dark Half Swords\n- Crafting Recipes were added to the following items: Saruman's Staff, Hood, Dark Half Hood, Magic Bolt, Poison Bolt, Enchant Weapon, Classic Bomb, Flying Rat, Demon Sickles, Multibolt, Hylian Sword, Plumber Gloves\n- Following suffixes were altered: Half Darkened\n- Tooltips for Manufacturing equipment were clarified.\n- Shadow Hat effect was altered to grant Manufacturing Points instead of a chance to find full stacks\n- Added a UI element to show Manufacturing Points charging up\n- Demon Realm enemies now properly deal Dark Damage instead of Holy\n- Rogue Tree Bonus increased\n- Defensive Roll now also adds a bit of Health";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Internal Testing 93</b>\n- Minor bug fixes and tooltip errors\n- Updates some player stats in the background to prepare for a bigger update.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Some Fixes 92</b>\n- Modifiers to damage on Temp Bow and Eternal Tome will now properly affect throwing items\n- Chain Attacks on Ranged Attacks now count as Multishots.\n- Fixed up a bunch more blue tooltip text\n- Your health can no longer drop below 0 when you take damage between fights (ie. from Damage Over Time)\n- Mega Boar's Toxic Spines have been restored!\n- Fixed an issue involving Nullifying Damaging Spells"
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>The One Patch 91</b>\n- Leech from Projectiles is fixed\n- Hardcore Challenge Event is OVER!  Congratulations to all winners!\n- Text on Explosive Charm and several other effects are fixed\n- New Artifact Tree is released!\n- The following artifacts have their effect increased: Phoenix Feather, Solar Plexus, Valkyrie's Cry, Gaia's Song, Archangel's Feather, Spirit Dragon's Breath\n- The following artifacts have their effect decreased: Valkyrie's Spear, 3rd Eye Chakra, Spirit Dragon's Claw";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Soulforge Patch 90</b>\n- Items that cost Power Tokens now properly show 'PT'\n- Quickstrike Tooltip is displayed correctly\n- Sapien Hair got increased Nullify but RSpecial was removed\n- Removed (hopefully) all remaining references to RSpecial\n- Fixed a couple new Rounding Errors\n- z50 and z100 bosses should now grant you items again\n- Sell Shadow Item popup fixed\n- Enlightened is once more earnable from any skill";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Soulforge Update 88</b>\n- Can now sell Essences for souls\n- Can now purchase Essences for souls in the Essence tab of the Forge\n- New Essence: Minor Chaos Essence, only available from the Soul Shop.  All players are granted one of these, FREE! (yes, it can be recycles for souls if you want :P)\n- Soul Gain increased and normalized at higher zones (z400+)\n- Leveling up Vessel should now always unlock the spell slot instantly\n- Many blue-text typos were fixed - please report any more that you find!\n- At Foot effects in Arena should now properly reset between opponents\n- further Highscores from Hardcore Mode will no longer spill over into normal mode... existing highscores will remain as they are, unfortunately.\n- Autopot now correctly uses Mana Potions when your mana drops low\n- Clarified tooltips on Strength, MPow and Initiative\n- Removed RSpecial from the game.  All sources now instead list the three resistances individually.\n- Crown Loot Chance slightly improved\n- Changed a bunch of background code connected to on-hit effects in order to make it more efficient.  Hopefully everything still works.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Monk Update 87</b>\n- Fixing a save error where progressing too quickly caused the save system to crash.\n- Standardizing blue tooltip text and correcting it for certain crafted items.\n- Hardcore 4,000 reward is now correct\n- Fixed a bug that stopped some new players from progressing through the tutorial\n- Some enemy stats have been adjusted\n- Heck Horns now scales properly\n- Monk Mini-Rework is complete!\n- Shadow Gloves and Rending Claw have been improved";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Crafting Balance Update 86</b>- Hardcore Mode now also grants Milestone Rewards\n- Constant Effects (ie. Cleanse, Free Spell, Roasted) now happen at the beginning of your turn\n- Enemy Damage and Spells increase at a reduced rate past z300\n- Increased damage of Breaker and Breaking Sword, Dazzling Strike, Searing Blast and Smothering Poison\n- Increased effect of Pentagram, Demon Horns and Reversed, Defensive Sais\n- Increased effectiveness of 'of Neptune', 'of Carousing', 'Upturned', 'of Closeness'\n- Divine Protection Healing increased\n- Surestrike effect increased\n- Added Accuracy to Monk Base Skill\n- Reduced damage of Surmounting Poison\n- Reduced health of base Turban\n- Shadow Sparrow's Bow's Accuracy is reduced in all recipes\n- Radiating Aura damage is fixed (was dealing x2 dmg), but damage also slightly increased.\n- Reduced the Crit Rate and Damage of Vorpal Weapon\n- SQS Recipe should now work\n- You can no longer go into Token Debt\n- Stealth properly activates when dodging Grenades\n- Quick Strike can no longer occasionally activate with throwing weapons (other than Shuriken)\n- Clarified tooltips for Surmounting Poison and Shield spells as well as any effect with multiple stacks.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Buff Gixes Patch 84</b>\n- Hardcore Mode is Released!\n- 'of Initiation' now has Reserve Mana\n- 'of the Sapien' numbers increased and can be placed on Relics\n- Real Tramp is improved\n- Abuse has been reduced slightly\n- Reduced 'of Dazzling', increased 'of the Rat'\n- Gold cost of epic upgrades reduced\n- Quick Strike no longer applies to bows\n- You can now properly turn a Special Premium epic by combining with the Vanilla version\n- Fixed a bunch of typos";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Crafting Clarity Patch 83</b>\n- You can now rename your character on Ascension\n- Fixed up minor issues in the New Character screen\n- SQS is fixed\n- Cantrip Curses no longer cast when enemy already has the debuff\n- Openned up several basic essences to be used with Spells and Grenades\n- Allowed certain essences to also affect Scrolls and Potions\n- Fixed another essence stack disappearing issue\n- Added a 'Crafting Preview' option";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Crafting Patch 82</b>\n- All suffix essences now have unique colors\n- Suffix Essences now properly block being added to the same item\n- Confirmation added to Death Screen when spending kreds\n- Essence of Efficiency tooltip fixed\n- Master's Statue removed from the game\n- You can no longer craft suffixes from basic charms (since you can acquire them en masse)\n- Essence of the Master can now apply to other things";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Crafting Update 81</b>\n- Crafting System is now available with over 300 recipes!\n- Two new pay bundles are now available in the Premium Shop\n- z300 and z400 Shadow Bosses have entered the realm\n- You may now only ascend to a zone you have already reached\n- You can revive at your current zone progress by paying Tokens";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Bug Fixes 80</b>\nUpdate 80:\n- Stealth is now broken when dealing any form of damage\n- Withdraw Userate should now work properly\n- Basic Stats Tab restored\n- Archangel’s Halo and Phoenix Flame are now working correctly\n-Autopot and Divine Protection now work again";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>End of Hardcore 79</b>\nHardcore Challenge Event has ended!  Rewards are now being distributed.  Note that the actual highscore list is different from that shown on Kongregate, to account for accused hackers and certain scores not being submit.\n- Lots of code was reworked, expect some bugs until the next hotfix\n- Vulnerability now properly affects R.Chem and R.Spirit\n- Scrolls are no longer marked 'Epic'\n- Fixed a bug where offline rewards were occasionally not being granted";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Upgrade Fix 78</b>\nATTENTION! There was a bug where some people lost items when trying to Upgrade. If you lost an item please send a Bug Report and I will refund it as quickly as possible.\n- Upgrading Fixed\n- Leap Attack fixed";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Just Bugs 77</b>\n- Fixed several tooltip errors\n- Dodging Ranged Attacks now properly sets of Stealth\n- Valkyrie's Cry now carries over between fights\n- Item Drops can once more be enchanted\n- Strength has returned to the Stats Menu\n- Distance Priorities should now work again\n- Resistances, Dodge and Turn are now hard-capped at 100%\n- Sapien Normal Form should add and remove stats properly\n- You should not longer approach and hit people with books or bows\n- Reduced soul costs for ascending to z400 and z600\n- Root Chakra Tooltip is fixed";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Small Patch 76</b>\n- Quality in town is returned to normal\n- Increased global text quality, especially for low graphic settings\n- Fixed yet another dupe bug\n- Changed some reference types to make runtime more efficient\n- Shuriken Base Damage no longer scales off of Base Monk Damage\n- Removed the Basic tab from the Stats Window in game\n- Raised the Ascend Zones up to z600\n- Goblin Shaman learned a new spell\n- Defensive Roll effect is reduced, but it has a chance to proc whenever you take damage\n- Deaths since Last Ascension now displayed in the LOG screen\n- Closing the game from the Adventure will now reset current zone progress to 0.  Closing from town will save your progress.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Pack Patch 75</b>\n- Class Packs can now be purchased separately from Class Bundles if you don't want to buy the class\n- Weapon/Helmet Priority Buttons are in the Arena\n- Quality is automatically set to BEST in all town areas (let me know if this negatively affects anyone's performance)\n- Fixed some display errors in the Statistics screen\n- Continued to work on some runtime issues\n- 'Didn't Happen' is now used before other defenses are checked\n- You can no longer use your stash in Hardcore Arena\n- Slightly increased health scaling of all monster\n- Direct Damage increases from different sources are now ADDITIVE instead of MULTIPLICATIVE";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Hardcore Patch 74</b>\n- Leap Tooltip fixed\n- Nullify now works correctly\n- Shurikens now truly work with Holy\n- Withdraw > Leap works again...\n- Leap Attack is once more classified as NEAR\n- Smite only works on the first hit of a multi\n- No more arena ghosts\n- Negative Stats are now calculated separately from Positive Stats\n- Forced Actions are now cleared when you go to town.\n- Forced Actions should no longer be carried over between characters";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Hardcore Update 73</b>\n- Hardcore Challenge Arena is Live!\n- Healing and Mana Potions now both count as CHEMICAL and Healing Spell is indicated that it is HOLY\n- Mana Potions now also scale with HEAL\n- Mana Shield effectiveness increased\n- Mana Shield no longer consumes mana if you would die anyways\n- Phoenix Flame Duration increased to 3\n- Class Skills are added and class stats have been moved there\n- Tooltip for Assassinate has been corrected\n- Enemies have increased health scaling but reduced damage scaling\n- Rogue Tree should now properly unlock for all characters\n- Modified a lot of code surrounding various actions to make it more efficient.\n- Modified a lot of code surrounding saving the game to make it more efficient.\n- Deathstreak is now visible in the LOG tab\n- 8z8z no longer becomes NaN\n- Shurikens now work with Holy trait";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Rogue Patch 72</b>\n- Rending Claws and Shred now work properly.\n- Quiver is now classified as a 'Buffing Trinket'\n- New players can now properly create character\n- Shadow Shortbow now spawns with the correct stats\n- Renamed 'Battle Cleanse' to 'Purge'\n- Toxic Gas and Classic Bomb now stack twice\n- Tooltip on Demon Sickles and Bleeding fixed\n- Leap Attack again uses all flurries\n- Rogue Titles now working\n- Rogue Shadow Items properly spawning";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Rogue Update 71</b>\n- Introducing The Rogue! Now available individually or through a bundle\n- The two first tier Ranger Skills have been reworked and a Ranger Pack is available!\n- Offline Progress can now be earned\n- Season 1 Tournament winners are officially posted in the Arena!  Check 'em out!\n- Arena Opponents now have properly scaling items after ascension\n- All trees now have a Class Stat that is the same across all skills\n- Radiating Aura Damage is reduced slightly (should be around the same with new Tree Bonus)\n- Guided and Defender enchantments are improved\n- Archangel's Feather is improved\n- Blood of the Minotaur now only has one chance to activate per round and only if you do not hit with any attack.\n- Classic Bomb has a TEMPORARY fix until I have a chance to rework it properly\n- Crusader's Mace now works correctly from Mid Range\n- Paladin's Buff Boost increases at level 7 instead of level 10\n- Increased the effect of Vulnerability, decreased Duration slightly\n- Decreased duration of Enchant Weapon\n- All bolts from Multibolt can now be potentially defended against\n- Gaia's Song effect increased at lower levels\n- Reduced the Approach penalty to 10% Accuracy/Spell Pen\n- Hylian Sword has slightly lower Base Damage but significantly higher Magic Damage\n- Captain's Shield only deals half x2 dmg at range\n- Quickstrike no longer applies to Ranged Weapons\n- Ranged Attacks no longer proc Thorns\n- Far and Mid are now modified only by the FAR multiplier\n- Berserk now also adds Tenacity\n- Added a Priorities Button under the Weapon and Helmet\n- Prioritizing Attack from Near will now use Withdraw > Leap if available\n- You can now change the priority tiers of your items\n- Buff Names only appear in game and in text when it is a fresh application, not when it increases stacks or refreshes a buff\n- Buff Tooltips now show details about the buff\n- Premium Shop is now accessible from the Town screen\n- Changed the Purchase Flow to only use Power Tokens, which can be purchased in bulk!\n- Skipping Zones is cheaper and can now be done with Power Tokens, but you don't gain souls for zone you've skipped.\n- XP Boosts can now be stacked\n- Added some extra safeguards to the Save System.  Certain in-town transitions may take longer but there should be fewer disconnects."
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Ranged Update 70</b>\n- Changed enemy scaling in many ways.\n- Withdraw will not occur if you have nothing to use at the withdrawn distance (aka. set everything NEAR and you will never withdraw)\n- You can still fail userate post withdraw, however\n- Additionally, Withdraw is placed FIRST in your action list, to be tested before any NEAR action\n- Added a new range category!  How do you access it??\n- Reworked the Baseball Bat, Captain's Shield and Hylian Sword\n- Clicking on the Priority button now scrolls classically\n- Hold the Priority Button to access the Advanced Menu\n- Distance is now an Inclusive List in the Advanced Menu\n- Split the -10 R.Spirit between the two basic Acolyte skills\n- Archangel Header is now correct\n- updated tooltip for Archangel's Whisper\n- Wider Tooltips!\n- Toggle Subtitles option is saved\n- Going back to town after defeating a boss also resets Premium Shop\n- No more 'Suns to skip boss' exploit\n- No more Arena Priority exploit\n- Items held when a level ends should now be returned to your inventory";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Archangel Update 69</b>\n- Archangel Artifacts are officially finished and released!\n- A new Premium Spell is now in rotation!\n- Masta Rasta change was reverted... Spell Pen removed and Mana increased greatly.\n- Reduced Smite dmg at lower levels, increased dmg at max level\n- Enemy Abilities are now all set by zone to increase predictability, instead of some being random\n- You can no longer choose to fight a boss again\n- Generic Spells are removed from the Premium Shop\n- Current Souls in the Temple correctly updates";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Priorities 1.5b: Update 68</b>\n- 3rd Eye Chakra now grants Initiative Scaling to Strength weapons and vice versa\n- Ratio of 3rd Eye Chakra increased\n- Swapped the effects of Dragon's Breath and Neptune's Trident and adjusted their values\n- Increased G.Rate from Deadly Alchemist and Shadow Armet\n- You can now click on the title in the Statistics Tab (in game) to switch to the enemy\n- Statistics are no longer cleared when an enemy dies\n- Enemy Leap Damage is now capped out at +200% at z200\n- Enemy Resistances now progress with Diminishing Returns\n- Enemies start to get Physical Resistance from z200 (when Block stops scaling)\n- Adjusted the Priorities 1.5 system slightly.  I would like feedback on which you like better.\n- Added a new priority list to Buffs and Curses\n- Shadow Axe and Masters are working\n- 4 Hairs are now found in the Premium Shop... Cosmetics shop isn't ready yet though!\n- tooltips for Leap and Withdraw are fixed\n- Many tooltips in general are cleaned up\n- Hopefully fixed the save issue after ascending.  Safeguards are still in place just in case.\n- SEMANTICS CHANGE: All players get 10% Dodge by default.  10% dodge was removed from Light Helmets and -10% Dodge was given to Medium Helmets.  PoF also lost equivalent of ~10% Dodge at max level.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Priorities 1.5: Update 67</b>\n- Changed the priority system to a Combo Box with a secondary option\n- Currently there is a different option just for Healing effects.  Please give feedback on this system in the forums.\n- Replaced 'Ornate' with 'Homing'\n- Granted a lesser Homing effect to all premium throwing weapons\n- Increased health of base Bandana\n- Shifted some HP from Sapien to Base (increasing Super Sapien HP)\n- Got rid of Sapien's +1 M Dmg\n- Pact now grants a flat -10% R.Spirit\n- Everyone is granted +10% FAR Damage by default\n- Classic Bomb now works correctly\n- Charms are now color coded\n- Changed name of Rhino\n- Changed name of Phoenix Flame's Debuff\n- Changed the Subtitle Font";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Hair Patch 66</b>\n- Added a new effect to Super Sapien\n- Added a new effect to Rasta and reduced Mana slightly\n- Embraced is now properly classified as a buff.\n- Tooltip for Rending Claws is fixed\n- Premium Shop again refreshes every zone in addition to granting tokens every 10";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Hair Update 65:</b>\n- 4 new Packs are available in the Premium Tab!  For a limited time, get 1 pack FREE!\n- Changed ascension levels to 30 at z50 and 45 at z100\n- Creating a new character now properly sets you at zone 1\n- Mousing over a buff icon will now show you its type (buff or curse) and number of stacks.\n- You now use Refresh Tokens to refresh the shops, earned by clearing zones."
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Hotfix 64:</b> Your zone should no longer be reset to 1 occasionally, expecially if you defeat an arena opponent.  All affected players were compensated."
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Prep Update 63:</b>\n- Wild now properly has +/- 60% damage (was acting like 30% previously)\n- Values on Crusader Helmet were shuffled slightly\n- Changed the tooltips on Lingering Depths, Ally of Light and Hockey Mask to reflect their current effects\n- Valkyrie's Cry no longer persists between fights.\n- Changed the formula for soul gains to be reduced at higher levels (360+)\n- No longer allowed to use the following characters in a stash name: [ ] ,\n- Icons now look better while still being prerendered to save on performance\n- Yermiyah has a beard now\n- Added new achievements when you level up each talent to 60 for the first time.\n- Prepared the Cosmetics Tab for a bunch of new cosmetics\n- Enemies who used stats from Heavy Weapons no longer have the 150% Strength Scaling (ie. Guardians)\n- You can now truly sell from the Stash"
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Moar Update 62:</b>\n- Added 4 more Stash Tabs... and #5 is free for existing players!\n- Added 3 new Skin Colors!\n- Juliette has officially entered the arena!\n- No enemy damage scales off of Initiative\n- Enemy Initiative is now split into several categories and only scales up to z200\n- Phoenix Feather now scales up to 100% chance, but only one revive can occur per fight\n- Change the effect on Holy Grail\n- Death Jester no longer allows you to revive through any other means (heal and prevent dmg yes)\n- Added Heavy Weapon to all two handed weapons, including Light Sword and all Staves\n- Heavy Weapon now properly scales with alternate sources (ie. MPow from the artifact)\n- Enchant Weapon duration can increase again with Duration artifacts\n- Divine Protection now triggers off of DoT\n- Overflow is now checked for condensing every time you open the tab\n- Icons are new rendered to hopefully save a bit on performance\n- Made all healing numbers the same color\n- Relics can now be swapped with each other\n- You can now sell items directly from your stash"
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Bye Bugs Update 61:</b>\n- Auto-sell should once more be disabled when turbo is not achieved\n- Fixed an error where the background would occasionally load incorrectly or start as a white screen\n- Increased the counter size on buff icons\n- Lightened up the blue on Heals\n- Full Titles can now be earned with fewer skill points in your main tree\n- All stats in the Stat Tab in game are now fully rounded\n- DOTEFF was renamed DOT and PROCEFF was renamed PROC\n- REND now only procs on Crit, but does x3 damage, lasts 1 extra round and still stacks up to 20\n- EXPLOSIVE effect no longer is affected by RCrit (bad idea... sry...), but had its damage reduced slightly instead\n- Cleanse can no longer remove 'Delayed Damage'\n- Auto-Buff now correctly only uses one instance of a buff";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Big Rebalance Update 60:</b>\n- Significantly reduced the Fear Effect on Chainsaw, slightly reduced Crit Rate\n- Significantly reduced Death Jester's Health Regen while alive\n- Undying is no longer reset when climbing above 0 hp, only when the buff runs out.\n- Slightly increased Rending Claws' Crit Rate, Removed its Crit Mult and gave it a stacking DoT.\n- Gave Crusader's Helm some non-buffed effects as well\n- Envenomed Mask now has Auto-Buff instead of Auto-Pot\n- Hockey Mask is now a Medium Helmet\n- Captain's Shield has increased base damage\n- All standard procs have slightly increased damage\n- Explosive is now resisted by R.Crit\n- All Light Helmets (except DJ) had their hitpoints increased\n- All Light Helmets now have an innate 10% Dodge\n- All Medium Helmets had their hitpoints increased\n- Added Heal Reduction to many Damage Over Time Effects (including MEGA BOAR)\n- Most two-handed weapons now have 150% Strength Scaling\n- Increased Fireball's BURN damage\n- Every point in the Wizard tree now also grants +1% MAGIC\n- Vessel now gives you a 3rd spell slot at level 7\n- Increased Autopotion Proc Rate\n- Decreased SUNS Decay Rate\n- Added small numbers in the health bar when your health drops below 0 (after death or during Undying)\n- Buff icons are now smaller and take multiple rows\n- Autopause should now work in the arena again.\n- Slightly increased Premium Drops from all monsters at higher zones\n- Dodge and Turn are now capped on normal monsters at 25%, but may go higher on certain monsters";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 59:</b>- Added a new option to the Autopause menu\n- Skill Tree Selection now appears after you create a new character or ascend\n- Made it more clear which skill trees are selected and which are not\n- Modified Autopause Low Health and Every Turn to happen right at the beginning of your turn\n- Autopause Every Turn also clears priorities when it happens.\n- Autosell Options now exist!  Find them off the Turbo Button\n- Slightly reduced Golem's Crit Mult and Resistances";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 58:</b>**NOTE** Some people may have lost some time or items during this pre-patch blunder.  So I'm giving everyone 15 Power Tokens as a 'sorry' and if anyone lost items please let me know.\n- Bundles Button in town now works correctly\n- Increased base cost of all stacking items\n- Refilling stacks now has a standardized cost across all items and scales off Zone instead of Item\n- Gem Level can now scale infinitely\n- Reworded Dragon Scale";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 57:</b>- Moved the Bundles to the Premium Shop\n- Fixed floating point errors with some damage values\n- Fixed upgrade and restack costs of Holy Grail and Pentagram\n- HEAL stat now properly works with lifesteal, spellsteal and paladin's healing\n- Valkyrie's Cry will no longer stall out the game\n- Radiating Aura now counts as a DOT for purposes of DOTEFF";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 56:</b>- Two new Classes are released, complete with Super-Premium Item Set!\n- Quarter Finals are complete!\n- Four free Cosmetic Skin Colours for your viewing pleasure!\n- Fixed Statistics screen in Arena\n- Cosmetics Tab is more prettier";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 55:</b>- Changed the text when your save requests time out to reflect that error instead of 'log in from different device'\n- Increased the timeout time.  This should make it clearer what is happening and prevent preventable timeouts\n- Fixed floating point error with Leech\n- Fixed Withdraw allowing heroes to Approach afterwards.\n- Fixed Enchant Weapon not scaling properly\n- Two new Premium Items are released!\n- Removed MPow from the Light Sword and added an extra ability";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 54b:</b>- Tournament Octofinals Complete!\n- Boost will now correctly give 2xp per kill (instead of accidentally giving 4)\n- Cleaned up the tooltips on Leap Attack and Withdraw\n- Limited transitions to only occur if nothing is saving or loading.  This will hopefully prevent unexpected data replacement issues.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 54:</b>- Playoffs Round Results are in!\n- Changed Health Potion to only trigger if you are also below 50% health.\n- Fear Powered no longer includes fears applied from the action being checked\n- Fixed a bug where SL Scrolls were using full MPow for Damage.  This will unfortunately affect the current tournament but we will not go back over previous rounds.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 53:</b>- Round 1 Tournament Results are in!  See the challengers in the tent!";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 52:</b>\n- Tournament Submissions are now closed!\n- If you die and kill in the same action during a Duel (ie. Thorns, Kabuto) then the match ends in a TIE (formerly always went to the Player: LEFT)\n- Fixed certain cases where tournament characters could enter the real world\n- Fixed an issue that allowed you to duplicate items\n- Fixed an issue that allowed you to gain free power tokens\n- Added 'Level Up' to the Autopause menu\n- After respec-ing, you can now respec for free until you close the Statistics Window\n- Reduced the CMult of all Demonic Beasts (including Golem)\n- Modified the difficulty curve to ramp up slower until z100.  This should make it easier for new players to reach their first ascension.  Curve is back to normal at z150+\n- Fixed text on Valkyrie's Shield";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 51:</b>\n- Hotfixed a few issues with the Tournament Simulator.";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 50:</b>\n<font color='#ff5500'>NOTE: THIS IS THE LAST BALANCE UPDATE UNTIL AFTER THE TOURNAMENT.</font>\n- Tournament has begun!\n- Changed the effect of the Shadow Cone\n- Increased effect of Spirit Dragon's Eye and Blood of the Titan Artifacts, Gaia's Dream and Blood of the Minotaur\n- Fear and Confuse no longer activate defensively when Cursed\n- Updated tooltips of Berserk and Root to include 'hurt or cursed'\n- Craft Belt formula changes.  It now starts at 5 and goes up to 25, which indicates Work/Turn.  100 Work = Belt.  (End effect is slightly stronger).\n- Fireball and Lightning Strike have reduced scaling mana cost\n- Poison Bolt has slightly increased scaling mana cost\n- Yermiyah and Gars found Plentiful Scrolls!\n- z200 reward now starts at level 15\n- Charms will now spawn with different subsets of enchantments per type (no new enchantments)\n- Quality Setting now saves\n- Death Streak counter in your Death Window\n- You can now choose which zone to respawn at after ascending, for a price\n- Renamed 'R.ALL' to 'R.SPECIAL'\n- Loading Orb returned from vacation\n- Items in locked spell slots will remain equipped but you will not cast them until the slot is unlocked.\n- Arena characters no longer upgrade after dying";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 49:</b>\n- Added 'Every Turn' to the Pause menu for those maximum control moments\n- Fixed an exploit that allowed you to equip two Relics at once\n- Gave everyone Manufacturing 20 by default\n- Arena Opponents are now considered Bosses for Priorities\n- Items will no longer autostack when being added to your inventory from drops or otherwise (you can still stack manually\n- Reduced Beezelpuff's NULLIFY, but increased his R.ALL\n- Reduced the NULLIFY of all Demonic enemies\n- Fixed a memory leak causing occasional undue lag\n- Turned certain effects into Tags in the tooltips\n- Changed colour of Physical Damage and position of Buff Text\n- Removed 'isQuickisMomentumisQuick' from the action log\n- Phoenix Ash and Valkyrie's Wing now state 'damage or curse an opponent'\n- Blood of Vampire and Blood of the Unicorn no longer proc when cursing\n- New z200 event, for anyone who gets there!";
-			i+=1;
-			if (i>=_numBack) return m;
-			m+="\n\n";
-			m+="<b>Version 48:</b>\n- Added 1 new Premium Item, the 'Temporary Bow'\n- Power Tokens have been added to the game!  These can be used instead of Kreds to purchase anything Premium.  Gain Power Tokens by selling Premium Items, and as special gifts\n- Everyone has been granted 15 free Power Tokens!\n- Added a Mini-Shop also when you die";
+			// m+="\n\n";
+			// m+="<b>Warrior Challenge Update 100</b>- Warrior Challenge Event is now Released!\n- Enemy Damage Dealt is now significantly reduced from z1000+\n- New z1000 Shadow Boss, including one-time reward and farmable reward.\n- Enemy Resistances now only scale up to 90% and the scaling values are slightly modified each level.\n- Certain other runaway stats will be capped.";
+			// i+=1;
+			// if (i>=_numBack) return m;
+
+
 			return m;
 		}
 		
@@ -1359,7 +941,7 @@
 			}
 			stash=new Array(8);
 			for (i=0;i<8;i+=1){
-				stash[i]=["Shared Stash "+String(i+1),true,new Array(20)];
+				stash[i]=["Shared Stash "+String(i+1),false,new Array(20)];
 			}
 			stash[0][1]=false;
 			overflow=[];
@@ -1370,7 +952,7 @@
 			for (i=0;i<scores.length;i+=1){
 				scores[i]=0;
 			}
-			flags=[false,false,true,false,false,false,false,false,false];
+			flags=[false,false,false,false,false,false,false,false,false];
 			achievements=[];
 			while(achievements.length<23){
 				achievements.push(false);
@@ -1383,7 +965,6 @@
 		}
 		
 //============================SUBFUNCS=======================
-		
 		
 		public static function submitDataQueue(_queue:Array,_override:Boolean=false){
 			timerExpired=0;
@@ -1435,7 +1016,7 @@
 					var _pair:Array=overQueue.shift();
 					m[_pair[0]]=valueToJSON(_pair[1]);
 				}
-				SteamAPI.submitPlayerData(m,true);
+				NoSteamXAPI.submitPlayerData(m,true);
 				delay=DELAY;
 			}else if (queue.length>0){
 				var m:Object=new Object;
@@ -1443,7 +1024,7 @@
 					_pair=queue.shift();
 					m[_pair[0]]=valueToJSON(_pair[1]);
 				}
-				SteamAPI.submitPlayerData(m,false);
+				NoSteamXAPI.submitPlayerData(m,false);
 				delay=DELAY;
 			}
 		}

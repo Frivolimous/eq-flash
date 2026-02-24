@@ -643,7 +643,7 @@
 				case EffectData.FREE_SPELL: m+="Casts this spell without using an action but for greatly reduced effect.  Not used on Round 1."; break;
 				//case EffectData.ESSENCE: m+="This item will be replaced with a Crafting Ingredient when the Crafting System is released.  Thank you for your patience!"; break;
 				case EffectData.SCOURING: m+="Removes all prefixes and suffixes from an item or pulls an item out of an essence.  No other ingredients are recovered."; break;
-				case EffectData.CHAOS_ESSENCE: m+="Places a random Premium Suffix on any craftable item."; break;
+				case EffectData.CHAOS_ESSENCE: m+="Places a random Mythic Suffix on any craftable item."; break;
 				case EffectData.MINOR_CHAOS_ESSENCE: m+="Places a random Basic Suffix on a Weapon, Helmet, Projectile, Charm or Trinket."; break;
 				case EffectData.EPIC_ESSENCE: m+="Upgrades any level 15 item to level 16 Epic.  Once the Epic Zone is unlocked you can also combine 2 identical items."; break;
 				case EffectData.SUFFIX_ESSENCE: m+="Combines with many different possible items to create a Suffixed Essence."; break;
@@ -712,7 +712,7 @@
 				case PREV_PAGE: return "Go to the previous page";
 				case TABLE_CONTENTS: return "Go back to the Table of Contents";
 				case SKILL_SCROLL: return "Change skill page to a different class.";
-				case REFRESH: return "Refreshes all shops for 1 Refresh Token.  1 Token is earned every 10 zones,  Max 10.";
+				case REFRESH: return "Refreshes all shops for 1 Refresh Token.  1 Token is earned every 10 zones,  Max 15.";
 				
 				case CONTINUE: return "Go forth to the next area.";
 				case RESPEC: return "Pay the money to get back all your spent skill points.";
@@ -1265,7 +1265,7 @@
 				case GameData.ACHIEVE_WILD: case GameData.ACHIEVE_WILD_COSMO: return "Wild";
 				case GameData.ACHIEVE_NOBLE: case GameData.ACHIEVE_NOBLE_COSMO: return "Noble";
 				case GameData.ACHIEVE_ORDINARY_COSMO: return "Ordinary";
-				case GameData.ACHIEVE_TURBO: return "Turbo";
+				// case GameData.ACHIEVE_TURBO: return "Turbo";
 				case GameData.ACHIEVE_ACOLYTE: return "Acolyte";
 				case GameData.ACHIEVE_PALADIN: return "Paladin";
 				case GameData.ACHIEVE_ROGUE: return "Rogue";
@@ -1311,7 +1311,7 @@
 		
 		public static const CONF_MONSTER:String="Both teams need to select at least one monster.",
 							CONF_TOO_MANY:String="Too many characters. Delete unused characters in the Load screen.",
-							CONF_ERASE:String="Erase ALL data?  This action is irreversable and will destroy all premium items and purchased stash tabs!",
+							CONF_ERASE:String="Erase ALL data?  This action is irreversable and will destroy all mythic items and purchased stash tabs!",
 							CONF_LOCKED:String="This talent is locked!  Check the Hall for how to unlock it.",
 							CONF_MUST_NEW:String="You must create a new character.",
 							CONF_MORAL:String="Your moral code does not allow you to visit this place!",

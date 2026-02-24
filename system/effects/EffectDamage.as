@@ -65,7 +65,8 @@
 			
 			if (name==EffectData.GOLD_STRIKE){
 				GameData.gold-=100;
-				try{ Facade.currentUI.inventoryUI.updateGold();
+				try{
+					Facade.currentUI.inventoryUI.updateGold();
 				}catch(e:Error){}
 			}
 			

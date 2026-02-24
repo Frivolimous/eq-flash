@@ -2,7 +2,7 @@
 	import ui.windows.ConfirmWindow;
 	import ui.main.PremiumTab;
 	import utils.GameData;
-	import utils.KongregateAPI;
+	import utils.PurchaseManager;
 	
 	public class SinglePremiumUI extends BaseInventoryUI{
 		public function SinglePremiumUI(){
@@ -30,7 +30,7 @@
 				return false;
 			}
 			
-			KongregateAPI.buyItem(finishRemoveItem,-_item.model.cost,alsoUpdate);
+			PurchaseManager.buyItem(finishRemoveItem,-_item.model.cost,alsoUpdate);
 			
 			return false;
 		}

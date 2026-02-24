@@ -369,7 +369,7 @@
 		
 		public function checkFilter(_item:ItemView):Boolean{
 			if (_item.model.isSpecial()) return true;
-			if (!GameData.hasAchieved(GameData.ACHIEVE_TURBO)) return true;
+			if (!GameData.getFlag(GameData.FLAG_TUTORIAL)) return true;
 			
 			if (_item.model.slot==ItemData.TRADE){
 				if (GameData._Save.data.sell[GameData.SELL_GEM]) return false;
@@ -459,7 +459,7 @@
 			}
 			muteB.toggled=Facade.soundC.mute;
 			
-			if (GameData.hasAchieved(GameData.ACHIEVE_TURBO)){
+			if (GameData.getFlag(GameData.FLAG_TUTORIAL)){
 				addChildAt(turboB,getChildIndex(pauseB)-1);
 				if (Facade.stage.frameRate>Facade.FRAMERATE){
 					turboB.toggled=Facade.gameC.turboB=true;

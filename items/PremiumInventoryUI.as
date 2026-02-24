@@ -1,7 +1,7 @@
 ﻿package items {
 	import ui.windows.ConfirmWindow;
 	import ui.main.PremiumTab;
-	import utils.KongregateAPI;
+	import utils.PurchaseManager;
 	import system.effects.EffectData;
 	
 	public class PremiumInventoryUI extends BaseInventoryUI{
@@ -34,9 +34,9 @@
 			}
 			
 			if (_item.model.hasTag(EffectData.SUPER_PREMIUM)){
-				KongregateAPI.buyItem(finishRemoveItem,20,alsoUpdate);
+				PurchaseManager.buyItem(finishRemoveItem,8,alsoUpdate);
 			}else{
-				KongregateAPI.buyItem(finishRemoveItem,15,alsoUpdate)
+				PurchaseManager.buyItem(finishRemoveItem,6,alsoUpdate)
 			}
 			
 			return false;

@@ -6,7 +6,6 @@
 	import system.effects.EffectData;
 	import ui.windows.ConfirmWindow;
 	import ui.assets.FadeTransition;
-	import utils.KongregateAPI;
 	import utils.GameData;
 	
 	public class CraftTab extends Sprite{

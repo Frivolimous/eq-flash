@@ -58,10 +58,12 @@
 			var premiumChance:Number=0.00019;
 			if (find>=1){
 				premiumChance*=(_level/3);
+				if (premiumChance>0.01) premiumChance=0.01;
 			}else{
-				premiumChance*=(1+_level/1500);
+				premiumChance*=(1-_level/1500);
+				if (premiumChance<0.0001) premiumChance = 0.0001;
 			}
-			if (premiumChance>0.1) premiumChance=0.1;
+			if (premiumChance>0.01) premiumChance=0.01;
 			
 			if (Math.random()<premiumChance){
 				return spawnPremium(0);

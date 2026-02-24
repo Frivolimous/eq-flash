@@ -2,7 +2,6 @@
 
     import flash.events.Event;
     import flash.net.SharedObject;
-    import com.amanitadesign.steam.FRESteamWorks; // Using the ANE we verified
     import utils.Base64;
     import flash.utils.ByteArray;
 
@@ -12,7 +11,6 @@
         public static var connected:Boolean=false;
         
         // Steam ANE instance
-        private static var steam:FRESteamWorks;
         private static const SAVE_FILE_NAME:String = "savegame.json";
         private static const SECRET_KEY:String = "EQ_KEY_F17eH51B";
 
@@ -24,61 +22,15 @@
         // INIT / LOGIN
         // ===============================
 
-        public static function init():void {            
-            // 1. Initialize Steam first
-            try {
-                steam = new FRESteamWorks();
-                if (steam.init()) {
-                    connected = true;
-                    // Facade.addLine("Steam Connected: " + steam.getPersonaName());
-                }
-            } catch (e:Error) {
-                Facade.addLine("Steam Init Failed: " + e.message);
-            }
+        public static function init():void {
+            connected = true;          
+            Facade.addLine("Steam Disabled; local only");
 
             // 2. Load data into memory
             initLocalSave();
         }
 
         private static function initLocalSave():void {
-            var cloudExists:Boolean = false;
-            if (connected) {
-                cloudExists = steam.fileExists(SAVE_FILE_NAME);
-                // Facade.addLine("Steam Cloud Exists: " + cloudExists);
-            }
-
-            if (cloudExists) {
-                var ba:ByteArray = new ByteArray();
-                var success:Boolean = steam.fileRead(SAVE_FILE_NAME, ba);
-
-                if (success) {
-                    ba.position = 0;
-                    // Read the string
-                    // var jsonStr:String = ba.readUTFBytes(ba.length);
-                    var encrypted:String = ba.readUTFBytes(ba.length);
-                    
-                    // 🛑 CRITICAL FIX: Trim null characters and whitespace 
-                    // This prevents the "Data Corrupt" error from invisible bytes
-                    encrypted = encrypted.replace(/\0/g, "").replace(/^\s+|\s+$/g, "");
-
-                    var jsonStr: String = decrypt(encrypted);
-
-                    try {
-                        saveSO = SharedObject.getLocal("OfflineSave");
-                        // Update the local SO with the fresh cloud data
-                        saveSO.data.playerData = JSON.parse(jsonStr); 
-                        
-                        Facade.addLine("Steam Cloud Load Success");
-                        return;
-                    } catch (e:Error) {
-                        // If it still fails, trace the string to see what's wrong
-                        Facade.addLine("Data Corrupt: " + e.message);
-                    }
-                }
-            } else {
-                Facade.addLine("No Cloud Save");
-            }
-            
             // Default fallback
             saveSO = SharedObject.getLocal("OfflineSave");
             if (saveSO.data.playerData == null)
@@ -91,32 +43,9 @@
          */
         private static function syncAll():void {
             saveSO.flush();
-
-            if (connected) {
-                var jsonStr:String = JSON.stringify(saveSO.data.playerData);
-                var encrypted:String = encrypt(jsonStr);
-                
-                // Prepare the ByteArray
-                var ba:ByteArray = new ByteArray();
-                // ba.writeUTFBytes(jsonStr);
-                ba.writeUTFBytes(encrypted);
-                
-                var success:Boolean = steam.fileWrite(SAVE_FILE_NAME, ba);
-                
-                if (success) {
-                    Facade.addLine("STEAM ACCEPTED FILE: " + SAVE_FILE_NAME);
-                } else {
-                    Facade.addLine("STEAM REJECTED WRITE. Check AppID/Extension.");
-                }
-            }
         }
         
         private static function deleteEverything(): void {
-            if (connected) {
-                // This tells Steam: "Delete this from the cloud and the user's disk"
-                steam.fileDelete("savegame.json");
-                Facade.addLine("Attempting to kill the ghost JSON...");
-            }
         }
 
         // ===============================
@@ -190,11 +119,6 @@
 
             if (i > current) {
                 saveSO.data.playerData["Highscore"] = i;
-                
-                // If you want to trigger a Steam Achievement for a highscore
-                // if (connected && i >= 1000) {
-                //    steam.setAchievement("ACH_HIGH_SCORE");
-                // }
             }
 
             syncAll();
@@ -219,7 +143,7 @@
         }
 
         public static function getName():String {
-            return steam.getPersonaName();
+            return "Debugger";
         }
 
         private static function encrypt(input:String):String {

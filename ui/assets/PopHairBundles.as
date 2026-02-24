@@ -1,6 +1,6 @@
 ﻿package ui.assets {
 	import flash.display.Sprite;
-	import utils.KongregateAPI;
+	import utils.PurchaseManager;
 	import utils.GameData;
 	import items.ItemData;
 	import ui.windows.ConfirmWindow;
@@ -82,7 +82,7 @@
 			if (GameData.getFlag(GameData.FLAG_FREE_PACK)){
 				new ConfirmWindow("Use your FREE PACK to unlock this pack?",100,100,unlockFree,i);
 			}else{
-				KongregateAPI.buySpecial(finishBuyBundle,KongregateAPI.MINI_BUNDLE);
+				PurchaseManager.buySpecial(finishBuyBundle,PurchaseManager.MINI_BUNDLE);
 			}
 		}
 		

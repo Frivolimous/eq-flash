@@ -5,7 +5,6 @@
 	import ui.windows.ConfirmWindow;
 	import ui.assets.FadeTransition;
 	import utils.GameData;
-	import utils.KongregateAPI;
 	import flash.events.Event;
 	import flash.text.TextField;
 	import artifacts.ArtifactData;
@@ -15,9 +14,6 @@
 	public class TempleUI extends BaseUI{
 		
 		public function TempleUI(){
-			//turboSale.yesB.update(null,buyTurbo);
-			turboB.update(StringData.YES,buyTurbo);
-			boostB.update("10 Tokens!",buyBoost);
 			mysteryG.restrict="0-9";
 			donateB.update(StringData.YES,buyDonate);
 			
@@ -40,26 +36,7 @@
 			soundB.toggled=Facade.soundC.mute;
 			display.update(Facade.gameM.playerM);
 			currentSoul.gold.text=String(GameData.souls);
-			if (GameData.hasAchieved(GameData.ACHIEVE_TURBO)){
-				turboB.disabled=true;
-				turboB.updateLabel("Unlocked!");
-				turboT.text="--";
-				if (contains(turboSub)) removeChild(turboSub);
-			}else{
-				turboB.disabled=false;
-			}
 			
-			if (GameData.boost>0){
-				//boostB.disabled=true;
-				//boostB.updateLabel("Unlocked!");
-				boostT.text=String(GameData.boost)+" left!";
-				//if (contains(boostK)) removeChild(boostK);
-			}else{
-				boostT.text="No Boosts";
-				//addChild(boostK);
-				//boostB.disabled=false;
-				//boostB.updateLabel("10 Tokens!");
-			}
 			var slots:int=0;
 			for (var i:int=0;i<GameData.artifacts.length;i+=1){
 				if (GameData.artifacts[i]!=-1){
@@ -75,7 +52,7 @@
 				ascendB.disabled=true;
 				soulGold.gold.text="---";
 			}
-			powerT.updateDisplay();
+			updateGold();
 			addEventListener(Event.ENTER_FRAME,onTick);
 		}
 		
@@ -86,31 +63,6 @@
 		public function muteSound(){
 			Facade.soundC.mute=!Facade.soundC.mute;
 			soundB.toggled=Facade.soundC.mute;
-		}
-		
-		public function buyTurbo(){
-			KongregateAPI.buySpecial(finishBuyTurbo,KongregateAPI.TURBO,powerT.updateDisplay);
-		}
-		
-		public function finishBuyTurbo(){
-			turboB.disabled=true;
-			turboB.updateLabel("Unlocked!");turboT.text="--";
-			if (contains(turboSub)) removeChild(turboSub);
-			GameData.achieve(GameData.ACHIEVE_TURBO);
-			powerT.updateDisplay();
-		}
-		
-		public function buyBoost(){
-			KongregateAPI.buySpecial(finishBuyBoost,KongregateAPI.BOOST,powerT.updateDisplay);
-		}
-		
-		public function finishBuyBoost(){
-			GameData.boost+=500;
-			//boostB.disabled=true;
-			//boostB.updateLabel("Unlocked!");
-			boostT.text=String(GameData.boost)+" left!";
-			//if (contains(boostK)) removeChild(boostK);
-			powerT.updateDisplay();
 		}
 		
 		public function onTick(e:Event){
@@ -137,6 +89,34 @@
 			new ConfirmWindow("The gods thank you for your donation!\nA warm glow surrounds you with the strength of "+String(Math.ceil(suns))+" sun"+(suns==1?"":"s")+".");
 			GameData.suns+=suns;
 			GameData.saveThis(GameData.SCORES);
+			updateGold();
+		}
+
+		public function updateGold(){
+			if (goldBox!=null){
+				var _gold:Number=GameData.gold;
+				var _letter:int=0;
+				if (_gold>=10000){
+					while(_gold>=1000){
+						_gold/=1000;
+						_letter+=1;
+					}
+				}
+				if (_gold>=100){
+					_gold=Math.round(_gold);
+				}else if (_gold>10){
+					_gold=Math.round(_gold*10)/10;
+				}else{
+					_gold=Math.round(_gold*100)/100;
+				}
+				goldBox.gold.text=String(_gold);
+				switch(_letter){
+					case 1: goldBox.gold.appendText("k"); break;
+					case 2: goldBox.gold.appendText("m"); break;
+					case 3: goldBox.gold.appendText("b"); break;
+					case 4: goldBox.gold.appendText("t"); break;
+				}
+			}
 		}
 	}
 }

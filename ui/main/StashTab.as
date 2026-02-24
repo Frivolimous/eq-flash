@@ -21,7 +21,7 @@
 		var shares:Array;
 		var cStash:Array;
 		var tTName:String="Stash Tabs:";
-		var tTDesc:String="P: Personal\n1 to 4: Shared\nO: Overflow\n *Special Items when Inv Full go here";
+		var tTDesc:String="P: Personal\n1 to 8: Shared\nO: Overflow\n *When inventory is full, special items go into OVERFLOW.";
 		public var noSave:Boolean=false;
 		
 		public function StashTab(){
@@ -81,7 +81,8 @@
 				cStash=Facade.gameM.stash[i];
 				
 				stashName.text=Facade.gameM.stash[i][0];
-				locked=Facade.gameM.stash[i][1];
+				// locked=Facade.gameM.stash[i][1];
+				locked = false;
 				inventory.locked=locked;
 				inventory.cantAdd=false;
 				if (locked && !noSave){

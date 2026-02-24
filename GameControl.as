@@ -235,7 +235,7 @@
 				GameData.setScore(GameData.SCORE_FURTHEST,gameM.area);
 			}
 			if (gameM.area>50) GameData.achieve(GameData.ACHIEVE_NOBLE);
-			if (gameM.area>100) GameData.achieve(GameData.ACHIEVE_TURBO);
+			// if (gameM.area>100) GameData.achieve(GameData.ACHIEVE_TURBO);
 			if (gameM.area>200) GameData.achieve(GameData.ACHIEVE_ACOLYTE);
 			if (gameM.area>300) {GameData.achieve(GameData.ACHIEVE_PALADIN); GameData.achieve(GameData.ACHIEVE_FORGE);}
 			if (gameM.area>400) GameData.achieve(GameData.ACHIEVE_EPIC);

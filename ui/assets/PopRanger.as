@@ -5,7 +5,7 @@
 	import items.ItemView;
 	import items.ItemModel;
 	import utils.GameData;
-	import utils.KongregateAPI;
+	import utils.PurchaseManager;
 	import ui.windows.ConfirmWindow;
 	
 	public class PopRanger extends Sprite{
@@ -50,7 +50,7 @@
 		}
 		
 		function buyBundle(i){
-			KongregateAPI.buySpecial(finishBuyBundle,KongregateAPI.MINI_BUNDLE2);
+			PurchaseManager.buySpecial(finishBuyBundle,PurchaseManager.MINI_BUNDLE2);
 		}
 		
 		function finishBuyBundle(){
