@@ -38,6 +38,8 @@
 					display.text="Cosmetics:\n 50 Ascends Reward.";
 				}else if (i==GameData.ACHIEVE_ROGUE){
 					display.text="Class Unlock:\n "+StringData.achieveName(i);
+				}else if (i==GameData.ACHIEVE_BERSERKER){
+					display.text="Class Unlock:\n "+StringData.achieveName(i);
 				}else if (i==GameData.ACHIEVE_FORGE){
 					display.text="Building Unlock:\nMystic Forge";
 				}else if (i==GameData.ACHIEVE_EPIC){

@@ -48,7 +48,6 @@
 		
 		public function updateStreak(i:int,j:int){
 			streakT.text=String(i);
-			streakST.text=String(j);
 		}
 		
 		public function addAction(_o:String,_action:String){

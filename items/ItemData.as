@@ -68,7 +68,7 @@
 			if (Math.random()<premiumChance){
 				return spawnPremium(0);
 			}
-			var level:int=Math.ceil((Math.random()*0.6+0.7)*_level/10);
+			var level:int=Math.ceil((Math.random()*0.8+0.25)*_level/10);
 			if (level>15) level=15;
 			var m:ItemModel;
 			switch(Math.floor(Math.random()*15)){
@@ -100,7 +100,7 @@
 					m=enchantItem(spawnItem(level,j),i);
 					break;
 				case 9: case 10: case 11: 
-					level=Math.ceil((Math.random()*0.6+0.7)*_level/10); 
+					level=Math.ceil((Math.random()*0.25+0.8)*_level/10); 
 					if  (level>15) level=Math.floor(15+(level-15)*0.3);
 					m=randomItem(TRADE,level); break;
 				case 12: case 13: case 14: m=randomItem(POTION,level); break;

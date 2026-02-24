@@ -52,10 +52,10 @@
 				buttons[7].setDesc(StringData.PTITLES[7*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Defeat arena 800 to unlock.");
 			}
 			
-			// if (!GameData.hasAchieved(GameData.ACHIEVE_BERSERKER)){
+			if (!GameData.hasAchieved(GameData.ACHIEVE_BERSERKER)){
 				buttons[8].disabled = true;
 				buttons[8].setDesc(StringData.PTITLES[8*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","This skill tree is unreleased. Maybe it will be, maybe not?");
-			// }			
+			}
 			
 			for (i=0;i<_origin.skillBlock.skillT.length;i+=1){
 				if (buttons[i].disabled){

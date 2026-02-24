@@ -38,7 +38,7 @@
 			
 			//respecC.text=respecCost().toString()+" g";
 			remainText.text=String(origin.skillBlock.skillPoints);
-			respecText.text=String(origin.respecsSinceAscension);
+			// respecText.text=String(origin.respecsSinceAscension);
 			trees=origin.skillBlock.getTreeArray();
 			if (trees.length==0) trees=[0];
 			skillCircles.numCircles(trees.length);

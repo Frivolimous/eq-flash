@@ -175,7 +175,6 @@
         // ===============================
 
         public static function getTime(_function:Function):void {
-
             _function(new Date());
         }
 
@@ -245,6 +244,17 @@
                 result += String.fromCharCode(charCode);
             }
             return result;
+        }
+
+        // ===========================
+        // ACHIEVEMENTS
+        // ===========================
+
+        private static function unlockAchievement(apiName:String):void {
+            // Standard ANE call to unlock and push to server
+            steam.setAchievement(apiName);
+            steam.storeStats(); 
+            Facade.addLine("🏆 Achievement Unlocked: " + apiName);
         }
     }
 }

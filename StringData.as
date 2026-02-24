@@ -1269,6 +1269,7 @@
 				case GameData.ACHIEVE_ACOLYTE: return "Acolyte";
 				case GameData.ACHIEVE_PALADIN: return "Paladin";
 				case GameData.ACHIEVE_ROGUE: return "Rogue";
+				case GameData.ACHIEVE_BERSERKER: return "Berserker";
 				default: return "Name "+String(i);
 			}
 		}

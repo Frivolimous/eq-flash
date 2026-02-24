@@ -104,7 +104,6 @@
         // ===============================
 
         public static function getTime(_function:Function):void {
-
             _function(new Date());
         }
 
@@ -169,6 +168,9 @@
                 result += String.fromCharCode(charCode);
             }
             return result;
+        }
+
+        private static function unlockAchievement(apiName:String):void {
         }
     }
 }
