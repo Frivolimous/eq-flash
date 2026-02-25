@@ -171,7 +171,7 @@
 							HALF_STRENGTH:String="Half Strength",
 							FULL_STRENGTH:String="Full Strength",
 							BONUS_STRENGTH:String="Heavy Weapon",
-							ONLYFAR:String="Only Mid",
+							ONLYFAR:String="Only Far",
 							TWO_CHARGES:String="Costs 2 Charges",
 							RETURN:String="Return",
 							HALF_MPOW:String="Half MPow",

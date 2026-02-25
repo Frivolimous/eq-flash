@@ -10,7 +10,6 @@
 	import gameEvents.GameEventManager;
 	import gameEvents.GameEvent;
 	import utils.GameData;
-	import utils.NoSteamXAPI;
 	
 	public class HardcoreDuelControl extends DuelControl{
 		/*var gameM:GameModel;
@@ -65,7 +64,7 @@
 		
 		public static var eliminated:Array=["8z8z","Time_Master","dja410","wizardness","Furball777","neit314","yamahaclavinova1","pizza87760","niconicolas","Battenberger","bonez893","lounsbery","GelanderLexC","opacitythebomb","archaeryon","fasman1234","himoo1","norgath","User2351","TrcKMaIsTeR","greatzar","Jarty","Zais764",	"Captain_Catface","virtual_maniac","VerboseandMorose","zver8","lPro100xl","owerske","lenchiko","Dejection","wtfzoids","TheRelic","lordasmodai","Batmanlin","wiffasniffa","Zgabouften","kasugol","tepduang","AgithS","matjdavis","romain5279","denbart93","EchoStar37","sryker","j6u6fu0","Hunterstyle89","Celebris","thegameslayer","Methangas","ohjajaja"];
 		public static function getEliminatedPosition():int{
-			var _name:String=NoSteamXAPI.getName();
+			var _name:String=Facade.steamAPI.getName();
 			for (var i:int=0;i<eliminated.length;i+=1){
 				if (eliminated[i]==_name){
 					 return 1+i;

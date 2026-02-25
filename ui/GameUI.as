@@ -172,6 +172,7 @@
 			//2 = Dueling Frame
 			if (currentFrame==1){
 				gaugeW.update(gameM.playerM);
+				if (gameM.playerM.craftB > 0) inventoryUI.manuBar.visible = true;
 				inventoryUI.manuBar.count(gameM.playerM.craftB,100);
 				
 				if (skillUI.y==fullIn){
@@ -447,6 +448,7 @@
 				statusW.update(gameM.playerM);
 				inventoryUI.update(gameM.playerM);
 				inventoryUI.manuBar.setTooltipName("Manufacturing Points");
+				inventoryUI.manuBar.visible = false;
 				//limitUI.update(gameM.playerM);
 				//Facade.saveC.saveFromGame();
 				gameM.enemyM.exists=false;
@@ -731,9 +733,9 @@
 			
 			switch(_state){
 				case GameModel.BETWEEN: gaugeW.state.text="Safe"; break;
-				case GameModel.FAR: gaugeW.state.text="Fight (Mid)"; break;
+				case GameModel.FAR: gaugeW.state.text="Fight (Far)"; break;
 				case GameModel.NEAR: gaugeW.state.text="Fight (Near)"; break;
-				case GameModel.VERY: gaugeW.state.text="Fight (Far)"; break;
+				case GameModel.VERY: gaugeW.state.text="Fight (Long)"; break;
 			}
 		}
 		

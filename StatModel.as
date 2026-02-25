@@ -212,7 +212,7 @@
 			turnReduce=0;
 			irate=mrate=0.4;
 			trate=prate=0;
-			craftBelt=5;
+			craftBelt=0;
 			dmgmult=strmult=mpowmult=initmult=healmult=regmult=blockmult=healthmult=manamult=buffmult=cursemult=1;
 			faravoid=0;
 			blocktorall=armortohealth=manatompow=manatostrength=0;

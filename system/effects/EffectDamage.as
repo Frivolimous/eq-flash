@@ -145,7 +145,7 @@
 			
 			m+=" damage";
 			if (name==EffectData.FULL_POWER){
-				" and can attack from Mid or Far Range";
+				" and can attack from Far or Long Range";
 			}
 			m+="."
 			return m;

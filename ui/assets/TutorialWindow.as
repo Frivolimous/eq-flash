@@ -144,7 +144,7 @@
 									//arrow inv
 									return "Your hero found a throwing weapon!  These also go in his belt.  Equip it now!";
 				case ALCHPRIORITY:	makeArrow(Facade.gameUI.inventoryUI,Facade.gameUI.inventoryUI.itemA[toTrack.index].x+15,72);
-									return "Throwing weapons are better used from far away.\nChange the Priority until it says 'FAR' or 'MID'.";
+									return "Throwing weapons are better used from far away.\nChange the Priority until it says 'FAR' or 'LONG'.";
 				case GEM:			toTrack=new ItemView(ItemData.spawnItem(1,45));
 									Facade.gameUI.addItem(toTrack);
 									Facade.gameUI.inventoryUI.trash.visible=true;

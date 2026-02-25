@@ -101,12 +101,12 @@
 							ALWAYS:String="All",
 							BETWEEN:String="Safe",
 							COMBAT:String="Fight",
-							VERY:String="Far",
-							FAR:String="Mid",
+							VERY:String="Long",
+							FAR:String="Far",
 							NEAR:String="Near",
 							NEAR_AW:String="NEAR",
-							FAR_AW:String="MID",
-							VERY_AW:String="FAR",
+							FAR_AW:String="FAR",
+							VERY_AW:String="LONG",
 							SAFE_AW:String="SAFE";
 								
 		public static const TYPE:String="TYPE",
@@ -623,7 +623,7 @@
 			switch(s){
 				case EffectData.RETURN: m+="Strikes twice"; break;
 				case EffectData.NO_ATTACK: m+="You cannot attack while holding this item."; break;
-				case EffectData.ONLYFAR: m+="Only useable from Mid Range."; break;
+				case EffectData.ONLYFAR: m+="Only useable from Far Range."; break;
 				case EffectData.TWO_CHARGES: m+="This item costs 2 charges when used."; break;
 				case EffectData.HALF_STRENGTH: m+="Only half your strength bonus is used for damage."; break;
 				case EffectData.HALF_MPOW: m+="Only half your MPow is added to the effect."; break;
@@ -632,8 +632,8 @@
 				case EffectData.BONUS_STRENGTH: m+="150% Damage Scaling from stats for this weapon."; break;
 				case EffectData.RELIC: m+="Only one Relic of any type can ever be equipped at a time."; break;
 				case EffectData.PIERCE: m+="Damage is based on your Initiative."; break;
-				case EffectData.RANGED: m+="Can also be used as a Mid Ranged Weapon, splitting its damage into two strikes."; break;
-				case EffectData.LONG_RANGED: m+="Can also be used at Far Range."; break;
+				case EffectData.RANGED: m+="Can also be used as a Far Ranged Weapon, splitting its damage into two strikes."; break;
+				case EffectData.LONG_RANGED: m+="Can also be used at Long Range."; break;
 				case EffectData.MONK_WEAPON: m+="Can use all of a monk's offensive skills."; break;
 				case EffectData.BLOOD_MAGIC: m+="Uses Health instead of Mana to cast this spell at an increased cost."; break;
 				case EffectData.DURATION: m+="Increases Duration by 1."; break;
@@ -730,8 +730,8 @@
 				case BETWEEN: return "This item will only be used between fights.";
 				case COMBAT: return "This item will be used any time during combat.";
 				case NEAR: return "This item will only be used when the enemy is right next to you.";
-				case FAR: return "This item will only be used when you at Mid Range.";
-				case VERY: return "This item will only be used at Far Range.";
+				case FAR: return "This item will only be used when you at Far Range.";
+				case VERY: return "This item will only be used at Long Range.";
 				case NEAR_AW: case FAR_AW: case SAFE_AW: case VERY_AW: return "Use this button to scroll between the three Action Lists.";
 				case EnemyData.TITLES[0][0]: return "Forest creatures are more cunning.";
 				case EnemyData.TITLES[0][1]: return "Mountain creatures are hardier.";
@@ -798,7 +798,7 @@
 					case DOTEFF: return "Increases the effectiveness of all your Over Time effects (Healing Included).";
 					case PROCEFF: return "Increases the effectiveness of all secondary damage from weapons, spells and potions, including direct and damage over time.";
 					case NEAR: return "Increased damage from Near Range.";
-					case FAR: return "Increased damage from Mid or Far Range.";
+					case FAR: return "Increased damage from Far or Long Range.";
 					case HEALMULT: return "Increases healing from all sources.";
 					case DMGMULT: return "Multiplies your base damage.";
 					case CRAFT_BELT: return "Add this amount of Manufacturing Points every turn, doubled while SAFE. 100 Points grants stacks of belt items based on stack size.";
@@ -1184,7 +1184,7 @@
 		public static function specialSkill(i:int):String{
 			switch(i){
 				case SkillData.UNARMED: return "\n\n<font color="+TEAL+">*Damage is added to Base Unarmed Damage of 10.</font>"; break;
-				case SkillData.LEAP: return "\n\n<font color="+TEAL+">*You can Leap and Attack from Mid Range (Overrides Approach: Acc -10%)</font>"; break;
+				case SkillData.LEAP: return "\n\n<font color="+TEAL+">*You can Leap and Attack from Far Range (Overrides Approach: Acc -10%)</font>"; break;
 				//case SkillData.GADGETEER: return "\n\n<font color="+TEAL+">*Increases effectiveness and use rate of all Belt Items (not Charms).</font>"; break;
 				case SkillData.WITHDRAW: return "\n\n<font color="+TEAL+">*Chance to move backwards and use a Damaging Action.</font>"; break;
 				case SkillData.IRON_GUT: return "\n\n<font color="+TEAL+">*Improves power of Health and Mana Potions</font>";
@@ -1202,7 +1202,7 @@
 				case SkillData.WARRIOR: return "\n\n<font color="+TEAL+">*Every point in this tree increases your Physical Damage from any source.</font>"; break;
 				case SkillData.MONK:	return "\n\n<font color="+TEAL+">*Every point in this tree increases your Secondary Damage from charms, skills, etc.</font>"; break;
 				case SkillData.WIZARD:	return "\n\n<font color="+TEAL+">*Every point in this tree increases your Magic Damage from any source.</font>"; break;
-				case SkillData.RANGER:	return "\n\n<font color="+TEAL+">*Every point in this tree increases all your damage when at Mid or Far Range.</font>"; break;
+				case SkillData.RANGER:	return "\n\n<font color="+TEAL+">*Every point in this tree increases all your damage when at Far or Long Range.</font>"; break;
 				case SkillData.ALCHEMIST: return "\n\n<font color="+TEAL+">*Every point in this tree increases Chemical Damage and Healing from any source.</font>"; break;
 				case SkillData.ACOLYTE:	return "\n\n<font color="+TEAL+">*Every point in this tree increases your Dark Damage from any source.</font>"; break;
 				case SkillData.PALADIN:	return "\n\n<font color="+TEAL+">*Every point in this tree increases your Holy Damage and Healing from any source.</font>"; break;
@@ -1219,7 +1219,7 @@
 				case 10: return "\n\n<font color="+TEAL+">*Increases Holy Damage dealt.</font>";
 				case 12: return "\n\n<font color="+TEAL+">*Increases the duration of all buffs.</font>";
 				case 14: return "\n\n<font color="+TEAL+">*Reduces physical damage taken.</font>";
-				case 15: return "\n\n<font color="+TEAL+">*Increased damage from Mid and Far Range.</font>";
+				case 15: return "\n\n<font color="+TEAL+">*Increased damage at Far and Long Range.</font>";
 				case 16: return "\n\n<font color="+TEAL+">*A percentage of your Block is added as Magic, Chemical and Holy Resistance.</font>";
 				case 18: return "\n\n<font color="+TEAL+">*Increases the amount of health gained from your Helmet by a percent.</font>";
 				case 22: return "\n\n<font color="+TEAL+">*Increases the amount of healing gained from all sources.</font>";
@@ -1230,7 +1230,7 @@
 				case 35: return "\n\n<font color="+TEAL+">*Increases your maximum mana by a percent.</font>";
 				case 37: return "\n\n<font color="+TEAL+">*Increases your base stats by an amount.</font>";
 				case 38: return "\n\n<font color="+TEAL+">*Increases damage while near and increases your Hit and Block by a percent.</font>";
-				case 39: return "\n\n<font color="+TEAL+">*Increases your Dodge and Nullify while at Mid or Far Range.</font>";
+				case 39: return "\n\n<font color="+TEAL+">*Increases your Dodge and Nullify while at Far or Long Range.</font>";
 				
 			}
 			return "";

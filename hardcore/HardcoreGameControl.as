@@ -18,7 +18,6 @@
 	import system.actions.ActionBase;
 	import system.effects.EffectBase;
 	import system.effects.EffectData;
-	import utils.NoSteamXAPI;
 	import ui.assets.AchievementDisplay;
 	
 	public class HardcoreGameControl extends GameControl{
@@ -39,7 +38,7 @@
 			if (!running) return;
 			//You Die!
 			
-			NoSteamXAPI.deletePlayerData(["player-100"]);
+			Facade.steamAPI.deletePlayerData(["player-100"]);
 			Facade.gameM.playerM.saveSlot=-1;
 			if (gameUI.goingTown){
 				gameUI.navOut();
@@ -467,7 +466,7 @@ Prem:
 		
 		public static var eliminated:Array=["shanekukacka","killaruna66","ThePokemonMew","Checkursyx","dja410","JustinL637","wazzur","Krelian970","denbart93","Zianzix","gromanakk","8z8z","slaaackin","Lycantroph","LSpike","WoeWei","KeithP23","nn330303","tocooljim","huangex","Captain_Catface","lounsbery","yamahaclavinova1","squetle","squidie","User2351","kbzalol","swordyo","Battenberger","KuroShiroi","brakerboi","keldariel","marcostonelo","demonspawn0001","Rygaive461","jubssmadder","fasman1234","lordasmodai","heybob","ICONAT","rjfc","frithjofbau","zver8","ChiefFishy","777588","Oooooo661","deathtyrant","WolfPackXV","OneWingedDevil","TitusLeoL"];
 		public static function getEliminatedPosition():int{
-			var _name:String=NoSteamXAPI.getName();
+			var _name:String=Facade.steamAPI.getName();
 			for (var i:int=0;i<eliminated.length;i+=1){
 				if (eliminated[i]==_name){
 					 return 1+i;

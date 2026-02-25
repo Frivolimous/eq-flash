@@ -40,20 +40,20 @@
 			button3.setDesc("Zone 301","Return to Zone 301 at Level 60 for 30000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
 			button4.update("401",selectButton,true);
 			button4.index=4;
-			button4.setDesc("Zone 401","Return to Zone 401 at Level 60 for 75000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
+			button4.setDesc("Zone 401","Return to Zone 401 at Level 60 for 45000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
 			button5.update("601",selectButton,true);
 			button5.index=5;
-			button5.setDesc("Zone 601","Return to Zone 601 at Level 60 for 150000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
+			button5.setDesc("Zone 601","Return to Zone 601 at Level 60 for 90000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
 			button6.update("1001",selectButton,true);
 			button6.index=6;
-			button6.setDesc("Zone 1001","Return to Zone 1001 at Level 60 for 300000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
+			button6.setDesc("Zone 1001","Return to Zone 1001 at Level 60 for 180000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
 			button7.update("2001",selectButton,true);
 			button7.index=7;
-			button7.setDesc("Zone 2001","Return to Zone 2001 at Level 60 for 600000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
+			button7.setDesc("Zone 2001","Return to Zone 2001 at Level 60 for 360000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
 			button8.update("3001",selectButton,true);
 			button8.index=8;
-			button8.setDesc("Zone 3001","Return to Zone 3001 at Level 60 for 900000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
-			
+			button8.setDesc("Zone 3001","Return to Zone 3001 at Level 60 for 720000 Souls.\n\nYou will not earn Souls for the areas you skipped and you may only travel to a zone you have already reached.");
+
 			var _furthest:int=GameData.getScore(GameData.SCORE_FURTHEST);
 			if (_furthest<201){
 				button2.disabled=true;
@@ -112,11 +112,11 @@
 				case 1: zone=101; cost=250; level=45; button1.toggled=true; break;
 				case 2: zone=201; cost=4000; level=50; button2.toggled=true; break;
 				case 3: zone=301; cost=30000; level=60; button3.toggled=true; break;
-				case 4: zone=401; cost=75000; level=60; button4.toggled=true; break;
-				case 5: zone=601; cost=150000; level=60; button5.toggled=true; break;
-				case 6: zone=1001; cost=300000; level=60; button6.toggled=true; break;
-				case 7: zone=2001; cost=600000; level=60; button7.toggled=true; break;
-				case 8: zone=3001; cost=900000; level=60; button8.toggled=true; break;
+				case 4: zone=401; cost=45000; level=60; button4.toggled=true; break;
+				case 5: zone=601; cost=90000; level=60; button5.toggled=true; break;
+				case 6: zone=1001; cost=180000; level=60; button6.toggled=true; break;
+				case 7: zone=2001; cost=360000; level=60; button7.toggled=true; break;
+				case 8: zone=3001; cost=720000; level=60; button8.toggled=true; break;
 			}
 
 			soulT.gold.text=String(cost);

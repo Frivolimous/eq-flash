@@ -7,8 +7,8 @@
 	public class GameModel{
 		
 		public static const NEAR:String="near",
-							FAR:String="mid",
-							VERY:String="far",
+							FAR:String="far",
+							VERY:String="long",
 							BETWEEN:String="safe";
 
 		public static const MAX_ROUNDS:int=200;

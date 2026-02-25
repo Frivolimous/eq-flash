@@ -355,14 +355,14 @@
 			var _title1:String;
 			var _title2:String;
 			if (mainClass>-1){
-				if (_points[mainClass]>=21){
+				if (_points[mainClass]>=20){
 					_title1=StringData.PTITLES[mainClass*3+1];
 				}else if (_points[mainClass]>=5){
 					_title1=StringData.PTITLES[mainClass*3];
 				}
 			}
 			if (class2>-1){
-				if (_points[class2]>=10 && _points[mainClass]>=21){
+				if (_points[class2]>=10 && _points[mainClass]>=20){
 					_title1=StringData.PTITLES2[mainClass][class2];
 					_title2=null;
 				}else if (_points[class2]>=6){

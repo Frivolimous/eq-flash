@@ -52,6 +52,7 @@
 		// 			i=Facade.gameM.area;
 		// 			break;
 		// 		case CHALLENGE_REACHED:
+		//			// this is the LEVEL of the challenge, not the INDEX.
 		// 			if (Facade.gameM.playerM.challenge[0]>0){
 		// 				i=Facade.saveC.challengeArray(Facade.gameM.playerM.challenge[0]-1,0)[1];
 		// 			}

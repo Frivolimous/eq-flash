@@ -39,7 +39,7 @@
 			}
 			if (type==UPGRADE){
 				valueGold=_item.model.cost*(_item.model.level+1)*3.5;
-				if (_item.model.level>15) valueGold*=2;//(_item.model.level-9);
+				if (_item.model.level>15) valueGold*=1.1+(_item.model.level - 15)*0.9;
 				valueD.text=String(valueGold)+" g";
 			}else if (type==STACK){
 				valueGold=_item.model.getRestackCost();

@@ -285,7 +285,7 @@
 					_skill.values=[[SpriteModel.STAT,StatModel.HEALTH,12*i],[SpriteModel.STAT,StatModel.DISPLAYS,new EffectDamageRadiation("Radiation",0.01*i,DamageModel.CHEMICAL)]];
 					break;
 				case CRAFTING:
-					_skill.values=[[SpriteModel.STAT,StatModel.ITEMEFF,0.02*i],[SpriteModel.STAT,StatModel.CRAFT_BELT,2*i]];
+					_skill.values=[[SpriteModel.STAT,StatModel.ITEMEFF,0.02*i],[SpriteModel.STAT,StatModel.CRAFT_BELT,2.5*i]];
 					break;
 				case DETERMINED:
 					_skill.values=[[SpriteModel.STAT,StatModel.RCHEMICAL,0.05+Facade.diminish(0.033,i)],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.CLEANSE,i)]];

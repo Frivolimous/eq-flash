@@ -33,11 +33,11 @@
 				case COMBAT: return "Fight";
 				case BETWEEN: return "Safe";
 				case NEAR: return "Near";
-				case FAR: return "Mid";
+				case FAR: return "Far";
 				
 				case NEVER: return "Never";
 				case EQUIP: return "Equip";
-				case VERY: return "Far";
+				case VERY: return "Long";
 				case NONE: return "";
 				
 				/*case PERCENT_100: return "<100%";
@@ -59,8 +59,8 @@
 				case COMBAT: return "Fight: Near or Far";
 				case BETWEEN: return "Safe Only";
 				case NEAR: return "Near Range Only";
-				case FAR: return "Mid Range Only";
-				case VERY: return "Far Range Only";
+				case FAR: return "Far Range Only";
+				case VERY: return "Long Range Only";
 				
 				case NEVER: return "Never";
 				case EQUIP: return "Equippable";
@@ -86,8 +86,8 @@
 				case COMBAT: return "Use this action at Near or Far distance in Combat.";
 				case BETWEEN: return "Only use this action when you are Safe (between fights)";
 				case NEAR: return "Only use this action when adjacent to your target.";
-				case FAR: return "Only use this action when you are away from your target.";
-				case VERY: return "Only use this action when you are far from your target.";
+				case FAR: return "Only use this action when you are far from your target.";
+				case VERY: return "Only use this action when you are at long range.";
 				
 				case NEVER: return "Never use this action.";
 				case EQUIP: return "This item does not have an associated action.";

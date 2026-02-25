@@ -8,21 +8,21 @@
     import ui.windows.ConfirmWindow;
 
     public class NoSteamXAPI {
-        public static var connected:Boolean=false;
+        public var connected:Boolean=false;
         
         // Steam ANE instance
-        private static const SAVE_FILE_NAME:String = "savegame.json";
-        private static const SECRET_KEY:String = "EQ_KEY_F17eH51B";
+        private const SAVE_FILE_NAME:String = "savegame.json";
+        private const SECRET_KEY:String = "EQ_KEY_F17eH51B";
 
-        static var saveSO:SharedObject;
+        var saveSO:SharedObject;
 
-        public static var expiredMC:ExpiredW;
+        public var expiredMC:ExpiredW;
         
         // ===============================
         // INIT / LOGIN
         // ===============================
 
-        public static function init():void {
+        public function init():void {
             connected = true;          
             Facade.addLine("Steam Disabled; local only");
 
@@ -30,7 +30,7 @@
             initLocalSave();
         }
 
-        private static function initLocalSave():void {
+        private function initLocalSave():void {
             // Default fallback
             saveSO = SharedObject.getLocal("OfflineSave");
             if (saveSO.data.playerData == null)
@@ -41,18 +41,18 @@
          * The Master Save Function
          * Syncs to both Local SO and Steam Cloud
          */
-        private static function syncAll():void {
+        private function syncAll():void {
             saveSO.flush();
         }
         
-        private static function deleteEverything(): void {
+        private function deleteEverything(): void {
         }
 
         // ===============================
         // PLAYER DATA SAVE / LOAD
         // ===============================
 
-        public static function submitPlayerData(_obj:*, _override:Boolean=false):void {
+        public function submitPlayerData(_obj:*, _override:Boolean=false):void {
             for (var key:String in _obj) {
                 if (_obj[key] == null) {
                     delete saveSO.data.playerData[key];
@@ -66,7 +66,7 @@
             Facade.addLine("Game Saved to Cloud");
         }
 
-        public static function retrievePlayerData(_vars:Array,_onComplete:Function):void {
+        public function retrievePlayerData(_vars:Array,_onComplete:Function):void {
             var result:Object = {};
 
             for each (var key:String in _vars) {
@@ -80,7 +80,7 @@
             _onComplete(result);
         }
 
-        public static function retrieveAllPlayerData(_onComplete:Function):void {
+        public function retrieveAllPlayerData(_onComplete:Function):void {
             var result:Object = {};
             for (var key:String in saveSO.data.playerData) {
                 result[key] = {
@@ -92,7 +92,7 @@
             _onComplete(result);
         }
 
-        public static function deletePlayerData(a:Array):void {
+        public function deletePlayerData(a:Array):void {
             for each (var key:String in a)
                 delete saveSO.data.playerData[key];
 
@@ -103,7 +103,7 @@
         // TIME
         // ===============================
 
-        public static function getTime(_function:Function):void {
+        public function getTime(_function:Function):void {
             _function(new Date());
         }
 
@@ -111,7 +111,7 @@
         // HIGHSCORE
         // ===============================
 
-        public static function submitHighscoreScript(i:int):void {
+        public function submitHighscoreScript(i:int):void {
             var current:int = 0;
             if (saveSO.data.playerData["Highscore"] != null)
                 current = saveSO.data.playerData["Highscore"];
@@ -124,7 +124,7 @@
             Facade.addLine("Highscore Synced");
         }
 
-        public static function expiredSession(_s:String):void {
+        public function expiredSession(_s:String):void {
             if (Facade.gameC != null)
                 Facade.gameC.pauseGame(true);
 
@@ -137,15 +137,15 @@
             Facade.stage.addEventListener(Event.ENTER_FRAME, locked);
         }
 
-        public static function locked(e:Event):void {
+        public function locked(e:Event):void {
             Facade.stage.addChild(expiredMC);
         }
 
-        public static function getName():String {
+        public function getName():String {
             return "Debugger";
         }
 
-        private static function encrypt(input:String):String {
+        private function encrypt(input:String):String {
             // return input;
 
             var result:String = "";
@@ -158,7 +158,7 @@
             return Base64.encode(result);
         }
 
-        private static function decrypt(input:String):String {
+        private function decrypt(input:String):String {
             // return input;
 
             var decoded:String = Base64.decode(input);
@@ -170,7 +170,7 @@
             return result;
         }
 
-        private static function unlockAchievement(apiName:String):void {
+        private function unlockAchievement(apiName:String):void {
         }
     }
 }

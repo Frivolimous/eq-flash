@@ -166,11 +166,11 @@
 					case 43: return new ItemModel(_index,"Beads",_level,USEABLE,CHARM,BUFF,100);
 					case 44: return new ItemModel(_index,"Hoof",_level,USEABLE,CHARM,BUFF,100);
 					
-					case 45: return new ItemModel(_index,"Diamond",_level,TRADE,TRADE,"",200*(1+0.1*_level));
-					case 46: return new ItemModel(_index,"Sapphire",_level,TRADE,TRADE,"",180*(1+0.1*_level));
-					case 47: return new ItemModel(_index,"Ruby",_level,TRADE,TRADE,"",160*(1+0.1*_level));
-					case 48: return new ItemModel(_index,"Emerald",_level,TRADE,TRADE,"",140*(1+0.1*_level));
-					case 49: return new ItemModel(_index,"Amethyst",_level,TRADE,TRADE,"",120*(1+0.1*_level));
+					case 45: return new ItemModel(_index,"Diamond",_level,TRADE,TRADE,"",200*(1+Math.min(3.5, 0.1*_level)));
+					case 46: return new ItemModel(_index,"Sapphire",_level,TRADE,TRADE,"",180*(1+Math.min(3.5, 0.1*_level)));
+					case 47: return new ItemModel(_index,"Ruby",_level,TRADE,TRADE,"",160*(1+Math.min(3.5, 0.1*_level)));
+					case 48: return new ItemModel(_index,"Emerald",_level,TRADE,TRADE,"",140*(1+Math.min(3.5, 0.1*_level)));
+					case 49: return new ItemModel(_index,"Amethyst",_level,TRADE,TRADE,"",120*(1+Math.min(3.5, 0.1*_level)));
 					
 					case 50: case 51: case 52: case 53: case 54: case 55: case 56: case 57: case 58: case 59: case 60: case 61: 
 						return new ItemScroll(_level,spawnItem(_level+Math.ceil(Math.min(_level,15)*0.25),_index-36),(_charges>=0)?_charges:1);

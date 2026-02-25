@@ -7,7 +7,6 @@
 	import artifacts.ArtifactModel;
 	import utils.GameData;
 	import flash.events.Event;
-	import utils.NoSteamXAPI;
 	import limits.LimitModel;
 	import limits.LimitData;
 	
@@ -55,8 +54,6 @@
 			["AlexD110",60,21,[0,0,0,10,0,0,0,0,0,0,10,0,0,0,10,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0],
 			[[107,15,-1,-1],[90,15,-1,-1],[20,15,-1,-1],null,null,[42,15,-1,10],[42,15,-1,10],[42,15,-1,10],[42,15,-1,10],[31,15,12,6]]]
 			];
-			
-
 		
 		public var temp:Array=new Array(2);
 		
@@ -148,7 +145,7 @@
 			}
 			
 			if (playerToUpdate==null || _save==null || _save[0]==null){
-				NoSteamXAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
+				Facade.steamAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
 				return;
 			}
 			
@@ -240,8 +237,10 @@
 			loadShort(_player,challengeArray(i,_list),i+5,false);
 		}
 		
+		// takes in the index of the challenge
+		// 1-10 is base level. Each floor(i/10) levels up the array by 50.
+		// returns a load-ready character array
 		public function challengeArray(i:int,_arrayIndex:int=0):Array{
-			
 			if (_arrayIndex==0){
 				var _level:int=Math.floor(i/_Challenge.length);
 				i=i%_Challenge.length;

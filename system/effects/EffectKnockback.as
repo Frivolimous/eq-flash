@@ -134,7 +134,7 @@
 				case FORWARDS_TWO: n="pull the enemy forwards to Near Range"; break;
 				case FORWARDS: n="pulls the enemy forwards by 1 unit"; break;
 				case BACK: n="knocks the target back 1 unit"; break;
-				case BACK_TWO: n="knocks the target back to Far Range"; break;
+				case BACK_TWO: n="knocks the target back to Long Range"; break;
 			}
 			if (stun){
 				n+=" and stuns for 1 round.";

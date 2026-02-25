@@ -82,8 +82,10 @@
 		}
 		
 		public static function calc(_zone:int):int{
-			if (_zone>400){
-				return 79188+(_zone-400)*(700+_zone/10);
+			if (_zone>800){
+				return Math.floor(251988+(_zone-800)*(200+_zone/50));
+			}else if (_zone>400){
+				return Math.floor(79188+(_zone-400)*(400+_zone/25));
 			}else{
 				return Math.floor(204431.4 + (238.6777 - 204431.4)/(1 + Math.pow((_zone/431.1145),6.160109)));
 			}

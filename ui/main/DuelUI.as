@@ -26,7 +26,7 @@
 		
 		public function DuelUI(){
 			challengeB.update(StringData.CHALLENGE,switchChallenge,true);
-			season1B.update(StringData.SEASON1,switchSeason1,true);
+			// season1B.update(StringData.SEASON1,switchSeason1,true);
 			duelB.update(StringData.DUEL,switchDuel,true);
 			exportB.update(StringData.EXPORT,popExport);
 			
@@ -138,7 +138,7 @@
 		
 		public function switchChallenge(){
 			challengeB.toggled=true;
-			season1B.toggled=false;
+			// season1B.toggled=false;
 			duelB.toggled=false;
 			if (contains(duelButtons)){
 				removeChild(duelButtons);
@@ -155,7 +155,7 @@
 		
 		public function switchSeason1(){
 			challengeB.toggled=false;
-			season1B.toggled=true;
+			// season1B.toggled=true;
 			duelB.toggled=false;
 			if (contains(duelButtons)){
 				removeChild(duelButtons);
@@ -172,7 +172,7 @@
 		
 		public function switchDuel(){
 			challengeB.toggled=false;
-			season1B.toggled=false;
+			// season1B.toggled=false;
 			duelB.toggled=true;
 			addChild(duelButtons);
 			if (popLoadUI!=null){

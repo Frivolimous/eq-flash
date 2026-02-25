@@ -6,7 +6,7 @@
 
 		public function PowerTokenDisplay() {
 			update(null,popPurchase);
-			setDesc("Power Tokens","These can be used instead of Kreds at a 1:1 ratio.  Click to purchase them in bulk!");
+			setDesc("Power Tokens","Obtained by salvaging Mythic and Legendary items and used to purchase new ones.");
 		}
 		
 		function popPurchase(){

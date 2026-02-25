@@ -54,8 +54,8 @@
 									PRE_COMBAT:String="Pre-fight",
 								DISTANCE:String="Range",
 									NEAR:String="Near",
-									FAR:String="Mid",
-									VERY:String="Far",
+									FAR:String="Far",
+									VERY:String="Long",
 									BETWEEN:String="Safe";
 									
 		public static const PERCENT_LIST:Array=[PERCENT_100,PERCENT_75,PERCENT_50,PERCENT_25,PERCENT_10],
@@ -218,7 +218,7 @@
 				}
 			}else if (_far){
 				if (_very){
-					return ActionPriorities.VERY;
+					return ActionPriorities.FAR;
 				}else if (_safe){
 					return ActionPriorities.FAR;
 				}else{
@@ -266,7 +266,7 @@
 			switch(i){
 				case ActionPriorities.COMBAT: if (basePriorityList==ActionPriorities.COMBAT) return true;
 				case ActionPriorities.ALL_DISTANCE: return false;
-				case ActionPriorities.VERY: if (veryFar && (basePriorityList==ActionPriorities.COMBAT || basePriorityList==ActionPriorities.FAR || basePriorityList==ActionPriorities.VERY)) return true;
+				case ActionPriorities.VERY:
 					return false;
 				case ActionPriorities.FAR: if (basePriorityList==ActionPriorities.COMBAT || basePriorityList==ActionPriorities.FAR || basePriorityList==ActionPriorities.VERY) return true;
 					return false;
@@ -610,8 +610,8 @@
 				case BOSS: _function("At Boss","Use when you are at the boss."); break;
 				case MINION: _function("At Regular Monster","Use when you are at a regular, non-boss monster."); break;
 				case NEAR: _function("Near Range","Use when you are right next to your opponent."); break;
-				case FAR: _function("Mid Range","Use when you are away from your opponent."); break;
-				case VERY: _function("Far Range","Use when you are far from your opponent."); break;
+				case FAR: _function("Far Range","Use when you are far away from your opponent."); break;
+				case VERY: _function("Long Range","Use when you are at long range."); break;
 				case BETWEEN: _function("Safe","Use when you have no current opponent."); break;
 				default: _function("Undefined","This property does nothing!  Or does it..."); break;
 			}

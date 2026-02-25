@@ -124,7 +124,7 @@
 			}
 		}
 		public static function saveHardcore(){
-			NoSteamXAPI.submitHighscoreScript(hardcore);
+			Facade.steamAPI.submitHighscoreScript(hardcore);
 			submitDataQueue([[HARDCORE,hardcore]]);
 			pingServer();
 		}
@@ -156,11 +156,11 @@
 		private static var cosmetics:Array=[[],[],[],[],[],[]];
 		private static var lastTime:String;
 		private static var rewards:Array=[];
-		public static var epics:Array=[0,0];
+		public static var epics:Array=[0,0]; // [0] = area, [1] = eCount
 		public static var zone:Array=[0,0,0,0];
 		
 		public static function setupZone(i:int,resetProgress:Boolean=true){
-			//0: AreaType, 1: MonsterType, 2: MonsterLevel, 3: ETotal
+			//zone - 0: AreaType, 1: MonsterType, 2: MonsterLevel, 3: ETotal
 			epics[0]=i;
 			if (resetProgress) epics[1]=0;
 			if (i==0 || i==10 || i==25 || i==50 || i==100 || i==200 || i==300 || i==400 || i==1000){
@@ -170,7 +170,7 @@
 				zone[0]=Math.floor((i-1)/3)%3;
 				zone[1]=(i-1)%3;
 			}
-			zone[2]=400+i*10;
+			zone[2]=400+(i-1)*10;
 			if (i==0){
 				zone[3]=0;
 			}else{
@@ -302,6 +302,7 @@
 						new AchievementDisplay(i);
 					}
 				}
+				return;
 			}
 			
 			if (!achievements[i]){
@@ -338,11 +339,11 @@
 		}
 		
 		public static function checkArenaSubmit(f:Function){
-			NoSteamXAPI.retrievePlayerData(["T1Submit"],function (_Data:Object){ f(_Data.T1Submit==null?false:_Data.T1Submit.Value) });
+			Facade.steamAPI.retrievePlayerData(["T1Submit"],function (_Data:Object){ f(_Data.T1Submit==null?false:_Data.T1Submit.Value) });
 		}
 		
 		public static function getCharacterArray(f:Function){
-			NoSteamXAPI.retrievePlayerData(["player0","player1","player2","player3","player4"],function (_Data:Object){ finishGetCharacterArray(_Data,f); });
+			Facade.steamAPI.retrievePlayerData(["player0","player1","player2","player3","player4"],function (_Data:Object){ finishGetCharacterArray(_Data,f); });
 		}
 		
 		public static function finishGetCharacterArray(_Data:Object,f:Function){
@@ -368,7 +369,7 @@
 			var doneDeleting:Function=function (e:Event){
 				if (!BUSY){
 					if (j>0){
-						NoSteamXAPI.deletePlayerData(["player"+String(numCharacters)]);
+						Facade.steamAPI.deletePlayerData(["player"+String(numCharacters)]);
 						j=-1;
 					}else{
 						Facade.stage.removeEventListener(Event.ENTER_FRAME,doneDeleting);
@@ -385,7 +386,7 @@
 		}
 		
 		public static function loadCharacter(i:int,f:Function){ //returns a character array to be converted into a character for use in the game
-			NoSteamXAPI.retrievePlayerData(["player"+String(i)],function(_Data:Object){
+			Facade.steamAPI.retrievePlayerData(["player"+String(i)],function(_Data:Object){
 										  if (_Data["player"+String(i)]!=null){
 										  	f(stringToArray(_Data["player"+String(i)].Value));
 										  }else{
@@ -468,7 +469,7 @@
 				/ (8) On Character Creation
 				*/
 			if (a[0]==null || !(a[0] is String) || (a[0] is String && a[0].length==0)){
-				NoSteamXAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
+				Facade.steamAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
 				return;
 			}
 			submitDataQueue([["player"+String(_slot),a]],_override);
@@ -513,7 +514,7 @@
 				Facade.stage.addChild(loading);
 				timerExpired+=1;
 				if (timerExpired>1000) {
-					NoSteamXAPI.expiredSession("A save request has taken much longer than expected causing a fatal error.  Please refresh your browser to continue.");
+					Facade.steamAPI.expiredSession("A save request has taken much longer than expected causing a fatal error.  Please refresh your browser to continue.");
 				}
 				
 			}else{
@@ -524,7 +525,7 @@
 		}
 		
 		public static function pingServer(){
-			NoSteamXAPI.getTime(getPong);
+			Facade.steamAPI.getTime(getPong);
 		}
 		
 		public static function getPong(_date:String){
@@ -534,7 +535,7 @@
 		}
 		
 		public static function pingForClocks(){
-			NoSteamXAPI.getTime(pongClocks);
+			Facade.steamAPI.getTime(pongClocks);
 		}
 		
 		public static function pongClocks(_date:String,_now:Boolean=false){
@@ -614,7 +615,7 @@
 			}
 			Facade.stage.addEventListener(Event.ENTER_FRAME,waiting);
 
-			NoSteamXAPI.init();
+			Facade.steamAPI.init();
 			Facade.stage.addEventListener(Event.ENTER_FRAME,waitingSteam);
 
 			Facade.stage.addEventListener(Event.ENTER_FRAME,checkBusy);
@@ -632,7 +633,7 @@
 		}
 		
 		public static function waiting(e:Event){
-			if (!NoSteamXAPI.connected) return;
+			if (!Facade.steamAPI.connected) return;
 						
 			if (dataUpdated==0){
 				dataUpdated=1;
@@ -647,14 +648,14 @@
 		}
 		
 		public static function waitingSteam(e:Event){
-			if (NoSteamXAPI.connected){
+			if (Facade.steamAPI.connected){
 				Facade.addLine("Steam Connected!");
 				Facade.stage.removeEventListener(Event.ENTER_FRAME,waitingSteam);
 			}
 		}
 		
 		public static function updateData(){
-			NoSteamXAPI.retrieveAllPlayerData(finishUpdateData);
+			Facade.steamAPI.retrieveAllPlayerData(finishUpdateData);
 		}
 		
 		public static function finishUpdateData(_Data:Object){
@@ -775,7 +776,7 @@
 							m["player"+String(i)]=_Data["player"+String(i)].Value;
 						}
 					}
-					NoSteamXAPI.submitPlayerData(m,true);
+					Facade.steamAPI.submitPlayerData(m,true);
 				}
 					
 					
@@ -840,7 +841,7 @@
 				// 	resetSave();
 				// 	_Save=SharedObject.getLocal("OPTIONS");
 				// }
-				if (_resubmit) NoSteamXAPI.submitPlayerData(m,true);
+				if (_resubmit) Facade.steamAPI.submitPlayerData(m,true);
 				
 				new ScrollAnnounce(getVersionLog());
 				Facade.addLine("Version "+_version.toString()+" is not current, updating now...");
@@ -1016,7 +1017,7 @@
 					var _pair:Array=overQueue.shift();
 					m[_pair[0]]=valueToJSON(_pair[1]);
 				}
-				NoSteamXAPI.submitPlayerData(m,true);
+				Facade.steamAPI.submitPlayerData(m,true);
 				delay=DELAY;
 			}else if (queue.length>0){
 				var m:Object=new Object;
@@ -1024,7 +1025,7 @@
 					_pair=queue.shift();
 					m[_pair[0]]=valueToJSON(_pair[1]);
 				}
-				NoSteamXAPI.submitPlayerData(m,false);
+				Facade.steamAPI.submitPlayerData(m,false);
 				delay=DELAY;
 			}
 		}

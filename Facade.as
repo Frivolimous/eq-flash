@@ -19,6 +19,8 @@
 	import flash.events.Event;
 	import ui.main.HomeUI;
 	import ui.windows.ConfirmWindow;
+	import utils.NoSteamXAPI;
+
 	
 	public class Facade{
 		public static const YELLOW:uint=0xFFF43F,
@@ -40,7 +42,8 @@
 						effectC:EffectControl=new EffectControl(),
 						mouseC:MouseControl=new MouseControl(),
 						soundC:SoundControl=new SoundControl(),
-						saveC:SaveControl=new SaveControl();
+						saveC:SaveControl=new SaveControl(),
+						steamAPI:NoSteamXAPI = new NoSteamXAPI();
 						
 		public static const DEBUG:Boolean=true;
 		

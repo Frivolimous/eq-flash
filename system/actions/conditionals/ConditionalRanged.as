@@ -7,7 +7,7 @@
 								DISTANCE:String="Range",
 									NEAR:String="Near",
 									FAR:String="Far",
-									VERY:String="Very",
+									VERY:String="Long",
 									BETWEEN:String="Safe";
 									
 		public static const DISTANCE_LIST:Array=[BETWEEN,VERY,FAR,NEAR];
