@@ -1,6 +1,7 @@
 ﻿package items {
 	import ui.windows.ConfirmWindow;
 	import utils.GameData;
+	import utils.AchieveData;
 	
 	public class GambleInventoryUI extends BaseInventoryUI{
 		public function GambleInventoryUI(){
@@ -27,6 +28,8 @@
 		override public function removeItem(_item:ItemView):Boolean{
 			if (GameData.gold>=_item.model.cost){
 				GameData.gold-=_item.model.cost;
+				AchieveData.achieve(AchieveData.BUY_ITEM);
+
 				
 				ItemData.finishGamble(_item);
 				

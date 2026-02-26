@@ -2,6 +2,7 @@
 	import ui.windows.ConfirmWindow;
 	import flash.text.TextField;
 	import utils.GameData;
+	import utils.AchieveData;
 	
 	public class ForgeIngredientsUI extends BaseInventoryUI{
 		//single box, for STACK or UPGRADE
@@ -126,6 +127,7 @@
 			GameData.saveThis(GameData.SCORES);
 			makeFakeItem();
 		}
+
 		public function makeFakeItem(){
 			if (contains(previewB)) removeChild(previewB);
 			if (fakeItem!=null && contains(fakeItem)) removeChild(fakeItem);
@@ -152,6 +154,7 @@
 					removeItemAt(1);
 					Facade.saveC.saveChar();
 					GameData.overflow.shift();
+					AchieveData.achieve(AchieveData.CRAFT_ITEM_1);
 				}else{
 					new ConfirmWindow(StringData.confGold(valueGold));
 				}

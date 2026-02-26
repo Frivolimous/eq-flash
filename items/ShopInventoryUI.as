@@ -3,6 +3,7 @@
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import utils.GameData;
+	import utils.AchieveData;
 	
 	public class ShopInventoryUI extends BaseInventoryUI{
 
@@ -30,6 +31,7 @@
 				itemA[_item.index].removeItem();
 				_item.model.cost/=4;
 				_item.tooltipDesc=null;
+				AchieveData.achieve(AchieveData.BUY_ITEM);
 				return true;
 			}else{
 				new ConfirmWindow(StringData.confGold(_item.model.cost));

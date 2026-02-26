@@ -1,5 +1,6 @@
 package utils {
 	import ui.windows.ConfirmWindow;
+	import utils.AchieveData;
 
 	public class PurchaseManager {
     public static var _Success:Function;
@@ -60,6 +61,8 @@ package utils {
 		public static function finishIngamePurchase(_amount:int){
 			if (_amount==10) boughtBoost=true;
 			GameData.kreds-=_amount;
+			AchieveData.achieve(AchieveData.BUY_MYTHIC);
+
 			_Success();
 			_Success=null;
 			//Facade.saveC.saveChar();

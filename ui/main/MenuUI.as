@@ -222,14 +222,14 @@
 				if (announceB.contains(newMessage)) announceB.removeChild(newMessage);
 			}
 			
-			if (!GameData.getFlag(GameData.FLAG_GIFT) && Facade.gameM.area>10){
-				new TutorialWindow(TutorialWindow.GIFT);
-			}
-			if (Facade.gameM.area>=80 && !GameData.getFlag(GameData.FLAG_GIFT2)){
-				new TutorialWindow(TutorialWindow.GIFT3);
-				GameData.setFlag(GameData.FLAG_GIFT2,true);
-			}
-						
+			// if (!GameData.getFlag(GameData.FLAG_GIFT) && Facade.gameM.area>10){
+			// 	new TutorialWindow(TutorialWindow.GIFT);
+			// }
+			// if (Facade.gameM.area>=80 && !GameData.getFlag(GameData.FLAG_GIFT2)){
+			// 	new TutorialWindow(TutorialWindow.GIFT3);
+			// 	GameData.setFlag(GameData.FLAG_GIFT2,true);
+			// }
+			
 			makeGrey(shopB,(GameData.getScore(GameData.SCORE_LEVEL)<3));
 			makeGrey(premiumB,(GameData.getScore(GameData.SCORE_LEVEL)<3));
 			makeGrey(hallB,(GameData.getScore(GameData.SCORE_LEVEL)<5));
@@ -280,6 +280,7 @@
 		}
 		
 		function popTombstone(e:MouseEvent){
+			AchieveData.achieve(AchieveData.VISIT_GRAVE);
 			Facade.stage.addChild(new PopTombstone);
 		}
 		

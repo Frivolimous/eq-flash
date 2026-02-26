@@ -11,7 +11,7 @@ package utils {
           DEATHS_1:int=3, //talent ungifted
           DEATHS_100:int=4,
           FIND_TREASURE:int=5, //talent clever
-          BUY_ITEM:int=6,//XX
+          BUY_ITEM:int=6,//
           READ_BOOK:int=7, //talent studious
           MAX_SKILL:int=8, //talent enlightened
           SKILL_5_TREES:int=9, //talent wild
@@ -36,10 +36,10 @@ package utils {
           ASCEND_10:int=28,
           ASCEND_25:int=29,
           ASCEND_50:int=30, //cosmetic dark halo
-          BUY_MYTHIC:int=31,//talent holy XX
-          SALVAGE_MYTHIC_1:int=32,//XX
-          HAVE_MYTHIC_10:int=33,//XX
-          CRAFT_ITEM_1:int=34,//XX class paladin
+          BUY_MYTHIC:int=31,//talent holy
+          SALVAGE_MYTHIC_1:int=32,//
+          UPGRADE_ITEM_1:int=33,//
+          CRAFT_ITEM_1:int=34,// class paladin
           ORDINARY_LEVEL_60:int=35,
           DEFT_LEVEL_60:int=36,
           CLEVER_LEVEL_60:int=37,
@@ -62,8 +62,9 @@ package utils {
           ARTIFACTS_1:int=54,
           ARTIFACTS_10:int=55,
           ARTIFACTS_40:int=56,
-          COMPLETE_ALL:int=57,//XX
-          NUM_ACHIEVEMENTS:int=58;
+          VISIT_GRAVE:int=57,
+          COMPLETE_ALL:int=58,//XX
+          NUM_ACHIEVEMENTS:int=59;
 
     public static const TALENT_ACHIEVEMENTS:Array=[1,5,3,7,8,20,31,9,11,100];
 
@@ -101,7 +102,7 @@ package utils {
       {displayText: "Cosmetic Unlocked: Dark Halo", awardDesc: "You have ascended 50 times and earned yourself the DARK HALO. Because you ascended a dark amount of times. It makes sense, just don't think about it too much."}, //cosmetic dark halo
       {displayText: "Talent Unlocked: Holy", awardDesc: "You have purchased an amazing Mythic item from the golden temple, and proved your devotion.\n\nThis achievement unlocked the Holy Talent."},//XX talent holy
       {displayText: "Mythic Item Sold", awardDesc: "You sold a mythic item! That probably mean you need Power Token for something. Here, sell this award also - I think you need the money."},//XX
-      {displayText: "10 Mythic Items Collected", awardDesc: "You own at least 10 Mythic Items! You can't equip more than like 2 or 3 at a time though, so I have no idea why you're hoarding them."},//XX
+      {displayText: "Item Upgraded", awardDesc: "Congratulations, you now know how to upgrade an item! You'll be doing this a lot, I guarantee it."},//XX
       {displayText: "Class Unlock: Paladin", awardDesc: "You have crafted an item at the Mythic Forge! I'm so proud of you!\n\nThis achievement unlocked the Paladin Skill Tree."},//XX class paladin
       {displayText: "Cosmetics Unlocked: Ordinary", awardDesc: "You got to level 60 with an Ordinary Hero! Why would you do that? The others are all way more interesting.\n\nThis achievement unlocked Ordinary Cosmetics."},
       {displayText: "Cosmetics Unlocked: Deft", awardDesc: "You got to level 60 with a Deft Hero! Did you do it quickly? Get It?!? Ah you don't know good jokes.\n\nThis achievement unlocked Deft Cosmetics."},
@@ -125,6 +126,7 @@ package utils {
       {displayText: "Artifacts Unlocked: 1", awardDesc: "You have unlocked a potent Artifact! This means you have officially joined the ranks of the Ascended Heroes!"},
       {displayText: "Artifacts Unlocked: 10", awardDesc: "Your collection of artifacts have grown beyond the number 10! Your epicness has increased."},
       {displayText: "Artifacts Unlocked: 40", awardDesc: "Wow, you got them all! You unlocked all 40 of the artifacts that exist! Now, how many have you actually used? Try out Blood of the Minotaur, I promise it's better than it looks!"},
+      {displayText: "Visited Gars", awardDesc: "The story isn't really that interesting. Gars used to be an Arena Character back before Juliette made hers. Then she finally made hers, which is epic and awesome, and I had to choose which one to replace. Then Gars' avatar joined the Shadow King out of spite (and asset reuse)."},
       {displayText: "Completionist", awardDesc: "You have officially completed all of the achievements! Congratulations!\n\nDid you save all of your other Awards as well? Because if you did, you unlock a super secret extra bonus cosmetic! It's super awesome and epic I swear! And yes, it's totally real! Honest it is!"},//XX
     ]
 
@@ -141,6 +143,7 @@ package utils {
 				for (var j:int=0;j<NUM_ACHIEVEMENTS;j+=1){
 					if (!GameData.achievements[j]){
 						GameData.achievements[j]=true;
+            checkUnlockCosmetics(i);
 						new AchievementDisplay(i);
 					}
 				}
@@ -150,7 +153,6 @@ package utils {
 			if (!GameData.achievements[i]){
 				GameData.achievements[i]=true;
         checkUnlockCosmetics(i);
-
 				new AchievementDisplay(i);
 
 				GameData.saveThis(GameData.ACHIEVEMENTS);

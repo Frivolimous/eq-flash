@@ -2,6 +2,7 @@
 	import ui.windows.ConfirmWindow;
 	import flash.text.TextField;
 	import utils.GameData;
+	import utils.AchieveData;
 	
 	public class SingleInventoryUI extends BaseInventoryUI{
 		//single box, for STACK or UPGRADE
@@ -71,6 +72,7 @@
 					GameData.gold-=valueGold;
 					drop.updateGold();
 					if (type==UPGRADE){
+						AchieveData.achieve(AchieveData.UPGRADE_ITEM_1);
 						itemA[0].stored.model.level+=1;
 						addItemAt(new ItemView(itemA[0].removeItem().model.clone()),0);
 						if (!itemA[0].check(itemA[0].stored)){
