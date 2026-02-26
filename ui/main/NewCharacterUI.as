@@ -132,7 +132,7 @@
 		public function finishSave(){
 			if (Facade.DEBUG){
 				if (inputName.text.substr(0,4)=="TEST"){
-					gameM.playerM.skillBlock.skillPoints=60;
+					gameM.playerM.skillBlock.skillPoints=59;
 					gameM.playerM.level=59;
 					gameM.playerM.levelup();
 					gameM.souls=100000;
@@ -236,11 +236,14 @@
 				}else if (inputName.text=="DEMON"){
 					gameM.areaType=2;
 				}else if (inputName.text=="PREMIUM"){
-					for (i=64; i<=82;i+=1){
-						gameM.playerM.addItem(ItemData.spawnItem(0,i));
+					for (i=64; i<=148;i+=1){
+						gameM.addOverflowItem(ItemData.spawnItem(0,i));
 					}
-					gameM.playerM.skillBlock.skillPoints=60;
-					gameM.playerM.level=60;
+					gameM.playerM.skillBlock.skillPoints=59;
+					gameM.playerM.level=59;
+					gameM.playerM.levelup();
+				}else if (inputName.text=="DLC"){
+					AchieveData.unlockDLCCosmetics();
 				}
 			}
 			

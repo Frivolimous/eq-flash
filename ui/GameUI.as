@@ -489,6 +489,10 @@
 			setCinematicMode(cinematicMode);
 			setSimpleMode(simpleMode);
 			//Facade.setQuality(GameData._Save.data.quality);
+
+			if (turboB.toggled) {
+				Facade.stage.frameRate=Facade.FRAMERATE*2;
+			}
 		}
 		
 		public function navOut(){
@@ -522,6 +526,8 @@
 			if (currentFrame==2){
 				endDuel();
 			}
+
+			Facade.stage.frameRate=Facade.FRAMERATE;
 		}
 		
 		function startDuel(){

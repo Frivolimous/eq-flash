@@ -219,35 +219,6 @@
 			}
 		}
 		
-		public static function setTalentCosmetics(a:Array,i:int){
-			switch(i){
-				case SkillData.ORDINARY: 
-					tryAdd(a[1],NORMAL); tryAdd(a[2],NORMAL); tryAdd(a[4],NONE); break;
-				case SkillData.DEFT: case SkillData.SEASON1_DEFT: case SkillData.SEASON1_GADG:
-					tryAdd(a[1],SMALL); tryAdd(a[2],SMIRK); break;
-				case SkillData.CLEVER:
-					tryAdd(a[1],QUIZ); tryAdd(a[2],FROWN); break;
-				case SkillData.UNGIFTED:
-					tryAdd(a[2],GAPE); tryAdd(a[4],BAGS); break;
-				case SkillData.STUDIOUS:
-					tryAdd(a[2],HMM); tryAdd(a[4],GLASSES); break;
-				case SkillData.ENLIGHTENED:
-					tryAdd(a[1],BRIGHT); tryAdd(a[2],SMILE); break;
-				case SkillData.POWERFUL:
-					tryAdd(a[1],FURROW); tryAdd(a[2],SNARL); tryAdd(a[4],CHIN); break;
-				case SkillData.HOLY: case SkillData.SEASON1_HOLY:
-					tryAdd(a[1],SQUINT); tryAdd(a[2],PURSED); break;
-				case SkillData.WILD:
-					tryAdd(a[1],CRAZY); tryAdd(a[2],TONGUE); break;
-				case SkillData.NOBLE:
-					tryAdd(a[1],UPWARD); tryAdd(a[2],UPFROWN); tryAdd(a[4],GOATEE); break;
-			}
-		}
-		
-		static function tryAdd(a:Array,_cosmetic:int){
-			if (!checkArrayHas(a,_cosmetic)) a.push(_cosmetic);
-		}
-		
 		static function checkArrayHas(a:Array,_cosmetic:int):Boolean{
 			for (var i:int=0;i<a.length;i+=1){
 				if (a[i]==_cosmetic) return true;

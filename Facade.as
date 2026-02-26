@@ -143,14 +143,13 @@
 		public static var traceCW:ConfirmWindow;
 		public static function addLine(s:String){
 			if (DEBUG) {
-				if (traceCW) {
-					traceCW.display.appendText("\n" + s);
-				} else {
-					traceCW = new ConfirmWindow(s, 50, 50, removeTraceWindow);
-				}
+				// if (traceCW) {
+				// 	traceCW.display.appendText("\n" + s);
+				// } else {
+				// 	traceCW = new ConfirmWindow(s, 50, 50, removeTraceWindow);
+				// }
+				trace(s);
 			}
-			//if (DEBUG && stage!=null) trace(s);
-			//trace(s);
 		}
 
 		public static function removeTraceWindow(i: int) {

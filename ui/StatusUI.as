@@ -18,6 +18,7 @@
 	import ui.main.TournamentDuelUI;
 	import hardcore.HardcoreDuelUI;
 	import hardcore.HardcoreHomeUI;
+	import utils.GameData;
 	
 	public class StatusUI extends BaseUI{
 		public static const STATS_X:Number=50,
@@ -60,7 +61,7 @@
 				stashW.noSave=true;
 				inventoryUI.nullSell=true;
 				toTheTop(0);
-			}else if (transTo is DuelUI || Facade.gameM.playerM.level<2){
+			}else if (transTo is DuelUI || GameData.getScore(GameData.SCORE_LEVEL)<2){
 				stashLocked=true;
 				cosmeticsLocked=true;
 				skillUI.noCost=true;

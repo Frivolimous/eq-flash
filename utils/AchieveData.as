@@ -56,16 +56,11 @@ package utils {
 			}
 			
 			if (!GameData.achievements[i]){
-				new AchievementDisplay(i);
 				GameData.achievements[i]=true;
-				if (i>=ACHIEVE_ORDINARY_COSMO && i<=ACHIEVE_NOBLE_COSMO){
-					i-=ACHIEVE_ORDINARY_COSMO;
-					BallHead.setTalentCosmetics(GameData.cosmetics,i);
-					GameData.saveThis(GameData.COSMETICS);
-				}else if (i==ACHIEVE_ASCEND_50){
-					GameData.cosmetics[4].push(BallHead.DARK_HALO);
-					GameData.saveThis(GameData.COSMETICS);
-				}
+        checkUnlockCosmetics(i);
+
+				new AchievementDisplay(i);
+
 				GameData.saveThis(GameData.ACHIEVEMENTS);
 			}
 		}
@@ -105,6 +100,60 @@ package utils {
         if (_trees[i]>0) _numTrees+=1;
       }
       if (_numTrees>=5) achieve(ACHIEVE_WILD);
+    }
+
+    public static function checkUnlockCosmetics(achieve:int):void {
+      switch(achieve) {
+        case ACHIEVE_ASCEND_50: addCosmetic(4, BallHead.DARK_HALO); GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_ORDINARY_COSMO:
+          addCosmetic(1, BallHead.NORMAL); addCosmetic(2, BallHead.NORMAL); addCosmetic(4, BallHead.NONE);
+          GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_DEFT_COSMO:
+          addCosmetic(1,BallHead.SMALL); addCosmetic(2,BallHead.SMIRK);
+          GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_CLEVER_COSMO:
+          addCosmetic(1,BallHead.QUIZ); addCosmetic(2,BallHead.FROWN);
+          GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_UNGIFTED_COSMO:
+          addCosmetic(2,BallHead.GAPE); addCosmetic(4,BallHead.BAGS);
+          GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_STUDIOUS_COSMO:
+          addCosmetic(2,BallHead.HMM); addCosmetic(4,BallHead.GLASSES);
+          GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_ENLIGHTENED_COSMO:
+          addCosmetic(1,BallHead.BRIGHT); addCosmetic(2,BallHead.SMILE);
+          GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_POWERFUL_COSMO:
+          addCosmetic(1,BallHead.FURROW); addCosmetic(2,BallHead.SNARL); addCosmetic(4,BallHead.CHIN); 
+          GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_HOLY_COSMO:
+          addCosmetic(1,BallHead.SQUINT); addCosmetic(2,BallHead.PURSED); 
+          GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_WILD_COSMO:
+          addCosmetic(1,BallHead.CRAZY); addCosmetic(2,BallHead.TONGUE); 
+          GameData.saveThis(GameData.COSMETICS); break;
+        case ACHIEVE_NOBLE_COSMO:
+          addCosmetic(1,BallHead.UPWARD); addCosmetic(1,BallHead.UPFROWN); addCosmetic(4,BallHead.GOATEE); 
+          GameData.saveThis(GameData.COSMETICS); break;
+      }
+    }
+
+    public static function unlockDLCCosmetics():void {
+      addCosmetic(1,18); //Acolyte
+      addCosmetic(4,8); //Paladin
+      addCosmetic(1,23); addCosmetic(3,8); addCosmetic(4,26); //Rogue
+      addCosmetic(3,7); addCosmetic(4,25); addCosmetic(4,27); //Ranger
+      addCosmetic(1,22); addCosmetic(2,29); addCosmetic(3,6); //Hair0
+      addCosmetic(2,27); addCosmetic(3,4); addCosmetic(4,10); //Hair1
+      addCosmetic(1,21); addCosmetic(2,28); addCosmetic(3,5); //Hair2
+      addCosmetic(1,20); addCosmetic(2,26); addCosmetic(3,3); addCosmetic(4,9); //Hair3
+      addCosmetic(5,1);
+    }
+
+    public static function addCosmetic(_type:int,index:int):void {
+      if (!GameData.hasCosmetic(_type,index)){
+        GameData.cosmetics[_type].push(index);
+      }
     }
   }
 }

@@ -69,7 +69,7 @@
 		public function finishOpen2(){
 			display.update(Facade.gameM.playerM);
 			
-			if (Facade.gameM.playerM.level>=2){
+			if (GameData.getScore(GameData.SCORE_LEVEL)>=2){
 				stashB.disabled=false;
 			}else{
 				stashB.disabled=true;
