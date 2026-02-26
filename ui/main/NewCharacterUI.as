@@ -378,7 +378,7 @@
 			
 			talents[0].setDesc(talents[0].label.text+StringData.locked(0,false),StringData.talentDesc(0));
 			for (var i:int=1;i<10;i+=1){
-				talents[i].disabled=!AchieveData.hasAchieved(i-1);
+				talents[i].disabled=!AchieveData.hasAchieved(AchieveData.TALENT_ACHIEVEMENTS[i-1]);
 				if (talents[i].disabled){
 					talents[i].setDesc(talents[i].label.text+StringData.locked(0,true),StringData.talentDesc(i));
 				}else{

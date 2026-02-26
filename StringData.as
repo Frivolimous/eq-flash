@@ -352,273 +352,6 @@
 			}
 		}
 		
-		/*public static function buff(s:String):String{
-			with (BuffData){
-				switch(s){
-					case BURNED: return "Takes magic damage over time.";
-					case POISONED: case POISONED2:
-						return "Takes magic damage over time.";
-					case GASSED: return "Takes chemical damage over time.";
-					case BOMB: return "Explodes after 1 turn.";
-					case IVY: return "Deals damage over time that scales with GRENADE and prevents enemy from moving.";
-					case ECCHO: return "Deals Damage over time when you deal Direct Damage, scaling with MPow.";
-					case SPINES: return "Deals chemical damage over time.";
-					case DELAYED_DAMAGE: return "Deals a percent of damage dealt after your opponent's next action.";
-					case BLEEDING: return "Will take massive physical damage..";
-					case PHOENIX_PROC: return "Deals damage over time when you successfully damage or debuff an opponent.";
-					case PHOENIX_THORNS: return "Deals damage over time to enemies at Near range.";
-					case PROTECTION: return "Heals you over time when you are injured.";
-					case REND: return "Deals Physical Damage over time.";
-					case REND_HEAL: return "Physical Healing over time.";
-					case CRIT_ACCUM: return "Gain a stacking Crit Rate bonus every time you fail to crit.";
-					case EMPOWERED: return "Magic power is increased.";
-					case EMPOWERED2: return "Strength is increased.";
-					case EMPOWERED3: return "Initiative is increased.";
-					case HASTENED: return "Has initiative and dodge rate increased.";
-					case SLOW: return "Has initiative and dodge rate reduced.";
-					
-					case ENCHANTED: return "Adds magic damage on every attack.";
-					case ENCHANTED2: return "Adds holy damage on every attack.";
-					case ENCHANTED3: return "Adds physical damage, Hit and Crit.";
-					case SHIELD: return "Prevents up to this amount of damage next time you receive damage.";
-					case SMITE_PROC: return "Deals massive Holy Damage when you deal damage.";
-					case BARRIER: return "Protects you from incoming damage.";
-					
-					case STRENGTHEN: return "Makes you stronger and deal more damage.";
-					case BUFF_POT: return "You have been empowered through alchemical wonders.";
-					case CELERITY_POT: return "Accelerates you through Science!";
-					case TURTLE_POT: return "Increases your defenses and gives you a bit of Return Damage.";
-					case PURITY_POT: return "Simulates enlightenment with fancy drugs.";
-					case MOVE_BOOST: return "Increased stats after using a Movement Ability.";
-					case COMBO: return "Increases further damage this round every time you hit.";
-					case COMBO_DEFENSE: return "Increases your defenses every time you hit.";
-					case COOLDOWN: return "Has reduced stats temporarily.";
-					case INITIAL_BLESS: return "Buffs you for a number of turns when you first encounter an enemy.";
-					case INITIAL_CURSE: return "Curses enemy for a number of turns when you first encounter them.";
-					case GRAILED: return "Increases Health Regeneration by a significant amount.";
-					case SAYAN: return "Normal mode";
-					case SUPER_SAYAN: return "Powered up after you revive until you defeat your enemy.";
-					
-					case BERSERK: return "Has more powerful attacks but is unable to take complicated actions.";
-					
-					case RUSHED: return "Your next attack is made with a penalty to hit your opponent.";
-					case QUICK: return "Chance to make a bonus attack when you hit with your first melee attack(s).";
-					case DOUBLESHOT: return "Chance to make a bonus ranged attack or throw an additional projectile or grenade.";
-					case AIMING: return "Your next attack is made with a bonus to hit your opponent.";
-					case LEAP_ATTACK: return "Leap at your opponent with increased base weapon damage.";
-					
-					case WEAKENED: return "Has decreased damage.";
-					case HEAL_NO: return "Has significantly reduced healing.";
-					case VULNERABLE: return "Has resistances decreased.";
-					case VULNERABLE2: return "Has physical resistance decreased.";
-					case SCORCHED: return "Reduces Magic Resistance.";
-					case ILLUMINATED: return "Reduces Spirit Resistance.";
-					case WHISPERED: return "Reduces Enemy Resistance to Magic, Chemical and Holy.";
-					case CURSED: return "Has a reduced Hit Rate.";
-					case BLIND: return "Your eyes blur making it difficult to hit your target.";
-					case RESPECT: return "Enemy has reduced Dodge and Nullify when you defend.";
-					case AUTHORITAH: return "Enemy deals reduced Base Damage for their next action.";
-					case ATTACK_IGNORED: return "You have already ignored an attack this fight.";
-					case HIGH: return "Your Health and Mana Regen are increased.";
-					case MARKED: return "Has reduced Dodge and Critical Resistance.";
-					case STEALTH: return "Has increased Dodge, CRate and CMult.  Stealth is lost when you make an offensive action, are Cursed or Injured.";
-					
-					case GOLEM_CONFUSED: case CONFUSED: case DISORIENTED: return "Chance of not acting.";
-					case STUNNED:
-					case ASLEEP: return "Cannot act.";
-					case AFRAID: return "Running in terror from opponent.";
-					
-					case SILENCED: return "Can't cast magic spells.";
-					case ROOTED: return "Cannot move forwards or backwards on your own.";
-					
-					case UNDYING: 
-					case DYING: return "Can survive below 0 health for a number of turns.";
-					case REVIVED: return "You have already revived this fight and cannot revive again.";
-					
-					case TOWN: return "You will go to town after this battle.";
-					case XP_BOOST: return "Gain extra Experience and Gold.";
-					case PROGRESS_BOOST: return "Every monster kill counts as two for Level Progress, XP and Loot.  Multiplies with XP Boosts!  Gained from Offline Hours.";
-					
-					default: return null;
-				}
-			}
-		}
-		public static function effect(s:String):String{
-			with (EffectData){
-				switch(s){
-					case BURN: //return "Deals magic damage over time.";
-					case POISON: case POISON2:
-						return "Deals magic damage over time.";
-					case STUN: return "Makes your opponent unable to act.";
-					case ENERVATE: return "Decreases your opponent's resistance to damage.";
-					case WEAKEN: return "Decreases opponent's primary damage.";
-					case HEAL_NO: return "Significantly reduces opponent's HEAL.";
-					case CONFUSE: return "Chance every turn that your opponent will not act.";
-					case DISORIENT: return "When you hit your opponent with a Belt Item, chance for them to not act next turn.";
-					case POISON_GAS: return "Deals chemical damage over time."
-					case BOMB: return "Explodes after 1 turn.";
-					case ECCHO: return "Deals Damage over time when you deal Direct Damage, scaling with MPow.";
-					
-					case BLIND: return "Your eyes blur making it difficult to hit your target.";
-					case SPINES: return "Deals chemical damage over time.";
-					
-					case TERRIFY: 
-					case TERRIFYING: return "Causes enemies to flee in terror.";
-					case IVY: return "Deals damage over time that scales with GRENADE and prevents enemy from moving.";
-					
-					case PHOENIX_PROC: return "Deals damage over time when you successfully damage or debuff and opponent.";
-							
-					case ENCHANT: return "Imbues your Weapon Attacks and Projectiles.";
-					case EMPOWER: return "Increases your effectiveness.";
-					case HASTEN: return "Increases your dodge rate and initiative.";
-					case SLOW: return "Reduces enemy dodge rate and initiative.";
-					case SHIELD: return "Prevents up to this much damage next time you would receive damage.  Cast with 3 stacks";
-					
-					case BUFF_POT: return "You have been empowered through alchemical wonders.";
-					case CELERITY_POT: return "Accelerates you through Science!";
-					case TURTLE_POT: return "Increases your defenses and gives you a bit of Return Damage.";
-					case PURITY_POT: return "Simulates enlightenment with fancy drugs.";
-					
-					case RUSHED: return "Your next attack is made with a penalty to hit your opponent.";
-					case AIMING: return "Your next attack is made with a bonus to hit your opponent.";
-					case LEAP_ATTACK: return "Leap at your opponent with increased base weapon damage.";
-					
-					case ARCANE: return "Adds Magic Damage any time you deal damage from any source.";
-					case ENCHANTED: return "Adds magic damage on every attack.";
-					case CRITBONUS: return "Extra damage dealt on critical hits";
-					case FLAMING: case SCORCHING: return "Bonus magic damage dealt on each strike.";
-					case BLAZING: return "Bonus chemical damage dealt on each strike.";
-					case FULL_POWER: return "When you are over 75% Health, deals bonus Magic Dmg and can attack from Mid or Far Range.";
-					case FULL_POWER2: return "When you are over 75% Health, deals bonus Magic Dmg";
-					case CORRUPTED: return "";
-					case BRILLIANT: case LUMINANT: return "Bonus holy damage dealt on each strike.";
-					case VENOMOUS: return "Bonus chemical damage dealt on each strike.";
-					case EXPLOSIVE: return "Deals bonus magic damage on critical hits.";
-					case SMITE: return "Deals massive Holy Damage when you deal damage every number of rounds.";
-					case SMITE_PROC: return "Deals massive Holy Damage when you deal damage.";
-					
-					case QUICK: return "Chance to make a bonus attack when you hit with your first melee attack(s).";
-					case DOUBLESHOT: return "Chance to make a bonus ranged attack or throw an additional projectile or grenade.";
-					case KI_STRIKE: return "Deal damage on critical hits based on mana spent. Scales off of MPOW.";
-					case SMASH: return "High chance to stun your opponent on critical hits.";
-					case CURSE: return "Reduces target's hit rate.";
-					case SACRIFICE: return "Deals a percent of damage dealt to yourself.";
-					case DAZZLE: return "Chance to stun the target.";
-					case KNOCKBACK: return "Sends target flying back to Mid Range distance and stuns for 1 round.";
-					case KNOCKBACK_NO: return "Sends target flying back to Far Range without stunning.";
-					case KNOCKBACK_MINOR: return "Knocks the target back to Mid Range without stunning.";
-					case KNOCKBACK_REVERSED: return "Pulls the enemy forward to Near Range without stunning.";
-					case CRIT_ACCUM: return "Gain a stacking Crit Rate bonus every time you fail to crit.";
-					case MANA_HEAL: return "Recover mana whenever you directly damage an enemy.";
-					case MPOW_HEAL: return "Chance to recover your MPow in Health when you directly damage an enemy.";
-					case NONCRIT: return "Increased Non-Critical Damage with Weapons and Projectiles";
-					case BLEED: return "Deals a percent of critical damage as physical damage every round.";
-					case DELAYED_DAMAGE: return "Deals a percent of damage dealt after your opponent's next action.";
-					case REMOVE_BUFF: return "Destroy a number of buff turns off of your enemy when you successfully damage or debuff an opponent.";
-					
-					case FEAR_BOOST: return "Increases Direct Damage against Feared targets.";
-					case NEAR_DMG_BOOST: return "Increases Direct Damage while at NEAR Range";
-					case RANDOM_DMG_BOOST: return "Chance to Increase or Decrease Direct Damage by up to this amount every cast.";
-					case BUFF_DMG_BOOST: return "Increases Direct Damage for every unique Buff applied to you.";
-					case CURSE_DMG_BOOST: return "Increases Direct Damage for every Debuff or Debuff Stack applied to your target.";
-					
-					case COMBO: return "Increases further damage this round every time you hit.";
-					case COMBO_DEFENSE: return "Increases your defenses every time you hit.";
-					case COOLDOWN: return "Has reduced stats temporarily.";
-					case AUTHORITAH: return "Enemy deals reduced Base Damage for their next action.";
-					case SCORCHED: return "Reduces Magic Resistance.";
-					case ILLUMINATED: return "Reduces Spirit Resistance.";
-					case WHISPERED: return "Reduces Enemy Resistance to Magic, Chemical and Holy when you successfully damage or debuff your opponent..";
-					case REND: return "Deals Physical Damage over time.";
-					case REND_HEAL: return "Physical Healing over time.";
-					case RANDOM_BUFF: return "Casts a random Buffing Potion effect on you at the listed level.";
-					
-					case MINOTAUR: return "Once per round, if no attack hits, chance to Knockback and Stun when an enemy blocks from Near Range.";
-					case RADIANT_PULSE: return "If the enemy blocks your attack, deal a percent of your Primary Damage as Holy Damage.";
-					case RADIANCE: return "When you block an enemy attack or projectile, deal Holy Damage.";
-					
-					case INITSCALING: return "Adds a percent of your bonus Initiative as a multiplier to Strength Items, or a percent of your bonus Strength to Initiative Items.";
-					case MPOWSCALING: return "Uses your MPow as your weapon multipier instead of Strength.";
-					case INIT_SPELL: return "Uses a percent of your bonus Initiative in addition to MPow as a multiplier for spells.";
-					case MPOWSCALINGADD: return "Adds a percent of your bonus MPow as a multiplier to Weapon Damage.";
-					case MULTI: case CHAIN: return "Increased number of hits";
-					case AWARD: return "Grants +1 XP Per Kill."; 
-					
-					case INITIAL_BLESS: return "Buffs you for a number of turns when you first encounter an enemy.";
-					case INITIAL_CURSE: return "Curses enemy for a number of turns when you first encounter them.";
-					case INITIAL_SPELL: return "Uses this spell once at the beginning of combat for free.";
-					case FREE_SPELL: return "Casts this spell without using an action but with greatly reduced effect.  Reduces your mana by the spell's Mana Cost.";
-					case INITIAL_MARK: return "Places a curse on your opponent at the beginning of combat.";
-					
-					case SPIKEY: return "Returns damage to melee attackers when you are Hit or when you Block.";
-					case STRENGTHEN: return "Makes you stronger and deal more damage.";
-					case BERSERKER: return "Chance to become berserk when hurt or debuffed, gaining bonus strength but only being able to attack.";
-					case FEARSOME: return "Chance to cause fear when hurt and make attackers run in terror.";
-					case BEFUDDLE: return "Chance to affect your attacker when you are hurt.";
-					case MUTE: return "Chance to prevent enemy from casting spells when you nullify a spell.";
-					case DTHROW: return "When you avoid damage at close range, chance to stun your opponent.";
-					case AUTOPOT: return "Chance to drink when dropping below 50% Health or Mana.";
-					case AUTOBUFF: return "Chance to drink a non-active buffing potion when you are dealt damage.";
-					case AUTOBUFFFREE: return "Chance to automatically gain a buff when you are dealt damage.";
-					case ROOT: return "When you are struck or debuffed the enemy is prevented from moving.";
-					case RESPECT: return "Enemy has reduced Dodge and Nullify when you defend.";
-					case PROTECTION: return "Heals you over time when you are injured.";
-					case BARRIER: return "Creates a Barrier stack every round which reduces damage taken.  Also scales with HEAL.";
-					case BUILD_WALL: return "A percent of damage taken will be used to reduce the next amount of damage taken.";
-					case ASSASSINATE: return "Deal increased direct damage based on target's current health.";
-					
-					case RADIATION: return "Deals % of your current health in CHEM damage to enemies NEAR you.";
-					case PHOENIX_THORNS: return "Deals damage over time to enemies at Near range.";
-					case CLEANSE: return "Chance to reduce a random debuff's duration by 1 each turn.";
-					case CLEANSE_HEAL: return "Removes 1 debuff turn on successful cast.";
-					case REVIVE_GRAIL: return "Revive after death with a percent of your health and Health Regen buff.  Only one revive of any type can occur per fight.";
-					case HEAL_GRAIL: return "Greatly increased your HReg.";
-					case REVIVE_JUST:
-					case REVIVE_PHOENIX: return "Revive after death with a percent of your maximum health.  Only one revive of any type can occur per fight.";
-					case REVIVE_GOKU: return "Revive after death and become Super Sapien!  Only one revive of any type can occur per fight.";
-					case MANA_SHIELD: return "When you would take lethal damage, Mana is consumed instead of Health";
-					case DEFENSIVE_ROLL: return "When you take any form of damage, succeed on a Dodge Roll to reduce damage taken.";
-					case FEATHER_HIT: return "Your first attack every round has bonus Hit.";
-					case HIGH: return "Increased regeneration between battles and for the first few turns of combat.";
-					case IGNORE_ATTACK: return "Ignore the first successful action from your enemy.";
-					case UNARMED_INIT: return "Use Initiative instead of Strength for Unarmed Damage.";
-					
-					case UNDYING: return "Can survive below 0 health for a number of turns. Cannot revive through other means.";
-					case FIND_STACKS: return "Chance to refill Belt Items after defeating an opponent.";
-					case BASE_DMG: return "Improves the weapon's Base Damage.";
-					case MOVE_BOOST: return "Gain a buff after using a Movement Ability.";
-					case CURSE_REFLECT: return "Chance to reflect any cursing Spell or Potion onto your enemy.";
-					case BUFF_REFLECT: return "Chance to steal any Buffing Spell or Potion from your enemy on cast.";
-					
-					case SPELL_BOOST: return "Chance to boost the level of any spell you cast.";
-					case BUFF_POT_BOOST: return "Boosts the level of buffing potions you drink.";
-					case BUFF_BOOST: return "Increases effectiveness of your buffing Spells and Items.";
-					case DREAM: return "Chance to put the enemy to sleep for one round whenever you take a non-offensive action.";
-					
-					case STEALTH_CMULT: return "Increases your Crit Mult while stealthed.\n\n*Grants Stealth at the start of combat.\n\n*Stealth is lost when you make an offensive action, are Cursed or Injured.";
-					case STEALTH_CRATE: return "Increases your Critical Rate while stealthed.\n\n*Grants you Stealth at the end of your turn if you Critically Hit.";
-					case STEALTH_DODGE: return "Increases your Dodge Rate while stealthed.\n\n*Grants you Stealth whenever you Dodge.";
-					
-					case MAGIC_STRIKE: return "Chance to make a Basic Attack after casting a spell.";
-					case GRENADE_STRIKE: return "Chance to make a Basic Attack after using a Grenade.";
-					case BUFFPOT_STRIKE: return "Chance to make a Basic Attack after using a Buffing Potion.";
-					
-					case STRIKE: return "Make a bonus strike against your opponent after this action.";
-					case ACT: return "Take a bonus action.";
-					case WITHDRAW_ACT: return "Take an attack action.";
-					
-					case WALK: return "Sally forth throughout the land, my friend, sally forth!";
-					case APPROACH: return "Close the distance between you and your opponent.";
-					case WITHDRAW: return "Move backwards one range category distance.";
-					case BERSERK: return "Has more powerful attacks but is unable to take complicated actions.";
-					case AFRAID: return "Running in terror from opponent.";
-					case INFINITY: return "Chance for consumable to not use a charge on activation.";
-					
-					default: return null;
-				}
-			}
-		}*/
-		
 		public static function getTagDesc(s:String):String{
 			var m:String="\n\n<font color="+TEAL+">*"
 			switch(s){
@@ -653,15 +386,6 @@
 			}
 			m+="</font>";
 			return m;
-		}
-		
-		public static function action(s:String):String{
-			switch(s){
-				/*case ActionData.SEARING: return "\n\n<font color="+TEAL+">*Only half your magic power is added to damage.</font>"
-				 case ActionData.HEALING: return "\n\n<font color="+TEAL+">*Only half your magic power is added to healing.</font>"*/
-				default:
-					return "";
-			}
 		}
 		
 		public static function button(s:String):String{
@@ -1035,7 +759,6 @@
 						_temp=model.action.cEffects[i].getSpecialDesc(EffectBase.DESC_CRIT);
 						if (_temp!=null) m+="\n\n<font color="+TEAL+">*"+_temp+"</font>";
 					}
-					m+=action(model.action.label);
 				}
 			}
 			
@@ -1048,19 +771,6 @@
 			}else{
 				m+="\n\n<p align='right'><font color="+YELLOW+">"+String(0-model.cost)+" PT</font></p>";
 			}
-			return m;
-		}
-
-		public static function getAchievementItemDesc(index:int, cost:int = 1):String{
-			var m:String="";
-			switch(index){
-				default:
-					m+="You got an achievement! This is just sample text to show what it would look like.";
-			}
-
-			m+="\n\n<font color="+TEAL+">*This award does nothing. Literally nothing. you can sell it for Power Tokens or keep it around forever for no reason.</font>";
-			m+="\n\n<p align='right'><font color="+YELLOW+">"+cost+" PT</font></p>";
-
 			return m;
 		}
 		
@@ -1270,42 +980,13 @@
 			}
 			return "";
 		}
-		
-		public static function achieveName(i:int):String{
-			switch (i){
-				case AchieveData.ACHIEVE_DEFT: case AchieveData.ACHIEVE_DEFT_COSMO: return "Deft";
-				case AchieveData.ACHIEVE_CLEVER: case AchieveData.ACHIEVE_CLEVER_COSMO: return "Clever";
-				case AchieveData.ACHIEVE_UNGIFTED: case AchieveData.ACHIEVE_UNGIFTED_COSMO: return "Ungifted";
-				case AchieveData.ACHIEVE_STUDIOUS: case AchieveData.ACHIEVE_STUDIOUS_COSMO: return "Studious";
-				case AchieveData.ACHIEVE_ENLIGHTENED: case AchieveData.ACHIEVE_ENLIGHTENED_COSMO: return "Enlightened";
-				case AchieveData.ACHIEVE_POWERFUL: case AchieveData.ACHIEVE_POWERFUL_COSMO: return "Powerful";
-				case AchieveData.ACHIEVE_HOLY: case AchieveData.ACHIEVE_HOLY_COSMO: return "Holy";
-				case AchieveData.ACHIEVE_WILD: case AchieveData.ACHIEVE_WILD_COSMO: return "Wild";
-				case AchieveData.ACHIEVE_NOBLE: case AchieveData.ACHIEVE_NOBLE_COSMO: return "Noble";
-				case AchieveData.ACHIEVE_ORDINARY_COSMO: return "Ordinary";
-				// case AchieveData.ACHIEVE_TURBO: return "Turbo";
-				case AchieveData.ACHIEVE_ACOLYTE: return "Acolyte";
-				case AchieveData.ACHIEVE_PALADIN: return "Paladin";
-				case AchieveData.ACHIEVE_ROGUE: return "Rogue";
-				case AchieveData.ACHIEVE_BERSERKER: return "Berserker";
-				default: return "Name "+String(i);
-			}
-		}
-		
-		public static function achieveDesc(i:int):String{
-			switch (i){
-				case 0: return ("Score a massive blow");
-				case 1: return ("Find the hidden treasure");
-				case 2: return ("Fail at your duty");
-				case 3: return ("Learn something important");
-				case 4: return ("Achieve a degree of mastery");
-				case 5: return ("Prove your worth in the arena");
-				case 6: return ("Aid the Creators");
-				case 7: return ("Grow without focus");
-				case 8: return ("Roam far across the land");
-				case 9: return ("Travel further than you can dream");
-				default: return ("Details "+String(i));
-			}
+
+		public static function getAchievementItemDesc(index:int, cost:int = 1):String{
+			var m:String= AchieveData.ACHIEVE_DEFS[index].awardDesc;
+
+			m+="\n\n<p align='right'><font color="+YELLOW+">"+cost+" PT</font></p>";
+
+			return m;
 		}
 		
 		public static function level(i:int):String{

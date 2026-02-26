@@ -68,7 +68,7 @@
 				page+=2;
 				loadPage(page);
 			}else{
-				AchieveData.achieve(AchieveData.ACHIEVE_STUDIOUS);
+				AchieveData.achieve(AchieveData.READ_BOOK);
 			}
 		}
 		

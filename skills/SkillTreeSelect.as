@@ -30,24 +30,26 @@
 			if (origin.skillBlock.checkTalent(SkillData.UNGIFTED)){
 				buttons[SkillData.WIZARD].disabled=true;
 			}
-			if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_ACOLYTE)){
+			if (!AchieveData.hasAchieved(AchieveData.ZONE_200)){
 				buttons[5].disabled = true;
 				buttons[5].setDesc(StringData.PTITLES[5*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Reach Zone 200 to unlock.");
 			}
-			if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_PALADIN)){
+			if (!AchieveData.hasAchieved(AchieveData.CRAFT_ITEM_1)){
 				buttons[6].disabled = true;
-				buttons[6].setDesc(StringData.PTITLES[6*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Reach Zone 300 to unlock.");
+				buttons[6].setDesc(StringData.PTITLES[6*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Craft any item in the Mystic Forge to unlock.");
 			}
 			
-			if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_ROGUE)){
+			if (!AchieveData.hasAchieved(AchieveData.DUEL_100)){
 				buttons[7].disabled = true;
-				buttons[7].setDesc(StringData.PTITLES[7*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Defeat arena 800 to unlock.");
+				buttons[7].setDesc(StringData.PTITLES[7*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Defeat arena level 100 to unlock.");
 			}
-			
-			if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_BERSERKER)){
+
+			// if (!AchieveData.hasAchieved(AchieveData.DUEL_250)){
+			// 	buttons[8].disabled = true;
+			// 	buttons[8].setDesc(StringData.PTITLES[8*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Defeat arena level 250 to unlock.");
+			// }
 				buttons[8].disabled = true;
 				buttons[8].setDesc(StringData.PTITLES[8*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","This skill tree is unreleased. Maybe it will be, maybe not?");
-			}
 			
 			for (i=0;i<_origin.skillBlock.skillT.length;i+=1){
 				if (buttons[i].disabled){

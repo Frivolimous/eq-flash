@@ -27,7 +27,6 @@
 		
 		public var delay:int;
 		public var spawn:int;
-		public var turboB:Boolean;
 		public var running:Boolean;
 		
 		public var roundWait:Boolean=false;
@@ -416,14 +415,13 @@
 		}
 				
 		public function turbo(){
-			if (turboB){
-				Facade.stage.frameRate=Facade.FRAMERATE;
-				turboB=false;
-				gameUI.turboB.toggled=false;
-			}else{
+			gameM.modeTurbo = !gameM.modeTurbo;
+			gameUI.turboB.toggled = gameM.modeTurbo;
+			Facade.addLine('turboing: '+gameM.modeTurbo);
+			if (gameM.modeTurbo){
 				Facade.stage.frameRate=Facade.FRAMERATE*2;
-				turboB=true;
-				gameUI.turboB.toggled=true;
+			}else{
+				Facade.stage.frameRate=Facade.FRAMERATE;
 			}
 		}
 		

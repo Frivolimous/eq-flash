@@ -18,20 +18,6 @@
 	import system.effects.EffectData;
 	
 	public class EpicGameControl extends GameControl{
-		/*public static const TURN_LENGTH:int=30;
-		public static const BUFF_DELAY:int=10;
-
-		public var gameM:GameModel;
-		public var gameV:Sprite;
-		public var gameUI:GameUI;
-		
-		public var delay:int;
-		var spawn:int;
-		public var turboB:Boolean;
-		public var running:Boolean;
-		
-		public var roundWait:Boolean=false;*/
-		
 		override public function playerDead(_v:SpriteModel){
 			if (!running) return;
 			//You Die!

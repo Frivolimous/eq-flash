@@ -11,23 +11,7 @@
 	import gameEvents.GameEvent;
 	import utils.GameData;
 	
-	public class HardcoreDuelControl extends DuelControl{
-		/*var gameM:GameModel;
-		var gameV:Sprite;
-		var gameUI:GameUI;
-		public var delay:int;
-		var turboB:Boolean;
-		public var running:Boolean;
-		
-		public var roundWait:Boolean=false;*/
-		
-		/*public function HardcoreDuelControl(){
-			gameM=Facade.gameM;
-			gameUI=Facade.gameUI;
-			gameV=gameUI.gameV;
-			Facade.stage.addEventListener(Event.ENTER_FRAME,onTick);
-		}*/
-		
+	public class HardcoreDuelControl extends DuelControl{		
 		override public function finishRound(i:int){
 			if (i==-2){ //TIMED OUT
 				new EndWindow(StringData.getEndText(StringData.END_TIE,gameM.playerM,gameM.enemyM),gameUI.navOut,gameUI.restart);
@@ -49,19 +33,7 @@
 				new EndWindow("NOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!\nYou lost the round!  You must restart from Bobo 1.",gameUI.navOut,gameUI.restart);
 			}
 		}
-		
-		//public function killEnemy(_v:SpriteModel){
-		//public function clearLevel(){
-		//public function chooseInit(){
-		
-		//override public function onTick(e:Event){
-			
-		//public function startDuel(){
-		
-		//public function startOfTurn(_v:SpriteModel){
-		//public function turbo(){
-		//public function pauseGame(b:Boolean,o:Boolean=false){
-		
+
 		public static var eliminated:Array=["8z8z","Time_Master","dja410","wizardness","Furball777","neit314","yamahaclavinova1","pizza87760","niconicolas","Battenberger","bonez893","lounsbery","GelanderLexC","opacitythebomb","archaeryon","fasman1234","himoo1","norgath","User2351","TrcKMaIsTeR","greatzar","Jarty","Zais764",	"Captain_Catface","virtual_maniac","VerboseandMorose","zver8","lPro100xl","owerske","lenchiko","Dejection","wtfzoids","TheRelic","lordasmodai","Batmanlin","wiffasniffa","Zgabouften","kasugol","tepduang","AgithS","matjdavis","romain5279","denbart93","EchoStar37","sryker","j6u6fu0","Hunterstyle89","Celebris","thegameslayer","Methangas","ohjajaja"];
 		public static function getEliminatedPosition():int{
 			var _name:String=Facade.steamAPI.getName();

@@ -622,18 +622,11 @@
 			
 			//NO ESSENCES PAST THIS POINT
 			if (_item0.index==_item1.index){
-				if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_EPIC)) return null;
+				if (!AchieveData.hasAchieved(AchieveData.ZONE_400)) return null;
 				if (_item0.level==15 && _item1.level==15 && (_item0.enchantIndex==-1 || _item1.enchantIndex==-1 || _item0.enchantIndex==_item1.enchantIndex) && (_item0.suffixIndex==-1 || _item1.suffixIndex==-1 || _item0.suffixIndex==_item1.suffixIndex)){
 					return ItemModel.importArray([_item0.index,16,_item0.maxCharges(),[_item0.enchantIndex==-1?_item1.enchantIndex:_item0.enchantIndex,_item0.suffixIndex==-1?_item1.suffixIndex:_item0.suffixIndex]]);
 				}
 				return null;
-			//if (areSame(_item0,_item1) && _item0.level==15 && _item1.level==15){ //Identical -- Make Epic
-				/*if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_EPIC)) return null;
-				if (_item0.suffixIndex==-1){
-					return _item1.clone(16);
-				}else{
-					return _item0.clone(16);
-				}*/
 			}
 			
 			if (!_item0.isPremium() && !_item1.isPremium()){

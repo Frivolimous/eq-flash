@@ -43,6 +43,7 @@
 		
 		public var active:Boolean=true;
 		public var manual:Boolean;
+		public var modeTurbo:Boolean;
 		
 		public var duel:Boolean=false;
 		public var challengeList:int=0;

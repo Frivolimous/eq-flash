@@ -460,15 +460,13 @@
 				actionText.updateStreak(gameM.deathStreak,gameM.playerM.deathsSinceAscension);
 			}
 			muteB.toggled=Facade.soundC.mute;
-			
+
 			if (GameData.getFlag(GameData.FLAG_TUTORIAL)){
 				addChildAt(turboB,getChildIndex(pauseB)-1);
-				if (Facade.stage.frameRate>Facade.FRAMERATE){
-					turboB.toggled=Facade.gameC.turboB=true;
-				}else{
-					turboB.toggled=Facade.gameC.turboB=false;
+				turboB.toggled = gameM.modeTurbo;
+				if (gameM.modeTurbo){
+					Facade.stage.frameRate=Facade.FRAMERATE*2;
 				}
-				turboB.toggled=Facade.gameC.turboB;
 			}else{
 				if (contains(turboB)){
 					removeChild(turboB);
@@ -489,10 +487,6 @@
 			setCinematicMode(cinematicMode);
 			setSimpleMode(simpleMode);
 			//Facade.setQuality(GameData._Save.data.quality);
-
-			if (turboB.toggled) {
-				Facade.stage.frameRate=Facade.FRAMERATE*2;
-			}
 		}
 		
 		public function navOut(){

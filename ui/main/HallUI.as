@@ -18,10 +18,27 @@
 			
 			achieveA=[achieve0,achieve1,achieve2,achieve3,achieve4,achieve5,achieve6,achieve7,achieve8,achieve9];
 
-			for (var i:int=0;i<10;i+=1){
-				achieveA[i].update(StringData.achieveName(i),nothing);
-				achieveA[i].setDesc(StringData.achieveName(i),StringData.achieveDesc(i));
-			}
+			achieveA[0].update("Deft",nothing);
+			achieveA[0].setDesc("Deft","Score a massive blow");
+			achieveA[1].update("Clever",nothing);
+			achieveA[1].setDesc("Clever","Find the hidden treasure");
+			achieveA[2].update("Ungifted",nothing);
+			achieveA[2].setDesc("Ungifted","Fail at your duty");
+			achieveA[3].update("Studious",nothing);
+			achieveA[3].setDesc("Studious","Learn something important");
+			achieveA[4].update("Enlightened",nothing);
+			achieveA[4].setDesc("Enlightened","Achieve a degree of mastery");
+			achieveA[5].update("Powerful",nothing);
+			achieveA[5].setDesc("Powerful","Prove your worth in the arena");
+			achieveA[6].update("Holy",nothing);
+			achieveA[6].setDesc("Holy","Buy into the Myth");
+			achieveA[7].update("Wild",nothing);
+			achieveA[7].setDesc("Wild","Grow without focus");
+			achieveA[8].update("Noble",nothing);
+			achieveA[8].setDesc("Noble","Roam far across the land");
+			achieveA[9].update("Ascend!",nothing);
+			achieveA[9].setDesc("Ascend!","Travel further than you can dream");
+
 			scores=[monsterT,deathT,damageT,areaT,timeT,characterT];
 		}
 		
@@ -30,14 +47,9 @@
 		
 		override public function openWindow(){
 			soundB.toggled=Facade.soundC.mute;
-			for (var i:int=0;i<10;i+=1){
-				if (AchieveData.hasAchieved(i)){
-					achieveA[i].disabled=false;
-					achieveA[i].setDesc(StringData.achieveName(i)+StringData.locked(1,false));
-				}else{
-					achieveA[i].disabled=true;
-					achieveA[i].setDesc(StringData.achieveName(i)+StringData.locked(1,true));
-				}
+			for (var i:int=0;i<AchieveData.TALENT_ACHIEVEMENTS.length;i+=1){
+				achieveA[i].disabled=!AchieveData.hasAchieved(AchieveData.TALENT_ACHIEVEMENTS[i]);
+				achieveA[i].setDesc(AchieveData.ACHIEVE_DEFS[AchieveData.TALENT_ACHIEVEMENTS[i]].name+StringData.locked(1,achieveA[i].disabled));
 			}
 			for (i=0;i<6;i+=1){
 				scores[i].text=String(GameData.getScore(i));

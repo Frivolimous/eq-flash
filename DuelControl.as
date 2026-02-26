@@ -12,23 +12,7 @@
 	import utils.GameData;
 	import system.effects.EffectBase;
 	
-	public class DuelControl extends GameControl{
-		/*var gameM:GameModel;
-		var gameV:Sprite;
-		var gameUI:GameUI;
-		public var delay:int;
-		var turboB:Boolean;
-		public var running:Boolean;
-		
-		public var roundWait:Boolean=false;*/
-		
-		/*override public function init(){
-			gameM=Facade.gameM;
-			gameUI=Facade.gameUI;
-			gameV=gameUI.gameV;
-			Facade.stage.addEventListener(Event.ENTER_FRAME,onTick);
-		}*/
-		
+	public class DuelControl extends GameControl{		
 		public function finishRound(i:int){
 			if (i==-2){ //TIMED OUT
 				new EndWindow(StringData.getEndText(StringData.END_TIE,gameM.playerM,gameM.enemyM),gameUI.navOut,gameUI.restart);
@@ -171,9 +155,5 @@
 			if (m>50000) m=50000;
 			return m;
 		}
-		
-		//public function startOfTurn(_v:SpriteModel){
-		//public function turbo(){
-		//public function pauseGame(b:Boolean,o:Boolean=false){
 	}
 }

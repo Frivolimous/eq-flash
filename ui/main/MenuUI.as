@@ -236,9 +236,9 @@
 			makeGrey(duelB,(GameData.getScore(GameData.SCORE_LEVEL)<8));
 			makeGrey(libraryB,(GameData.getScore(GameData.SCORE_LEVEL)<10));
 			makeGrey(blackB,(GameData.getScore(GameData.SCORE_LEVEL)<12));
-			makeGrey(forgeB,!AchieveData.hasAchieved(AchieveData.ACHIEVE_FORGE));
+			makeGrey(forgeB,!AchieveData.hasAchieved(AchieveData.ZONE_300));
 			
-			if (AchieveData.hasAchieved(AchieveData.ACHIEVE_EPIC)){
+			if (AchieveData.hasAchieved(AchieveData.ZONE_400)){
 				addChild(epicB);
 			}else{
 				if (contains(epicB)){

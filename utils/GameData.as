@@ -289,7 +289,7 @@
 		//========= PRINCIPLE FUNCTIONS ==========================
 				
 		public static function getMaxLevel():int{
-			if (AchieveData.hasAchieved(AchieveData.ACHIEVE_LEVEL_70)){
+			if (AchieveData.hasAchieved(AchieveData.REACH_LEVEL_70)){
 				return 70;
 			}else{
 				return 60;
@@ -404,14 +404,7 @@
 			submitDataQueue([[STASH,stash],[OVERFLOW,overflow],[SCORES,scores],[LASTCHAR,lastChar]]);
 			pingServer();
 		}
-		
-		public static function saveCharacterPrestige(_slot:int,a:Array){
-			//before and after you prestige, save this
-			saveCharacter(_slot,a);
-			submitDataQueue[[ARTIFACTS,artifacts],[SCORES,scores]];
-			pingServer();
-		}
-		
+
 		public static function saveCharacterAll(_slot:int,a:Array){
 			saveCharacter(_slot,a);
 			submitDataQueue([[ARTIFACTS,artifacts],[STASH,stash],[OVERFLOW,overflow],[SCORES,scores],[LASTCHAR,lastChar]]);
@@ -796,7 +789,6 @@
 				// 	m["player-100"]=null;
 				// 	hardcore=0;
 				// 	submitDataQueue([[HARDCORE,hardcore]]);
-				// 	achievements[ACHIEVE_LEVEL_70]=false;
 				// 	_Save=SharedObject.getLocal("HC_OPTIONS");
 				// 	resetSave();
 				// 	_Save=SharedObject.getLocal("OPTIONS");

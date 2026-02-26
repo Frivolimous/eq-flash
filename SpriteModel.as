@@ -293,9 +293,7 @@
 
 			if (saveSlot>=0 && saveSlot<5){
 				GameData.setHigherScore(GameData.SCORE_LEVEL,level);
-				if (level>=60){
-					(skillBlock.getTalentIndex()+AchieveData.ACHIEVE_ORDINARY_COSMO);
-				}
+				AchieveData.checkTalentLevel(level,skillBlock.getTalentIndex());
 			}
 		}
 		

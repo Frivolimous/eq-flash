@@ -45,7 +45,7 @@
 			ingredientsUI.init(inventoryUI);
 			upgradeUI.init(SingleInventoryUI.UPGRADE,inventoryUI);
 			inventoryUI.alsoUpdate=stashW.powerT.updateDisplay;
-			if (AchieveData.hasAchieved(AchieveData.ACHIEVE_EPIC)){
+			if (AchieveData.hasAchieved(AchieveData.ZONE_400)){
 				craftLocked=false;
 				if (contains(craftLockedO)) removeChild(craftLockedO);
 			}else{
