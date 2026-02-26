@@ -14,7 +14,7 @@
 	import ui.main.StatsTab;
 	import ui.main.DuelUI;
 	import ui.main.HomeUI;
-	import utils.GameData;
+	import utils.AchieveData;
 	
 	public class ForgeUI extends BaseUI{
 		public static const INV_X:Number=343,
@@ -45,7 +45,7 @@
 			ingredientsUI.init(inventoryUI);
 			upgradeUI.init(SingleInventoryUI.UPGRADE,inventoryUI);
 			inventoryUI.alsoUpdate=stashW.powerT.updateDisplay;
-			if (GameData.hasAchieved(GameData.ACHIEVE_EPIC)){
+			if (AchieveData.hasAchieved(AchieveData.ACHIEVE_EPIC)){
 				craftLocked=false;
 				if (contains(craftLockedO)) removeChild(craftLockedO);
 			}else{

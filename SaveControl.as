@@ -198,8 +198,6 @@
 				
 				Facade.gameUI.background.clear();
 			}
-			// Check all achievements on player load
-			if (_player.level>=60) GameData.maxLevel(_player);
 		}
 		
 		public function loadShort(_player:SpriteModel,_save:Array,i:int=-1,_updateUI:Boolean=false){

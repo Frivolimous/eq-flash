@@ -9,6 +9,7 @@
 	import artifacts.ArtifactData;
 	import system.buffs.BuffData;
 	import utils.GameData;
+	import utils.AchieveData;
 	import skills.SkillModel;
 	import system.actions.ActionBase;
 	import system.actions.ActionData;
@@ -946,6 +947,10 @@
 		public static function getItemDesc(model:ItemModel):String{
 			var m:String="";
 			var _post:String="";
+
+			if (model.index == 118) {
+				return getAchievementItemDesc(model.enchantIndex, -model.cost);
+			}
 			
 			if (model.level<0){
 				//m="Level <font color="+YELLOW+">?</font> ";
@@ -1043,6 +1048,19 @@
 			}else{
 				m+="\n\n<p align='right'><font color="+YELLOW+">"+String(0-model.cost)+" PT</font></p>";
 			}
+			return m;
+		}
+
+		public static function getAchievementItemDesc(index:int, cost:int = 1):String{
+			var m:String="";
+			switch(index){
+				default:
+					m+="You got an achievement! This is just sample text to show what it would look like.";
+			}
+
+			m+="\n\n<font color="+TEAL+">*This award does nothing. Literally nothing. you can sell it for Power Tokens or keep it around forever for no reason.</font>";
+			m+="\n\n<p align='right'><font color="+YELLOW+">"+cost+" PT</font></p>";
+
 			return m;
 		}
 		
@@ -1255,21 +1273,21 @@
 		
 		public static function achieveName(i:int):String{
 			switch (i){
-				case GameData.ACHIEVE_DEFT: case GameData.ACHIEVE_DEFT_COSMO: return "Deft";
-				case GameData.ACHIEVE_CLEVER: case GameData.ACHIEVE_CLEVER_COSMO: return "Clever";
-				case GameData.ACHIEVE_UNGIFTED: case GameData.ACHIEVE_UNGIFTED_COSMO: return "Ungifted";
-				case GameData.ACHIEVE_STUDIOUS: case GameData.ACHIEVE_STUDIOUS_COSMO: return "Studious";
-				case GameData.ACHIEVE_ENLIGHTENED: case GameData.ACHIEVE_ENLIGHTENED_COSMO: return "Enlightened";
-				case GameData.ACHIEVE_POWERFUL: case GameData.ACHIEVE_POWERFUL_COSMO: return "Powerful";
-				case GameData.ACHIEVE_HOLY: case GameData.ACHIEVE_HOLY_COSMO: return "Holy";
-				case GameData.ACHIEVE_WILD: case GameData.ACHIEVE_WILD_COSMO: return "Wild";
-				case GameData.ACHIEVE_NOBLE: case GameData.ACHIEVE_NOBLE_COSMO: return "Noble";
-				case GameData.ACHIEVE_ORDINARY_COSMO: return "Ordinary";
-				// case GameData.ACHIEVE_TURBO: return "Turbo";
-				case GameData.ACHIEVE_ACOLYTE: return "Acolyte";
-				case GameData.ACHIEVE_PALADIN: return "Paladin";
-				case GameData.ACHIEVE_ROGUE: return "Rogue";
-				case GameData.ACHIEVE_BERSERKER: return "Berserker";
+				case AchieveData.ACHIEVE_DEFT: case AchieveData.ACHIEVE_DEFT_COSMO: return "Deft";
+				case AchieveData.ACHIEVE_CLEVER: case AchieveData.ACHIEVE_CLEVER_COSMO: return "Clever";
+				case AchieveData.ACHIEVE_UNGIFTED: case AchieveData.ACHIEVE_UNGIFTED_COSMO: return "Ungifted";
+				case AchieveData.ACHIEVE_STUDIOUS: case AchieveData.ACHIEVE_STUDIOUS_COSMO: return "Studious";
+				case AchieveData.ACHIEVE_ENLIGHTENED: case AchieveData.ACHIEVE_ENLIGHTENED_COSMO: return "Enlightened";
+				case AchieveData.ACHIEVE_POWERFUL: case AchieveData.ACHIEVE_POWERFUL_COSMO: return "Powerful";
+				case AchieveData.ACHIEVE_HOLY: case AchieveData.ACHIEVE_HOLY_COSMO: return "Holy";
+				case AchieveData.ACHIEVE_WILD: case AchieveData.ACHIEVE_WILD_COSMO: return "Wild";
+				case AchieveData.ACHIEVE_NOBLE: case AchieveData.ACHIEVE_NOBLE_COSMO: return "Noble";
+				case AchieveData.ACHIEVE_ORDINARY_COSMO: return "Ordinary";
+				// case AchieveData.ACHIEVE_TURBO: return "Turbo";
+				case AchieveData.ACHIEVE_ACOLYTE: return "Acolyte";
+				case AchieveData.ACHIEVE_PALADIN: return "Paladin";
+				case AchieveData.ACHIEVE_ROGUE: return "Rogue";
+				case AchieveData.ACHIEVE_BERSERKER: return "Berserker";
 				default: return "Name "+String(i);
 			}
 		}

@@ -1,21 +1,15 @@
 ﻿package{
 	import flash.display.Stage;
-	import flash.text.TextFormat;
 	import ui.*;
 	import ui.main.MenuUI;
-	import ui.main.HallUI;
-	import flash.display.StageQuality;
 	import flash.text.TextField;
-	import ui.assets.AchievementDisplay;
 	import ui.assets.InstantTransition;
 	import ui.assets.FadeTransition;
-	import ui.main.BaseUI;
 	import flash.display.Sprite;
 	import utils.GameData;
 	import ui.assets.Tooltip;
 	import utils.SpriteSheets;
 	import gameEvents.*;
-	import flash.events.FocusEvent;
 	import flash.events.Event;
 	import ui.main.HomeUI;
 	import ui.windows.ConfirmWindow;

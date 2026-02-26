@@ -444,5 +444,19 @@
 			}
 			return _talent;
 		}
+
+		public static function getTreeAssignment(skillA: Array):Array{
+			//a: SkillModel[];
+			var m:Array=new Array(NUM_TREES);
+			for (var i:int=0;i<m.length;i+=1){
+				m[i]=0;
+			}
+
+			for (i=0;i<skillA.length;i+=1){
+				m[Math.floor(i/5)]+=skillA[i].level;
+			}
+
+			return m;
+		}
 	}
 }

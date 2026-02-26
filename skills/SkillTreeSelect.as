@@ -1,7 +1,7 @@
 ﻿package skills{
 	import flash.display.Sprite;
 	import ui.windows.ConfirmWindow;
-	import utils.GameData;
+	import utils.AchieveData;
 
 	public class SkillTreeSelect extends Sprite{
 		const MAX_TOGGLED:int=5;
@@ -23,13 +23,6 @@
 			
 			buttons=[skill1B,skill2B,skill3B,skill4B,skill5B,skill6B,skill7B,skill8B,skill9B];
 			
-			// buy6B.setDesc("Buy Acolyte Tree for 55 Kreds","Buy this premium skill tree for Power Tokens or Kreds. Also earned by reaching zone 200, or can be purchased in a bundle.");
-			// buy7B.setDesc("Buy Paladin Tree for 55 Kreds","Buy this premium skill tree for Power Tokens or Kreds. Also earned by reaching zone 300, or can be purchased in a bundle.");
-			// buy8B.setDesc("Buy Rogue Tree for 55 Kreds","Buy this premium skill tree for Power Tokens or Kreds. Also earned by defeating arena 800, or can be purchased in a bundle.");
-			//buy9B.setDesc("Buy Berserker Tree for 55 Kreds","Buy this premium skill tree for Power Tokens or Kreds. Also earned by defeating arena 1200, or can be purchased in a bundle.");
-			// buy9B.setDesc("Unavalable","This skill tree is unavailable - it will be added to the game soon!");
-			// buy9B.disabled=true;
-			
 			for (var i:int=0;i<buttons.length;i+=1){
 				buttons[i].update(StringData.PTITLES[i*3+1],toggleTree,true);
 				buttons[i].index=i;
@@ -37,22 +30,21 @@
 			if (origin.skillBlock.checkTalent(SkillData.UNGIFTED)){
 				buttons[SkillData.WIZARD].disabled=true;
 			}
-			if (!GameData.hasAchieved(GameData.ACHIEVE_ACOLYTE)){
-				// removeChild(buttons[5]);
+			if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_ACOLYTE)){
 				buttons[5].disabled = true;
 				buttons[5].setDesc(StringData.PTITLES[5*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Reach Zone 200 to unlock.");
 			}
-			if (!GameData.hasAchieved(GameData.ACHIEVE_PALADIN)){
+			if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_PALADIN)){
 				buttons[6].disabled = true;
 				buttons[6].setDesc(StringData.PTITLES[6*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Reach Zone 300 to unlock.");
 			}
 			
-			if (!GameData.hasAchieved(GameData.ACHIEVE_ROGUE)){
+			if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_ROGUE)){
 				buttons[7].disabled = true;
 				buttons[7].setDesc(StringData.PTITLES[7*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Defeat arena 800 to unlock.");
 			}
 			
-			if (!GameData.hasAchieved(GameData.ACHIEVE_BERSERKER)){
+			if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_BERSERKER)){
 				buttons[8].disabled = true;
 				buttons[8].setDesc(StringData.PTITLES[8*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","This skill tree is unreleased. Maybe it will be, maybe not?");
 			}

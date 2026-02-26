@@ -169,9 +169,8 @@
 						graphicEffect(ADD_DAMAGE,_o,total());
 					}
 						
-					if ((_o==Facade.gameM.playerM)&&(total()>GameData.getScore(GameData.SCORE_DAMAGE))){
-						GameData.setScore(GameData.SCORE_DAMAGE,total());
-						if (total()>100) GameData.achieve(GameData.ACHIEVE_DEFT);
+					if (_o==Facade.gameM.playerM){
+						GameData.setHigherScore(GameData.SCORE_DAMAGE,total());
 					}
 				}
 			}

@@ -5,6 +5,7 @@
 	import items.*
 	import ui.windows.ConfirmWindow;
 	import ui.assets.FadeTransition;
+	import utils.GameData;
 	
 	public class ShopUI extends BaseUI{
 		public static const SHOP_X:Number=37,
@@ -46,8 +47,7 @@
 			
 			shopTab.restock();
 			//premiumTab.restockSingle();
-			
-			if (Facade.gameM.playerM.level>=3){
+			if (GameData.getScore(GameData.SCORE_LEVEL)>=3){
 				shopLocked=false;
 				if (contains(shopLockedO)){
 					removeChild(shopLockedO);
@@ -56,7 +56,7 @@
 				shopLocked=true;
 				addChild(shopLockedO);
 			}
-			if (Facade.gameM.playerM.level>=12){
+			if (GameData.getScore(GameData.SCORE_LEVEL)>=12){
 				blackLocked=false;
 				if (contains(blackLockedO)){
 					removeChild(blackLockedO);

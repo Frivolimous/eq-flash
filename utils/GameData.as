@@ -7,7 +7,6 @@
 	import ui.assets.ScrollAnnounce;
 	import items.ItemModel;
 	//import tournament.TournamentData;
-	import sprites.BallHead;
 	import ui.assets.AchievementDisplay;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
@@ -46,7 +45,11 @@
 							SCORE_ASCENDS:int=10,
 							SCORE_GOLD:int=11,
 							SCORE_REFRESH:int=12,
-							SCORE_CLOCKS:int=13;
+							SCORE_CLOCKS:int=13,
+							SCORE_LEVEL:int=14,
+							SCORE_DUEL:int=15,
+							SCORE_EPICS:int=16,
+							NUM_SCORES:int=17;
 							
 		public static var _Save:SharedObject=SharedObject.getLocal("OPTIONS");
 		public static const PAUSE_TURN:int=0,
@@ -71,36 +74,7 @@
 							SELL_SPELL:int=5,
 							SELL_SCROLL:int=6,
 							SELL_CHARM:int=7;
-							
-		public static const ACHIEVE_DEFT:int=0,
-							ACHIEVE_CLEVER:int=1,
-							ACHIEVE_UNGIFTED:int=2,
-							ACHIEVE_STUDIOUS:int=3,
-							ACHIEVE_ENLIGHTENED:int=4,
-							ACHIEVE_POWERFUL:int=5,
-							ACHIEVE_HOLY:int=6,
-							ACHIEVE_WILD:int=7,
-							ACHIEVE_NOBLE:int=8,
-							// ACHIEVE_TURBO:int=9,
-							ACHIEVE_ACOLYTE:int=10,
-							ACHIEVE_PALADIN:int=11,
-							ACHIEVE_ORDINARY_COSMO:int=12,
-							ACHIEVE_DEFT_COSMO:int=13,
-							ACHIEVE_CLEVER_COSMO:int=14,
-							ACHIEVE_UNGIFTED_COSMO:int=15,
-							ACHIEVE_STUDIOUS_COSMO:int=16,
-							ACHIEVE_ENLIGHTENED_COSMO:int=17,
-							ACHIEVE_POWERFUL_COSMO:int=18,
-							ACHIEVE_HOLY_COSMO:int=19,
-							ACHIEVE_WILD_COSMO:int=20,
-							ACHIEVE_NOBLE_COSMO:int=21,
-							ACHIEVE_ASCEND_50:int=22,
-							ACHIEVE_ROGUE:int=23,
-							ACHIEVE_FORGE:int=24,
-							ACHIEVE_EPIC:int=25,
-							ACHIEVE_BERSERKER:int=26,
-							ACHIEVE_LEVEL_70:int=27;
-							
+														
 		public static const ACHIEVEMENTS:String="achievements",
 							ARTIFACTS:String="artifacts",
 							STASH:String="stash",
@@ -124,7 +98,7 @@
 			}
 		}
 		public static function saveHardcore(){
-			Facade.steamAPI.submitHighscoreScript(hardcore);
+			// Facade.steamAPI.submitHighscoreScript(hardcore);
 			submitDataQueue([[HARDCORE,hardcore]]);
 			pingServer();
 		}
@@ -144,23 +118,24 @@
 			}
 		}
 		//public static var _BUSY:Boolean=false;
-		
+		    
+    public static var achievements:Array;
 		public static var artifacts:Array;
 		public static var stash:Array;
 		public static var overflow:Array;
 		public static var lastChar:int;
-		private static var achievements:Array;
-		private static var scores:Array; //[0-kills,1-deaths,2-damage,3-furthest,4-time,5-chars::
+		public static var scores:Array; //[0-kills,1-deaths,2-damage,3-furthest,4-time,5-chars::
 										 //6-boost,7-suns,8-souls,9-kreds,10-ascends,11-gold,12-refresh,13-clocks]
-		private static var flags:Array;
-		private static var cosmetics:Array=[[],[],[],[],[],[]];
-		private static var lastTime:String;
-		private static var rewards:Array=[];
+		public static var flags:Array;
+		public static var cosmetics:Array=[[],[],[],[],[],[]];
+		public static var lastTime:String;
+		public static var rewards:Array=[];
 		public static var epics:Array=[0,0]; // [0] = area, [1] = eCount
 		public static var zone:Array=[0,0,0,0];
 		
 		public static function setupZone(i:int,resetProgress:Boolean=true){
 			//zone - 0: AreaType, 1: MonsterType, 2: MonsterLevel, 3: ETotal
+			setHigherScore(SCORE_EPICS,i);
 			epics[0]=i;
 			if (resetProgress) epics[1]=0;
 			if (i==0 || i==10 || i==25 || i==50 || i==100 || i==200 || i==300 || i==400 || i==1000){
@@ -191,13 +166,29 @@
 		public static function getScore(i:int):int{
 			return scores[i];
 		}
+
+		public static function setHigherScore(i:int,value:int){
+			if(value>scores[i]){
+				if (i == SCORE_LEVEL){
+					switch(value){
+						case 3: new AchievementDisplay(105); break;
+						case 5: new AchievementDisplay(101); break;
+						case 8: new AchievementDisplay(102); break;
+						case 10: new AchievementDisplay(103); break;
+						case 12: new AchievementDisplay(104); break;
+					}
+				}
+				setScore(i,value);
+			}
+		}
 		
 		public static function setScore(i:int,value:int){
+			AchieveData.checkScore(i,value);
 			scores[i]=value;
 		}
 		
 		public static function addScore(i:int,value:int){
-			scores[i]+=value;
+			setScore(i,scores[i]+value);
 		}
 		
 		public static function addAscend(){
@@ -288,50 +279,17 @@
 		}
 		
 		public static function setFlag(i:int,b:Boolean){
+			if (b) {
+				AchieveData.checkFlag(i);
+			}
 			flags[i]=b;
 			saveThis(FLAGS);
 		}
 		
 		//========= PRINCIPLE FUNCTIONS ==========================
-		
-		public static function achieve(i:int){
-			if (i==313){
-				for (var j:int=0;j<28;j+=1){
-					if (!achievements[j]){
-						achievements[j]=true;
-						new AchievementDisplay(i);
-					}
-				}
-				return;
-			}
-			
-			if (!achievements[i]){
-				new AchievementDisplay(i);
-				achievements[i]=true;
-				if (i>=ACHIEVE_ORDINARY_COSMO && i<=ACHIEVE_NOBLE_COSMO){
-					i-=ACHIEVE_ORDINARY_COSMO;
-					sprites.BallHead.setTalentCosmetics(cosmetics,i);
-					saveThis(COSMETICS);
-				}else if (i==ACHIEVE_ASCEND_50){
-					cosmetics[4].push(BallHead.DARK_HALO);
-					saveThis(COSMETICS);
-				}
-				saveThis(ACHIEVEMENTS);
-			}
-		}
-		
-		public static function hasAchieved(i:int):Boolean{
-			return achievements[i];
-		}
-		
-		public static function maxLevel(_v:SpriteModel){
-			if (_v.level>=60){
-				achieve(_v.skillBlock.getTalentIndex()+ACHIEVE_ORDINARY_COSMO);
-			}
-		}
-		
+				
 		public static function getMaxLevel():int{
-			if (hasAchieved(ACHIEVE_LEVEL_70)){
+			if (AchieveData.hasAchieved(AchieveData.ACHIEVE_LEVEL_70)){
 				return 70;
 			}else{
 				return 60;
@@ -665,14 +623,16 @@
 				versionChecked=2;
 				dataUpdated=2;
 			}else{				
-				if (_Data.scores==null){
-					scores=[0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+				if (_Data.scores==null) {
+					scores=new Array(NUM_SCORES);
 				}else{
 					scores=stringToValue(_Data.scores.Value);
-					while (scores.length<14){
-						scores.push(0);
-					}
 				}
+				
+				while (scores.length<NUM_SCORES){
+					scores.push(0);
+				}
+				
 				if (_Data.lastChar==null){
 					lastChar=0;
 				}else{
@@ -683,7 +643,7 @@
 				}else{
 					achievements=stringToValue(_Data.achievements.Value);					
 				}
-				while(achievements.length<28){
+				while(achievements.length<AchieveData.NUM_ACHIEVEMENTS){
 					achievements.push(false);
 				}
 				
@@ -949,13 +909,13 @@
 			numCharacters=0;
 			lastChar=0;
 			cosmetics=[[],[],[],[],[],[]]
-			scores=new Array(14);
+			scores=new Array(NUM_SCORES);
 			for (i=0;i<scores.length;i+=1){
 				scores[i]=0;
 			}
 			flags=[false,false,false,false,false,false,false,false,false];
 			achievements=[];
-			while(achievements.length<23){
+			while(achievements.length<AchieveData.NUM_ACHIEVEMENTS){
 				achievements.push(false);
 			}
 			submitDataQueue([["version",VERSION],["firstVersion",VERSION],

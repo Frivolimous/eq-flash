@@ -1,5 +1,5 @@
 ﻿package skills {
-	import utils.GameData;
+	import utils.AchieveData;
 	import system.actions.ActionBase;
 	
 	public class SkillBlock {
@@ -119,12 +119,7 @@
 					
 					if (Facade.currentUI!=null) Facade.currentUI.updateStats();
 					
-					if (skillA[i].level==SkillData.MAX_SKILL) GameData.achieve(GameData.ACHIEVE_ENLIGHTENED);
-					var _numTrees:int=0;
-					for (var i:int=0;i<9;i+=1){
-						if (pointsInTree(i)>0) _numTrees+=1;
-					}
-					if (_numTrees>=5) GameData.achieve(GameData.ACHIEVE_WILD);
+					AchieveData.checkSkills(skillA);
 					
 					return true;
 				}
@@ -182,14 +177,6 @@
 			}else{
 				origin.title="";
 			}
-		}
-		
-		public function pointsInTree(i:int):int{
-			var m:int=0;
-			for (var j:int=0;j<5;j+=1){
-				m+=skillA[i*5+j].level;
-			}
-			return m;
 		}
 		
 		public function setTrees(){

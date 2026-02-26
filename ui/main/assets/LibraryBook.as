@@ -7,7 +7,7 @@
 	import flash.display.MovieClip;
 	import ui.main.assets.Page;
 	import ui.assets.GraphicButton;
-	import utils.GameData;
+	import utils.AchieveData;
 	
 	public class LibraryBook extends MovieClip{
 		var _Name:String;
@@ -68,7 +68,7 @@
 				page+=2;
 				loadPage(page);
 			}else{
-				GameData.achieve(GameData.ACHIEVE_STUDIOUS);
+				AchieveData.achieve(AchieveData.ACHIEVE_STUDIOUS);
 			}
 		}
 		

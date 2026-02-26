@@ -93,9 +93,6 @@
 				if (e.ctrlKey && e.shiftKey){
 					Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT, Facade.saveC.exportSave(Facade.gameM.playerM));
 					//Facade.gameM.playerM.stash[3]=[Facade.saveC.saveItem(ItemData.spawnItem(15,34,6)),Facade.saveC.saveItem(ItemData.spawnItem(15,36,6))];
-					
-					//Facade.achieve(6);
-					//Facade.achieve(9);
 				}
 			}else if (e.keyCode==Keyboard.P){
 				if (e.ctrlKey && e.shiftKey && Facade.DEBUG){
@@ -114,7 +111,9 @@
 					//Facade.gameUI.togglePause();
 				}
 			}else if (e.keyCode==Keyboard.O){
-				
+				var _item = ItemData.spawnItem(1, 118);
+				_item = ItemData.enchantItem(_item, 1);
+				Facade.gameM.addItemFallbackOverflow(_item);
 			}
 		}
 		

@@ -6,6 +6,7 @@
 	import flash.display.MovieClip;
 	import ui.windows.ConfirmWindow;
 	import utils.GameData;
+	import utils.AchieveData;
 	import flash.display.Sprite;
 	import hardcore.*;
 	import ui.StatusUI;
@@ -198,8 +199,6 @@
 			removeChild(treasure);
 			GameData.setFlag(GameData.FLAG_TREASURE,true);
 			GameData.gold+=500;
-			GameData.achieve(GameData.ACHIEVE_CLEVER);
-			new AchievementDisplay(315);
 		}
 		
 		override public function openWindow(){
@@ -230,16 +229,16 @@
 				new TutorialWindow(TutorialWindow.GIFT3);
 				GameData.setFlag(GameData.FLAG_GIFT2,true);
 			}
+						
+			makeGrey(shopB,(GameData.getScore(GameData.SCORE_LEVEL)<3));
+			makeGrey(premiumB,(GameData.getScore(GameData.SCORE_LEVEL)<3));
+			makeGrey(hallB,(GameData.getScore(GameData.SCORE_LEVEL)<5));
+			makeGrey(duelB,(GameData.getScore(GameData.SCORE_LEVEL)<8));
+			makeGrey(libraryB,(GameData.getScore(GameData.SCORE_LEVEL)<10));
+			makeGrey(blackB,(GameData.getScore(GameData.SCORE_LEVEL)<12));
+			makeGrey(forgeB,!AchieveData.hasAchieved(AchieveData.ACHIEVE_FORGE));
 			
-			makeGrey(shopB,(Facade.gameM.playerM.level<3));
-			makeGrey(premiumB,(Facade.gameM.playerM.level<3));
-			makeGrey(hallB,(Facade.gameM.playerM.level<5));
-			makeGrey(duelB,(Facade.gameM.playerM.level<8));
-			makeGrey(libraryB,(Facade.gameM.playerM.level<10));
-			makeGrey(blackB,(Facade.gameM.playerM.level<12));
-			makeGrey(forgeB,!GameData.hasAchieved(GameData.ACHIEVE_FORGE));
-			
-			if (GameData.hasAchieved(GameData.ACHIEVE_EPIC)){
+			if (AchieveData.hasAchieved(AchieveData.ACHIEVE_EPIC)){
 				addChild(epicB);
 			}else{
 				if (contains(epicB)){
@@ -247,7 +246,7 @@
 				}
 			}
 			
-			if (Facade.gameM.playerM.level>2){
+			if (GameData.getScore(GameData.SCORE_LEVEL)>2){
 				addChild(stashB);
 			}else{
 				if (contains(stashB)){

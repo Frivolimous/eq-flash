@@ -57,13 +57,7 @@
 					if (GameData._Save.data.pause[GameData.PAUSE_LEVEL]){
 						Facade.gameUI.setPause(true);
 					}
-					if (e.values.newLevel>=60){
-						GameData.maxLevel(e.values.player);
-					}
 					break;
-					
-				/*========================= FOR ACHIEVEMENTS =======================*/
-				
 			}
 		}
 	}

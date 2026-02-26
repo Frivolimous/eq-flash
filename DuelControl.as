@@ -158,7 +158,7 @@
 				
 				Facade.saveC.temp[1]=Facade.saveC.challengeArray(Facade.saveC.temp[0][14][gameM.challengeList],gameM.challengeList);
 				Facade.gameM.enemyM.saveSlot+=1;
-				if (Facade.saveC.temp[0][14][0]>10) GameData.achieve(GameData.ACHIEVE_POWERFUL);
+				GameData.setHigherScore(GameData.SCORE_DUEL,Facade.saveC.temp[0][14][0]*5);
 				
 				return _reward;
 			}else{

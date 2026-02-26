@@ -1,15 +1,8 @@
 ﻿package ui.windows {
-	import utils.KongregateAPI;
 	import utils.GameData;
 	import flash.display.MovieClip;
 	
 	public class TokenWindow extends MovieClip{
-			//kred50b	50 PT
-			//kred90b	100 PT
-			//kred160b	200 PT
-			//kred350b	500 PT
-			//kred600b	1000 PT
-			//kred1000b	2000 PT
 		var update:Function;
 		
 		public function TokenWindow(_update:Function=null) {
@@ -40,7 +33,7 @@
 		var amount:int=0;
 		function buyTokens(_amount:int){
 			amount=_amount;
-			KongregateAPI.buyTokens(finishBuyTokens,_amount);
+			new ConfirmWindow("Finish purchasing this item using 0 Power Tokens?",50,50,finishBuyTokens,0);
 		}
 		
 		function finishBuyTokens(){

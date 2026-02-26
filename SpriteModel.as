@@ -23,6 +23,7 @@
 	import system.effects.EffectBuff;
 	import items.ItemUnarmed;
 	import utils.GameData;
+	import utils.AchieveData;
 	
 	public class SpriteModel{
 		
@@ -289,14 +290,11 @@
 			if (skillBlock.checkTalent(SkillData.NOBLE) && (level%12)==0) skillBlock.addSkillPoint();
 			new FlyingText(this,FlyingText.LEVEL_UP,0x0000ff);
 			setMaxXP();
-			
+
 			if (saveSlot>=0 && saveSlot<5){
-				switch(level){
-					case 3: new AchievementDisplay(105); break;
-					case 5: new AchievementDisplay(101); break;
-					case 8: new AchievementDisplay(102); break;
-					case 10: new AchievementDisplay(103); break;
-					case 12: new AchievementDisplay(104); break;
+				GameData.setHigherScore(GameData.SCORE_LEVEL,level);
+				if (level>=60){
+					(skillBlock.getTalentIndex()+AchieveData.ACHIEVE_ORDINARY_COSMO);
 				}
 			}
 		}
@@ -333,11 +331,8 @@
 			mainClass=-1;
 			var class2:int=-1;
 			
-			var _points:Array=new Array(9);
-			for (var i:int=0;i<9;i+=1){
-				_points[i]=skillBlock.pointsInTree(i);
-			}
-			for (i=0;i<9;i+=1){
+			var _points:Array=SkillData.getTreeAssignment(skillBlock.skillA);
+			for (var i=0;i<SkillData.NUM_TREES;i+=1){
 				if (_points[i]>=1){
 					if ((mainClass==-1)||(_points[i]>_points[mainClass])){
 						if ((class2==-1)||(_points[mainClass]>_points[class2])){

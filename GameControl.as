@@ -46,7 +46,6 @@
 			GameData.addScore(GameData.SCORE_DEATHS,1);
 			gameM.deathStreak+=1;
 			gameM.playerM.deathsSinceAscension+=1;
-			GameData.achieve(GameData.ACHIEVE_UNGIFTED);
 			if (gameM.eCount>gameM.eTotal){
 				//nextLevel();
 			}else{
@@ -234,12 +233,6 @@
 			if (gameM.area>GameData.getScore(GameData.SCORE_FURTHEST)){
 				GameData.setScore(GameData.SCORE_FURTHEST,gameM.area);
 			}
-			if (gameM.area>50) GameData.achieve(GameData.ACHIEVE_NOBLE);
-			// if (gameM.area>100) GameData.achieve(GameData.ACHIEVE_TURBO);
-			if (gameM.area>200) GameData.achieve(GameData.ACHIEVE_ACOLYTE);
-			if (gameM.area>300) {GameData.achieve(GameData.ACHIEVE_PALADIN); GameData.achieve(GameData.ACHIEVE_FORGE);}
-			if (gameM.area>400) GameData.achieve(GameData.ACHIEVE_EPIC);
-			if (gameM.area>1000) GameData.achieve(GameData.ACHIEVE_LEVEL_70);
 			
 			//gameUI.background.clear();
 			GameData.addRefresh();

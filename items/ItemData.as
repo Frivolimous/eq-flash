@@ -5,6 +5,7 @@
 	import system.actions.*;
 	import items.ItemModel;
 	import utils.GameData;
+	import utils.AchieveData;
 	import ui.effects.PopEffect;
 
 	
@@ -247,7 +248,8 @@
 					case 115: return new ItemEquipment(_index,"Crusader Helmet",_level,HELMET,HEAVY,750,null,[[SpriteModel.STAT,StatModel.HEALTH,120+62*_level],[SpriteModel.STAT,StatModel.RCRIT,.35],[SpriteModel.STAT,StatModel.INITIATIVE,-40],[SpriteModel.STAT,StatModel.DODGE,-0.2],[SpriteModel.STAT,StatModel.HEALMULT,0.05+0.006*_level],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.INITIAL_BLESS,_level)]],[EffectData.SUPER_PREMIUM]);
 					case 116: return new ItemEquipment(_index,"Demon Sickles",_level,WEAPON,DOUBLE,750,ActionData.makeWeapon(8+0.5*_level,new <EffectBase>[EffectData.makeEffect(EffectData.DELAYED_DAMAGE,_level)],null,10+_level*2,0,0,[EffectData.PIERCE]),null,[EffectData.SUPER_PREMIUM]);
 					case 117: return new ItemEquipment(_index,"Demon Horns",_level,HELMET,LIGHT,750,null,[[SpriteModel.STAT,StatModel.HEALTH,70+40*_level],[SpriteModel.STAT,StatModel.RCRIT,0.15],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.CURSE_REFLECT,_level)]],[EffectData.SUPER_PREMIUM]);
-					case 118: return new ItemModel(_index,"Participation Award",_level,USEABLE,CHARM,BUFF,3500,null,[[SpriteModel.STAT,StatModel.HEALTH,4+4*_level],[SpriteModel.STAT,StatModel.ILOOT,0.06+0.006*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.AWARD,_level)]],-1,[EffectData.RELIC]);
+					
+					case 118: return new ItemModel(_index,"Achievement Award",_level,TRADE,TRADE,"",-1,null,null,-1,[EffectData.PREMIUM]);
 					case 119: return new ItemModel(_index,"Trophy",_level,USEABLE,CHARM,BUFF,3500,null,[[SpriteModel.STAT,StatModel.STRENGTH,2+2*_level],[SpriteModel.STAT,StatModel.MPOWER,2+2*_level],[SpriteModel.STAT,StatModel.INITIATIVE,2+2*_level],[SpriteModel.STAT,StatModel.THROWEFF,0.02+0.02*_level],[SpriteModel.STAT,StatModel.HEALTH,4+4*_level],[SpriteModel.STAT,StatModel.ILOOT,0.06+0.006*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.AWARD,_level)]],-1,[EffectData.RELIC]);
 					
 					case 120: return new ItemEquipment(_index,"Big Pencil",_level,WEAPON,TWO_HANDED,750,ActionData.makeWeapon(35+2.3*_level,null,null,0,0,0,[EffectData.BONUS_STRENGTH]),[[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.MAGIC_STRIKE,_level)]],[EffectData.SUPER_PREMIUM]);
@@ -341,6 +343,13 @@
 					default: m.name="Rank #"+String(_index)+" "+m.name; break;
 				}
 				m.enchantIndex=_index;
+				return m;
+			}
+			
+			if (m.index === 118) {
+				m.name = m.name+" #"+_index;
+				m.enchantIndex=_index;
+				m.cost=-1;
 				return m;
 			}
 			
@@ -613,13 +622,13 @@
 			
 			//NO ESSENCES PAST THIS POINT
 			if (_item0.index==_item1.index){
-				if (!GameData.hasAchieved(GameData.ACHIEVE_EPIC)) return null;
+				if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_EPIC)) return null;
 				if (_item0.level==15 && _item1.level==15 && (_item0.enchantIndex==-1 || _item1.enchantIndex==-1 || _item0.enchantIndex==_item1.enchantIndex) && (_item0.suffixIndex==-1 || _item1.suffixIndex==-1 || _item0.suffixIndex==_item1.suffixIndex)){
 					return ItemModel.importArray([_item0.index,16,_item0.maxCharges(),[_item0.enchantIndex==-1?_item1.enchantIndex:_item0.enchantIndex,_item0.suffixIndex==-1?_item1.suffixIndex:_item0.suffixIndex]]);
 				}
 				return null;
 			//if (areSame(_item0,_item1) && _item0.level==15 && _item1.level==15){ //Identical -- Make Epic
-				/*if (!GameData.hasAchieved(GameData.ACHIEVE_EPIC)) return null;
+				/*if (!AchieveData.hasAchieved(AchieveData.ACHIEVE_EPIC)) return null;
 				if (_item0.suffixIndex==-1){
 					return _item1.clone(16);
 				}else{
@@ -1128,9 +1137,8 @@
 						}break;
 					case 118: //Participation Award
 					case 119: //Trophy
-					
 					case 120: //Big Pencil
-					
+						break;
 					case 121: //Tramp Hair
 						if (_item1.index==122){
 							return enchantItem(_item0.clone(-1,false,true),0);
@@ -2046,7 +2054,7 @@
 					case 64: case 65: case 66: case 67: case 68: case 69: case 70: case 71:
 					case 88: case 89: case 90: case 91:
 					case 101: case 102: case 103: case 104: case 105: case 110:
-					case 112: case 113: case 115: case 117: case 118: case 119:
+					case 112: case 113: case 115: case 117: case 119:
 					case 121: case 122: case 123: case 124: 
 					case 130: case 133:
 					case 142: case 144:
@@ -2151,7 +2159,7 @@
 					case 84:
 					case 88: case 89: case 90: case 91:
 					case 101: case 102: case 103: case 104: case 105: case 108: case 109: case 110:
-					case 112: case 113: case 115: case 117: case 118: case 119:
+					case 112: case 113: case 115: case 117: case 119:
 					case 121: case 122: case 123: case 124:
 					case 129: case 130: case 131: case 132: case 133:
 					case 137: case 138: case 139: case 140: case 141: case 142: case 143: case 144:
@@ -2429,7 +2437,7 @@
 					case 115: applySuffix(_index,"of Initiation",m,[[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.INITIAL_BLESS,10)]]); break; //Crusader's Helmet
 					case 116: applySuffix(_index,"Delayed",m,[[SpriteModel.ATTACK,ActionBase.DAMAGE,-0.4],[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.DELAYED_DAMAGE,0)]]); break; //Demon Sickles
 					case 117: applySuffix(_index,"of Overturning",m,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.CURSE_REFLECT,10)]]); break; //Demon Horns
-					case 118: applySuffix(_index,"of Experience",m,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.AWARD,0)],[SpriteModel.STAT,StatModel.ILOOT,0.1]]); break; //Participation Award
+					// case 118: applySuffix(_index,"of Experience",m,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.AWARD,0)],[SpriteModel.STAT,StatModel.ILOOT,0.1]]); break; //Participation Award
 					case 119: applySuffix(_index,"of Superior Experience",m,[[SpriteModel.STAT,StatModel.HEALTH,60],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.AWARD,0)],[SpriteModel.STAT,StatModel.ILOOT,0.1]]); break; //Trophy
 					
 					//case 120: applySuffix(_index,"",m,[]); break; //Big Pencil

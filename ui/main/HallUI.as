@@ -4,6 +4,7 @@
 	import ui.assets.FadeTransition;
 	import flash.events.Event;
 	import utils.GameData;
+	import utils.AchieveData;
 	
 	public class HallUI extends BaseUI{
 		var achieveA:Array=new Array(10);
@@ -30,7 +31,7 @@
 		override public function openWindow(){
 			soundB.toggled=Facade.soundC.mute;
 			for (var i:int=0;i<10;i+=1){
-				if (GameData.hasAchieved(i)){
+				if (AchieveData.hasAchieved(i)){
 					achieveA[i].disabled=false;
 					achieveA[i].setDesc(StringData.achieveName(i)+StringData.locked(1,false));
 				}else{

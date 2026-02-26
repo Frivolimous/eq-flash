@@ -9,6 +9,7 @@
 	import ui.assets.*;
 	import flash.text.TextField;
 	import utils.GameData;
+	import utils.AchieveData;
 	import ui.StatusUI;
 	import skills.SkillTreeWindow;
 	import hardcore.HardcoreHomeUI;
@@ -128,13 +129,12 @@
 			}
 		}
 		
-		
 		public function finishSave(){
 			if (Facade.DEBUG){
 				if (inputName.text.substr(0,4)=="TEST"){
 					gameM.playerM.skillBlock.skillPoints=60;
-					gameM.playerM.level=60;
-					//gameM.playerM.xp=gameM.playerM.maxXP-1;
+					gameM.playerM.level=59;
+					gameM.playerM.levelup();
 					gameM.souls=100000;
 					gameM.playerM.addItem(ItemData.spawnItem(0,31,-1));
 					gameM.playerM.addItem(ItemData.spawnItem(15,26));
@@ -161,7 +161,7 @@
 				}else if (inputName.text=="EXHIBIT"){
 					//Facade.menuUI.addChild(Facade.menuUI.exhibitionB);
 				}else if (inputName.text=="ACHIEVE"){
-					GameData.achieve(313);
+					AchieveData.achieve(313);
 				}else if (inputName.text=="MAGIC"){
 					for (var i:int=14;i<26;i+=1){
 						gameM.playerM.addItem(ItemData.spawnItem(0,i));
@@ -184,18 +184,15 @@
 					gameM.playerM.level=50;
 					gameM.playerM.skillBlock.skillPoints=50;
 					for (i=0;i<20;i+=1){
-						gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,2),i));//ItemData.randomItem(ItemData.WEAPON,0),i));
+						gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,2),i));
 					}
 				}else if (inputName.text=="HELMET"){
 					gameM.playerM.skillBlock.skillPoints=50;
 					gameM.playerM.level=50;
 					for (i=15;i<30;i+=1){
-						gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,10),i));//ItemData.randomItem(ItemData.HELMET,0),i));
+						gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,10),i));
 					}
 				}else if (inputName.text=="CHARM1"){
-					/*for (i=15;i<30;i+=1){
-						gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),i));//ItemData.randomItem(ItemData.HELMET,0),i));
-					}*/
 					for (i=0;i<=15;i+=1){
 						var j:int=0;
 						switch(i){
@@ -208,9 +205,6 @@
 						gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,j),i));
 					}
 				}else if (inputName.text=="CHARM2"){
-					/*for (i=15;i<30;i+=1){
-						gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),i));//ItemData.randomItem(ItemData.HELMET,0),i));
-					}*/
 					for (i=16;i<30;i+=1){
 						j=0;
 						switch(i){
@@ -309,6 +303,8 @@
 			
 			navOut();
 			GameData.addScore(GameData.SCORE_CHARS,1);
+			Facade.menuUI.shopUI.restock();
+
 			if (saveSlot==-1){
 				new FadeTransition(this,Facade.menuUI);
 			}else{
@@ -379,7 +375,7 @@
 			
 			talents[0].setDesc(talents[0].label.text+StringData.locked(0,false),StringData.talentDesc(0));
 			for (var i:int=1;i<10;i+=1){
-				talents[i].disabled=!GameData.hasAchieved(i-1);
+				talents[i].disabled=!AchieveData.hasAchieved(i-1);
 				if (talents[i].disabled){
 					talents[i].setDesc(talents[i].label.text+StringData.locked(0,true),StringData.talentDesc(i));
 				}else{

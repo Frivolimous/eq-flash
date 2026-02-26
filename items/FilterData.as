@@ -337,9 +337,8 @@
 						if (_prefix>-1) _matrix=[19.65,19.94,-28.59,0,-1680,-7.76,10.88,7.88,0,-1680,20.25,-23.13,13.88,0,-1680,0,0,0,1,0]; break;
 					case 118: //Participation Award
 					case 119: //Trophy
-					
 					case 120: //Big Pencil
-					
+						break;
 					case 121: //Tramp Hair
 						if (_prefix>-1) _matrix=[2.14,0.51,-1.65,0,-3.33,-0.67,1.29,0.37,0,-3.33,0.88,-1.88,1.99,0,-3.33,0,0,0,1,0]; break;
 					case 122: //Princess

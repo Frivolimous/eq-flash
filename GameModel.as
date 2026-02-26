@@ -3,6 +3,17 @@
 	import items.ItemModel;
 	import items.ItemData;
 	import utils.GameData;
+	import ui.StatusUI;
+	import items.ItemView;
+	import ui.main.DuelUI;
+	import ui.main.ShopUI;
+	import ui.main.ForgeUI;
+	import ui.windows.ConfirmWindow;
+	import hardcore.HardcoreHomeUI;
+	import hardcore.HardcoreDuelUI;
+	import ui.main.ArtifactUI;
+	import ui.main.LoadCharacterUI;
+	import ui.main.NewCharacterUI;
 	
 	public class GameModel{
 		
@@ -205,10 +216,76 @@
 			
 			return m;
 		}
+
+		//finds the player wherever he is and adds an item, or if not found adds to overflow
+		public function addItemFallbackOverflow(_item:ItemModel){
+			//fix when in duel (directly doesn't work it adds to duel character)
+			//fix when actively dueling (i get  ref error)
+			//fix when in shop (add to shop inventory)
+			if ((Facade.gameC is EpicGameControl) || (Facade.gameC is GameControl)){
+				trace("added through game");
+				Facade.gameUI.addItem(new ItemView(_item));
+				return;
+			}
+
+			if (Facade.gameC is DuelControl) {
+				trace("added to overflow cus duel");
+				addOverflowItem(_item, true);
+				return;
+			}
+
+			if (Facade.currentUI is DuelUI) {
+				trace("added to overflow cus duel");
+				addOverflowItem(_item, true);
+				return;
+			}
+
+ 			if ((Facade.currentUI is HardcoreHomeUI) || (Facade.currentUI is HardcoreDuelUI) || (Facade.currentUI is ArtifactUI) || (Facade.currentUI is LoadCharacterUI) || (Facade.currentUI is NewCharacterUI)){
+				trace("added to overflow cus not perma char");
+				addOverflowItem(_item, true);
+				return;
+			}
+
+			if (Facade.currentUI is ShopUI) {
+				trace("added through shop");
+				if (Facade.currentUI.inventory.addItem(new ItemView(_item))){
+					return;
+				}
+			}
+
+			if (Facade.currentUI is ForgeUI) {
+				trace("added through forge");
+				if (Facade.currentUI.inventoryUI.addItem(new ItemView(_item))){
+					return;
+				}
+			}
+
+			if (Facade.currentUI is StatusUI) {
+				if (!Facade.currentUI.inventoryUI.noSell) {
+					trace("added through status");
+					if (Facade.currentUI.inventoryUI.addItem(new ItemView(_item))){
+						return;
+					}
+				}
+			} else {
+				if (playerM.addItem(_item)) {
+					trace("added to player directly");
+
+					return;
+				}
+			}
+
+			trace("added to overflow");
+			addOverflowItem(_item, true);
+		}
 		
-		public function addOverflowItem(_item:ItemModel){
+		public function addOverflowItem(_item:ItemModel, andConfirm:Boolean=false){
 			condenseOverflow();
 			overflow.unshift(_item.exportArray());
+
+			if (andConfirm){
+				new ConfirmWindow("Item added to overflow: "+_item.name);
+			}
 		}
 		
 		public function condenseOverflow(){
