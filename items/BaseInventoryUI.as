@@ -6,6 +6,7 @@
 	import ui.windows.ConfirmWindow;
 	import system.effects.EffectData;
 	import utils.GameData;
+	import utils.AchieveData;
 	
 	public class BaseInventoryUI extends Sprite{
 		var IWIDTH:Number=32.5;

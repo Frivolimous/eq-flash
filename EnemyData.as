@@ -245,7 +245,7 @@
 							switch(_aType){
 								case 0:
 									attackType(ActionBase.MAGICAL);
-									equipItem(125);
+									equipItem(14);
 									equipItem(19);
 									break;
 								case 1:

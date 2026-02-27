@@ -90,12 +90,14 @@
 		
 		public function keyDown(e:KeyboardEvent){
 			if (e.keyCode==Keyboard.C){
-				if (e.ctrlKey && e.shiftKey){
-					Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT, Facade.saveC.exportSave(Facade.gameM.playerM));
+				if (e.ctrlKey){
+					var _save = Facade.saveC.exportSave(Facade.gameM.playerM);
+					Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT, _save);
+					Facade.addLine(_save);
 					//Facade.gameM.playerM.stash[3]=[Facade.saveC.saveItem(ItemData.spawnItem(15,34,6)),Facade.saveC.saveItem(ItemData.spawnItem(15,36,6))];
 				}
 			}else if (e.keyCode==Keyboard.P){
-				if (e.ctrlKey && e.shiftKey && Facade.DEBUG){
+				if (e.ctrlKey){
 					Facade.gameM.playerM.xp+=5;
 					
 					/*if (Facade.currentUI==Facade.menuUI){

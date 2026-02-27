@@ -3,6 +3,7 @@
 	import flash.events.Event;
 	import flash.display.Sprite;
 	import items.ItemData;
+	import items.ItemModel;
 	import items.ItemView;
 	import flash.geom.Matrix;
 	import ui.GameUI;
@@ -83,20 +84,23 @@
 				_item=new ItemView(ItemData.findItem(gameM.area,1));
 			}
 			gameUI.addItem(_item);*/
+			var _model:ItemModel;
 			if (gameM.areaType==3){ //Shadow
-				gameUI.addItem(new ItemView(ItemData.enchantItem(ItemData.spawnItem(15,135),0)));
+				_model=ItemData.enchantItem(ItemData.spawnItem(15,135),0); //scouring
 			}else if ((gameM.area-3)%20==0){
-				gameUI.addItem(new ItemView(ItemData.enchantItem(ItemData.spawnItem(15,135),1)));
+				_model=ItemData.enchantItem(ItemData.spawnItem(15,135),1); //chaos
 			}else if ((gameM.area-13)%20==0){
-				gameUI.addItem(new ItemView(ItemData.spawnItem(15,136)));
+				_model=ItemData.spawnItem(15,136); //epic e
 			}else if (gameM.area%3==1){
-				gameUI.addItem(new ItemView(ItemData.spawnItem(15,135)));
+				_model=ItemData.spawnItem(15,135); //standard e
 			}else{
-				gameUI.addItem(new ItemView(ItemData.suffixItem(ItemData.spawnItem(15,135),Math.floor(Math.random()*30))));
+				_model=ItemData.spawnPremium(0,true);
+				_model=ItemData.suffixItem(ItemData.spawnItem(15,135),_model.index); //random mythic suffx
 			}
+			gameUI.addItem(new ItemView(_model));
 			gameUI.progress+=1;
 		}
-			
+		
 		override function getMobReward(){
 			/*if (Math.random()<gameM.playerM.stats.getValue(StatModel.ILOOT)){
 				var _item:ItemView=new ItemView(ItemData.findItem(gameM.area,gameM.playerM.stats.getValue(StatModel.ILOOT)));

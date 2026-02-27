@@ -112,7 +112,7 @@
 			} else if (_action.source!=null){
 				if (_action.source.primary==ItemData.WEAPON){
 					action(ATTACK,_extra);
-				}else if ((_action.source.primary==ItemData.POTION)||(_action.source.primary==ItemData.PROJECTILE)){
+				}else if ((_action.source.primary==ItemData.POTION)||(_action.source.primary==ItemData.PROJECTILE)||(_action.source.primary==ItemData.GRENADE)){
 					action(THROW,_extra);
 				}else{
 					action(CAST,_extra);

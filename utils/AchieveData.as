@@ -3,6 +3,7 @@ package utils {
   import ui.assets.AchievementDisplay;
   import sprites.BallHead;
   import skills.SkillData;
+  import items.ItemData;
 
 	public class AchieveData {
     public static const TUTORIAL_COMPLETE:int=0,
@@ -11,7 +12,7 @@ package utils {
           DEATHS_1:int=3, //talent ungifted
           DEATHS_100:int=4,
           FIND_TREASURE:int=5, //talent clever
-          BUY_ITEM:int=6,//
+          BUY_ITEM:int=6,
           READ_BOOK:int=7, //talent studious
           MAX_SKILL:int=8, //talent enlightened
           SKILL_5_TREES:int=9, //talent wild
@@ -37,8 +38,8 @@ package utils {
           ASCEND_25:int=29,
           ASCEND_50:int=30, //cosmetic dark halo
           BUY_MYTHIC:int=31,//talent holy
-          SALVAGE_MYTHIC_1:int=32,//
-          UPGRADE_ITEM_1:int=33,//
+          SALVAGE_MYTHIC_1:int=32,
+          UPGRADE_ITEM_1:int=33,
           CRAFT_ITEM_1:int=34,// class paladin
           ORDINARY_LEVEL_60:int=35,
           DEFT_LEVEL_60:int=36,
@@ -66,32 +67,32 @@ package utils {
           COMPLETE_ALL:int=58,//XX
           NUM_ACHIEVEMENTS:int=59;
 
-    public static const TALENT_ACHIEVEMENTS:Array=[1,5,3,7,8,20,31,9,11,100];
+    public static const TALENT_ACHIEVEMENTS:Array=[1,5,3,7,8,20,31,9,11,12];
 
     public static const ACHIEVE_DEFS:Array=[
       {displayText: "Tutorial Complete!", awardDesc: "You made it through the entire tutorial!"},
-      {displayText: "Talent Unlock: Deft", awardDesc: "You dealt 100 damage in a single blow!\n\nThis achievement unlocked the Deft talent."}, //talent deft
+      {displayText: "Talent Unlock: Deft", awardDesc: "You dealt 100 damage in a single blow!\n\nThis achievement unlocked the Deft talent."}, //
       {displayText: "1,000 Damage Dealt!", awardDesc: "You dealt a massive 1,000 damage! You may be the strongest you can ever get now."},
-      {displayText: "Talent Unlock: ungifted", awardDesc: "You died. Congratulations..?\n\nThis achievement unlocked the Ungifted Talent."}, //talent ungifted
+      {displayText: "Talent Unlock: ungifted", awardDesc: "You died. Congratulations..?\n\nThis achievement unlocked the Ungifted Talent."},
       {displayText: "Secret Achievement: DEATH", awardDesc: "You died 100 times. This is a secret achievement, because I don't actually want people to do this on purpose."},
-      {displayText: "Talent Unlock: Clever", awardDesc: "OMG you found the secret treasure! Was it hard to find?\n\nThis achievement unlocked the Clever Talent."}, //talent clever
+      {displayText: "Talent Unlock: Clever", awardDesc: "OMG you found the secret treasure! Was it hard to find?\n\nThis achievement unlocked the Clever Talent."},
       {displayText: "Purchase any item", awardDesc: "You bought something from the shop! I think that deserves an award!"},//XX
-      {displayText: "Talent Unlock: Studious", awardDesc: "Wow! You actually read one of my books! <3 err... i mean... amazing reading!\n\nThis achievement unlocked the Studious Talent."}, //talent studious
-      {displayText: "Talent Unlock: Enlightened", awardDesc: "You leveled up a skill to the max!\n\nThis achievement unlocked the Enlightened Talent."}, //talent enlightened
-      {displayText: "Talent Unlock: Wild", awardDesc: "You placed 1 skill point in 5 different trees. Make up your mind!\n\nThis achievement unlocked the Wild Talent."}, //talent wild
+      {displayText: "Talent Unlock: Studious", awardDesc: "Wow! You actually read one of my books! <3 err... i mean... amazing reading!\n\nThis achievement unlocked the Studious Talent."},
+      {displayText: "Talent Unlock: Enlightened", awardDesc: "You leveled up a skill to the max!\n\nThis achievement unlocked the Enlightened Talent."},
+      {displayText: "Talent Unlock: Wild", awardDesc: "You placed 1 skill point in 5 different trees. Make up your mind!\n\nThis achievement unlocked the Wild Talent."},
       {displayText: "Zone Complete: 25", awardDesc: "Woohoo! You made it past the second Shadow Minion! Keep going, more prizes await!"},
-      {displayText: "Talent Unlocked: Noble", awardDesc: "Amazing, you made it to Zone 50! That's halfway to ascension!\n\nThis achievement unlocked the Noble Talent."}, //talent noble
-      {displayText: "Feature Unlock: Ascension", awardDesc: "This achievement unlocked Ascension! Go to the Temple to ascend and unlock powerful artifacts!"}, //prestige unlocked
-      {displayText: "Class Unlock: Acolyte", awardDesc: "Wow! You made it to Zone 200! that's like... super far!\n\nThis achievement unlocked the Acolyte Skill Tree."}, //class acolyte
-      {displayText: "Building Unlocked: Mystic Forge", awardDesc: "You made it to Zone 300!\n\nThis achievement unlocked the Mystic Forge in town."}, //feature forge
-      {displayText: "Building Unlocked: Epic Zone!", awardDesc: "You made it all the way to Zone 400! I can't believe you made it this far... now the REAL journey begins!\n\nThis achievement unlocked the Epic Zone in town."}, //feature epic
+      {displayText: "Talent Unlocked: Noble", awardDesc: "Amazing, you made it to Zone 50! That's halfway to ascension!\n\nThis achievement unlocked the Noble Talent."},
+      {displayText: "Feature Unlock: Ascension", awardDesc: "This achievement unlocked Ascension! Go to the Temple to ascend and unlock powerful artifacts!"},
+      {displayText: "Class Unlock: Acolyte", awardDesc: "Wow! You made it to Zone 200! that's like... super far!\n\nThis achievement unlocked the Acolyte Skill Tree."},
+      {displayText: "Building Unlocked: Mystic Forge", awardDesc: "You made it to Zone 300!\n\nThis achievement unlocked the Mystic Forge in town."},
+      {displayText: "Building Unlocked: Epic Zone!", awardDesc: "You made it all the way to Zone 400! I can't believe you made it this far... now the REAL journey begins!\n\nThis achievement unlocked the Epic Zone in town."},
       {displayText: "Zone Completed: 600", awardDesc: "If you can believe it, the game was originally made expecting Level 100 to be the farthest possible. You have gone 6x into the impossible!"},
       {displayText: "Zone Completed: 800", awardDesc: "Nothing rhymes with 800! Except 'Bait Hunt Dread'. Ok whatever, you do better!"},
-      {displayText: "Level 70 Unlocked!", awardDesc: "Wow, you have officially made it farther than I ever thought possible! As a reward... you can go further!\n\nThis achievement unlocked Level 70."}, //feature lvl70
+      {displayText: "Level 70 Unlocked!", awardDesc: "Wow, you have officially made it farther than I ever thought possible! As a reward... you can go further!\n\nThis achievement unlocked Level 70."},
       {displayText: "Zone Completed: 2000", awardDesc: "OK that's it! you made it. Stop playing now, there's nothing else to do. Like literally... that's it."},
-      {displayText: "Talent Unlock: Powerful", awardDesc: "You have defeated all of the Arena Opponents! But wait... now they come back STRONGER!\n\nThis achievement unlocked the Powerful Talent."}, //talent powerful
-      {displayText: "Class Unlock: Rogue", awardDesc: "You have defeated the second set of opponents! But wait, there's more?!?\n\nThis achievement unlocked the Rogue Skill Tree"}, //class rogue
-      {displayText: "Arena Level: 250", awardDesc: "You have defeated the level 250 opponents! Go you!"}, //class barbarian?
+      {displayText: "Talent Unlock: Powerful", awardDesc: "You have defeated all of the Arena Opponents! But wait... now they come back STRONGER!\n\nThis achievement unlocked the Powerful Talent."},
+      {displayText: "Class Unlock: Rogue", awardDesc: "You have defeated the second set of opponents! But wait, there's more?!?\n\nThis achievement unlocked the Rogue Skill Tree"},
+      {displayText: "Arena Level: 250", awardDesc: "You have defeated the level 250 opponents! Go you!"},
       {displayText: "Arena Level: 500", awardDesc: "So you probably know this by now, but the arena is a great place to make gold. You have defeated level 500, which is like... 100 guys in one ascension!"},
       {displayText: "Arena Level: 800", awardDesc: "I'm starting to run out of ways to say 'Good Job!' wait - - i never tried this one: GOOD JOB!"},
       {displayText: "Arena Level: 1000", awardDesc: "You have defeated a Level 1,000 Yermiyah. That's the 20th incarnation! That means you have killed me at least 20 times."},
@@ -99,7 +100,7 @@ package utils {
       {displayText: "You have ascended", awardDesc: "Rise from your grave! You have ascended and returned... with more power than ever before!"},
       {displayText: "Ascensions: 10", awardDesc: "You have ascended 10 times and all you got was this lousy award."},
       {displayText: "Ascensions: 25", awardDesc: "You have ascended a grand total of 25 times! Or more, if you kept this award around and are looking at it later. Why would you do that? Sell it! Get your Power Tokens already!"},
-      {displayText: "Cosmetic Unlocked: Dark Halo", awardDesc: "You have ascended 50 times and earned yourself the DARK HALO. Because you ascended a dark amount of times. It makes sense, just don't think about it too much."}, //cosmetic dark halo
+      {displayText: "Cosmetic Unlocked: Dark Halo", awardDesc: "You have ascended 50 times and earned yourself the DARK HALO. Because you ascended a dark amount of times. It makes sense, just don't think about it too much."},
       {displayText: "Talent Unlocked: Holy", awardDesc: "You have purchased an amazing Mythic item from the golden temple, and proved your devotion.\n\nThis achievement unlocked the Holy Talent."},//XX talent holy
       {displayText: "Mythic Item Sold", awardDesc: "You sold a mythic item! That probably mean you need Power Token for something. Here, sell this award also - I think you need the money."},//XX
       {displayText: "Item Upgraded", awardDesc: "Congratulations, you now know how to upgrade an item! You'll be doing this a lot, I guarantee it."},//XX
@@ -155,6 +156,8 @@ package utils {
         checkUnlockCosmetics(i);
 				new AchievementDisplay(i);
 
+				var _item = ItemData.enchantItem(ItemData.spawnItem(1, 118), i);
+				Facade.gameM.addItemFallbackOverflow(_item);
 				GameData.saveThis(GameData.ACHIEVEMENTS);
 			}
 		}

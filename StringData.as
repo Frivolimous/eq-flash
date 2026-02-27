@@ -984,8 +984,8 @@
 		public static function getAchievementItemDesc(index:int, cost:int = 1):String{
 			var m:String= AchieveData.ACHIEVE_DEFS[index].awardDesc;
 
+			m+="\n\n<font color="+TEAL+">*This award does nothing. Literally nothing. you can sell it for Power Tokens or keep it around forever for no reason.</font>";
 			m+="\n\n<p align='right'><font color="+YELLOW+">"+cost+" PT</font></p>";
-
 			return m;
 		}
 		

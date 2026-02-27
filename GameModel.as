@@ -248,23 +248,23 @@
 			}
 
 			if (Facade.currentUI is ShopUI) {
-				trace("added through shop");
 				if (Facade.currentUI.inventory.addItem(new ItemView(_item))){
+					trace("added through shop");
 					return;
 				}
 			}
 
 			if (Facade.currentUI is ForgeUI) {
-				trace("added through forge");
 				if (Facade.currentUI.inventoryUI.addItem(new ItemView(_item))){
+					trace("added through forge");
 					return;
 				}
 			}
 
 			if (Facade.currentUI is StatusUI) {
 				if (!Facade.currentUI.inventoryUI.noSell) {
-					trace("added through status");
 					if (Facade.currentUI.inventoryUI.addItem(new ItemView(_item))){
+						trace("added through status");
 						return;
 					}
 				}

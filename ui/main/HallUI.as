@@ -49,7 +49,7 @@
 			soundB.toggled=Facade.soundC.mute;
 			for (var i:int=0;i<AchieveData.TALENT_ACHIEVEMENTS.length;i+=1){
 				achieveA[i].disabled=!AchieveData.hasAchieved(AchieveData.TALENT_ACHIEVEMENTS[i]);
-				achieveA[i].setDesc(AchieveData.ACHIEVE_DEFS[AchieveData.TALENT_ACHIEVEMENTS[i]].name+StringData.locked(1,achieveA[i].disabled));
+				achieveA[i].setDesc(StringData.locked(1,achieveA[i].disabled)); //add name back in here?
 			}
 			for (i=0;i<6;i+=1){
 				scores[i].text=String(GameData.getScore(i));
