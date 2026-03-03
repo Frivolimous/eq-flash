@@ -29,6 +29,7 @@
 	import limits.LimitData;
 	import limits.LimitView;
 	import utils.GameData;
+	import ui.assets.AchievementDisplay;
 	
 	public class MouseControl{
 		var gameM:GameModel;
@@ -116,6 +117,7 @@
 				var _item = ItemData.spawnItem(1, 118);
 				_item = ItemData.enchantItem(_item, 1);
 				Facade.gameM.addItemFallbackOverflow(_item);
+				new AchievementDisplay(313);
 			}
 		}
 		

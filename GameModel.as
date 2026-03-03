@@ -223,7 +223,7 @@
 			//fix when in duel (directly doesn't work it adds to duel character)
 			//fix when actively dueling (i get  ref error)
 			//fix when in shop (add to shop inventory)
-			if ((Facade.gameC is EpicGameControl) || (Facade.gameC is GameControl)){
+			if (Facade.gameC is GameControl && !(Facade.gameC is DuelControl)){
 				trace("added through game");
 				Facade.gameUI.addItem(new ItemView(_item));
 				return;

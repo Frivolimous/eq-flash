@@ -46,9 +46,7 @@
 					counter-=1;
 					x=0-width+counter*width/25;
 				}else{
-					numAchievements-=1;
-					removeEventListener(Event.ENTER_FRAME,update,false);
-					if (parent!=null) parent.removeChild(this);
+					finishRemove();
 				}
 			}
 		}
@@ -57,6 +55,12 @@
 			if (!removing){
 				removing=true;
 			}
+		}
+
+		public function finishRemove(){
+			numAchievements-=1;
+			removeEventListener(Event.ENTER_FRAME,update,false);
+			if (parent!=null) parent.removeChild(this);
 		}
 	}
 }

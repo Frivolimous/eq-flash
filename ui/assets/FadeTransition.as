@@ -62,7 +62,12 @@
 		
 		function purge(){
 			while (Facade.stage.numChildren>0){
-				Facade.stage.removeChildAt(0);
+				var child = Facade.stage.getChildAt(0);
+				if (child is AchievementDisplay) {
+					child.finishRemove();
+				} else {
+					Facade.stage.removeChildAt(0);
+				}
 			}
 		}
 	}
