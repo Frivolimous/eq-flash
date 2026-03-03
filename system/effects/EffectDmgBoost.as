@@ -21,7 +21,8 @@
 							RANDOMIZED:int=4,
 							DISTANCE:int=5,
 							HEALTH_PERCENT:int=6,
-							FLAT:int=7;
+							FLAT:int=7,
+							HEALTH_FULL:int=8;
 		
 		var boostType:int;
 		var boostAmount:Number;
@@ -79,6 +80,10 @@
 					break;
 				case HEALTH_PERCENT:
 					_dmgModel.addMult(_t.healthPercent()*boostAmount);
+				case HEALTH_FULL:
+					if (_t.healthPercent() == 1) {
+						_dmgModel.addMult(boostAmount);
+					}
 					break;
 				case FLAT:
 					_dmgModel.addMult(boostAmount);
@@ -93,6 +98,8 @@
 			}
 			if (boostType==HEALTH_PERCENT){
 				m="Deal up to <font color="+StringData.RED+"><b>+"+String(Math.round(boostAmount*100))+"%</b></font> damage when enemy is at full health.";
+			}else if (boostType==HEALTH_FULL){
+				m="Deal <font color="+StringData.RED+"><b>+"+String(Math.round(boostAmount*100))+"%</b></font> damage when enemy is at full health.";
 			}else{
 				m+=name;
 				if (boostType==HAS_CURSE){
@@ -117,6 +124,7 @@
 			switch(boostType){
 				case RANDOMIZED: n+="by up to this amount."; break;
 				case HEALTH_PERCENT: n+="based on target's current health."; break;
+				case HEALTH_FULL: n+="to targets at full health."; break;
 				case NUM_CURSE: n+="for every Debuff or Debuff Stack applied to your target."; break;//  Reduced effect for every stack beyond the first. (%increase*#buffs*25 / (#buffs+24)"; break;
 				case NUM_BUFF: n+="for every unique Buff applied to you."; break//  Reduced effect for every buff beyond the first. (%increase*#buffs*25 / (#buffs+24)"; break;
 				case HAS_CURSE: n+="if enemy is "+extra+"."; break;

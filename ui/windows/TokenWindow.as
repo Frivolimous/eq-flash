@@ -36,7 +36,7 @@
 			new ConfirmWindow("Finish purchasing this item using 0 Power Tokens?",50,50,finishBuyTokens,0);
 		}
 		
-		function finishBuyTokens(){
+		function finishBuyTokens(i:int){
 			GameData.kreds+=amount;
 			new ConfirmWindow("Congratulations!  You purchased "+String(amount)+" more Power Tokens, bringing your total up to "+String(Facade.gameM.kreds)+".",50,50,null,0,null,3);
 		}

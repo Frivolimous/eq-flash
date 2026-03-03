@@ -171,7 +171,7 @@
 				//Init Buffs
 				case INITIAL_BLESS: return new BuffStats(116,label,level,BuffBase.BUFF,3,[[SpriteModel.STAT,StatModel.DMGMULT,0.05+0.009*level],[SpriteModel.ATTACK,ActionBase.HITRATE,10+2*level]]);
 				case INITIAL_CURSE: return new BuffStats(116,label,level,BuffBase.CURSE,3,[[SpriteModel.STAT,StatModel.DMGMULT,-0.05-0.009*level],[SpriteModel.ATTACK,ActionBase.HITRATE,-10-2*level]]);
-				case MARKED: return new BuffStats(BuffView.SKILL_START+16,label,level,BuffBase.CURSE,3,[[SpriteModel.STAT,StatModel.DODGE,-0.05-0.01*level],[SpriteModel.STAT,StatModel.RPHYS,-0.05-0.02*level],[SpriteModel.STAT,StatModel.RCRIT,-0.05-0.02*level]]);
+				case MARKED: return new BuffStats(BuffView.SKILL_START+16,label,level,BuffBase.CURSE,2,[[SpriteModel.STAT,StatModel.DODGE,-0.05-0.01*level],[SpriteModel.STAT,StatModel.RPHYS,-0.05-0.02*level],[SpriteModel.STAT,StatModel.RCRIT,-0.05-0.02*level]]);
 				
 				case HIGH: return new BuffStats(124,label,level,BuffBase.BUFF,3,[[SpriteModel.STAT,StatModel.HREGEN,0.01+0.001*level],[SpriteModel.STAT,StatModel.MREGEN,0.01+0.001*level]]);
 				case BARRIER: return new BuffShield(123,label,level,-1,StatModel.MPOWER,1+1*level,20);

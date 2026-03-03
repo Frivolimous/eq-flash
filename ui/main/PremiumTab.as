@@ -13,17 +13,13 @@
 		var restockAll:Function;
 		
 		public function PremiumTab(){
-			// bundleB.update("Paladin/Acolyte",popBundle);
-			// bundle2B.update("Rogue/Ranger",popBundle2);
-			// hairPackB.update("Hair Packs",popPacks);
-			// relicPackB.update("Relic Packs",popRelic);
-			// craftPackB.update("Crafting Packs",popCraft);
 			refreshB.update(StringData.REFRESH,tryRestock);
 		}
 				
 		public function init(_inventory:StoreInventoryUI,_restock:Function){
 			inventory=_inventory;
 			gambleUI.alsoUpdate=powerT.updateDisplay;
+			singleUI.alsoUpdate=powerT.updateDisplay;
 			inventory.alsoUpdate=powerT.updateDisplay;
 			powerT.updateDisplay();
 			restockAll=_restock;
@@ -31,12 +27,12 @@
 		
 		public function lockInventory(b:Boolean){
 			gambleUI.locked=b;
-			//singleUI.locked=b;
+			singleUI.locked=b;
 		}
 		
 		public function update(_player:*){
 			gambleUI.update(_player);
-			//singleUI.update(_player);
+			singleUI.update(_player);
 			remainText.text=String(GameData.refreshes);
 			powerT.updateDisplay();
 		}
@@ -55,23 +51,22 @@
 			remainText.text=String(GameData.refreshes);
 			powerT.updateDisplay();
 			gambleUI.clear();
+			singleUI.clear();
 			for (var i:int=0;i<3;i+=1){
 				do{
 					gambleUI.addItemAt(new ItemView(ItemData.spawnPremium(0,true)),i);
 				}while(((i>0) && (gambleUI.itemA[i].stored.model.index==gambleUI.itemA[i-1].stored.model.index))||((i>1) && (gambleUI.itemA[i].stored.model.index==gambleUI.itemA[i-2].stored.model.index)))				
 				if (gambleUI.itemA[i].stored.model.hasTag(EffectData.SUPER_PREMIUM)){
-					gambleUI.itemA[i].stored.model.cost=-8;
+					gambleUI.itemA[i].stored.model.cost=-16;
 				}else{
-					gambleUI.itemA[i].stored.model.cost=-6;
+					gambleUI.itemA[i].stored.model.cost=-12;
 				}
 			}
+
+			singleUI.addItemAt(new ItemView(ItemData.spawnItem(0,100)),0);
+			singleUI.itemA[0].stored.model.cost=-6;
 		}
-		
-		public function restockSingle(){
-			//singleUI.clear();
-			//singleUI.addItemAt(new ItemView(ItemData.spawnItem(0,100)),0);
-		}
-		
+				
 		public function getItemArray():Array{
 			var m:Array=new Array(4);
 			for (var i:int=0;i<3;i+=1){
@@ -90,9 +85,9 @@
 				if (_a[i]!=null && _a[i]!=-1){
 					gambleUI.addItemAt(new ItemView(ItemData.spawnItem(0,_a[i])),i);
 					if (gambleUI.itemA[i].stored.model.hasTag(EffectData.SUPER_PREMIUM)){
-						gambleUI.itemA[i].stored.model.cost=-8;
+						gambleUI.itemA[i].stored.model.cost=-16;
 					}else{
-						gambleUI.itemA[i].stored.model.cost=-6;
+						gambleUI.itemA[i].stored.model.cost=-12;
 					}
 				}
 			}

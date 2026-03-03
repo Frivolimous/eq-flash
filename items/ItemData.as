@@ -69,7 +69,7 @@
 			if (Math.random()<premiumChance){
 				return spawnPremium(0);
 			}
-			var level:int=Math.ceil((Math.random()*0.8+0.25)*_level/10);
+			var level:int=Math.ceil((Math.random()*0.25+0.8)*_level/10);
 			if (level>15) level=15;
 			var m:ItemModel;
 			switch(Math.floor(Math.random()*15)){
@@ -254,7 +254,7 @@
 					
 					case 120: return new ItemEquipment(_index,"Big Pencil",_level,WEAPON,TWO_HANDED,750,ActionData.makeWeapon(35+2.3*_level,null,null,0,0,0,[EffectData.BONUS_STRENGTH]),[[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.MAGIC_STRIKE,_level)]],[EffectData.SUPER_PREMIUM]);
 					
-					case 121: return new ItemEquipment(_index,"Tramp Hair",_level,HELMET,HEAVY,750,null,[[SpriteModel.STAT,StatModel.HEALTH,120+62*_level],[SpriteModel.STAT,StatModel.RCRIT,.3],[SpriteModel.STAT,StatModel.INITIATIVE,-30],[SpriteModel.STAT,StatModel.DODGE,-0.2],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.IGNORE_ATTACK,_level)],[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.UNARMED_INIT,_level)]],[EffectData.SUPER_PREMIUM]);//trump
+					case 121: return new ItemEquipment(_index,"Tramp Hair",_level,HELMET,HEAVY,750,null,[[SpriteModel.STAT,StatModel.HEALTH,110+57*_level],[SpriteModel.STAT,StatModel.RCRIT,.3],[SpriteModel.STAT,StatModel.INITIATIVE,-90],[SpriteModel.STAT,StatModel.DODGE,-0.3],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.IGNORE_ATTACK,_level)]],[EffectData.SUPER_PREMIUM]);//trump
 					case 122: return new ItemEquipment(_index,"Princess",_level,HELMET,MEDIUM,750,null,[[SpriteModel.STAT,StatModel.HEALTH,100+52*_level],[SpriteModel.STAT,StatModel.RCRIT,.2],[SpriteModel.STAT,StatModel.INITIATIVE,-20],[SpriteModel.STAT,StatModel.DODGE,-0.1],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.BARRIER,_level)]],[EffectData.SUPER_PREMIUM]);//princess
 					case 123: return new ItemEquipment(_index,"Masta Rasta",_level,HELMET,LIGHT,750,null,[[SpriteModel.STAT,StatModel.HEALTH,78+38*_level],[SpriteModel.STAT,StatModel.RCRIT,.1],[SpriteModel.STAT,StatModel.MANA,18+7*_level],[SpriteModel.STAT,StatModel.EFFECT,new EffectBuffBasic(BuffData.makeBuff(BuffData.HIGH,_level),EffectBase.BUFF,EffectBase.SAFE)]],[EffectData.SUPER_PREMIUM]);//rasta
 					case 124: return new ItemEquipment(_index,"Sapien Hair",_level,HELMET,LIGHT,750,null,[[SpriteModel.STAT,StatModel.HEALTH,60+26*_level],[SpriteModel.STAT,StatModel.RCRIT,.1],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.REVIVE_GOKU,_level)]],[EffectData.SUPER_PREMIUM]);
@@ -865,7 +865,9 @@
 					case 74: //Rending Claws
 						if (_item1.index==84){
 							return enchantItem(_item0.clone(-1,false,true),0);
-						}
+						} else if (_item1.enchantIndex==19) {
+							return enchantItem(_item0.clone(-1,false,true),1);
+						}break;
 					case 75: //Hylian Sword
 						if (_item1.isPremium()) break;
 						if (_item1.primary!=HELMET){
@@ -1039,6 +1041,8 @@
 					case 106: //Hell Hands
 						if (_item1.enchantIndex==6 && (_item1.primary==SCROLL || _item1.primary==GRENADE)){
 							return enchantItem(_item0.clone(-1,false,true),0);
+						}else if (_item1.enchantIndex==19) {
+							return enchantItem(_item0.clone(-1,false,true),1);
 						}break;
 					case 107: //Chainsaw
 						if (_item1.index==21){
@@ -1531,9 +1535,15 @@
 					case 73: //Light Sword
 						return m;
 					case 74: //Rending Claws
-						m.name="Mending Claws";
-						m.values[2][2]=EffectData.makeEffect(EffectData.REND_HEAL,m.level);
-						return m;
+						if (_index==0) {
+							m.name="Mending Claws";
+							m.values[2][2]=EffectData.makeEffect(EffectData.REND_HEAL,m.level);
+							return m;
+						} else {
+							m.name="Bending Claws";
+							m.values.unshift([SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.UNARMED_INIT,0)]);
+							return m;
+						}break;
 					case 75: //Hylian Sword
 						switch(_index){
 							case 0: m.name="Divine "+m.name;
@@ -1758,10 +1768,16 @@
 						m.action.basePriority.setBaseDistance(ActionPriorities.COMBAT,false);
 						return m;
 					case 106: //Hell Hands
-						m.name="Frenetic "+m.name;
-						m.values[0][2].buff.maxStacks=5;
-						m.values[0][2].buff.values[0][2]*=0.8;
-						return m;
+						if (_index==0) {
+							m.name="Frenetic "+m.name;
+							m.values[0][2].buff.maxStacks=5;
+							m.values[0][2].buff.values[0][2]*=0.8;
+							return m;
+						} else {
+							m.name="Heck Hands"
+							m.values.unshift([SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.UNARMED_INIT,0)]);
+							return m;
+						}
 					case 107: //Chainsaw
 						switch(_index){
 							case 0: m.name="Vulnerable "+m.name;
@@ -2435,7 +2451,7 @@
 					
 					//case 120: applySuffix(_index,"",m,[]); break; //Big Pencil
 					
-					case 121: applySuffix(_index,"of the Tramp",m,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.IGNORE_ATTACK,0)]]); break; //Tramp Hair
+					case 121: applySuffix(_index,"of the Tramp",m,[[SpriteModel.STAT,StatModel.INITIATIVE,-90],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.IGNORE_ATTACK,0)]]); break; //Tramp Hair
 					case 122: applySuffix(_index,"of the Princess",m,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.BARRIER,10)]]); break; //Princess
 					case 123: applySuffix(_index,"of Stoning",m,[[SpriteModel.STAT,StatModel.EFFECT,new EffectBuffBasic(BuffData.makeBuff(BuffData.HIGH,15),EffectBase.BUFF,EffectBase.SAFE)]]); break; //Masta Rasta
 					case 124: applySuffix(_index,"of the Sapien",m,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.REVIVE_JUST,0)]]); break; //Sapien Hair

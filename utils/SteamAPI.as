@@ -22,51 +22,6 @@
 
         public var expiredMC:ExpiredW;
 
-        private const ACHIEVEMENT_MAP:Array = [
-            {id:"ACH_TUTORIAL",  ref:"FLAG_TUTORIAL", type:"bool"},
-            {id:"ACH_TREASURE",  ref:"FLAG_TREASURE", type:"bool"},
-            {id:"ACH_DEFT",      ref:"SCORE_DAMAGE",  type:"int",  min:100},
-            {id:"ACH_NOBLE",     ref:"SCORE_FURTHEST",type:"int",  min:50},
-            {id:"ACH_TURBO",     ref:"SCORE_FURTHEST",type:"int",  min:100},
-            {id:"ACH_ASCEND_50", ref:"SCORE_ASCENDS", type:"int",  min:50}
-        ];
-
-        public function syncAllAchievements():void {
-            if (!connected) return;
-
-            var pData:Object = saveSO.data.playerData;
-            var changed:Boolean = false;
-
-            for (var i:int = 0; i < ACHIEVEMENT_MAP.length; i++) {
-                var ach:Object = ACHIEVEMENT_MAP[i];
-                
-                // 1. Check if they already have it on Steam to save API calls
-                if (!steam["getAchievement"](ach.id)) {
-                    
-                    var shouldUnlock:Boolean = false;
-                    
-                    // 2. Determine if criteria is met based on type
-                    if (ach.type == "bool" && pData[ach.ref] == true) {
-                        shouldUnlock = true;
-                    } else if (ach.type == "int" && pData[ach.ref] >= ach.min) {
-                        shouldUnlock = true;
-                    }
-
-                    // 3. Trigger Unlock
-                    if (shouldUnlock) {
-                        steam["setAchievement"](ach.id);
-                        changed = true;
-                        Facade.addLine("🏆 Steam Unlocked: " + ach.id);
-                    }
-                }
-            }
-
-            // 4. Only push to Steam servers if a change actually occurred
-            if (changed) {
-                steam["storeStats"]();
-            }
-        }
-        
         // ===============================
         // INIT / LOGIN
         // ===============================
@@ -324,8 +279,9 @@
         }
 
         public function checkAchievement(apiName:String):Boolean {
-            if (!connected) return;
-            return steam.getAchievement(apiName);
+            if (!connected) return false;
+            return false;
+            // return steam.getAchievement(apiName);
         }
 
     //     steam["setStatInt"]("stat_kills", saveSO.data.playerData.SCORE_KILLS);

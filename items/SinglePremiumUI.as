@@ -46,7 +46,7 @@
 			
 			itemA[itemBuying.index].removeItem();
 			
-			(parent as PremiumTab).inventory.addItem(new ItemView(ItemData.spawnItem(itemBuying.model.level,itemBuying.model.index)));
+			(parent as PremiumTab).inventory.addItem(new ItemView(ItemData.spawnPremium(0, true)));
 			
 			if (alsoUpdate!=null) alsoUpdate();
 			Facade.saveC.saveChar();

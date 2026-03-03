@@ -156,8 +156,8 @@
 									Facade.gameUI.zoneW.townB.visible=true;
 									flags[DISABLE]=true;
 									GameData.setFlag(GameData.FLAG_TUTORIAL,true);
-									Facade.gameUI.addItem(new ItemView(ItemData.spawnPremium(0)));
-									return "You can now head back to town using this handy button!\nYour hero will only travel during his next 'SAFE' action.\n\nYou're on your own from here... and take a Mythic Item as a gift!\n(Check your Inventory)";
+									// Facade.gameUI.addItem(new ItemView(ItemData.spawnPremium(0)));
+									return "You can now head back to town using this handy button!\nYour hero will only travel during his next 'SAFE' action.\n\nYou're on your own from here...";
 				
 				case GIFT:			makeArrow(Facade.stage,273,10,180);
 									//displayArrow.scaleX=displayArrow.scaleY=0.6;
@@ -207,8 +207,6 @@
 			}
 		}
 		
-		
-		
 		public static function disableTutorial(){
 			if (!GameData.getFlag(GameData.FLAG_TUTORIAL)){
 				flags[DISABLE]=true;
@@ -217,7 +215,7 @@
 				Facade.gameUI.actionText.visible=true;
 				Facade.gameUI.zoneW.townB.visible=true;
 				GameData.setFlag(GameData.FLAG_TUTORIAL,true);
-				Facade.gameUI.addItem(new ItemView(ItemData.spawnPremium(0)));
+				// Facade.gameUI.addItem(new ItemView(ItemData.spawnPremium(0)));
 			}
 			if (current !=null && current.parent!=null) current.remove();
 		}

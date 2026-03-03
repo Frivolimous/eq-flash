@@ -32,13 +32,8 @@
 			if ((parent as PremiumTab).inventory.isFull()){
 				return false;
 			}
-			
-			if (_item.model.hasTag(EffectData.SUPER_PREMIUM)){
-				PurchaseManager.buyItem(finishRemoveItem,8,alsoUpdate);
-			}else{
-				PurchaseManager.buyItem(finishRemoveItem,6,alsoUpdate)
-			}
-			
+			PurchaseManager.buyItem(finishRemoveItem,-_item.model.cost,alsoUpdate);
+
 			return false;
 		}
 		

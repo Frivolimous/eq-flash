@@ -5,7 +5,6 @@
 	import skills.SkillData;
 	import items.ItemModel;
 	import items.ItemData;
-	import ui.assets.AchievementDisplay;
 	import artifacts.ArtifactModel;
 	import flash.display.Sprite;
 	import flash.display.IBitmapDrawable;

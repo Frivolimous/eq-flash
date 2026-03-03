@@ -261,7 +261,7 @@
 		}
 		
 		public function canHaveName(i:int):Boolean{
-			if (basePriorityList==ActionPriorities.ALL_DISTANCE && (veryFar || i!=ActionPriorities.VERY)) return true;
+			if (basePriorityList==ActionPriorities.ALL_DISTANCE && (i!=ActionPriorities.VERY)) return true;
 			
 			switch(i){
 				case ActionPriorities.COMBAT: if (basePriorityList==ActionPriorities.COMBAT) return true;

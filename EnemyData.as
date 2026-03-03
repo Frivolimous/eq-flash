@@ -251,12 +251,12 @@
 								case 1:
 									attackType(ActionBase.MAGICAL);
 									equipItem(15);
-									equipItem(21);
+									equipItem(20);
 									break;
 								case 2:
 									attackType(ActionBase.DARK);
 									equipItem(30);
-									equipItem(20);
+									equipItem(21);
 									break;
 							}
 							break;
@@ -265,27 +265,30 @@
 							setBaseStats(_level,3,2,4,2,2,2);
 							attackType(ActionBase.CHEMICAL);
 							switch(_aType){
-								case 0: equipItem(34); equipAction(ActionData.WITHDRAW); break;
-								case 1: equipItem(34); spawn.stats.addValue(StatModel.THROWEFF,_level/100); break;
+								case 0: equipItem(34); spawn.stats.addValue(StatModel.THROWEFF,_level/100); break;
+								case 1: equipItem(34); equipAction(ActionData.WITHDRAW); break;
 								case 2: equipItem(35); spawn.stats.addValue(StatModel.HEALTH,3*_level); break;
 							}
 							break;
 						case 4:
 							spawn.label=VINE;
-							setBaseStats(_level,4,4,2,4,3,1);
-							spawn.actionList.attack.leech+=0.05;
+							setBaseStats(_level,4,4,2,3,3,1);
+							spawn.actionList.attack.leech+=0.1;
 							switch(_aType){
-								case 0: spawn.actionList.attack.critrate+=0.05; break;
-								case 1: spawn.actionList.attack.leech+=0.05; break;
-								case 2: spawn.actionList.attack.critmult+=1; break;
+								case 0: equipCharm(7); spawn.actionList.attack.critrate+=0.05; break;
+								case 1: equipCharm(9); spawn.actionList.attack.leech+=0.1; break;
+								case 2: equipCharm(100); spawn.actionList.attack.critmult+=1; break;
 							}
 							break;
 						case 5:
 							spawn.label=BLOB;
 							setBaseStats(_level,2,6,2,3,1,1);
-							attackType(ActionBase.CHEMICAL);
 							spawn.stats.addValue(StatModel.DODGE,0.1);
-							spawn.stats.addValue(StatModel.RCHEMICAL,0.4);
+							switch(_aType){
+								case 0: attackType(ActionBase.MAGICAL); spawn.stats.addValue(StatModel.RMAGICAL,0.4); break;
+								case 1: attackType(ActionBase.CHEMICAL); spawn.stats.addValue(StatModel.RCHEMICAL,0.4); break;
+								case 2: attackType(ActionBase.DARK); spawn.stats.addValue(StatModel.RSPIRIT,0.4); break;
+							}
 							break;
 						default: null;
 					}
@@ -323,9 +326,9 @@
 							spawn.label=RHINO;
 							setBaseStats(_level,1,3,4,3,4,4);
 							switch(_aType){
-								case 0: equipItem(26); break;
+								case 0: spawn.stats.addValue(StatModel.RCRIT,0.2); break;
 								case 1: spawn.stats.addValue(StatModel.HEALTH,3*_level); break;
-								case 2: spawn.stats.addValue(StatModel.RCRIT,0.2); break;
+								case 2: equipItem(26); break;
 							}
 							break;
 						case 2:
@@ -333,9 +336,9 @@
 							setBaseStats(_level,5,3,3,2,3,2);
 							equipItem(37);
 							switch(_aType){
-								case 0: spawn.stats.addValue(StatModel.DODGE,0.1); break;
-								case 1: spawn.stats.addValue(StatModel.STRENGTH,_level); break;
-								case 2: spawn.actionList.attack.critrate+=0.1; break;
+								case 0: spawn.actionList.attack.critrate+=0.1; break;
+								case 1: spawn.stats.addValue(StatModel.DODGE,0.1); break;
+								case 2: spawn.stats.addValue(StatModel.STRENGTH,_level); break;
 							}
 							break;
 						case 3:
@@ -352,9 +355,9 @@
 							spawn.label=GOATMAN;
 							setBaseStats(_level,3,3,3,4,3,2);
 							switch(_aType){
-								case 0: equipItem(27); equipCharm(22); break;
-								case 1: equipItem(25); equipCharm(23); break;
-								case 2: equipItem(20); equipCharm(25); break;
+								case 0: equipItem(25); equipCharm(22); break;
+								case 1: equipItem(15); equipCharm(23); break;
+								case 2: equipItem(27); equipCharm(25); break;
 							}
 							break;
 						default: null;
@@ -363,8 +366,8 @@
 					spawn.stats.addValue(StatModel.RSPIRIT,0.1);
 					switch(_aType){
 						case 0: spawn.stats.addValue(StatModel.INITIATIVE,25); break;
-						case 1: spawn.stats.addValue(StatModel.STRENGTH,2*_level); break;
-						case 2: spawn.actionList.attack.critmult+=0.5; break;
+						case 1: spawn.actionList.attack.critmult+=0.5; break;
+						case 2: spawn.stats.addValue(StatModel.STRENGTH,2*_level); break;
 					}
 					break;
 				case 2:
@@ -375,9 +378,9 @@
 							setBaseStats(_level,3,2,2,3,3,2);
 							equipAction(ActionData.WITHDRAW);
 							switch(_aType){
-								case 0: equipItem(16); equipItem(21); break;
+								case 0: equipItem(16); equipItem(19); break;
 								case 1: equipItem(14); equipItem(18); break;
-								case 2: equipItem(30); equipItem(19); break;
+								case 2: equipItem(30); equipItem(21); break;
 							}
 							break;
 						case 1:
@@ -393,23 +396,23 @@
 							break;
 						case 2:
 							spawn.label=GOLEM;
-							setBaseStats(_level,0,3,3,5,4,4);
+							setBaseStats(_level,0,3,3,6,5,4);
 							spawn.stats.addValue(StatModel.RMAGICAL,0.2);
 							spawn.stats.addValue(StatModel.RSPIRIT,0.2);
 							spawn.actionList.attack.critrate+=0.2;
-							spawn.actionList.attack.critmult+=2.5;
+							spawn.actionList.attack.critmult+=1;
 							equipAction(ActionData.CONFUSED);
 							break;
 						case 3:
 							spawn.label=FLAMBERT;
-							setBaseStats(_level,5,4,2,3,2,0);
+							setBaseStats(_level,5,4,2,3,2,1);
 							spawn.stats.addValue(StatModel.RSPIRIT,0.2);
 							//equipAction(ActionData.LEAP);
 							equipEffect(EffectData.LEAP_ATTACK);
 							switch(_aType){
-								case 0: attackType(ActionBase.MAGICAL); equipItem(26); break;
-								case 1: attackType(ActionBase.MAGICAL); equipItem(15); break;
-								case 2: attackType(ActionBase.DARK); equipItem(29); break;
+								case 0: attackType(ActionBase.MAGICAL); equipCharm(28); break;
+								case 1: attackType(ActionBase.MAGICAL); equipCharm(29); break;
+								case 2: attackType(ActionBase.DARK); equipCharm(11); break;
 							}
 							break;
 						case 4:

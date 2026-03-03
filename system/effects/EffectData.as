@@ -31,7 +31,7 @@
 							RANDOM_COLOR:String="Random Color",
 							INIT_SPELL:String="Speedcaster",
 							IGNORE_ATTACK:String="Deniability",
-							UNARMED_INIT:String="Small Hands",
+							UNARMED_INIT:String="Deft Hands",
 							
 							QUICK:String="Quick Strike",
 							DOUBLESHOT:String="Doubleshot",
@@ -263,7 +263,7 @@
 				case FEAR_BOOST: return new EffectDmgBoost(label,level,EffectDmgBoost.HAS_CURSE,0.15+0.015*level,1,BuffData.AFRAID);
 				case NEAR_DMG_BOOST: return new EffectDmgBoost(label,level,EffectDmgBoost.DISTANCE,0.25,1,GameModel.NEAR);
 				case RANDOM_DMG_BOOST: return new EffectDmgBoost(label,level,EffectDmgBoost.RANDOMIZED,level/100);
-				case ASSASSINATE: return new EffectDmgBoost(label,level,EffectDmgBoost.HEALTH_PERCENT,0.05+0.07*level);
+				case ASSASSINATE: return new EffectDmgBoost(label,level,EffectDmgBoost.HEALTH_FULL,0.05+0.07*level);
 				
 				case RANDOM_BUFF: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.ALL,1,Math.floor(level*1.5));
 				case KI_STRIKE: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HIT,1,[0.1+0.39*level,(100-5*level<25?25:100-5*level)]);

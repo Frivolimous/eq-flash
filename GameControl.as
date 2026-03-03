@@ -265,7 +265,7 @@
 			}else if (delay==BUFF_DELAY){
 				if (gameM.playerM.checkDone() && gameM.enemyM.checkDone() ){
 					if (gameM.distance==GameModel.BETWEEN){
-						gameM.playerM.onTurnStart(true);
+						gameM.playerM.onTurnStart(false);
 						gameM.playerM.stats.useDisplays(EffectBase.CONSTANT,null,gameM.playerM,null);
 						gameM.playerM.stats.useEffects(EffectBase.SAFE,null,gameM.playerM,null);
 					}else if (!gameM.turn){

@@ -82,7 +82,7 @@ package utils {
       {displayText: "Talent Unlock: Wild", awardDesc: "You placed 1 skill point in 5 different trees. Make up your mind!\n\nThis achievement unlocked the Wild Talent."},
       {displayText: "Zone Complete: 25", awardDesc: "Woohoo! You made it past the second Shadow Minion! Keep going, more prizes await!"},
       {displayText: "Talent Unlocked: Noble", awardDesc: "Amazing, you made it to Zone 50! That's halfway to ascension!\n\nThis achievement unlocked the Noble Talent."},
-      {displayText: "Feature Unlock: Ascension", awardDesc: "This achievement unlocked Ascension! Go to the Temple to ascend and unlock powerful artifacts!"},
+      {displayText: "Feature Unlock: Ascension", awardDesc: "You made it to Zone 100 and defeated the SHADOW KING!\n\nThis achievement unlocked Ascension! Go to the Temple to ascend and unlock powerful artifacts!"},
       {displayText: "Class Unlock: Acolyte", awardDesc: "Wow! You made it to Zone 200! that's like... super far!\n\nThis achievement unlocked the Acolyte Skill Tree."},
       {displayText: "Building Unlocked: Mystic Forge", awardDesc: "You made it to Zone 300!\n\nThis achievement unlocked the Mystic Forge in town."},
       {displayText: "Building Unlocked: Epic Zone!", awardDesc: "You made it all the way to Zone 400! I can't believe you made it this far... now the REAL journey begins!\n\nThis achievement unlocked the Epic Zone in town."},
@@ -215,13 +215,19 @@ package utils {
     }
 
     public static function checkSkills(skillA: Array):void {
-      if (skillA[i].level==SkillData.MAX_SKILL) achieve(MAX_SKILL);
       var _numTrees:int=0;
       var _trees = SkillData.getTreeAssignment(skillA);
       for (var i:int=0;i<SkillData.NUM_TREES;i+=1){
         if (_trees[i]>0) _numTrees+=1;
       }
       if (_numTrees>=5) achieve(SKILL_5_TREES);
+
+      for (i=0;i<skillA.length;i+=1){
+        if (skillA[i].level==SkillData.MAX_SKILL) {
+          achieve(MAX_SKILL);
+          return;
+        }
+      }
     }
 
     public static function checkUnlockCosmetics(achieve:int):void {
