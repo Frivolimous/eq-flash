@@ -76,11 +76,17 @@
 					m[i]=-1;
 				}
 			}
+			if (singleUI.itemA[0].stored!=null){
+				m[3]=singleUI.itemA[0].stored.model.index;
+			}else{
+				m[3]=-1;
+			}
 			return m;
 		}
 		
 		public function setItemsFromArray(_a:Array){
 			gambleUI.clear();
+			singleUI.clear();
 			for (var i:int=0;i<3;i+=1){
 				if (_a[i]!=null && _a[i]!=-1){
 					gambleUI.addItemAt(new ItemView(ItemData.spawnItem(0,_a[i])),i);
@@ -90,6 +96,11 @@
 						gambleUI.itemA[i].stored.model.cost=-12;
 					}
 				}
+			}
+
+			if (_a[3]!=null && _a[3]!=-1){
+				singleUI.addItemAt(new ItemView(ItemData.spawnItem(0,100)),0);
+				singleUI.itemA[0].stored.model.cost=-6;
 			}
 		}
 	}

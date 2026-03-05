@@ -123,7 +123,7 @@
         // PLAYER DATA SAVE / LOAD
         // ===============================
 
-        public function submitPlayerData(_obj:*, _override:Boolean=false):void {
+        public function submitPlayerData(_obj:*):void {
             for (var key:String in _obj) {
                 if (_obj[key] == null) {
                     delete saveSO.data.playerData[key];
@@ -175,30 +175,31 @@
         // ===============================
 
         public function getTime(_function:Function):void {
-            _function(new Date());
+            var _now = new Date();
+            _function(_now.time);
         }
 
         // ===============================
         // HIGHSCORE
         // ===============================
 
-        public function submitHighscoreScript(i:int):void {
-            var current:int = 0;
-            if (saveSO.data.playerData["Highscore"] != null)
-                current = saveSO.data.playerData["Highscore"];
+        // public function submitHighscoreScript(i:int):void {
+        //     var current:int = 0;
+        //     if (saveSO.data.playerData["Highscore"] != null)
+        //         current = saveSO.data.playerData["Highscore"];
 
-            if (i > current) {
-                saveSO.data.playerData["Highscore"] = i;
+        //     if (i > current) {
+        //         saveSO.data.playerData["Highscore"] = i;
                 
-                // If you want to trigger a Steam Achievement for a highscore
-                // if (connected && i >= 1000) {
-                //    steam.setAchievement("ACH_HIGH_SCORE");
-                // }
-            }
+        //         // If you want to trigger a Steam Achievement for a highscore
+        //         // if (connected && i >= 1000) {
+        //         //    steam.setAchievement("ACH_HIGH_SCORE");
+        //         // }
+        //     }
 
-            syncAll();
-            Facade.addLine("Highscore Synced");
-        }
+        //     syncAll();
+        //     Facade.addLine("Highscore Synced");
+        // }
 
         public function expiredSession(_s:String):void {
             if (Facade.gameC != null)

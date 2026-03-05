@@ -285,6 +285,7 @@
 				//Facade.saveC.reloadChar(_player);
 			}else{
 				gameM.playerM.label=inputName.text;
+				if (Facade.DEBUG) GameData.setFlag(GameData.FLAG_TUTORIAL,true);
 				if (GameData.getFlag(GameData.FLAG_TUTORIAL)){
 					gameM.playerM.addItemAt(ItemData.spawnItem(0,31,6),5);
 					if (!gameM.playerM.skillBlock.checkTalent(SkillData.UNGIFTED)){

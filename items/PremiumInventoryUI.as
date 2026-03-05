@@ -40,12 +40,6 @@
 		var itemBuying:ItemView;
 		
 		public function finishRemoveItem(){
-			//use kreds
-			
-			//ItemData.finishGamble(itemBuying); ???
-			
-			//itemBuying.model._Cost=500;
-			
 			itemA[itemBuying.index].removeItem();
 			
 			(parent as PremiumTab).inventory.addItem(new ItemView(ItemData.spawnItem(itemBuying.model.level,itemBuying.model.index)));

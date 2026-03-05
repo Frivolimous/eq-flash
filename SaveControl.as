@@ -255,7 +255,7 @@
 			if (_level==0){
 				return a;
 			}else{
-				var _temp:Array=GameData.stringToArray(GameData.arrayToString(a));
+				var _temp:Array=JSON.parse(JSON.stringify({Value:a})).Value;
 				_temp[0]=a[0];
 				_temp[1]+=(50*_level);
 				for (var j:int=0;j<_temp[3].length;j+=1){
@@ -481,12 +481,12 @@
 		
 		public function exportSave(_v:SpriteModel):String{
 			var _a:Array=getShortArray(_v);
-			var _string:String=GameData.arrayToString(_a);
+			var _string:String=Facade.steamAPI.arrayToString(_a);
 			return _string;
 		}
 		
 		public function importSave(_player:SpriteModel,_string:String){
-			var _a:Array=GameData.stringToArray(_string);
+			var _a:Array=Facade.steamAPI.stringToArray(_string);
 			_player=loadShort(_player,_a,-1,false);
 		}
 		

@@ -84,7 +84,7 @@
 							LASTCHAR:String="lastChar",
 							COSMETICS:String="cosmetics",
 							REWARDS:String="rewards",
-							TIME:String="LastTime",
+							TIME:String="lastTime",
 							EPICS:String="epics";
 							
 		public static const HARDCORE:String="Hardcore";
@@ -98,8 +98,7 @@
 			}
 		}
 		public static function saveHardcore(){
-			// Facade.steamAPI.submitHighscoreScript(hardcore);
-			submitDataQueue([[HARDCORE,hardcore]]);
+			saveThis(HARDCORE);
 			pingServer();
 		}
 		
@@ -128,7 +127,7 @@
 										 //6-boost,7-suns,8-souls,9-kreds,10-ascends,11-gold,12-refresh,13-clocks]
 		public static var flags:Array;
 		public static var cosmetics:Array=[[],[],[],[],[],[]];
-		public static var lastTime:String;
+		public static var lastTime:Number=0;
 		public static var rewards:Array=[];
 		public static var epics:Array=[0,0]; // [0] = area, [1] = eCount
 		public static var zone:Array=[0,0,0,0];
@@ -296,10 +295,6 @@
 			}
 		}
 		
-		public static function checkArenaSubmit(f:Function){
-			Facade.steamAPI.retrievePlayerData(["T1Submit"],function (_Data:Object){ f(_Data.T1Submit==null?false:_Data.T1Submit.Value) });
-		}
-		
 		public static function getCharacterArray(f:Function){
 			Facade.steamAPI.retrievePlayerData(["player0","player1","player2","player3","player4"],function (_Data:Object){ finishGetCharacterArray(_Data,f); });
 		}
@@ -308,7 +303,7 @@
 			var a:Array=new Array();
 			for (var i:int=0;i<5;i+=1){
 				if (_Data["player"+String(i)]!=null){
-					a.push(stringToArray(_Data["player"+String(i)].Value));
+					a.push(_Data["player"+String(i)]);
 				}
 			}
 			
@@ -346,11 +341,17 @@
 		public static function loadCharacter(i:int,f:Function){ //returns a character array to be converted into a character for use in the game
 			Facade.steamAPI.retrievePlayerData(["player"+String(i)],function(_Data:Object){
 										  if (_Data["player"+String(i)]!=null){
-										  	f(stringToArray(_Data["player"+String(i)].Value));
+										  	f(_Data["player"+String(i)]);
 										  }else{
 											  f(null);
 										  }
 										  });
+		}
+
+		public static function saveThese(a:Array){
+			for (var i=0;i<a.length;i+=1){
+				saveThis(a[i]);
+			}
 		}
 		
 		public static function saveThis(s:String){
@@ -367,21 +368,22 @@
 				case REWARDS: _pair=[REWARDS,rewards]; break;
 				case TIME: _pair=[TIME,lastTime]; break;
 				case EPICS: _pair=[EPICS,epics]; break;
+				case HARDCORE: _pair=[HARDCORE,hardcore]; break;
 			}
 			if (_pair!=null){
-				submitDataQueue([_pair]);
+				Facade.steamAPI.setPlayerProperty(_pair[0],_pair[1]);
 			}
 		}
 		
-		public static function saveCharacterJust(_slot:int,a:Array,_override:Boolean=false){
-			saveCharacter(_slot,a,_override);
+		public static function saveCharacterJust(_slot:int,a:Array){
+			saveCharacter(_slot,a);
 		}
 		
 		public static function saveCharacterGame(_slot:int,a:Array){
 			//When you kill an enemy, go to next level or die.
 			//You may get an overflow item and scores will be changed for lots of stuff.
 			saveCharacter(_slot,a);
-			submitDataQueue([[OVERFLOW,overflow],[SCORES,scores]]);
+			saveThese([OVERFLOW,SCORES]);
 			pingServer();
 		}
 		
@@ -389,7 +391,7 @@
 			//When you kill an enemy, go to the next level or die in EPIC MODE
 			//You may get an overflow item and scores will be changed for lots of stuff.
 			saveCharacter(_slot,a);
-			submitDataQueue([[OVERFLOW,overflow],[SCORES,scores],[EPICS,epics]]);
+			saveThese([OVERFLOW,SCORES,EPICS]);
 		}
 		
 		public static function saveCharacterDuel(_slot:int,a:Array){
@@ -401,17 +403,17 @@
 		
 		public static function saveCharacterMenu(_slot:int,a:Array){
 			saveCharacter(_slot,a);
-			submitDataQueue([[STASH,stash],[OVERFLOW,overflow],[SCORES,scores],[LASTCHAR,lastChar]]);
+			saveThese([STASH,OVERFLOW,SCORES,LASTCHAR]);
 			pingServer();
 		}
 
 		public static function saveCharacterAll(_slot:int,a:Array){
 			saveCharacter(_slot,a);
-			submitDataQueue([[ARTIFACTS,artifacts],[STASH,stash],[OVERFLOW,overflow],[SCORES,scores],[LASTCHAR,lastChar]]);
+			saveThese([ARTIFACTS,STASH,OVERFLOW,SCORES,LASTCHAR]);
 			pingServer();
 		}
 		
-		private static function saveCharacter(_slot:int,a:Array,_override:Boolean=false){
+		private static function saveCharacter(_slot:int,a:Array){
 				/* This is the only way to save a Character.  Call this when you need to save, Notably:
 				/ (4) Transition into Town Menu
 				/ (5) Entering or Exiting Prestige Menu, along with Player Data Save
@@ -423,10 +425,10 @@
 				Facade.steamAPI.expiredSession("An error has occurred loading your character.  Please refresh the page to continue.");
 				return;
 			}
-			submitDataQueue([["player"+String(_slot),a]],_override);
+			Facade.steamAPI.setPlayerProperty("player"+String(_slot),a);
 		}
 		
-		private static function saveAllPlayerData(_override:Boolean=false){
+		private static function saveAllPlayerData(){
 				/* This is the only way to save the Player Data.  Call this whenever you need to save the game in the following instances:
 				/ (1) Achievement Earned
 				/ (2) Entering or Exiting Prestige Menu, along with Character Data Save
@@ -439,15 +441,14 @@
 				/
 				/ DO NOT need to SavePlayerData during gameplay.
 				*/
-			submitDataQueue([[ACHIEVEMENTS,achievements],[ARTIFACTS,artifacts],[STASH,stash],[OVERFLOW,overflow],[SCORES,scores],
-							[FLAGS,flags],[LASTCHAR,lastChar],[COSMETICS,cosmetics]],_override);
+			saveThese([ACHIEVEMENTS,ARTIFACTS,STASH,OVERFLOW,SCORES,FLAGS,LASTCHAR,COSMETICS]);
 		}
 		
 		
 //===============CONSTANTLY RUN======================
 
 		public static function get BUSY():Boolean{
-			if (SaveControl.BUSY>0 || queue.length>0 || DELETING>0){
+			if (SaveControl.BUSY>0 || Facade.steamAPI.BUSY>0 || DELETING>0){
 				return true;
 			}
 			return false;
@@ -457,21 +458,12 @@
 			//null
 		}
 		
-		static var timerExpired:int=0;
 		public static function checkBusy(e:Event){			
-			submitDataPerTick();
+			Facade.steamAPI.submitDataPerTick();
 			if (ready && BUSY){
-				//BUSY=true;
-				Facade.stage.addChild(loading);
-				timerExpired+=1;
-				if (timerExpired>1000) {
-					Facade.steamAPI.expiredSession("A save request has taken much longer than expected causing a fatal error.  Please refresh your browser to continue.");
-				}
-				
+				Facade.stage.addChild(loading);				
 			}else{
-				//BUSY=false;
 				if (loading.parent!=null) loading.parent.removeChild(loading);
-				timerExpired=0;
 			}
 		}
 		
@@ -479,22 +471,24 @@
 			Facade.steamAPI.getTime(getPong);
 		}
 		
-		public static function getPong(_date:String){
+		public static function getPong(_date:Number){
 			pongClocks(_date,true);
-			//lastTime=_date;
-			//submitDataQueue([["LastTime",_date]]);
 		}
 		
 		public static function pingForClocks(){
 			Facade.steamAPI.getTime(pongClocks);
 		}
 		
-		public static function pongClocks(_date:String,_now:Boolean=false){
-			if (lastTime==null || clocks>=500){
+		public static function pongClocks(_date:Number,_now:Boolean=false){
+			Facade.addLine(lastTime+" "+_date);
+
+			if (lastTime==0 || clocks>=500){
 				lastTime=_date;
+				saveThis(TIME);
 				return;
 			}
-			var _hours:Number=compareTimes(_date,lastTime);
+
+			var _hours:Number = (_date - lastTime) / 1000 / 60 / 60;
 			var _score:int=_hours*20;
 			lastTime=_date;
 			
@@ -517,30 +511,19 @@
 					}
 					new ConfirmWindow(s,50,50,null,0,null,3);
 					
-					saveThis(TIME);
 					saveThis(SCORES);
 				}else{
 					addReward(["You were away for "+String(_hours)+" hours and "+String(_minutes)+" minutes",[SCORE_CLOCKS,_score]]);
-					saveThis(TIME);
 				}
-			}else{
-				saveThis(TIME);
 			}
-			
-			//new ConfirmWindow("  You now have a total of "+String(clocks)+"Offline Progress Boosts!",50,50,null,0,null,3);
+
+			saveThis(TIME);
+			Facade.addLine("Time should be saved: "+TIME+" "+lastTime);
 		}
 		
 		static function addReward(_reward:Array){
 			rewards.push(_reward);
 			saveThis(REWARDS);
-		}
-		
-		public static function compareTimes(_current:String,_previous:String):Number{
-			var _cA:Array=dateToArray(_current);
-			var _pA:Array=dateToArray(_previous);
-			var currentTime:Number=Date.UTC(_cA[0],_cA[1],_cA[2],_cA[3],_cA[4],_cA[5]);
-			var previousTime:Number=Date.UTC(_pA[0],_pA[1],_pA[2],_pA[3],_pA[4],_pA[5]);
-			return (currentTime-previousTime)/1000/60/60;
 		}
 		
 		public static function dateToArray(s:String):Array{
@@ -615,13 +598,12 @@
 				resetPlayerData();
 				versionChecked=2;
 				dataUpdated=2;
-			}else{				
+			}else{
 				if (_Data.scores==null) {
 					scores=new Array(NUM_SCORES);
 				}else{
-					scores=stringToValue(_Data.scores.Value);
+					scores=_Data.scores;
 				}
-				
 				while (scores.length<NUM_SCORES){
 					scores.push(0);
 				}
@@ -629,27 +611,25 @@
 				if (_Data.lastChar==null){
 					lastChar=0;
 				}else{
-					lastChar=stringToValue(_Data.lastChar.Value);
+					lastChar=_Data.lastChar;
 				}
 				if (_Data.achievements==null){
 					achievements=[];
 				}else{
-					achievements=stringToValue(_Data.achievements.Value);					
+					achievements=_Data.achievements;					
 				}
 				while(achievements.length<AchieveData.NUM_ACHIEVEMENTS){
 					achievements.push(false);
 				}
-				
 				if (_Data.artifacts==null){
 					artifacts=new Array(50);
 					for (i=0;i<50;i+=1){
 						artifacts[i]=-1;
 					}
 				}
-					artifacts=stringToValue(_Data.artifacts.Value);
-					
+				artifacts=_Data.artifacts;
 				if (_Data.stash!=null){
-					stash=stringToValue(_Data.stash.Value);
+					stash=_Data.stash;
 					for (i=0;i<8;i+=1){
 						if (stash[i]==null || stash[i].length==0){
 							stash[i]=["Shared Stash "+String(i+1),false,new Array(20)];
@@ -668,24 +648,23 @@
 					}
 					stash[0][1]=false;
 				}
-				
 				if (_Data.overflow==null){
 					overflow=[];
 				}else{
-					overflow=stringToValue(_Data.overflow.Value);
+					overflow=_Data.overflow;
 				}
 				if (_Data.flags==null){
 					flags=[true,false,false,false,false,false,false,false,false];
 				}else{
-					flags=stringToValue(_Data.flags.Value);
+					flags=_Data.flags;
 					while (flags.length<9){
 						flags.push(false);
 					}
 				}
-				if (_Data.cosmetics==null || _Data.cosmetics.Value.length<6){
+				if (_Data.cosmetics==null || _Data.cosmetics.length<6){
 					cosmetics=[[],[],[],[],[],[]];
 				}else{
-					cosmetics=stringToValue(_Data.cosmetics.Value);
+					cosmetics=_Data.cosmetics;
 					for (i=0;i<cosmetics.length;i+=1){
 						for (var j:int=0;j<cosmetics[i].length;j+=1){
 							if (cosmetics[i][j]==null){
@@ -694,24 +673,20 @@
 						}
 					}
 				}
-				
-				if (_Data.rewards!=null && _Data.rewards.Value.length>0){
-					rewards=stringToArray(_Data.rewards.Value);
+				if (_Data.rewards!=null && _Data.rewards.length>0){
+					rewards=_Data.rewards;
 				}
-				
-				if (_Data.LastTime!=null){
-					lastTime=_Data.LastTime.Value;
+				if (_Data.lastTime!=null && _Data.lastTime!=null){
+					lastTime=_Data.lastTime;
 				}
 				
 				if (_Data.epics!=null){
-					epics=stringToArray(_Data.epics.Value);
+					epics=_Data.epics;
 				}
-				
 				if (_Data.Hardcore!=null){
-					hardcore=_Data.Hardcore.Value;
+					hardcore=_Data.Hardcore;
 				}
 				pingForClocks();
-				
 				var _resubmit:Boolean=false;
 				for (i=0;i<4;i+=1){
 					if (_Data["player"+String(i)]==null && _Data["player"+String(i+1)]!=null){
@@ -726,13 +701,12 @@
 						if (_Data["player"+String(i)]==null){
 							m["player"+String(i)]=null;
 						}else{
-							m["player"+String(i)]=_Data["player"+String(i)].Value;
+							m["player"+String(i)]=_Data["player"+String(i)];
 						}
 					}
-					Facade.steamAPI.submitPlayerData(m,true);
+					Facade.steamAPI.submitPlayerData(m);
 				}
-					
-					
+				
 				for (var i:int=4;i>=0;i-=1){
 					if (_Data["player"+String(i)]!=null){
 						numCharacters=i+1;
@@ -752,7 +726,7 @@
 			if (_Data.version==null){
 				_version=88;
 			}else{
-				var _version:int=stringToValue(_Data.version.Value);
+				var _version:int=_Data.version;
 			}
 			
 			var m:Object=new Object;
@@ -762,7 +736,7 @@
 				//UPDATES SINCE LAST VERSION
 				// if (_version<99){
 				// 	if (_Data.Hardcore!=null){
-				// 		hardcore=_Data.Hardcore.Value;
+				// 		hardcore=_Data.Hardcore;
 				// 		if (hardcore>=0){
 				// 			var _rank:int=HardcoreGameControl.getEliminatedPosition();
 				// 			if (_rank==1){
@@ -788,17 +762,17 @@
 				// 	_resubmit=true;
 				// 	m["player-100"]=null;
 				// 	hardcore=0;
-				// 	submitDataQueue([[HARDCORE,hardcore]]);
+				// Facade.steamAPI.setPlayerProperty(HARDCORE,hardcore);
 				// 	_Save=SharedObject.getLocal("HC_OPTIONS");
 				// 	resetSave();
 				// 	_Save=SharedObject.getLocal("OPTIONS");
 				// }
-				if (_resubmit) Facade.steamAPI.submitPlayerData(m,true);
+				if (_resubmit) Facade.steamAPI.submitPlayerData(m);
 				
 				new ScrollAnnounce(getVersionLog());
 				Facade.addLine("Version "+_version.toString()+" is not current, updating now...");
-				submitDataQueue([["version",VERSION]],true);
-				saveAllPlayerData(true);
+				Facade.steamAPI.setPlayerProperty("version",VERSION);
+				saveAllPlayerData();
 			}else{
 				Facade.addLine("Version "+_version.toString()+" is Current");
 			}
@@ -910,173 +884,9 @@
 			while(achievements.length<AchieveData.NUM_ACHIEVEMENTS){
 				achievements.push(false);
 			}
-			submitDataQueue([["version",VERSION],["firstVersion",VERSION],
-							 ["cosmetics",cosmetics],["achievements",achievements], ["flags",flags],["artifacts",artifacts],["stash",stash],["overflow",overflow],["scores",scores],["lastChar",lastChar],
-							 ["player0",null],["player1",null],["player2",null],["player3",null],["player4",null]],true);
-							 
-			//RESET CHARACTER DATA AS WELL
-		}
-		
-//============================SUBFUNCS=======================
-		
-		public static function submitDataQueue(_queue:Array,_override:Boolean=false){
-			timerExpired=0;
-			if (_override){
-				while(_queue.length>0){
-					var i:int=0;
-					while(i<overQueue.length){
-						if (overQueue[i][0]==_queue[0][0]){
-							overQueue.splice(i,1);
-						}else{
-							i+=1;
-						}
-					}
-					overQueue.push(_queue.shift());
-				}
-				//overQueue=overQueue.concat(_queue);
-			}else{
-				while(_queue.length>0){
-					i=0;
-					while(i<queue.length){
-						if (queue[i][0]==_queue[0][0]){
-							queue.splice(i,1);
-						}else{
-							i+=1;
-						}
-					}
-					if (_queue[0][1] is Array){
-						_queue[0][1]=(_queue[0][1] as Array).concat();
-					}
-					queue.push(_queue.shift());
-				}
-				//queue=queue.concat(_queue);
-			}
-		}
-		
-		public static var queue:Array=new Array;
-		public static var overQueue:Array=new Array;
-		public static var delay:int=0;
-		public static const DELAY:int=40;
-		public static function submitDataPerTick(){
-			if (delay>0){
-				delay-=1;
-				return;
-			}
-			
-			if (overQueue.length>0){
-				m=new Object;
-				for (var i:int=0;(i<10 && overQueue.length>0);i+=1){
-					var _pair:Array=overQueue.shift();
-					m[_pair[0]]=valueToJSON(_pair[1]);
-				}
-				Facade.steamAPI.submitPlayerData(m,true);
-				delay=DELAY;
-			}else if (queue.length>0){
-				var m:Object=new Object;
-				for (i=0;(i<10 && queue.length>0);i+=1){
-					_pair=queue.shift();
-					m[_pair[0]]=valueToJSON(_pair[1]);
-				}
-				Facade.steamAPI.submitPlayerData(m,false);
-				delay=DELAY;
-			}
-		}
-		
-		public static function valueToJSON(v:*):*{
-			if (v is int || v is String || v is Boolean){
-				return v;
-			}else if (v is Array){
-				return arrayToString(v);
-			}else{
-				return null;
-			}
-		}
-		
-		public static function stringToValue(s:String):*{
-			if (s=="true"){
-				return true;
-			}else if (s=="false"){
-				return false;
-			}else if (s.search(/\d/)==0 || s.substr(0,1)=="-"){
-				return Number(s);
-			}else if (s.charAt(0)=="["){
-				return stringToArray(s);
-			}else{
-				return s;
-			}
-		}
-		
-		public static function arrayToString(a:Array,_incNull:Boolean=false):String{
-			var m:String="[";
-			for (var i:int=0;i<a.length;i+=1){
-				if (a[i] is Array){
-					m+=arrayToString(a[i],_incNull);
-				}else if (_incNull){
-					if (a[i]==null){
-						m+="null";
-					}else if (a[i] is String){
-						m+='"'+String(a[i])+'"';
-					}else{
-						m+=String(a[i]);
-					}
-				}else if (a[i]!=null){
-					m+=String(a[i]);
-				}
-				if (i<a.length-1){
-					m+=",";
-				}
-			}
-			
-			m+="]";
-			return m;
-		}
-				
-		public static function stringToArray(s:String):*{
-			var m:Array=new Array;
-			//var j:*=JSON.parse("{a:"+s+"}");
-			s=s.substring(1);
-			
-			while(s.length>0){
-				if (s.charAt(0)=="["){
-					var i:int=1;
-					char=0
-					var r:int=0;
-					s2=s;
-					while (i>0){
-						var s2:String=s2.substring(char+1);
-						r+=char+1;
-						char=s2.search(/(\[|\])/);
-						if (s.charAt(char+r)=="["){
-							i+=1;
-						}else{
-							i-=1;
-						}
-					}
-					m.push(stringToArray(s.substring(0,char+r+1)));
-					s=s.substring(char+r+2);
-					
-				}else{
-					var char:int=s.indexOf(",");
-					if (char==-1){
-						char=s.indexOf("]");
-						if (char==0){
-							m.push(null);
-						}else{
-							m.push(stringToValue(s.substring(0,char)));
-						}
-						s="";
-					}else{
-						if (char==0){
-							m.push(null);
-							s=s.substring(1);
-						}else{
-							m.push(stringToValue(s.substring(0,char)));
-							s=s.substring(char+1);
-						}
-					}
-				}
-			}
-			return m;
+			saveThese([COSMETICS,ACHIEVEMENTS,FLAGS,ARTIFACTS,STASH,OVERFLOW,SCORES,LASTCHAR]);
+			Facade.steamAPI.setPlayerProperties([["version",VERSION],["firstVersion",VERSION],
+							 ["player0",null],["player1",null],["player2",null],["player3",null],["player4",null]]);
 		}
 	}
 }

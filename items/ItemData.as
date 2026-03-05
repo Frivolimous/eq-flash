@@ -131,24 +131,24 @@
 					case 12: return new ItemEquipment(_index,"Helmet",_level,HELMET,MEDIUM,80,null,[[SpriteModel.STAT,StatModel.HEALTH,100+52*_level],[SpriteModel.STAT,StatModel.RCRIT,.2],[SpriteModel.STAT,StatModel.INITIATIVE,-20],[SpriteModel.STAT,StatModel.DODGE,-0.1]]);
 					case 13: return new ItemEquipment(_index,"Armet",_level,HELMET,HEAVY,100,null,[[SpriteModel.STAT,StatModel.HEALTH,120+62*_level],[SpriteModel.STAT,StatModel.RCRIT,.3],[SpriteModel.STAT,StatModel.INITIATIVE,-40],[SpriteModel.STAT,StatModel.DODGE,-0.2]]);
 					
-					case 14: return new ItemMagic(_index,"Magic Bolt",_level,DAMAGING,60,ActionData.makeAction(ActionData.MISSILE,_level));
-					case 15: return new ItemMagic(_index,"Fireball",_level,DAMAGING,80,ActionData.makeAction(ActionData.FIREBALL,_level));
-					case 16: return new ItemMagic(_index,"Lightning",_level,DAMAGING,100,ActionData.makeAction(ActionData.LIGHTNING,_level));
-					case 17: return new ItemMagic(_index,"Searing Light",_level,DAMAGING,140,ActionData.makeAction(ActionData.SEARING,_level));
-					case 18: return new ItemMagic(_index,"Poison Bolt",_level,CURSE,75,ActionData.makeAction(ActionData.POISON,_level));
-					case 19: return new ItemMagic(_index,"Confusion",_level,CURSE,85,ActionData.makeAction(ActionData.CONFUSION,_level));
-					case 20: return new ItemMagic(_index,"Cripple",_level,CURSE,75,ActionData.makeAction(ActionData.WEAKEN,_level));
-					case 21: return new ItemMagic(_index,"Vulnerability",_level,CURSE,90,ActionData.makeAction(ActionData.VULNERABILITY,_level));
-					case 22: return new ItemMagic(_index,"Healing",_level,HEALING,95,ActionData.makeAction(ActionData.HEALING,_level));
-					case 23: return new ItemMagic(_index,"Empower",_level,BUFF,110,ActionData.makeAction(ActionData.EMPOWER,_level));
-					case 24: return new ItemMagic(_index,"Haste",_level,BUFF,70,ActionData.makeAction(ActionData.HASTE,_level));
-					case 25: return new ItemMagic(_index,"Enchant Weapon",_level,BUFF,70,ActionData.makeAction(ActionData.ENCHANT,_level));
+					case 14: return new ItemMagic(_index,"Magic Bolt",_level,DAMAGING,180,ActionData.makeAction(ActionData.MISSILE,_level));
+					case 15: return new ItemMagic(_index,"Fireball",_level,DAMAGING,240,ActionData.makeAction(ActionData.FIREBALL,_level));
+					case 16: return new ItemMagic(_index,"Lightning",_level,DAMAGING,300,ActionData.makeAction(ActionData.LIGHTNING,_level));
+					case 17: return new ItemMagic(_index,"Searing Light",_level,DAMAGING,420,ActionData.makeAction(ActionData.SEARING,_level));
+					case 18: return new ItemMagic(_index,"Poison Bolt",_level,CURSE,225,ActionData.makeAction(ActionData.POISON,_level));
+					case 19: return new ItemMagic(_index,"Confusion",_level,CURSE,255,ActionData.makeAction(ActionData.CONFUSION,_level));
+					case 20: return new ItemMagic(_index,"Cripple",_level,CURSE,225,ActionData.makeAction(ActionData.WEAKEN,_level));
+					case 21: return new ItemMagic(_index,"Vulnerability",_level,CURSE,270,ActionData.makeAction(ActionData.VULNERABILITY,_level));
+					case 22: return new ItemMagic(_index,"Healing",_level,HEALING,285,ActionData.makeAction(ActionData.HEALING,_level));
+					case 23: return new ItemMagic(_index,"Empower",_level,BUFF,330,ActionData.makeAction(ActionData.EMPOWER,_level));
+					case 24: return new ItemMagic(_index,"Haste",_level,BUFF,210,ActionData.makeAction(ActionData.HASTE,_level));
+					case 25: return new ItemMagic(_index,"Enchant Weapon",_level,BUFF,210,ActionData.makeAction(ActionData.ENCHANT,_level));
 					
-					case 26: return new ItemMagic(_index,"Berserk",_level,BUFF,50,ActionData.makeAction(ActionData.BERSERK,_level));
-					case 27: return new ItemMagic(_index,"Deadly Curse",_level,CURSE,50,ActionData.makeAction(ActionData.DEADLY_CURSE,_level));
-					case 28: return new ItemMagic(_index,"Energize",_level,MANA,50,ActionData.makeAction(ActionData.ENERGIZE,_level));
-					case 29: return new ItemMagic(_index,"Terrify",_level,CURSE,50,ActionData.makeAction(ActionData.TERRIFY,_level));
-					case 30: return new ItemMagic(_index,"Dark Burst",_level,DAMAGING,50,ActionData.makeAction(ActionData.DARK_BLAST,_level));
+					case 26: return new ItemMagic(_index,"Berserk",_level,BUFF,150,ActionData.makeAction(ActionData.BERSERK,_level));
+					case 27: return new ItemMagic(_index,"Deadly Curse",_level,CURSE,150,ActionData.makeAction(ActionData.DEADLY_CURSE,_level));
+					case 28: return new ItemMagic(_index,"Energize",_level,MANA,150,ActionData.makeAction(ActionData.ENERGIZE,_level));
+					case 29: return new ItemMagic(_index,"Terrify",_level,CURSE,150,ActionData.makeAction(ActionData.TERRIFY,_level));
+					case 30: return new ItemMagic(_index,"Dark Burst",_level,DAMAGING,150,ActionData.makeAction(ActionData.DARK_BLAST,_level));
 					
 					case 31: return new ItemModel(_index,"Healing Potion",_level,USEABLE,POTION,HEALING,30,ActionData.makeAction(ActionData.HEALING_POT,_level),null,(_charges>=0)?_charges:(Math.ceil(Math.random()*6)));
 					case 32: return new ItemModel(_index,"Mana Potion",_level,USEABLE,POTION,MANA,40,ActionData.makeAction(ActionData.MANA_POT,_level),null,(_charges>=0)?_charges:(Math.ceil(Math.random()*6)));
@@ -244,10 +244,10 @@
 					case 112: return new ItemModel(_index,"Pentagram",_level,USEABLE,TRINKET,MANA,4000,ActionData.makeAction(ActionData.MANA_PENTA,_level),[[SpriteModel.STAT,StatModel.PROCEFF,0.1+0.016*_level]],1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 113: return new ItemModel(_index,"Holy Grail",_level,USEABLE,TRINKET,HEALING,4000,null,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.REVIVE_GRAIL,_level)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					
-					case 114: return new ItemEquipment(_index,"Crusader Mace",_level,WEAPON,TWO_HANDED,750,ActionData.makeWeapon(36+2.4*_level,null,null,0,0,0,[EffectData.BONUS_STRENGTH]),[[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.MAGIC_STRIKE,_level)]],[EffectData.SUPER_PREMIUM]);
-					case 115: return new ItemEquipment(_index,"Crusader Helmet",_level,HELMET,HEAVY,750,null,[[SpriteModel.STAT,StatModel.HEALTH,120+62*_level],[SpriteModel.STAT,StatModel.RCRIT,.35],[SpriteModel.STAT,StatModel.INITIATIVE,-40],[SpriteModel.STAT,StatModel.DODGE,-0.2],[SpriteModel.STAT,StatModel.HEALMULT,0.05+0.006*_level],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.INITIAL_BLESS,_level)]],[EffectData.SUPER_PREMIUM]);
-					case 116: return new ItemEquipment(_index,"Demon Sickles",_level,WEAPON,DOUBLE,750,ActionData.makeWeapon(8+0.5*_level,new <EffectBase>[EffectData.makeEffect(EffectData.DELAYED_DAMAGE,_level)],null,10+_level*2,0,0,[EffectData.PIERCE]),null,[EffectData.SUPER_PREMIUM]);
-					case 117: return new ItemEquipment(_index,"Demon Horns",_level,HELMET,LIGHT,750,null,[[SpriteModel.STAT,StatModel.HEALTH,70+40*_level],[SpriteModel.STAT,StatModel.RCRIT,0.15],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.CURSE_REFLECT,_level)]],[EffectData.SUPER_PREMIUM]);
+					case 114: return new ItemEquipment(_index,"Crusader Mace",_level,WEAPON,TWO_HANDED,750,ActionData.makeWeapon(36+2.4*_level,null,null,0,0,0,[EffectData.BONUS_STRENGTH]),[[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.MAGIC_STRIKE,_level)]],[EffectData.PREMIUM]);
+					case 115: return new ItemEquipment(_index,"Crusader Helmet",_level,HELMET,HEAVY,750,null,[[SpriteModel.STAT,StatModel.HEALTH,120+62*_level],[SpriteModel.STAT,StatModel.RCRIT,.35],[SpriteModel.STAT,StatModel.INITIATIVE,-40],[SpriteModel.STAT,StatModel.DODGE,-0.2],[SpriteModel.STAT,StatModel.HEALMULT,0.05+0.006*_level],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.INITIAL_BLESS,_level)]],[EffectData.PREMIUM]);
+					case 116: return new ItemEquipment(_index,"Demon Sickles",_level,WEAPON,DOUBLE,750,ActionData.makeWeapon(8+0.5*_level,new <EffectBase>[EffectData.makeEffect(EffectData.DELAYED_DAMAGE,_level)],null,10+_level*2,0,0,[EffectData.PIERCE]),null,[EffectData.PREMIUM]);
+					case 117: return new ItemEquipment(_index,"Demon Horns",_level,HELMET,LIGHT,750,null,[[SpriteModel.STAT,StatModel.HEALTH,70+40*_level],[SpriteModel.STAT,StatModel.RCRIT,0.15],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.CURSE_REFLECT,_level)]],[EffectData.PREMIUM]);
 					
 					case 118: return new ItemModel(_index,"Achievement Award",_level,TRADE,TRADE,"",-1,null,null,-1,[EffectData.PREMIUM]);
 					case 119: return new ItemModel(_index,"Trophy",_level,USEABLE,CHARM,BUFF,3500,null,[[SpriteModel.STAT,StatModel.STRENGTH,2+2*_level],[SpriteModel.STAT,StatModel.MPOWER,2+2*_level],[SpriteModel.STAT,StatModel.INITIATIVE,2+2*_level],[SpriteModel.STAT,StatModel.THROWEFF,0.02+0.02*_level],[SpriteModel.STAT,StatModel.HEALTH,4+4*_level],[SpriteModel.STAT,StatModel.ILOOT,0.06+0.006*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.AWARD,_level)]],-1,[EffectData.RELIC]);
@@ -259,7 +259,7 @@
 					case 123: return new ItemEquipment(_index,"Masta Rasta",_level,HELMET,LIGHT,750,null,[[SpriteModel.STAT,StatModel.HEALTH,78+38*_level],[SpriteModel.STAT,StatModel.RCRIT,.1],[SpriteModel.STAT,StatModel.MANA,18+7*_level],[SpriteModel.STAT,StatModel.EFFECT,new EffectBuffBasic(BuffData.makeBuff(BuffData.HIGH,_level),EffectBase.BUFF,EffectBase.SAFE)]],[EffectData.SUPER_PREMIUM]);//rasta
 					case 124: return new ItemEquipment(_index,"Sapien Hair",_level,HELMET,LIGHT,750,null,[[SpriteModel.STAT,StatModel.HEALTH,60+26*_level],[SpriteModel.STAT,StatModel.RCRIT,.1],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.REVIVE_GOKU,_level)]],[EffectData.SUPER_PREMIUM]);
 					
-					case 125: return new ItemMagic(_index,"Multibolt",_level,DAMAGING,500,ActionData.makeAction(ActionData.MULTI_BOLT,_level),[EffectData.PREMIUM]);
+					case 125: return new ItemMagic(_index,"Multibolt",_level,DAMAGING,750,ActionData.makeAction(ActionData.MULTI_BOLT,_level),[EffectData.PREMIUM]);
 					
 					case 126: return new ItemEquipment(_index,"Shortbow",_level,WEAPON,RANGED,80,ActionData.makeRanged(35+1.5*_level,null,null,0,0,0,0,[EffectData.PIERCE,EffectData.LONG_RANGED]));
 					case 127: return new ItemEquipment(_index,"Shotgun",_level,WEAPON,RANGED,80,ActionData.makeRanged(35+1.5*_level,null,null,0,0,0,0,[EffectData.PIERCE,EffectData.LONG_RANGED]));
@@ -276,13 +276,13 @@
 					case 135: return new ItemModel(_index,"Essence",15,TRADE,ESSENCE,"",200*(1+0.1*_level),null,[[SpriteModel.ATTACK,ActionBase.TAG,EffectData.SUFFIX_ESSENCE]],_charges,[EffectData.ESSENCE]);
 					case 136: return new ItemModel(_index,"Epic Essence",15,TRADE,ESSENCE,"",200*(1+0.1*_level),null,[[SpriteModel.ATTACK,ActionBase.TAG,EffectData.EPIC_ESSENCE]],_charges,[EffectData.ESSENCE]);
 					
-					case 137: return new ItemModel(_index,"Screamer",_level,USEABLE,TRINKET,CURSE,4000,ActionData.makeAction(ActionData.SCREAMER,_level),[],(_charges>=0)?_charges:2,[EffectData.RELIC,EffectData.PREMIUM]);
+					case 137: return new ItemModel(_index,"Screamer",_level,USEABLE,TRINKET,CURSE,4000,ActionData.makeAction(ActionData.SCREAMER,_level),[],(_charges>=0)?_charges:2,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 138: return new ItemModel(_index,"Puzzling Mask",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.SPELLSTEAL,0.05+0.005*_level],[SpriteModel.STAT,StatModel.EFFECT,new EffectBuffBasic(BuffData.makeBuff(BuffData.TRAP,_level),EffectBase.CURSE,EffectBase.INITIAL)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
-					case 139: return new ItemModel(_index,"Big Bad Mask",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.ATTACK,ActionBase.HITRATE,2+2*_level],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.005*_level],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.1+0.05*_level],[SpriteModel.STAT,StatModel.ILOOT,0.05+0.005*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.GOLD_PER_KILL,_level)]],-1,[EffectData.RELIC,EffectData.PREMIUM]);
+					case 139: return new ItemModel(_index,"Big Bad Mask",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.ATTACK,ActionBase.HITRATE,2+2*_level],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.005*_level],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.1+0.05*_level],[SpriteModel.STAT,StatModel.ILOOT,0.05+0.005*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.GOLD_PER_KILL,_level)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 140: return new ItemModel(_index,"Muzzle",_level,USEABLE,TRINKET,DAMAGING,4000,ActionData.makeAction(ActionData.CANNIBAL,_level),[[SpriteModel.ATTACK,ActionBase.LEECH,0.05+0.005*_level]],(_charges>=0)?_charges:1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
-					case 141: return new ItemModel(_index,"Ruby Visor",_level,USEABLE,TRINKET,DAMAGING,4000,ActionData.makeAction(ActionData.CYCLOPS,_level),[],(_charges>=0)?_charges:1,[EffectData.RELIC,EffectData.PREMIUM]);
+					case 141: return new ItemModel(_index,"Ruby Visor",_level,USEABLE,TRINKET,DAMAGING,4000,ActionData.makeAction(ActionData.CYCLOPS,_level),[],(_charges>=0)?_charges:1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 142: return new ItemModel(_index,"Rocketman",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.TURN_REDUCE,0.05],[SpriteModel.STAT,StatModel.MANA,2+2*_level],[SpriteModel.STAT,StatModel.MANATOMPOW,0.05+0.01*_level]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
-					case 143: return new ItemModel(_index,"Monacle",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.STRENGTH,2+2*_level],[SpriteModel.STAT,StatModel.MPOWER,2+2*_level],[SpriteModel.STAT,StatModel.INITIATIVE,2+2*_level],[SpriteModel.STAT,StatModel.THROWEFF,0.02+0.02*_level],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.NO_OFFENSIVE,_level)]],-1,[EffectData.RELIC,EffectData.PREMIUM]);
+					case 143: return new ItemModel(_index,"Monacle",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.STRENGTH,2+2*_level],[SpriteModel.STAT,StatModel.MPOWER,2+2*_level],[SpriteModel.STAT,StatModel.INITIATIVE,2+2*_level],[SpriteModel.STAT,StatModel.THROWEFF,0.02+0.02*_level],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.NO_OFFENSIVE,_level)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 144: return new ItemModel(_index,"Goggles",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.THROWEFF,0.03+0.03*_level],[SpriteModel.STAT,StatModel.CHEMEFF,0.015+0.015*_level],[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,0.05],[SpriteModel.STAT,StatModel.RCHEMICAL,0.01+0.01*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.FIND_STACKS,_level)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 145: return new ItemEquipment(_index,"Dragon Sword",_level,WEAPON,SHIELD,70,ActionData.makeWeapon(26+1.7*_level),[[SpriteModel.STAT,StatModel.BLOCK,12+11*_level]]);
 					case 146: return new ItemEquipment(_index,"Raider Sword",_level,WEAPON,SHIELD,70,ActionData.makeWeapon(26+1.7*_level),[[SpriteModel.STAT,StatModel.BLOCK,12+11*_level]]);
@@ -463,7 +463,7 @@
 			switch (_index){
 				case 0: applyEnchant(0,"Master's",m,3,[SpriteModel.ATTACK,ActionBase.DAMAGE,0.1]);break;
 				case 1: applyEnchant(1,"Focal",m,3.5,[SpriteModel.STAT,StatModel.MRATE,0.15+0.03*m.level]);break;
-				case 2: applyEnchant(2,"Mystic",m,2,[SpriteModel.STAT,StatModel.MPOWER,2+2*m.level]);break;
+				case 2: applyEnchant(2,"Mystic",m,2.5,[SpriteModel.STAT,StatModel.MPOWER,2+2*m.level]);break;
 				case 3: applyEnchant(3,"Guided",m,3.5,[SpriteModel.ATTACK,ActionBase.HITRATE,3+3*m.level]);break;
 				case 4: applyEnchant(4,"Keen",m,3,[SpriteModel.ATTACK,ActionBase.CRITRATE,0.02+0.0054*m.level]);break;
 				case 5: applyEnchant(5,"Grenadier",m,3,[SpriteModel.STAT,StatModel.THROWEFF,0.02+0.02*m.level]);break;
@@ -2608,8 +2608,7 @@
 		}
 		
 		public static function gambleCost(_cost:int,_level:int,_projectile:Boolean):int{
-			//var m:int=(_cost*(1+_level/5)+100)*_level*_level*4;
-			var m:int=(_cost*(1+_level/5)+100)*_level*4;
+			var m:int=(_cost*2.5*(1+_level/5)+100)*_level*4;
 			if (_projectile){
 				m*=5;
 			}

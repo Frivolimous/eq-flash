@@ -303,16 +303,10 @@
 		public function setMaxXP(_level:int=-1){
 			if (_level==-1) _level=level;
 			if (level<getMaxLevel()){
-				if (level==1){
-					maxXP=3;
-				}else if (level==2){
-					maxXP=6;
-				}else if (level<40){
-					maxXP=Math.floor(level*2.2);
-				}else if (level<60){
-					maxXP=Math.floor(level*((level-35)/2));
+				if (level<40) {
+					maxXP=level*3;
 				}else{
-					maxXP=Math.floor(level*level/2);
+					maxXP=Math.floor((level-38)*(level-38)*1.4+117);
 				}
 			}else{
 				maxXP=_XP=0;

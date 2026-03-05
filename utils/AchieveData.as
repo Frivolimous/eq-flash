@@ -18,54 +18,55 @@ package utils {
           SKILL_5_TREES:int=9, //talent wild
           ZONE_25:int=10,
           ZONE_50:int=11, //talent noble
-          ZONE_100:int=12, //prestige unlocked
-          ZONE_200:int=13, //class acolyte
-          ZONE_300:int=14, //feature forge
-          ZONE_400:int=15, //feature epic
-          ZONE_600:int=16,
-          ZONE_800:int=17,
-          ZONE_1000:int=18, //feature lvl70
-          ZONE_2000:int=19,
-          DUEL_50:int=20, //talent powerful
-          DUEL_100:int=21, //class rogue
-          DUEL_250:int=22, //class barbarian?
-          DUEL_500:int=23,
-          DUEL_800:int=24,
-          DUEL_1000:int=25,
-          DUEL_1500:int=26,
-          ASCEND_1:int=27,
-          ASCEND_10:int=28,
-          ASCEND_25:int=29,
-          ASCEND_50:int=30, //cosmetic dark halo
-          BUY_MYTHIC:int=31,//talent holy
-          SALVAGE_MYTHIC_1:int=32,
+          ZONE_75:int=12,
+          ZONE_100:int=13, //prestige unlocked
+          ZONE_200:int=14, //class acolyte
+          ZONE_300:int=15, //feature forge
+          ZONE_400:int=16, //feature epic
+          ZONE_600:int=17,
+          ZONE_800:int=18,
+          ZONE_1000:int=19, //feature lvl70
+          ZONE_2000:int=20,
+          DUEL_50:int=21, //talent powerful
+          DUEL_100:int=22, //class rogue
+          DUEL_250:int=23, //class barbarian?
+          DUEL_500:int=24,
+          DUEL_800:int=25,
+          DUEL_1000:int=26,
+          DUEL_1500:int=27,
+          ASCEND_1:int=28,
+          ASCEND_10:int=29,
+          ASCEND_25:int=30,
+          ASCEND_50:int=31, //cosmetic dark halo
+          BUY_MYTHIC:int=32,//talent holy
           UPGRADE_ITEM_1:int=33,
-          CRAFT_ITEM_1:int=34,// class paladin
-          ORDINARY_LEVEL_60:int=35,
-          DEFT_LEVEL_60:int=36,
-          CLEVER_LEVEL_60:int=37,
-          UNGIFTED_LEVEL_60:int=38,
-          STUDIOUS_LEVEL_60:int=39,
-          ENLIGHTENED_LEVEL_60:int=40,
-          POWERFUL_LEVEL_60:int=41,
-          HOLY_LEVEL_60:int=42,
-          WILD_LEVEL_60:int=43,
-          NOBLE_LEVEL_60:int=44,
-          KILL_10:int=45,
-          KILL_100:int=46,
-          KILL_10K:int=47,
-          KILL_100K:int=48,
-          KILL_1M:int=49,
-          REACH_LEVEL_70:int=50,
-          EPIC_ZONE_2:int=51,
-          EPIC_ZONE_10:int=52,
-          EPIC_ZONE_100:int=53,
-          ARTIFACTS_1:int=54,
-          ARTIFACTS_10:int=55,
-          ARTIFACTS_40:int=56,
-          VISIT_GRAVE:int=57,
-          COMPLETE_ALL:int=58,//XX
-          NUM_ACHIEVEMENTS:int=59;
+          UPGRADE_ITEM_15:int=34,
+          CRAFT_ITEM_1:int=35,// class paladin
+          ORDINARY_LEVEL_60:int=36,
+          DEFT_LEVEL_60:int=37,
+          CLEVER_LEVEL_60:int=38,
+          UNGIFTED_LEVEL_60:int=39,
+          STUDIOUS_LEVEL_60:int=40,
+          ENLIGHTENED_LEVEL_60:int=41,
+          POWERFUL_LEVEL_60:int=42,
+          HOLY_LEVEL_60:int=43,
+          WILD_LEVEL_60:int=44,
+          NOBLE_LEVEL_60:int=45,
+          KILL_200:int=46,
+          KILL_2000:int=47,
+          KILL_20K:int=48,
+          KILL_200K:int=49,
+          KILL_2M:int=50,
+          REACH_LEVEL_70:int=51,
+          EPIC_ZONE_2:int=52,
+          EPIC_ZONE_10:int=53,
+          EPIC_ZONE_100:int=54,
+          ARTIFACTS_1:int=55,
+          ARTIFACTS_10:int=56,
+          ARTIFACTS_40:int=57,
+          VISIT_GRAVE:int=58,
+          COMPLETE_ALL:int=59,//XX
+          NUM_ACHIEVEMENTS:int=60;
 
     public static const TALENT_ACHIEVEMENTS:Array=[1,5,3,7,8,20,31,9,11,12];
 
@@ -82,6 +83,7 @@ package utils {
       {displayText: "Talent Unlock: Wild", awardDesc: "You placed 1 skill point in 5 different trees. Make up your mind!\n\nThis achievement unlocked the Wild Talent."},
       {displayText: "Zone Complete: 25", awardDesc: "Woohoo! You made it past the second Shadow Minion! Keep going, more prizes await!"},
       {displayText: "Talent Unlocked: Noble", awardDesc: "Amazing, you made it to Zone 50! That's halfway to ascension!\n\nThis achievement unlocked the Noble Talent."},
+      {displayText: "Zone Complete: 75", awardDesc: "You have surpassed zone 75! Keep going to 100 to unlock Ascension!"},
       {displayText: "Feature Unlock: Ascension", awardDesc: "You made it to Zone 100 and defeated the SHADOW KING!\n\nThis achievement unlocked Ascension! Go to the Temple to ascend and unlock powerful artifacts!"},
       {displayText: "Class Unlock: Acolyte", awardDesc: "Wow! You made it to Zone 200! that's like... super far!\n\nThis achievement unlocked the Acolyte Skill Tree."},
       {displayText: "Building Unlocked: Mystic Forge", awardDesc: "You made it to Zone 300!\n\nThis achievement unlocked the Mystic Forge in town."},
@@ -102,8 +104,8 @@ package utils {
       {displayText: "Ascensions: 25", awardDesc: "You have ascended a grand total of 25 times! Or more, if you kept this award around and are looking at it later. Why would you do that? Sell it! Get your Power Tokens already!"},
       {displayText: "Cosmetic Unlocked: Dark Halo", awardDesc: "You have ascended 50 times and earned yourself the DARK HALO. Because you ascended a dark amount of times. It makes sense, just don't think about it too much."},
       {displayText: "Talent Unlocked: Holy", awardDesc: "You have purchased an amazing Mythic item from the golden temple, and proved your devotion.\n\nThis achievement unlocked the Holy Talent."},//XX talent holy
-      {displayText: "Mythic Item Sold", awardDesc: "You sold a mythic item! That probably mean you need Power Token for something. Here, sell this award also - I think you need the money."},//XX
       {displayText: "Item Upgraded", awardDesc: "Congratulations, you now know how to upgrade an item! You'll be doing this a lot, I guarantee it."},//XX
+      {displayText: "Item Upgraded 15", awardDesc: "Congratulations, you upgraded an item up to level 15! That's max level btw (for now...)"},//XX
       {displayText: "Class Unlock: Paladin", awardDesc: "You have crafted an item at the Mythic Forge! I'm so proud of you!\n\nThis achievement unlocked the Paladin Skill Tree."},//XX class paladin
       {displayText: "Cosmetics Unlocked: Ordinary", awardDesc: "You got to level 60 with an Ordinary Hero! Why would you do that? The others are all way more interesting.\n\nThis achievement unlocked Ordinary Cosmetics."},
       {displayText: "Cosmetics Unlocked: Deft", awardDesc: "You got to level 60 with a Deft Hero! Did you do it quickly? Get It?!? Ah you don't know good jokes.\n\nThis achievement unlocked Deft Cosmetics."},
@@ -115,11 +117,11 @@ package utils {
       {displayText: "Cosmetics Unlocked: Holy", awardDesc: "You got to Level 60 with Holiness. Just wait until you unlock the Paladin Skill Tree! You'll def wanna do it again!\n\nThis achievement unlocked Holy Cosmetics."},
       {displayText: "Cosmetics Unlocked: Wild", awardDesc: "You got to Level 60 with a WiLd tALeNt! Did you actually notice a difference?\n\nThis achievement unlocked Wild Cosmetics."},
       {displayText: "Cosmetics Unlocked: Noble", awardDesc: "You got to Level 60 with a Noble Hero! Did you figure out how to min/max this guy? You can't really do it eh?\n\nThis achievement unlocked Noble Cosmetics."},
-      {displayText: "Monsters Killed: 10", awardDesc: "You got this award for killing 10 baddies. Now go kill more!"},
-      {displayText: "Monsters Killed: 100", awardDesc: "You got this award for killing 100 baddies. That's like Zone 10 right? Not that far."},
-      {displayText: "Monsters Killed: 10,000", awardDesc: "You got this award for killing TEN THOUSAND MONSTERS! That's pretty good! But there are a lot more out there!"},
-      {displayText: "Monsters Killed: 100,000", awardDesc: "You have officially killed over 100,000 monsters. That's a lot!"},
-      {displayText: "Monsters Killed: 1,000,000", awardDesc: "You have killed over a million monsters. This definitely counts as genocide!"},
+      {displayText: "Monsters Killed: 200", awardDesc: "You got this award for killing 200 baddies. Now go kill more!"},
+      {displayText: "Monsters Killed: 2000", awardDesc: "You got this award for killing 2,000 baddies. That's like Zone 67 right? No, you probably died a bunch so got this earlier.."},
+      {displayText: "Monsters Killed: 20,000", awardDesc: "You got this award for killing TWENTY THOUSAND MONSTERS! That's pretty good! But there are a lot more out there!"},
+      {displayText: "Monsters Killed: 200,000", awardDesc: "You have officially killed over 200,000 monsters. That's a lot!"},
+      {displayText: "Monsters Killed: 2,000,000", awardDesc: "You have killed over two million monsters. This definitely counts as genocide!"},
       {displayText: "Level Reached: 70", awardDesc: "You reached level 70! Bet you didn't think this was possible, did you? Nah, you did... admit it, you were scanning the achievements page."},
       {displayText: "Epic Zone: 2", awardDesc: "OK cool, so now you know what the epic zone is, because you got to Zone 3. What do you think? Up for the challenge?"},
       {displayText: "Epic Zone: 10", awardDesc: "You got this award for completing Epic Zone 10. Don't stick with just 1 character, diversify and strive! That's the only way to push your limits."},
@@ -166,6 +168,7 @@ package utils {
       if (score == GameData.SCORE_FURTHEST) {
           if (value>25) achieve(ZONE_25);
           if (value>50) achieve(ZONE_50);
+          if (value>75) achieve(ZONE_75);
           if (value>100) achieve(ZONE_100);
           if (value>200) achieve(ZONE_200);
           if (value>300) achieve(ZONE_300);
@@ -178,26 +181,27 @@ package utils {
         if (value>=1) achieve(DEATHS_1);
         if (value>=100) achieve(DEATHS_100);
       } else if (score == GameData.SCORE_DUEL) {
-          if (value>50) achieve(DUEL_50);
-          if (value>100) achieve(DUEL_100);
-          if (value>250) achieve(DUEL_250);
-          if (value>500) achieve(DUEL_500);
-          if (value>800) achieve(DUEL_800);
-          if (value>1000) achieve(DUEL_1000);
-          if (value>1500) achieve(DUEL_1500);
+          if (value>=50) achieve(DUEL_50);
+          if (value>=100) achieve(DUEL_100);
+          if (value>=250) achieve(DUEL_250);
+          if (value>=500) achieve(DUEL_500);
+          if (value>=800) achieve(DUEL_800);
+          if (value>=1000) achieve(DUEL_1000);
+          if (value>=1500) achieve(DUEL_1500);
       } else if (score == GameData.SCORE_DAMAGE) {
         if (value>=100) achieve(DAMAGE_100);
+        if (value>=1000) achieve(DAMAGE_1000);
       } else if (score == GameData.SCORE_ASCENDS) {
         if (value>=1) achieve(ASCEND_1);
         if (value>=10) achieve(ASCEND_10);
         if (value>=25) achieve(ASCEND_25);
         if (value>=50) achieve(ASCEND_50);
       } else if (score == GameData.SCORE_KILLS) {
-        if (value>=10) achieve(KILL_10);
-        if (value>=100) achieve(KILL_100);
-        if (value>=10000) achieve(KILL_10K);
-        if (value>=100000) achieve(KILL_100K);
-        if (value>=1000000) achieve(KILL_1M);
+        if (value>=200) achieve(KILL_200);
+        if (value>=2000) achieve(KILL_2000);
+        if (value>=20000) achieve(KILL_20K);
+        if (value>=200000) achieve(KILL_200K);
+        if (value>=2000000) achieve(KILL_2M);
       } else if (score == GameData.SCORE_EPICS) {
         if (value>=2) achieve(EPIC_ZONE_2);
         if (value>=10) achieve(EPIC_ZONE_10);

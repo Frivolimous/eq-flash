@@ -16,7 +16,7 @@
 				index=_v.index+36;
 				name=_v.name+" Scroll";
 				secondary=_v.secondary;
-				cost=60*(1+_level/2);
+				cost=_v.cost*0.75;
 				_Charges=_charges;
 				action=_v.action;
 				values=_v.values;

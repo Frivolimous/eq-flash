@@ -120,8 +120,6 @@
 		
 		function sellPremiumYes(i:int=0){			
 			if (origin!=null){
-				AchieveData.achieve(AchieveData.SALVAGE_MYTHIC_1);
-
 				GameData.kreds+=1;
 				updateGold();
 				Facade.soundC.playEffect(SoundControl.GOLD);

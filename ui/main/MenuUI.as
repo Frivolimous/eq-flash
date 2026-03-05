@@ -48,7 +48,7 @@
 			}
 			
 			tombstone.addEventListener(MouseEvent.CLICK,popTombstone,false,0,true);
-			treasureIndex=getChildIndex(treasure);
+			treasureIndex=getChildIndex(tombstone);
 			blinkT.addEventListener(TimerEvent.TIMER,startBlink);
 		}
 		
@@ -202,6 +202,8 @@
 		}
 		
 		override public function openWindow(){
+			if (Facade.DEBUG) GameData.setFlag(GameData.FLAG_TUTORIAL, true);
+
 			//Facade.actionC.itemCover.remove();
 			soundB.toggled=Facade.soundC.mute;
 			Facade.gameC=null;
@@ -209,11 +211,18 @@
 			//shopUI.restock();
 			//blackUI.restock();
 			Facade.soundC.startMusic(1);
-			if (GameData.getFlag(GameData.FLAG_TREASURE)){
+			if (GameData.getFlag(GameData.FLAG_TREASURE) || !GameData.getFlag(GameData.FLAG_TUTORIAL)){
 				if (contains(treasure)) removeChild(treasure);
 			}else{
 				addChildAt(treasure,treasureIndex);
 			}
+
+			if (GameData.getFlag(GameData.FLAG_TUTORIAL)){
+				addChildAt(tombstone,treasureIndex);
+			}else{
+				if (contains(tombstone)) removeChild(tombstone);
+			}
+
 			if (GameData.getFlag(GameData.FLAG_MESSAGE)){
 				newMessage.y=-45;
 				newMessage.scaleX=newMessage.scaleY=0.7;
