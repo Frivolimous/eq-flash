@@ -91,9 +91,9 @@
 				if (_a[i]!=null && _a[i]!=-1){
 					gambleUI.addItemAt(new ItemView(ItemData.spawnItem(0,_a[i])),i);
 					if (gambleUI.itemA[i].stored.model.hasTag(EffectData.SUPER_PREMIUM)){
-						gambleUI.itemA[i].stored.model.cost=-16;
-					}else{
 						gambleUI.itemA[i].stored.model.cost=-12;
+					}else{
+						gambleUI.itemA[i].stored.model.cost=-9;
 					}
 				}
 			}

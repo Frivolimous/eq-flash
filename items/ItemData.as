@@ -56,15 +56,14 @@
 							STACK:String="restack";
 							
 		public static function findItem(_level:int,find:Number):ItemModel{
-			var premiumChance:Number=0.00019;
+			var premiumChance:Number=0;
 			if (find>=1){
-				premiumChance*=(_level/3);
-				if (premiumChance>0.01) premiumChance=0.01;
+				premiumChance = 0.007+_level/200*(0.01-0.007);
+				if (premiumChance>0.01) premiumChance = 0.01;
 			}else{
-				premiumChance*=(1-_level/1500);
-				if (premiumChance<0.0001) premiumChance = 0.0001;
+				premiumChance = 0.0006+_level/500*(0.001-0.0006);
+				if (premiumChance>0.001) premiumChance = 0.001;
 			}
-			if (premiumChance>0.01) premiumChance=0.01;
 			
 			if (Math.random()<premiumChance){
 				return spawnPremium(0);
@@ -393,6 +392,7 @@
 					applyEnchant(30,"",m,1,[SpriteModel.STAT,StatModel.BLOCK,1.5+1.5*m.level]);
 					applyEnchant(30,"Shadow King's",m,30,[SpriteModel.ATTACK,ActionBase.HITRATE,2+2*m.level]);
 					m.tags.push(EffectData.RELIC);
+					m.tags.push(EffectData.PREMIUM);
 					return m;
 				}else if (_index==31){
 					applyEnchant(31,"",m,1,[SpriteModel.ATTACK,ActionBase.CRITRATE,0.005*m.level]);
@@ -402,6 +402,7 @@
 					applyEnchant(31,"",m,1,[SpriteModel.STAT,StatModel.HEALTH,2+2*m.level]);
 					applyEnchant(31,"Shadow Queen's",m,30,[SpriteModel.STAT,StatModel.MANA,2+1*m.level]);
 					m.tags.push(EffectData.RELIC);
+					m.tags.push(EffectData.PREMIUM);
 					return m;
 				}
 			}else if (m.index==135){
@@ -2464,7 +2465,7 @@
 					
 					case 129: applySuffix(_index,"of the Sparrow",m,[[SpriteModel.ATTACK,ActionBase.HITRATE,20],[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,0.05],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.05]]); break; //Sparrow's Bow
 					case 130: applySuffix(_index,"of Distance",m,[[SpriteModel.STAT,StatModel.FAR,0.15]]); break; //Bycocket
-					case 131: applySuffix(_index,"of Doubling",m,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.DOUBLESHOT,5)]]); break; //Quickdraw Quiver
+					case 131: applySuffix(_index,"of Doubling",m,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.DOUBLESHOT,3)]]); break; //Quickdraw Quiver
 					
 					case 132: applySuffix(_index,"of Potency",m,[[SpriteModel.ATTACK,ActionBase.CRITMULT,1]]); break; //Sais
 					case 133: applySuffix(_index,"of Closeness",m,[[SpriteModel.STAT,StatModel.NEAR,0.15]]); break; //Fukumen

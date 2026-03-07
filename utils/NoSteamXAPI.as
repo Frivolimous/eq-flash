@@ -33,8 +33,6 @@
         private function initLocalSave():void {
             // Default fallback
             saveSO = SharedObject.getLocal("OfflineSave");
-            if (saveSO.data.playerData == null)
-                saveSO.data.playerData = {};
         }
 
         /**
@@ -45,7 +43,9 @@
             saveSO.flush();
         }
         
-        private function deleteEverything(): void {
+        public function deleteEverything(): void {
+            saveSO.clear();
+            syncAll();
         }
 
         // ===============================
@@ -54,9 +54,9 @@
 
         public function setPlayerProperty(_key:String,_value:*):void {
             if (_value == null){
-                delete saveSO.data.playerData[_key];
+                delete saveSO.data[_key];
             }else{
-                saveSO.data.playerData[_key]=valueToJSON(_value);
+                saveSO.data[_key]=valueToJSON(_value);
             }
             delay=DELAY;
         }
@@ -64,9 +64,9 @@
         public function setPlayerProperties(_queue:Array):void {
             for(var i=0;i<_queue.length;i+=1){
                  if (_queue[i][1] == null){
-                    delete saveSO.data.playerData[_queue[i][0]];
+                    delete saveSO.data[_queue[i][0]];
                 }else{
-                    saveSO.data.playerData[_queue[i][0]]=valueToJSON(_queue[i][1]);
+                    saveSO.data[_queue[i][0]]=valueToJSON(_queue[i][1]);
                 }
             }
             delay=DELAY;
@@ -75,10 +75,10 @@
         public function submitPlayerData(_obj:*):void {
             for (var key:String in _obj) {
                 if (_obj[key] == null) {
-                    delete saveSO.data.playerData[key];
+                    delete saveSO.data[key];
                 } else {
                     // Storing as JSON-friendly format
-                    saveSO.data.playerData[key] = String(_obj[key]);
+                    saveSO.data[key] = String(_obj[key]);
                 }
             }
 
@@ -89,8 +89,8 @@
             var result:Object = {};
 
             for each (var key:String in _vars) {
-                if (saveSO.data.playerData[key] != null) {
-                    result[key] = stringToValue(saveSO.data.playerData[key]);
+                if (saveSO.data[key] != null) {
+                    result[key] = stringToValue(saveSO.data[key]);
                 }
             }
 
@@ -99,8 +99,8 @@
 
         public function retrieveAllPlayerData(_onComplete:Function):void {
             var result:Object = {};
-            for (var key:String in saveSO.data.playerData) {
-                result[key] = stringToValue(saveSO.data.playerData[key]);
+            for (var key:String in saveSO.data) {
+                result[key] = stringToValue(saveSO.data[key]);
             }
             Facade.addLine("retrieving player data: " + JSON.stringify(result));
 
@@ -109,7 +109,7 @@
 
         public function deletePlayerData(a:Array):void {
             for each (var key:String in a)
-                delete saveSO.data.playerData[key];
+                delete saveSO.data[key];
 
             delay=DELAY;
         }

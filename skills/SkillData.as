@@ -226,15 +226,15 @@
 					break;
 				case UNARMED:
 					//_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,10+1.5*i],[SpriteModel.UNARMED,ActionBase.HITRATE,9*i],[SpriteModel.UNARMED,ActionBase.DODGE_REDUCE,0.01*i],[SpriteModel.UNARMED,StatModel.BLOCK,10*i],[SpriteModel.UNARMED,ActionBase.CRITMULT,0.1*i]];
-					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.HITRATE,9*i],[SpriteModel.STAT,StatModel.BLOCK,10*i],[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,i)]];
+					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.HITRATE,8*i],[SpriteModel.STAT,StatModel.BLOCK,5*i],[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,i)]];
 					break;
 				case KI_STRIKE:
-					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.CRITRATE,0.012*i],[SpriteModel.STAT,StatModel.RMAGICAL,0.01*i],[SpriteModel.UNARMED,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.KI_STRIKE,i)]];
+					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.CRITRATE,0.012*i],[SpriteModel.STAT,StatModel.RMAGICAL,0.02*i],[SpriteModel.UNARMED,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.KI_STRIKE,i)]];
 					break;
 				case FLURRY:
 					//_skill.values=[[SpriteModel.UNARMED,ActionBase.HITRATE,4*i],[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,i)]];
 					//_skill.values=[[SpriteModel.UNARMED,ActionBase.DODGE_REDUCE,0.01*i]];
-					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.DODGE_REDUCE,0.01*i],[SpriteModel.STAT,StatModel.RPHYS,0.01*i],[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.MASSIVE_BLOW,i)]];
+					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.DODGE_REDUCE,0.01*i],[SpriteModel.STAT,StatModel.RPHYS,0.02*i],[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.MASSIVE_BLOW,i)]];
 					break;
 				case PURITY:
 					_skill.values=[[SpriteModel.UNARMORED,StatModel.INITIATIVE,i*4],[SpriteModel.UNARMORED,StatModel.DODGE,Facade.diminish(0.027,i)],[SpriteModel.UNARMORED,StatModel.TURN,Facade.diminish(0.035,i)],[SpriteModel.UNARMORED,StatModel.HREGEN,0.003*i],[SpriteModel.UNARMORED,StatModel.MREGEN,0.003*i]];
@@ -253,14 +253,14 @@
 					_skill.values=[[SpriteModel.STAT,StatModel.MANA,5*i],[SpriteModel.STAT,StatModel.MREGEN,0.005*i],[SpriteModel.STAT,StatModel.SLOTS,(i>0?1:0)+(i>=7?1:0)]];
 					break;
 				case ATTUNEMENT:
-					_skill.values=[[SpriteModel.STAT,StatModel.RMAGICAL,0.05+Facade.diminish(0.05,i)],[SpriteModel.STAT,StatModel.RCHEMICAL,0.02+Facade.diminish(0.02,i)],[SpriteModel.STAT,StatModel.RSPIRIT,0.035+Facade.diminish(0.035,i)]];
+					_skill.values=[[SpriteModel.STAT,StatModel.RMAGICAL,Facade.diminish(0.13,i)],[SpriteModel.STAT,StatModel.RCHEMICAL,Facade.diminish(0.04,i)],[SpriteModel.STAT,StatModel.RSPIRIT,Facade.diminish(0.077,i)]];
 					break;
 				case TURNING:
-					_skill.values=[[SpriteModel.STAT,StatModel.TURN,Facade.diminish(0.06,i)]];
+					_skill.values=[[SpriteModel.STAT,StatModel.TURN,Facade.diminish(0.11,i)]];
 					break;
 					
 				case PRECISION:
-					_skill.values=[[SpriteModel.ATTACK,ActionBase.HITRATE,12*i],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01*i],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.15*i]];
+					_skill.values=[[SpriteModel.ATTACK,ActionBase.HITRATE,12*i],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.015*i],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.2*i]];
 					break;
 				case GADGETEER:
 					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,4*i],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.DOUBLESHOT,i)]];
@@ -269,7 +269,7 @@
 					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,7*i],[SpriteModel.STAT,StatModel.DODGE,Facade.diminish(0.03,i)],[SpriteModel.STAT,StatModel.BLOCK,4*i]];
 					break;
 				case VITAL:
-					_skill.values=[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.012*i],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.INITIAL_MARK,i)]];
+					_skill.values=[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.02*i],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.INITIAL_MARK,i)]];
 					break;
 				case WITHDRAW:
 					_skill.action=ActionData.makeAction(ActionData.WITHDRAW,i);
@@ -288,14 +288,14 @@
 					_skill.values=[[SpriteModel.STAT,StatModel.ITEMEFF,0.02*i],[SpriteModel.STAT,StatModel.CRAFT_BELT,2.5*i]];
 					break;
 				case DETERMINED:
-					_skill.values=[[SpriteModel.STAT,StatModel.RCHEMICAL,0.05+Facade.diminish(0.033,i)],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.CLEANSE,i)]];
+					_skill.values=[[SpriteModel.STAT,StatModel.RCHEMICAL,Facade.diminish(0.13,i)],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.CLEANSE,i)]];
 					break;
 				
 				case PACT:
 					_skill.values=[[SpriteModel.STAT,StatModel.STRENGTH,6*i],[SpriteModel.STAT,StatModel.MPOWER,6*i],[SpriteModel.STAT,StatModel.INITIATIVE,6*i],[SpriteModel.ATTACK,ActionBase.HITRATE,6*i],[SpriteModel.STAT,StatModel.RSPIRIT,0-0.05]];
 					break;
 				case BINDING:
-					_skill.values=[[SpriteModel.STAT,StatModel.HEALTH,18*i],[SpriteModel.STAT,StatModel.MANA,4*i],[SpriteModel.STAT,StatModel.RMAGICAL,0.1+Facade.diminish(0.035,i)],[SpriteModel.STAT,StatModel.RCHEMICAL,0.02+Facade.diminish(0.02,i)],[SpriteModel.STAT,StatModel.RSPIRIT,0-0.05]];
+					_skill.values=[[SpriteModel.STAT,StatModel.HEALTH,18*i],[SpriteModel.STAT,StatModel.MANA,4*i],[SpriteModel.STAT,StatModel.RMAGICAL,0.06+Facade.diminish(0.075,i)],[SpriteModel.STAT,StatModel.RCHEMICAL,0.07+Facade.diminish(0.04,i)],[SpriteModel.STAT,StatModel.RSPIRIT,0-0.05]];
 					break;
 				case DEPTHS:
 					_skill.values=[[SpriteModel.STAT,StatModel.CURSEMULT,0.2+0.02*i],[SpriteModel.STAT,StatModel.PROCS,new EffectDmgBoost("Dmg/Curse",i,EffectDmgBoost.NUM_CURSE,0.05+0.02*i)]];
@@ -328,10 +328,10 @@
 					_skill.values=[[SpriteModel.ATTACK,ActionBase.HITRATE,7*i],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.16*i],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.STEALTH_CMULT,i)]];
 					break;
 				case DEADLY_SHADOWS:
-					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,4*i],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.019*i],[SpriteModel.ATTACK,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.STEALTH_CRATE,i)]];
+					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,4*i],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.016*i],[SpriteModel.ATTACK,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.STEALTH_CRATE,i)]];
 					break;
 				case DANCING_SHADOWS:
-					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,4*i],[SpriteModel.STAT,StatModel.DODGE,0.04+Facade.diminish(0.03,i)],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.STEALTH_DODGE,i)]];
+					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,4*i],[SpriteModel.STAT,StatModel.DODGE,0.03+Facade.diminish(0.025,i)],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.STEALTH_DODGE,i)]];
 					break;
 				case ASSASSINATE:
 					_skill.values=[[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.ASSASSINATE,i)]];

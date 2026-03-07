@@ -242,7 +242,7 @@
 			scores[SCORE_REFRESH]=i*10;
 		}
 		
-		public static function addRefresh(){
+		public static function addRefresh():void{
 			scores[SCORE_REFRESH]+=1;
 			if (scores[SCORE_REFRESH]>150) scores[SCORE_REFRESH]=150;
 		}
@@ -392,6 +392,7 @@
 			//You may get an overflow item and scores will be changed for lots of stuff.
 			saveCharacter(_slot,a);
 			saveThese([OVERFLOW,SCORES,EPICS]);
+			pingServer();
 		}
 		
 		public static function saveCharacterDuel(_slot:int,a:Array){
@@ -458,7 +459,7 @@
 			//null
 		}
 		
-		public static function checkBusy(e:Event){			
+		public static function checkBusy(e:Event):void {			
 			Facade.steamAPI.submitDataPerTick();
 			if (ready && BUSY){
 				Facade.stage.addChild(loading);				
@@ -469,6 +470,7 @@
 		
 		public static function pingServer(){
 			Facade.steamAPI.getTime(getPong);
+			Facade.traceMoment();
 		}
 		
 		public static function getPong(_date:Number){

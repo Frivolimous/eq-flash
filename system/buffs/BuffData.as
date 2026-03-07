@@ -183,7 +183,7 @@
 				//Action Buffs
 				case RUSHED: return new BuffStats(-1,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,-0.1],[SpriteModel.STAT,StatModel.TURN_REDUCE,-0.1]]);
 				case AIMING: return new BuffStats(-1,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.HITRATE,5+5*level]]);
-				case LEAP_ATTACK: return new BuffStats(-1,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,-0.1+0.02*level],[SpriteModel.STAT,StatModel.DMGMULT,0.1*level]]);
+				case LEAP_ATTACK: return new BuffStats(-1,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,-0.1+0.02*level],[SpriteModel.STAT,StatModel.DMGMULT,0.15*level]]);
 				
 				//Spell Curses
 				case WEAKENED: return new BuffStats(21,label,level,BuffBase.CURSE,5,[[SpriteModel.STAT,StatModel.DMGMULT,-0.1-0.7*Facade.diminish(0.09,halfLevel)]]);

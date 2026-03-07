@@ -141,7 +141,7 @@
 				case HITMULT: hitmult+=_value; break;
 				case USERATE: userate=addMult(userate,_value); break;
 				case DAMAGE: damage+=_value; break;
-				case CRITRATE: critrate=addMult(critrate,_value); break;
+				case CRITRATE: critrate+=_value; break;
 				case CRITMULT: critmult+=_value; break;
 				case EFFECT: effects.push(_value); break;
 				case CEFFECT: cEffects.push(_value); break;
@@ -161,7 +161,7 @@
 				case HITMULT: hitmult-=_value; break;
 				case USERATE: userate=subMult(userate,_value); break;
 				case DAMAGE: damage-=_value; break;
-				case CRITRATE: critrate=subMult(critrate,_value); break;
+				case CRITRATE: critrate-=_value; break;
 				case CRITMULT: critmult-=_value; break;
 				case EFFECT: effects.splice(effects.indexOf(_value),1); break;
 				case CEFFECT: cEffects.splice(cEffects.indexOf(_value),1); break;
@@ -181,7 +181,7 @@
 				case HITMULT: return hitmult;
 				case USERATE: return userate;
 				case DAMAGE: return damage;
-				case CRITRATE: return critrate;
+				case CRITRATE: return Math.min(critrate, 1);
 				case CRITMULT: return critmult;
 				case EFFECT: return effects;
 				case CEFFECT: return cEffects;

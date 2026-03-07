@@ -130,6 +130,7 @@
 		}
 		
 		public function clearData(){
+			Facade.steamAPI.deleteEverything();
 			GameData.resetPlayerData();
 		}
 		

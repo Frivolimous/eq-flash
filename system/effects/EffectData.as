@@ -279,7 +279,7 @@
 				case MPOWSCALING: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,1,level/10);
 				case CHAIN: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HIT,1,level);
 				case MULTI: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,1,level);
-				case DOUBLESHOT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,0.1+0.09*level,1);
+				case DOUBLESHOT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,0.05+0.070*level,1);
 				case UNARMED_INIT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,1,0);
 				case BASE_DMG: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,1,5+level/2);
 				case INIT_SPELL: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,1,0.1+0.02*level);
@@ -298,8 +298,8 @@
 				
 				//--- STEALTH ---
 				case STEALTH_CMULT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.INITIAL,1,0.16*level); //Initiate:: CMult
-				case STEALTH_CRATE:	return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,0.019*level); //C.Effect:: CRate
-				case STEALTH_DODGE: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DODGE,1,0.04+Facade.diminish(0.03,level)); //On Dodge:: Dodge
+				case STEALTH_CRATE:	return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,0.016*level); //C.Effect:: CRate
+				case STEALTH_DODGE: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DODGE,1,0.03+Facade.diminish(0.025,level)); //On Dodge:: Dodge
 				case STEALTH_CLEAR_DAMAGED: return new EffectBase(label,0,EffectBase.INSTANT,EffectBase.HURT,1);
 				case STEALTH_CLEAR_ATTACK: return new EffectBase(label,0,EffectBase.INSTANT,EffectBase.OFFENSE,1);
 				
@@ -317,7 +317,7 @@
 				
 				case IGNORE_ATTACK: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,BuffData.makeBuff(BuffData.ATTACK_IGNORED,level));
 				case BUILD_WALL: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.HURT,1,BuffData.makeBuff(BuffData.BUILD_WALL,level));
-				case DTHROW: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DEFENSE,Facade.diminish(0.06,level),0);
+				case DTHROW: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DEFENSE,Facade.diminish(0.077,level),0);
 				
 				case FURY_HURT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,10+level);
 				case FURY_INIT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.INITIAL,1,5+2*level);

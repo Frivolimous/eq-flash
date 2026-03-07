@@ -193,14 +193,15 @@
 		
 		public static function skillTree(i:int):String{
 			switch(i){
-				case SkillData.WARRIOR: return "Mixture of Offense and Defense";
+				case SkillData.WARRIOR: return "Balance of Offense and Defense";
 				case SkillData.MONK: return "Unarmed warrior with mystic tendencies";
 				case SkillData.WIZARD: return "Specialized spellcaster and destroyer.";
 				case SkillData.RANGER: return "Ranged Master and Critical Thinker.";
 				case SkillData.ALCHEMIST: return "Many tricks and many treats.";
-				case SkillData.ACOLYTE: return "Made a deal with darkness for more power.";
-				case SkillData.PALADIN: return "Made a deal with the light for more power.";
+				case SkillData.ACOLYTE: return "Servant of a dark master, gaining unholy power.";
+				case SkillData.PALADIN: return "Servant of a bright master, gaining holy power.";
 				case SkillData.ROGUE: return "Master of shadows and lethality.";
+				case SkillData.BERSERKER: return "Brutal and wild survivor.";
 				default: return null;
 			}
 		}
@@ -243,11 +244,16 @@
 					case GUARD: return "Your skin tingles with power and your confidence grows.";
 					case ALLY: return "As your soul grows strong your power increases.";
 					case PROTECTION: return "You are surrounded by love and light.";
-					case ONE_SHADOWS: return "You meld effortlessly into your surroundings";
-					case DEADLY_SHADOWS: return "You strike quickly and precisely";
-					case DANCING_SHADOWS: return "You move with the darkness, disappearing from view";
+					case ONE_SHADOWS: return "You meld effortlessly into your surroundings.";
+					case DEADLY_SHADOWS: return "You strike quickly and precisely.";
+					case DANCING_SHADOWS: return "You move with the darkness, disappearing from view.";
 					case ASSASSINATE: return "You first cut strikes deepest.";
-					case DEFENSIVE_ROLL: return "You move with your opponent and turn blows aside";
+					case DEFENSIVE_ROLL: return "You move with your opponent and turn blows aside.";
+					case WILDERNESS: return "Living off the land has trained your health and endurance.";
+					case FURIOUS: return "The more you fail, the angrier you get.";
+					case LASTING_ANGER: return "Your rage is endless, supplying your power.";
+					case BLOODLUST: return "Your strikes are filled with a lust for blood, keeping your anger alive.";
+					case UNSTOPPABLE: return "When your blood boils you become unbreakable.";
 					default: return null;
 				}
 			}
