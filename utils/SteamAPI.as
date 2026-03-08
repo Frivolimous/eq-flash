@@ -111,17 +111,35 @@
             }
         }
         
-        private function deleteEverything(): void {
-            if (connected) {
-                // This tells Steam: "Delete this from the cloud and the user's disk"
-                steam.fileDelete("savegame.json");
-                Facade.addLine("Attempting to kill the ghost JSON...");
-            }
+        public function deleteEverything(): void {
+            saveSO.clear();
+            saveSO.data.playerData = {};
+            syncAll();
         }
 
         // ===============================
         // PLAYER DATA SAVE / LOAD
         // ===============================
+
+        public function setPlayerProperty(_key:String,_value:*):void {
+            if (_value == null){
+                delete saveSO.data.playerData[_key];
+            }else{
+                saveSO.data.playerData[_key]=valueToJSON(_value);
+            }
+            delay=DELAY;
+        }
+
+        public function setPlayerProperties(_queue:Array):void {
+            for(var i=0;i<_queue.length;i+=1){
+                 if (_queue[i][1] == null){
+                    delete saveSO.data.playerData[_queue[i][0]];
+                }else{
+                    saveSO.data.playerData[_queue[i][0]]=valueToJSON(_queue[i][1]);
+                }
+            }
+            delay=DELAY;
+        }
 
         public function submitPlayerData(_obj:*):void {
             for (var key:String in _obj) {
@@ -133,8 +151,7 @@
                 }
             }
 
-            syncAll();
-            Facade.addLine("Game Saved to Cloud");
+            delay=DELAY;
         }
 
         public function retrievePlayerData(_vars:Array,_onComplete:Function):void {
@@ -142,9 +159,7 @@
 
             for each (var key:String in _vars) {
                 if (saveSO.data.playerData[key] != null) {
-                    result[key] = {
-                        Value: saveSO.data.playerData[key]
-                    };
+                    result[key] = stringToValue(saveSO.data.playerData[key]);
                 }
             }
 
@@ -288,5 +303,126 @@
     //     steam["setStatInt"]("stat_kills", saveSO.data.playerData.SCORE_KILLS);
     // steam["setStatInt"]("stat_deaths", saveSO.data.playerData.SCORE_DEATHS);
     // steam["setStatInt"]("stat_ascends", saveSO.data.playerData.SCORE_ASCENDS);
+        // === OLD SUBFUNKS === \\
+		public var delay:int=0;
+		public const DELAY:int=2;
+		public function submitDataPerTick(){
+			if (delay>0){
+				delay-=1;
+				return;
+			}
+
+            if (delay==0){
+                delay-=1;
+                syncAll();
+                Facade.addLine("Game Saved to Cloud");
+            }
+		}
+		
+		public function valueToJSON(v:*):*{
+			if (v is Number || v is int || v is String || v is Boolean){
+				return String(v);
+			}else if (v is Array){
+				return arrayToString(v);
+			}else{
+				return null;
+			}
+		}
+		
+		public function arrayToString(a:Array,_incNull:Boolean=false):String{
+			var m:String="[";
+			for (var i:int=0;i<a.length;i+=1){
+				if (a[i] is Array){
+					m+=arrayToString(a[i],_incNull);
+				}else if (_incNull){
+					if (a[i]==null){
+						m+="null";
+					}else if (a[i] is String){
+						m+='"'+String(a[i])+'"';
+					}else{
+						m+=String(a[i]);
+					}
+				}else if (a[i]!=null){
+					m+=String(a[i]);
+				}
+				if (i<a.length-1){
+					m+=",";
+				}
+			}
+			
+			m+="]";
+			return m;
+		}
+
+        public function stringToValue(s:String):*{
+			if (s=="true"){
+				return true;
+			}else if (s=="false"){
+				return false;
+			}else if (s.search(/\d/)==0 || s.substr(0,1)=="-"){
+				return Number(s);
+			}else if (s.charAt(0)=="["){
+				return stringToArray(s);
+			}else{
+				return s;
+			}
+		}
+				
+		public function stringToArray(s:String):*{
+			var m:Array=new Array;
+			//var j:*=JSON.parse("{a:"+s+"}");
+			s=s.substring(1);
+			
+			while(s.length>0){
+				if (s.charAt(0)=="["){
+					var i:int=1;
+					char=0
+					var r:int=0;
+					s2=s;
+					while (i>0){
+						var s2:String=s2.substring(char+1);
+						r+=char+1;
+						char=s2.search(/(\[|\])/);
+						if (s.charAt(char+r)=="["){
+							i+=1;
+						}else{
+							i-=1;
+						}
+					}
+					m.push(stringToArray(s.substring(0,char+r+1)));
+					s=s.substring(char+r+2);
+					
+				}else{
+					var char:int=s.indexOf(",");
+					if (char==-1){
+						char=s.indexOf("]");
+						if (char==0){
+							m.push(null);
+						}else{
+							m.push(stringToValue(s.substring(0,char)));
+						}
+						s="";
+					}else{
+						if (char==0){
+							m.push(null);
+							s=s.substring(1);
+						}else{
+							m.push(stringToValue(s.substring(0,char)));
+							s=s.substring(char+1);
+						}
+					}
+				}
+			}
+			return m;
+		}
+
+        public function get BUSY():Boolean{
+			return delay>0;
+		}
+		
+		public function set BUSY(b:Boolean){
+			//null
+		}
+		
     }
 }

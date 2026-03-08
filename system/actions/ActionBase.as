@@ -181,7 +181,7 @@
 				case HITMULT: return hitmult;
 				case USERATE: return userate;
 				case DAMAGE: return damage;
-				case CRITRATE: return Math.min(critrate, 1);
+				case CRITRATE: return critrate;
 				case CRITMULT: return critmult;
 				case EFFECT: return effects;
 				case CEFFECT: return cEffects;
@@ -361,7 +361,7 @@
 			hitrate+=_v.hitrate;
 			hitmult+=_v.hitmult;
 			type=_v.type;
-			critrate=addMult(critrate,_v.critrate);
+			critrate+=_v.critrate;
 			critmult+=_v.critmult;
 			cEffects=cEffects.concat(_v.cEffects);
 			furytohit+=_v.furytohit;

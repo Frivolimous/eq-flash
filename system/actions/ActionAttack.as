@@ -89,8 +89,11 @@
 			
 			if (_random){
 				m.damage*=(1+_v.stats.drange*(GameModel.random()-0.5)*2);
-				
-				if (m.critrate>0 && GameModel.random()<m.critrate){
+
+				// var _critrate:Number=(1-0.25*m.critrate)*m.critrate;
+				var _critrate = Math.floor(m.critrate, 1);
+
+				if (_critrate>0 && GameModel.random()<_critrate){
 					m.crit=true;
 					if (m.cEffects.length>0){
 						for (i=0;i<m.cEffects.length;i+=1){
@@ -106,7 +109,12 @@
 						}
 					}
 					
-					m.damage*=m.critmult;
+					var _brutrate:Number=m.critrate/_critrate-1;
+					var _critmult:Number=m.critmult;
+					if (GameModel.random()<_brutrate) {
+						_critmult+=m.critmult-1;
+					}
+					m.damage*=_critmult;
 					dmgModel.after=PopEffect.CRIT;
 				}else{
 					_effect=m.findEffect(EffectData.NONCRIT);
