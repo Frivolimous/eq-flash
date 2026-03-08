@@ -84,7 +84,7 @@
 				m.damage*=(1+_v.stats.drange*(GameModel.random()-0.5)*2);
 				
 				// var _critrate:Number=(1-0.25*m.critrate)*m.critrate;
-				var _critrate = Math.floor(m.critrate, 1);
+				var _critrate = Math.min(m.critrate, 1);
 				
 				if (_critrate>0 && GameModel.random()<_critrate){
 					m.crit=true;

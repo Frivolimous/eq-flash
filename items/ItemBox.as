@@ -64,7 +64,7 @@
 				case UPGRADE: if (_item.model.level<20 && _item.model.level!=15 && _item.model.slot!=ItemData.TRADE) return true; break;
 				case STACK: if (_item.model.charges>=0 && _item.model.charges<_item.model.maxCharges() && _item.model.index!=135 && _item.model.index!=136) return true; break;
 				case NONE: return true; break;
-				case FORGE: if (_item.model.level>=15 && _item.model.slot!=ItemData.TRADE) return true; break;
+				case FORGE: if (_item.model.level>=15 && _item.model.primary!=ItemData.TRADE) return true; break;
 			}
 			return false;
 		}
