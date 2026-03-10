@@ -144,7 +144,7 @@
 				case CANNIBALISM: return new BuffStats(141,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.LEECH,0.25+0.025*level],[SpriteModel.ATTACK,ActionBase.HITRATE,10+5*level],[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,0.5],[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.CANNIBAL_CLEAR_ATTACK,0)]]);
 				//Pot Buffs
 				case BUFF_POT: return new BuffStats(34,label,level,BuffBase.BUFF,5,[[SpriteModel.STAT,StatModel.STRENGTH,15+5*halfLevel],[SpriteModel.STAT,StatModel.MPOWER,15+5*halfLevel],[SpriteModel.STAT,StatModel.INITIATIVE,15+5*halfLevel],[SpriteModel.STAT,StatModel.THROWEFF,0.15+0.05*halfLevel],[SpriteModel.STAT,StatModel.RMAGICAL,0.1+0.7*Facade.diminish(0.03,level)],[SpriteModel.STAT,StatModel.RCHEMICAL,0.1+0.7*Facade.diminish(0.03,level)],[SpriteModel.STAT,StatModel.RSPIRIT,0.1+0.7*Facade.diminish(0.03,level)]]);
-				case CELERITY_POT: return new BuffStats(98,label,level,BuffBase.BUFF,5,[[SpriteModel.ATTACK,ActionBase.HITRATE,15+5*level],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.02+Facade.diminish(0.01,halfLevel)],[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,1+0.5*halfLevel)]]);
+				case CELERITY_POT: return new BuffStats(98,label,level,BuffBase.BUFF,5,[[SpriteModel.ATTACK,ActionBase.HITRATE,15+5*level],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.6*Facade.diminish(0.01,halfLevel)],[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,1+0.5*halfLevel)]]);
 				case TURTLE_POT: return new BuffStats(99,label,level,BuffBase.BUFF,5,[[SpriteModel.STAT,StatModel.BLOCK,20+6.6*level],[SpriteModel.STAT,StatModel.RPHYS,0.02+Facade.diminish(0.011,level)],[SpriteModel.STAT,StatModel.RMAGICAL,0.05+Facade.diminish(0.019,level)],[SpriteModel.STAT,StatModel.RCHEMICAL,0.05+Facade.diminish(0.019,level)],[SpriteModel.STAT,StatModel.RSPIRIT,0.05+Facade.diminish(0.019,level)],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.SPIKEY,Math.floor(level*0.7))]]);
 				case PURITY_POT: return new BuffStats(100,label,level,BuffBase.BUFF,5,[[SpriteModel.STAT,StatModel.DODGE,0.02+Facade.diminish(0.018,halfLevel)],[SpriteModel.STAT,StatModel.TURN,0.02+Facade.diminish(0.018,halfLevel)],[SpriteModel.STAT,StatModel.HREGEN,0.005+0.001*halfLevel],[SpriteModel.STAT,StatModel.MREGEN,0.005+0.001*halfLevel]]);				
 				case GRAILED: return new BuffStats(114,label,level,BuffBase.BUFF,3,[[SpriteModel.STAT,StatModel.HREGEN,0.01+0.004*halfLevel]]);
@@ -163,7 +163,7 @@
 				case COOLDOWN: return new BuffStats(87,label,level,BuffBase.CURSE,2,[[SpriteModel.STAT,StatModel.STRMULT,-0.9],[SpriteModel.STAT,StatModel.INITMULT,-0.9]]);
 				
 				//Proc Buffs
-				case CRIT_ACCUM: return new BuffStats(BuffView.ARTIFACT_START+19,label,level,BuffBase.BUFF,-1,[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.05+0.01*level]],10);
+				case CRIT_ACCUM: return new BuffStats(BuffView.ARTIFACT_START+19,label,level,BuffBase.BUFF,-1,[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.03+0.007*level]],10);
 				case COMBO: return new BuffStats(107,label,level,BuffBase.BUFF,1,[[SpriteModel.STAT,StatModel.DMGMULT,0.20+0.01*halfLevel]],3);
 				case COMBO_DEFENSE: return new BuffStats(103,label,level,BuffBase.BUFF,2,[[SpriteModel.STAT,StatModel.RPHYS,0.01+0.001*halfLevel],[SpriteModel.STAT,StatModel.RCHEMICAL,0.025+0.0025*halfLevel]],8);
 				case QUICK: return new BuffStats(-1,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.HITRATE,8*level]]);

@@ -601,6 +601,16 @@
 				versionChecked=2;
 				dataUpdated=2;
 			}else{
+				Facade.addLine("Processing...");
+				if (_Data.scores && _Data.scores.Value!=null){
+					Facade.addLine("Resetting...");
+					Facade.steamAPI.deleteEverything();
+					resetPlayerData();
+					versionChecked=2;
+					dataUpdated=2;
+					return;
+				}
+
 				if (_Data.scores==null) {
 					scores=new Array(NUM_SCORES);
 				}else{
@@ -720,6 +730,7 @@
 				}
 				
 				dataUpdated=2;
+				Facade.addLine("Data Processed");
 				checkVersion(_Data);
 			}
 		}
@@ -881,6 +892,7 @@
 			for (i=0;i<scores.length;i+=1){
 				scores[i]=0;
 			}
+			scores[SCORE_REFRESH]=5;
 			flags=[false,false,false,false,false,false,false,false,false];
 			achievements=[];
 			while(achievements.length<AchieveData.NUM_ACHIEVEMENTS){

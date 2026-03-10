@@ -10,33 +10,20 @@
 	import system.effects.EffectBuffBasic;
 	
 	public class EnemyData{
-		public static const WARLOCK:String="Warlock",
-							WSHAMAN:String="Warlock Shaman",
-							GRUNTLING:String="Gruntling",
-							FLOATER:String="Floater",
-							SKULTOPUS:String="Skultopus",
-		
-							FIGHTER:String="Goblin Fighter",
+		public static const FIGHTER:String="Goblin Fighter",
 							SHAMAN:String="Goblin Shaman",
 							ALCHEMIST:String="Goblin Alchemist",
 							BRUTE:String="Goblin Brute",
-							TREE:String="Stumpling",
 							VINE:String="Vine",
 							BLOB:String="Blob",
 							CHIEF:String="Goblin Chief",
 							
-							DRAGON:String="Dragon",
 							RHINO:String="Uniceratops",
-							TIGER:String="Tiger",
-							WHELP:String="Whelp",
-							WOLF:String="Wolf",
-							BOAR:String="Mega Boar",
-							
 							GOATMAN:String="Goat Man",
 							CATMAN:String="Cat Man",
 							GUARDIAN:String="Guardian",
 							BIRDMAN:String="Bird Man",
-							//RHINO:String="Rhino",
+							BOAR:String="Mega Boar",
 							
 							IMP:String="Imp",
 							HELLING:String="Helling",
@@ -50,7 +37,6 @@
 			["Wild","Savage","Dire"],
 			["Hellish","Plasmic","Spectral"]];
 		
-		public static const NAMES:Array=[FIGHTER,BRUTE,SHAMAN,ALCHEMIST,VINE,BLOB,DRAGON,RHINO,TIGER,WHELP,WOLF,IMP,HELLING,GOLEM,FLAMBERT,SKELETON];
 		public static const SHADOW:Array=[
 			["Shadow Knight",25,11,[5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[[1,2,0,-2,0],[12,2,0,-2,0],[25,2,0,-1,0],null,null,[31,2,6,-1,0],[31,2,6,-1,0]]],
@@ -396,7 +382,7 @@
 							break;
 						case 2:
 							spawn.label=GOLEM;
-							setBaseStats(_level,0,3,3,6,5,4);
+							setBaseStats(_level,0,3,3,5,5,4);
 							spawn.stats.addValue(StatModel.RMAGICAL,0.2);
 							spawn.stats.addValue(StatModel.RSPIRIT,0.2);
 							spawn.actionList.attack.critrate+=0.2;
@@ -467,6 +453,10 @@
 				
 				spawn.actionList.attack.critrate=0.05;
 				spawn.actionList.attack.critmult=2;
+				if(_level>100){
+					spawn.actionList.attack.dodgeReduce=Math.min(_level/50000,0.1);
+					spawn.stats.addValue(StatModel.TURN_REDUCE,Math.min(_level/50000,0.1));
+				}
 			}
 		}
 

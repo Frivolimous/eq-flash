@@ -188,9 +188,9 @@
 					case 70: return new ItemEquipment(_index,"Crown",_level,HELMET,MEDIUM,500,null,[[SpriteModel.STAT,StatModel.HEALTH,110+58*_level],[SpriteModel.STAT,StatModel.RCRIT,.2],[SpriteModel.STAT,StatModel.INITIATIVE,-10],[SpriteModel.STAT,StatModel.DODGE,-0.1],[SpriteModel.STAT,StatModel.ILOOT,0.06+0.006*_level]],[EffectData.PREMIUM]);
 					case 71: return new ItemEquipment(_index,"Protector",_level,HELMET,UNARMORED,500,null,[[SpriteModel.STAT,StatModel.HEALTH,61+27*_level],[SpriteModel.STAT,StatModel.RCRIT,.05],[SpriteModel.STAT,StatModel.MANA,5+1*_level],[SpriteModel.STAT,StatModel.STRENGTH,1+_level],[SpriteModel.STAT,StatModel.MPOWER,1+_level],[SpriteModel.STAT,StatModel.INITIATIVE,1+_level],[SpriteModel.STAT,StatModel.DODGE,0.01+0.003*_level],[SpriteModel.STAT,StatModel.TURN,0.01+0.003*_level]],[EffectData.PREMIUM]);
 					
-					case 72: return new ItemEquipment(_index,"Katanas",_level,WEAPON,DOUBLE,500,ActionData.makeWeapon(20+1.2*_level,null,null,0,0.10+0.02*_level,-0.25-0.05*_level),null,[EffectData.PREMIUM]);
+					case 72: return new ItemEquipment(_index,"Katanas",_level,WEAPON,DOUBLE,500,ActionData.makeWeapon(20+1.2*_level,null,null,0,0.06+0.015*_level,-0.25-0.05*_level),null,[EffectData.PREMIUM]);
 					case 73: return new ItemEquipment(_index,"Light Sword",_level,WEAPON,TWO_HANDED,500,ActionData.makeWeapon(27+2.45*_level,new <EffectBase>[new EffectDamage("Luminant",18+9.5*_level,DamageModel.HOLY),EffectData.makeEffect(EffectData.ILLUMINATED,_level)],null,0,0,0,[EffectData.BONUS_STRENGTH]),null,[EffectData.PREMIUM]);
-					case 74: return new ItemEquipment(_index,"Rending Claws",_level,WEAPON,UNARMED,500,null,[[SpriteModel.UNARMED,ActionBase.CRITRATE,0.05+0.007*_level],[SpriteModel.UNARMED,ActionBase.CRITMULT,0.1+0.05*_level],[SpriteModel.UNARMED,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.REND,_level)]],[EffectData.PREMIUM]);
+					case 74: return new ItemEquipment(_index,"Rending Claws",_level,WEAPON,UNARMED,500,null,[[SpriteModel.UNARMED,ActionBase.CRITRATE,0.03+0.0045*_level],[SpriteModel.UNARMED,ActionBase.CRITMULT,0.1+0.05*_level],[SpriteModel.UNARMED,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.REND,_level)]],[EffectData.PREMIUM]);
 					case 75: return new ItemEquipment(_index,"Hylian Sword",_level,WEAPON,SHIELD,500,ActionData.makeWeapon(29+1.9*_level,new <EffectBase>[EffectData.makeEffect(EffectData.FULL_POWER,_level)],null,0,0,0,[EffectData.LONG_RANGED],true),[[SpriteModel.STAT,StatModel.BLOCK,12+11*_level]],[EffectData.PREMIUM]);
 					case 76: return new ItemEquipment(_index,"Plumber Gloves",_level,WEAPON,UNARMED,500,null,[[SpriteModel.ATTACK,ActionBase.EFFECT,new EffectDamage("Blazing",10+4*_level,DamageModel.CHEMICAL,7,1,PopEffect.FIRE)]],[EffectData.PREMIUM]);
 					case 77: return new ItemEquipment(_index,"Boxing Gloves",_level,WEAPON,UNARMED,500,null,[[SpriteModel.STAT,StatModel.BLOCK,4+4*_level],[SpriteModel.STAT,StatModel.DODGE,0.05+0.005*_level]],[EffectData.PREMIUM]);
@@ -231,7 +231,7 @@
 					
 					case 105: return new ItemEquipment(_index,"Riot Gear",_level,WEAPON,SHIELD,500,ActionData.makeWeapon(26+1.7*_level,new <EffectBase>[EffectData.makeEffect(EffectData.AUTHORITAH,_level)]),[[SpriteModel.STAT,StatModel.BLOCK,17+17*_level]],[EffectData.PREMIUM]);
 					case 106: return new ItemEquipment(_index,"Hell Hands",_level,WEAPON,UNARMED,500,null,[[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.COMBO,_level)]],[EffectData.PREMIUM]);
-					case 107: return new ItemEquipment(_index,"Chainsaw",_level,WEAPON,TWO_HANDED,500,ActionData.makeWeapon(1,new <EffectBase>[EffectData.makeEffect(EffectData.CHAIN,3)],new <EffectBase>[new EffectDamage("Bonus Physical",55+10*_level,DamageModel.PHYSICAL),EffectData.makeEffect(EffectData.TERRIFYING,1)],0,0.03+0.025*_level),null,[EffectData.PREMIUM]);
+					case 107: return new ItemEquipment(_index,"Chainsaw",_level,WEAPON,TWO_HANDED,500,ActionData.makeWeapon(1,new <EffectBase>[EffectData.makeEffect(EffectData.CHAIN,3)],new <EffectBase>[new EffectDamage("Bonus Physical",55+10*_level,DamageModel.PHYSICAL),EffectData.makeEffect(EffectData.TERRIFYING,1)],0,0.02+0.016*_level),null,[EffectData.PREMIUM]);
 					case 108: return new ItemModel(_index,"Eternal Tome",_level,EQUIPMENT,WEAPON,HELD,500,null,[[SpriteModel.STAT,StatModel.MPOWER,13+7*_level],[SpriteModel.STAT,StatModel.MRATE,0.2+0.03*_level]],-1,[EffectData.NO_ATTACK,EffectData.PREMIUM]);
 					case 109: return new ItemModel(_index,"Temporary Bow",_level,EQUIPMENT,WEAPON,HELD,500,null,[[SpriteModel.STAT,StatModel.PHYSEFF,0.1+0.01*_level],[SpriteModel.STAT,StatModel.IRATE,0.2+0.03*_level]],-1,[EffectData.NO_ATTACK,EffectData.PREMIUM]);
 					
@@ -266,8 +266,7 @@
 					
 					case 129: return new ItemEquipment(_index,"Sparrow's Bow",_level,WEAPON,RANGED,500,ActionData.makeRanged(38+1.65*_level,null,null,2+2*_level,0,0,0.1,[EffectData.PIERCE,EffectData.LONG_RANGED]),null,[EffectData.PREMIUM]);
 					case 130: return new ItemEquipment(_index,"Bycocket",_level,HELMET,LIGHT,500,null,[[SpriteModel.STAT,StatModel.HEALTH,80+40*_level],[SpriteModel.STAT,StatModel.RCRIT,.1],[SpriteModel.STAT,StatModel.FAR,0.1+0.01*_level]],[EffectData.PREMIUM]);
-					case 131: return new ItemModel(_index,"Quickdraw Quiver",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.006*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.DOUBLESHOT,Math.floor(_level/3+1))]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
-					
+					case 131: return new ItemModel(_index,"Quickdraw Quiver",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.004*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.DOUBLESHOT,Math.floor(_level/3+1))]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 132: return new ItemEquipment(_index,"Sais",_level,WEAPON,DOUBLE,500,ActionData.makeWeapon(14+0.94*_level,null,null,0,0.1+0.015*_level,0,[EffectData.PIERCE]),[[SpriteModel.STAT,StatModel.BLOCK,10+2*_level]],[EffectData.PREMIUM]);
 					case 133: return new ItemEquipment(_index,"Fukumen",_level,HELMET,UNARMORED,500,null,[[SpriteModel.STAT,StatModel.HEALTH,61+26*_level],[SpriteModel.STAT,StatModel.RCRIT,0.05],[SpriteModel.STAT,StatModel.DODGE,0.1+0.01*_level]],[EffectData.PREMIUM]);
 					case 134: return new ItemModel(_index,"Shuriken",_level,USEABLE,PROJECTILE,DAMAGING,750,ActionData.makeAction(ActionData.SHURIKEN,_level),null,(_charges>=0)?_charges:50,[EffectData.SUPER_PREMIUM]);
@@ -277,7 +276,7 @@
 					
 					case 137: return new ItemModel(_index,"Screamer",_level,USEABLE,TRINKET,CURSE,4000,ActionData.makeAction(ActionData.SCREAMER,_level),[],(_charges>=0)?_charges:2,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 138: return new ItemModel(_index,"Puzzling Mask",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.SPELLSTEAL,0.05+0.005*_level],[SpriteModel.STAT,StatModel.EFFECT,new EffectBuffBasic(BuffData.makeBuff(BuffData.TRAP,_level),EffectBase.CURSE,EffectBase.INITIAL)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
-					case 139: return new ItemModel(_index,"Big Bad Mask",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.ATTACK,ActionBase.HITRATE,2+2*_level],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.005*_level],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.1+0.05*_level],[SpriteModel.STAT,StatModel.ILOOT,0.05+0.005*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.GOLD_PER_KILL,_level)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
+					case 139: return new ItemModel(_index,"Big Bad Mask",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.ATTACK,ActionBase.HITRATE,2+2*_level],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.003*_level],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.1+0.05*_level],[SpriteModel.STAT,StatModel.ILOOT,0.05+0.005*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.GOLD_PER_KILL,_level)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 140: return new ItemModel(_index,"Muzzle",_level,USEABLE,TRINKET,DAMAGING,4000,ActionData.makeAction(ActionData.CANNIBAL,_level),[[SpriteModel.ATTACK,ActionBase.LEECH,0.05+0.005*_level]],(_charges>=0)?_charges:1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 141: return new ItemModel(_index,"Ruby Visor",_level,USEABLE,TRINKET,DAMAGING,4000,ActionData.makeAction(ActionData.CYCLOPS,_level),[],(_charges>=0)?_charges:1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 142: return new ItemModel(_index,"Rocketman",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.TURN_REDUCE,0.05],[SpriteModel.STAT,StatModel.MANA,2+2*_level],[SpriteModel.STAT,StatModel.MANATOMPOW,0.05+0.01*_level]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
@@ -395,7 +394,7 @@
 					m.tags.push(EffectData.PREMIUM);
 					return m;
 				}else if (_index==31){
-					applyEnchant(31,"",m,1,[SpriteModel.ATTACK,ActionBase.CRITRATE,0.005*m.level]);
+					applyEnchant(31,"",m,1,[SpriteModel.ATTACK,ActionBase.CRITRATE,0.003*m.level]);
 					applyEnchant(31,"",m,1,[SpriteModel.ATTACK,ActionBase.CRITMULT,0.02*m.level]);
 					applyEnchant(31,"",m,1,[SpriteModel.STAT,StatModel.DODGE,0.005*m.level]);
 					applyEnchant(31,"",m,1,[SpriteModel.STAT,StatModel.TURN,0.005*m.level]);
@@ -466,7 +465,7 @@
 				case 1: applyEnchant(1,"Focal",m,3.5,[SpriteModel.STAT,StatModel.MRATE,0.15+0.03*m.level]);break;
 				case 2: applyEnchant(2,"Mystic",m,2.5,[SpriteModel.STAT,StatModel.MPOWER,2+2*m.level]);break;
 				case 3: applyEnchant(3,"Guided",m,3.5,[SpriteModel.ATTACK,ActionBase.HITRATE,3+3*m.level]);break;
-				case 4: applyEnchant(4,"Keen",m,3,[SpriteModel.ATTACK,ActionBase.CRITRATE,0.02+0.0054*m.level]);break;
+				case 4: applyEnchant(4,"Keen",m,3,[SpriteModel.ATTACK,ActionBase.CRITRATE,0.02+0.003*m.level]);break;
 				case 5: applyEnchant(5,"Grenadier",m,3,[SpriteModel.STAT,StatModel.THROWEFF,0.02+0.02*m.level]);break;
 				case 6: applyEnchant(6,"Defender",m,3.1,[SpriteModel.STAT,StatModel.BLOCK,3+3*m.level]);break;
 				case 7: applyEnchant(7,"Flaming",m,3.4,[SpriteModel.ATTACK,ActionBase.EFFECT,new EffectDamage("Flaming",5+2*m.level,DamageModel.MAGICAL,7,1,PopEffect.FIRE)]);break;
@@ -495,7 +494,7 @@
 			var _level:int=m.level;
 			if (m.index==9) _level=Math.ceil(1.2*m.level);
 			switch (_index){
-				case 7: applyEnchant(7,"Shadow",m,6,[SpriteModel.ATTACK,ActionBase.CRITRATE,0.02+0.006*_level]); break;//rogue
+				case 7: applyEnchant(7,"Shadow",m,6,[SpriteModel.ATTACK,ActionBase.CRITRATE,0.015+0.0025*_level]); break;//rogue
 				case 8: applyEnchant(8,"Shadow",m,6,[SpriteModel.STAT,StatModel.DOTEFF,0.015+0.015*_level]); break;//acolyte
 				case 9: applyEnchant(9,"Shadow",m,6,[SpriteModel.STAT,StatModel.HOLYEFF,0.01+0.01*_level]); break;//paladin
 				case 10: applyEnchant(10,"Shadow",m,6,[SpriteModel.STAT,StatModel.HEALTH,25+10*_level]); break; //monk
@@ -1356,7 +1355,7 @@
 				case 97: //Celerity
 					if (m.enchantIndex==0){
 						m.name="Plentiful Acuity Potion";
-						m.action.effects[0]=new EffectBuffBasic(new BuffStats(m.index+1,"Acuitized",m.level,BuffBase.BUFF,5,[[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,0.07],[SpriteModel.STAT,StatModel.THROWEFF,0.15+0.03*m.level],[SpriteModel.ATTACK,ActionBase.HITRATE,15+3*m.level],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.05+0.01*m.level]]),EffectBase.BUFF,EffectBase.ALL);
+						m.action.effects[0]=new EffectBuffBasic(new BuffStats(m.index+1,"Acuitized",m.level,BuffBase.BUFF,5,[[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,0.07],[SpriteModel.STAT,StatModel.THROWEFF,0.15+0.03*m.level],[SpriteModel.ATTACK,ActionBase.HITRATE,15+3*m.level],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.03+0.007*m.level]]),EffectBase.BUFF,EffectBase.ALL);
 						return m;
 					}break;
 				case 98: //Turtle
@@ -1472,7 +1471,7 @@
 							((m.action.effects[0] as EffectBuff).buff as BuffEnchantWeapon).values[0][2].damage*=0.4;
 							((m.action.effects[0] as EffectBuff).buff as BuffEnchantWeapon).values[0][2].damageType=ActionBase.PHYSICAL;
 							((m.action.effects[0] as EffectBuff).buff as BuffEnchantWeapon).values.push([SpriteModel.ATTACK,ActionBase.HITRATE,10+5*m.level]);
-							((m.action.effects[0] as EffectBuff).buff as BuffEnchantWeapon).values.push([SpriteModel.ATTACK,ActionBase.CRITRATE,0.05+0.3*Facade.diminish(0.04,m.level)]);
+							((m.action.effects[0] as EffectBuff).buff as BuffEnchantWeapon).values.push([SpriteModel.ATTACK,ActionBase.CRITRATE,0.03+0.2*Facade.diminish(0.04,m.level)]);
 							(m.action.effects[0] as EffectBuff).buff.name=BuffData.ENCHANTED3;
 							return m;
 						case 2: m.name="Darkened Weapon";
@@ -1528,7 +1527,7 @@
 						return enchantHelmet(m,_index);
 					case 71: //Protector
 						m.name="Alternate Protector";
-						m.values=[[SpriteModel.STAT,StatModel.HEALTH,61+27*m.level],[SpriteModel.STAT,StatModel.RCRIT,.05],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.003*m.level],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.1+0.03*m.level],[SpriteModel.STAT,StatModel.RPHYS,0.003+0.0010*m.level],[SpriteModel.STAT,StatModel.RMAGICAL,0.005+0.0015*m.level],[SpriteModel.STAT,StatModel.RCHEMICAL,0.005+0.0015*m.level],[SpriteModel.STAT,StatModel.RSPIRIT,0.005+0.0015*m.level]];
+						m.values=[[SpriteModel.STAT,StatModel.HEALTH,61+27*m.level],[SpriteModel.STAT,StatModel.RCRIT,.05],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.0019*m.level],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.1+0.03*m.level],[SpriteModel.STAT,StatModel.RPHYS,0.003+0.0010*m.level],[SpriteModel.STAT,StatModel.RMAGICAL,0.005+0.0015*m.level],[SpriteModel.STAT,StatModel.RCHEMICAL,0.005+0.0015*m.level],[SpriteModel.STAT,StatModel.RSPIRIT,0.005+0.0015*m.level]];
 						return m;
 					case 72: //Katanas
 						m.action.critrate=-0.05-0.002*m.level;
@@ -2248,7 +2247,7 @@
 					case 1: applySuffix(1,"of Focus",m,[[SpriteModel.STAT,StatModel.MRATE,0.45]]);break;
 					case 2: applySuffix(2,"of the Mystic",m,[[SpriteModel.STAT,StatModel.MPOWER,22]]);break;
 					case 3: applySuffix(3,"of Guidance",m,[[SpriteModel.ATTACK,ActionBase.HITRATE,33]]);break;
-					case 4: applySuffix(4,"of Keenness",m,[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.07]]);break;
+					case 4: applySuffix(4,"of Keenness",m,[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.05]]);break;
 					case 5: applySuffix(5,"of the Grenadier",m,[[SpriteModel.STAT,StatModel.THROWEFF,0.22]]);break;
 					case 6: applySuffix(6,"of Defending",m,[[SpriteModel.STAT,StatModel.BLOCK,33]]);break;
 					case 7: applySuffix(7,"of Flame",m,[[SpriteModel.ATTACK,ActionBase.EFFECT,new EffectDamage("Flaming",25,DamageModel.MAGICAL,7,1,PopEffect.FIRE)]]);break;
@@ -2395,7 +2394,7 @@
 					case 69: applySuffix(_index,"of Quickening",m,[[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,4)]]); break; //Turban
 					case 70: applySuffix(_index,"of Finding",m,[[SpriteModel.STAT,StatModel.ILOOT,0.1]]); break; //Crown
 					case 71: applySuffix(_index,"of Trine",m,[[SpriteModel.STAT,StatModel.STRENGTH,20],[SpriteModel.STAT,StatModel.MPOWER,20],[SpriteModel.STAT,StatModel.INITIATIVE,20]]); break; //Protector
-					case 72: applySuffix(_index,"of Honor",m,[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.3],[SpriteModel.ATTACK,ActionBase.CRITMULT,-0.75]]); break; //Katanas
+					case 72: applySuffix(_index,"of Honor",m,[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.21],[SpriteModel.ATTACK,ActionBase.CRITMULT,-0.75]]); break; //Katanas
 					case 73: applySuffix(_index,"of Luminance",m,[[SpriteModel.ATTACK,ActionBase.CEFFECT,new EffectDamage("Luminant",110,DamageModel.HOLY)]]); break; //Light Sword
 					case 74: applySuffix(_index,"of Rending",m,[[SpriteModel.ATTACK,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.REND,10)]]); break; //Rending Claws
 					case 75: applySuffix(_index,"of Power",m,[[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.FULL_POWER2,0)]]); break; //Hylian Sword
@@ -2463,7 +2462,7 @@
 					case 127: 
 					case 128: */
 					
-					case 129: applySuffix(_index,"of the Sparrow",m,[[SpriteModel.ATTACK,ActionBase.HITRATE,20],[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,0.05],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.05]]); break; //Sparrow's Bow
+					case 129: applySuffix(_index,"of the Sparrow",m,[[SpriteModel.ATTACK,ActionBase.HITRATE,20],[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,0.05],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.03]]); break; //Sparrow's Bow
 					case 130: applySuffix(_index,"of Distance",m,[[SpriteModel.STAT,StatModel.FAR,0.15]]); break; //Bycocket
 					case 131: applySuffix(_index,"of Doubling",m,[[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.DOUBLESHOT,3)]]); break; //Quickdraw Quiver
 					
@@ -2609,6 +2608,7 @@
 		}
 		
 		public static function gambleCost(_cost:int,_level:int,_projectile:Boolean):int{
+			//var m:int=(_cost*(1+_level/5)+100)*_level*4;
 			var m:int=(_cost*2.5*(1+_level/5)+100)*_level*4;
 			if (_projectile){
 				m*=5;

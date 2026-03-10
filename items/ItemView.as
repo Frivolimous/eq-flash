@@ -82,16 +82,16 @@
 					_color=FilterData.getEssenceFilter(3);
 				}
 			}else{
-				if (_model.enchantIndex>=0){
+					if (_model.isShadow()){
+						_color=darken();
+						if (_glow==null) _glow=darkGlow();
+					}else if (_model.enchantIndex>=0){
 					if (_model.isPremium() || _model.primary==ItemData.MAGIC || ((_model.primary==ItemData.POTION || _model.primary==ItemData.GRENADE) && _model.enchantIndex!=6)){
 						if (_model.charges>=0 && _model.enchantIndex==6){
 							_glow=glow();
 						}else{
 							_color=FilterData.getPremiumFilter(_model.index,_model.enchantIndex);
 						}
-					}else if (_model.isShadow()){
-						_color=darken();
-						if (_glow==null) _glow=darkGlow();
 					}else{
 						if (_model.primary==ItemData.CHARM){
 							_color=enchantFilter(_model.enchantIndex);

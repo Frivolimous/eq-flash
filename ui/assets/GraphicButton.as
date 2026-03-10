@@ -169,6 +169,11 @@
 		public function get disabled():Boolean{
 			return currentFrame==4;
 		}
+
+		public function highlight(){
+			gotoAndStop(5);
+			updateLabel();
+		}
 		
 		public function setDesc(_name:String=null,_desc:String=null){
 			if (_name!=null){

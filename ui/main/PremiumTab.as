@@ -57,9 +57,9 @@
 					gambleUI.addItemAt(new ItemView(ItemData.spawnPremium(0,true)),i);
 				}while(((i>0) && (gambleUI.itemA[i].stored.model.index==gambleUI.itemA[i-1].stored.model.index))||((i>1) && (gambleUI.itemA[i].stored.model.index==gambleUI.itemA[i-2].stored.model.index)))				
 				if (gambleUI.itemA[i].stored.model.hasTag(EffectData.SUPER_PREMIUM)){
-					gambleUI.itemA[i].stored.model.cost=-16;
-				}else{
 					gambleUI.itemA[i].stored.model.cost=-12;
+				}else{
+					gambleUI.itemA[i].stored.model.cost=-9;
 				}
 			}
 

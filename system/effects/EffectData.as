@@ -298,7 +298,7 @@
 				
 				//--- STEALTH ---
 				case STEALTH_CMULT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.INITIAL,1,0.16*level); //Initiate:: CMult
-				case STEALTH_CRATE:	return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,0.016*level); //C.Effect:: CRate
+				case STEALTH_CRATE:	return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,0.011*level); //C.Effect:: CRate
 				case STEALTH_DODGE: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DODGE,1,0.03+Facade.diminish(0.025,level)); //On Dodge:: Dodge
 				case STEALTH_CLEAR_DAMAGED: return new EffectBase(label,0,EffectBase.INSTANT,EffectBase.HURT,1);
 				case STEALTH_CLEAR_ATTACK: return new EffectBase(label,0,EffectBase.INSTANT,EffectBase.OFFENSE,1);

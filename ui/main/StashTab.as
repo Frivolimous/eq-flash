@@ -60,6 +60,7 @@
 			origin=_origin;
 			inventory.update(_origin);
 			if (_inventory!=null) inventory.alsoUpdate=_inventory.updateGold;
+
 			toggleStash(0);
 		}
 		
@@ -104,7 +105,12 @@
 					}else{
 						shares[j].toggled=false;
 					}
-					personalB.toggled=false;
+				}
+				personalB.toggled=false;
+				Facade.gameM.condenseOverflow();
+				if (Facade.gameM.overflow.length>0){
+					overB.highlight();
+				} else{
 					overB.toggled=false;
 				}
 			}else if (i==100){ // Personal Tab
@@ -137,7 +143,12 @@
 				}
 				inventory.updateStash(origin.stash[2],!noSave);
 				personalB.toggled=true;
-				overB.toggled=false;
+				Facade.gameM.condenseOverflow();
+				if (Facade.gameM.overflow.length>0){
+					overB.highlight();
+				} else{
+					overB.toggled=false;
+				}
 				for (j=0;j<shares.length;j+=1){
 					shares[j].toggled=false;
 				}

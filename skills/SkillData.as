@@ -226,10 +226,10 @@
 					break;
 				case UNARMED:
 					//_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,10+1.5*i],[SpriteModel.UNARMED,ActionBase.HITRATE,9*i],[SpriteModel.UNARMED,ActionBase.DODGE_REDUCE,0.01*i],[SpriteModel.UNARMED,StatModel.BLOCK,10*i],[SpriteModel.UNARMED,ActionBase.CRITMULT,0.1*i]];
-					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.HITRATE,8*i],[SpriteModel.STAT,StatModel.BLOCK,5*i],[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,i)]];
+					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.HITRATE,9*i],[SpriteModel.STAT,StatModel.BLOCK,10*i],[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,i)]];
 					break;
 				case KI_STRIKE:
-					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.CRITRATE,0.012*i],[SpriteModel.STAT,StatModel.RMAGICAL,0.02*i],[SpriteModel.UNARMED,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.KI_STRIKE,i)]];
+					_skill.values=[[SpriteModel.UNARMED,ActionBase.DAMAGE,1*i],[SpriteModel.UNARMED,ActionBase.CRITRATE,0.008*i],[SpriteModel.STAT,StatModel.RMAGICAL,0.02*i],[SpriteModel.UNARMED,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.KI_STRIKE,i)]];
 					break;
 				case FLURRY:
 					//_skill.values=[[SpriteModel.UNARMED,ActionBase.HITRATE,4*i],[SpriteModel.UNARMED,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,i)]];
@@ -260,7 +260,7 @@
 					break;
 					
 				case PRECISION:
-					_skill.values=[[SpriteModel.ATTACK,ActionBase.HITRATE,12*i],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.015*i],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.2*i]];
+					_skill.values=[[SpriteModel.ATTACK,ActionBase.HITRATE,12*i],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01*i],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.2*i]];
 					break;
 				case GADGETEER:
 					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,4*i],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.DOUBLESHOT,i)]];
@@ -269,7 +269,7 @@
 					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,7*i],[SpriteModel.STAT,StatModel.DODGE,Facade.diminish(0.03,i)],[SpriteModel.STAT,StatModel.BLOCK,4*i]];
 					break;
 				case VITAL:
-					_skill.values=[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.02*i],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.INITIAL_MARK,i)]];
+					_skill.values=[[SpriteModel.ATTACK,ActionBase.CRITRATE,0.015*i],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.INITIAL_MARK,i)]];
 					break;
 				case WITHDRAW:
 					_skill.action=ActionData.makeAction(ActionData.WITHDRAW,i);
@@ -328,7 +328,7 @@
 					_skill.values=[[SpriteModel.ATTACK,ActionBase.HITRATE,7*i],[SpriteModel.ATTACK,ActionBase.CRITMULT,0.16*i],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.STEALTH_CMULT,i)]];
 					break;
 				case DEADLY_SHADOWS:
-					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,4*i],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.016*i],[SpriteModel.ATTACK,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.STEALTH_CRATE,i)]];
+					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,4*i],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.011*i],[SpriteModel.ATTACK,ActionBase.CEFFECT,EffectData.makeEffect(EffectData.STEALTH_CRATE,i)]];
 					break;
 				case DANCING_SHADOWS:
 					_skill.values=[[SpriteModel.STAT,StatModel.INITIATIVE,4*i],[SpriteModel.STAT,StatModel.DODGE,0.03+Facade.diminish(0.025,i)],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.STEALTH_DODGE,i)]];
@@ -431,7 +431,7 @@
 					_talent.values=[[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.RANDOM_COLOR,0)]];
 					break;
 				case SEASON1_DEFT:
-					_talent.values=[[SpriteModel.STAT,StatModel.DODGE,0.1],[SpriteModel.STAT,StatModel.INITIATIVE,10],[SpriteModel.STAT,StatModel.STRENGTH,-10],[SpriteModel.STAT,StatModel.MPOWER,-10],[SpriteModel.ATTACK,ActionBase.HITRATE,120],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.14]];
+					_talent.values=[[SpriteModel.STAT,StatModel.DODGE,0.1],[SpriteModel.STAT,StatModel.INITIATIVE,10],[SpriteModel.STAT,StatModel.STRENGTH,-10],[SpriteModel.STAT,StatModel.MPOWER,-10],[SpriteModel.ATTACK,ActionBase.HITRATE,120],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.1]];
 					break;
 				case SEASON1_HOLY:
 					_talent.values=[[SpriteModel.STAT,StatModel.HOLYEFF,0.1],[SpriteModel.STAT,StatModel.RSPIRIT,0.1],[SpriteModel.STAT,StatModel.INITIATIVE,50],[SpriteModel.STAT,StatModel.ITEMEFF,0.5],[SpriteModel.STAT,StatModel.IRATE,0.1]];
