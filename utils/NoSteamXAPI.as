@@ -173,7 +173,27 @@
             return result;
         }
 
-        private function unlockAchievement(apiName:String):void {
+        // ===========================
+        // ACHIEVEMENTS
+        // ===========================
+
+        public function unlockAchievement(apiName:String):void {
+            Facade.addLine("Fake Achieve: "+apiName);
+        }
+
+        private function resetAchievements():void {
+        }
+
+        public function hasPremiumDLC(): Boolean {
+            return true;
+        }
+
+        public function checkAchievement(apiName:String):Boolean {
+            return false;
+        }
+        
+        public function setStatInt(stat:String, score:int):void {
+            Facade.addLine("Fake Stat: "+stat);
         }
 
         // === OLD SUBFUNKS === \\

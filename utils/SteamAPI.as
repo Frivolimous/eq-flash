@@ -11,7 +11,7 @@
     public class SteamAPI {
         public var connected:Boolean=false;
 
-        public const ENCRYPT:Boolean=false;
+        public const ENCRYPT:Boolean=true;
         
         // Steam ANE instance
         private var steam:FRESteamWorks;
@@ -32,7 +32,7 @@
                 steam = new FRESteamWorks();
                 if (steam.init()) {
                     connected = true;
-                    // Facade.addLine("Steam Connected: " + steam.getPersonaName());
+                    Facade.addLine("Steam Connected: " + steam.getPersonaName());
                 }
             } catch (e:Error) {
                 Facade.addLine("Steam Init Failed: " + e.message);
@@ -168,13 +168,11 @@
 
         public function retrieveAllPlayerData(_onComplete:Function):void {
             var result:Object = {};
+            Facade.addLine("sapi retrieving...");
             for (var key:String in saveSO.data.playerData) {
-                result[key] = {
-                    Value: saveSO.data.playerData[key]
-                };
+                result[key] = stringToValue(saveSO.data.playerData[key]);
             }
-            Facade.addLine("retrieving player data: " + String(result));
-
+            Facade.addLine("sapi retrieved...");
             _onComplete(result);
         }
 
@@ -182,7 +180,7 @@
             for each (var key:String in a)
                 delete saveSO.data.playerData[key];
 
-            syncAll();
+            delay=DELAY;
         }
 
         // ===============================
@@ -197,24 +195,6 @@
         // ===============================
         // HIGHSCORE
         // ===============================
-
-        // public function submitHighscoreScript(i:int):void {
-        //     var current:int = 0;
-        //     if (saveSO.data.playerData["Highscore"] != null)
-        //         current = saveSO.data.playerData["Highscore"];
-
-        //     if (i > current) {
-        //         saveSO.data.playerData["Highscore"] = i;
-                
-        //         // If you want to trigger a Steam Achievement for a highscore
-        //         // if (connected && i >= 1000) {
-        //         //    steam.setAchievement("ACH_HIGH_SCORE");
-        //         // }
-        //     }
-
-        //     syncAll();
-        //     Facade.addLine("Highscore Synced");
-        // }
 
         public function expiredSession(_s:String):void {
             if (Facade.gameC != null)
@@ -266,11 +246,10 @@
         // ACHIEVEMENTS
         // ===========================
 
-        private function unlockAchievement(apiName:String):void {
+        public function unlockAchievement(apiName:String):void {
             // Standard ANE call to unlock and push to server
             steam.setAchievement(apiName);
-            steam.storeStats(); 
-            Facade.addLine("🏆 Achievement Unlocked: " + apiName);
+            steam.storeStats();
         }
 
         private function resetAchievements():void {
@@ -281,17 +260,11 @@
         }
 
         public function hasPremiumDLC():Boolean {
-            var dlcID:int = 999999; // Your future DLC ID
+            var dlcID:int = 1574174; // Your future DLC ID
             if (connected) {
                 return steam.isSubscribedApp(dlcID);
             }
             return false;
-        }
-
-        public function setStat(stat:String, score:int):void {
-            if (!connected) return;
-
-            steam.setStatInt(stat, score);
         }
 
         public function checkAchievement(apiName:String):Boolean {
@@ -300,9 +273,13 @@
             // return steam.getAchievement(apiName);
         }
 
-    //     steam["setStatInt"]("stat_kills", saveSO.data.playerData.SCORE_KILLS);
-    // steam["setStatInt"]("stat_deaths", saveSO.data.playerData.SCORE_DEATHS);
-    // steam["setStatInt"]("stat_ascends", saveSO.data.playerData.SCORE_ASCENDS);
+        public function setStatInt(stat:String,score:int):void {
+            if (!connected) return;
+            Facade.addLine("Attempt Stat: "+stat);
+            steam.setStatInt(stat, score);
+            Facade.addLine("Stat: "+stat);
+        }
+
         // === OLD SUBFUNKS === \\
 		public var delay:int=0;
 		public const DELAY:int=2;
