@@ -133,8 +133,12 @@ package utils {
       {steamName: "COMPLETE_ALL", displayText: "Completionist", awardDesc: "You have officially completed all of the achievements! Congratulations!\n\nDid you save all of your other Awards as well? Because if you did, you unlock a super secret extra bonus cosmetic! It's super awesome and epic I swear! And yes, it's totally real! Honest it is!"},//XX
     ]
 
-    public static function checkAllAchievements():void {
-      
+    public static function checkCompleteAll():void {
+      for (var i=0;i<COMPLETE_ALL;i+=1){
+        if (GameData.achievements[i]==false) return false;
+      }
+
+      achieve(COMPLETE_ALL);
     }
 
     public static function hasAchieved(i:int):Boolean{
@@ -164,6 +168,8 @@ package utils {
         Facade.steamAPI.unlockAchievement(ACHIEVE_DEFS[i].steamName);
 
 				GameData.saveThis(GameData.ACHIEVEMENTS);
+
+        checkCompleteAll();
 			}
 		}
 

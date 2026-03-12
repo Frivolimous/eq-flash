@@ -10,6 +10,7 @@
 		}
 		
 		function popPurchase(){
+			if (!Facade.DEBUG) return;
 			Facade.stage.addChild(new TokenWindow(updateDisplay));
 		}
 		
