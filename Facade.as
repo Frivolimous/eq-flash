@@ -13,9 +13,9 @@
 	import flash.events.Event;
 	import ui.main.HomeUI;
 	import ui.windows.ConfirmWindow;
+	import utils.SteamAPI;
 	import utils.NoSteamXAPI;
 
-	
 	public class Facade{
 		public static const YELLOW:uint=0xFFF43F,
 							DARK_RED:uint=0x9F400D,
@@ -26,6 +26,7 @@
 							WIDTH:int=640,
 							HEIGHT:int=420,
 							SCALE:int=1,
+							// FRAMERATE:int=48;
 							FRAMERATE:int=24;
 
 		public static var stage:Stage,
@@ -37,9 +38,10 @@
 						mouseC:MouseControl=new MouseControl(),
 						soundC:SoundControl=new SoundControl(),
 						saveC:SaveControl=new SaveControl(),
-						steamAPI:NoSteamXAPI = new NoSteamXAPI();
-						
-		public static const DEBUG:Boolean=true;
+						steamAPI:SteamAPI = new SteamAPI();
+						// steamAPI:NoSteamXAPI = new NoSteamXAPI();
+
+		public static const DEBUG:Boolean=false;
 		
 		public static var currentUI:*;
 		static var popV:Tooltip=new Tooltip;
@@ -146,7 +148,7 @@
 				// if (traceCW) {
 				// 	traceCW.display.appendText("\n" + s);
 				// } else {
-				// 	traceCW = new ConfirmWindow(s, 50, 50, removeTraceWindow);
+				// 	traceCW = new ConfirmWindow(s, 50, 50, removeTraceWindow,0,null,3);
 				// }
 				trace(s);
 			}

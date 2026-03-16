@@ -32,9 +32,9 @@
 			_skill=SkillData.treeSkill(_skill.index,_skill.level);
 			index=_skill.index;
 			level=_skill.level;
-			vectorIcon=new SkillTreeIcon();
+			// vectorIcon=new SkillTreeIcon();
 			vectorIcon.gotoAndStop(index+1);
-			makeBitmap(vectorIcon,1.5,1.5,42);
+			// makeBitmap(vectorIcon,1.5,1.5,42);
 			/*if (_skill.values[0][1]==StatModel.PROCS){
 				label.text=_skill.values[0][2].name;
 				value.text=_skill.values[0][2].level;
