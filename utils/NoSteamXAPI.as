@@ -177,8 +177,12 @@
         // ACHIEVEMENTS
         // ===========================
 
-        public function unlockAchievement(apiName:String):void {
+        public function unlockAchievement(apiName:String,andStore:Boolean=true):void {
             Facade.addLine("Fake Achieve: "+apiName);
+        }
+
+        public function forceStore():void {
+
         }
 
         private function resetAchievements():void {

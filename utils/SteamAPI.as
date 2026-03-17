@@ -246,9 +246,15 @@
         // ACHIEVEMENTS
         // ===========================
 
-        public function unlockAchievement(apiName:String):void {
+        public function unlockAchievement(apiName:String,andStore:Boolean=true):void {
+            if (GameData.DEMO) return;
+
             // Standard ANE call to unlock and push to server
             steam.setAchievement(apiName);
+            if (andStore) steam.storeStats();
+        }
+
+        public function forceStore():void {
             steam.storeStats();
         }
 
@@ -260,6 +266,8 @@
         }
 
         public function hasPremiumDLC():Boolean {
+            if (GameData.DEMO) return false;
+
             var dlcID:int = 1574174; // Your future DLC ID
             if (connected) {
                 return steam.isSubscribedApp(dlcID);
@@ -268,6 +276,8 @@
         }
 
         public function checkAchievement(apiName:String):Boolean {
+            if (GameData.DEMO) return false;
+
             if (!connected) return false;
             return false;
             // return steam.getAchievement(apiName);

@@ -321,5 +321,12 @@ package utils {
         GameData.cosmetics[_type].push(index);
       }
     }
+
+    public static function validateSteamAchievements():void {
+      for (var i=0;i<NUM_ACHIEVEMENTS;i++){
+        if (hasAchieved(i)) Facade.steamAPI.unlockAchievement(ACHIEVE_DEFS[i].steamName, false);
+      }
+      Facade.steamAPI.forceStore();
+    }
   }
 }

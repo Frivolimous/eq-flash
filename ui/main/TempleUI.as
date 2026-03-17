@@ -17,7 +17,11 @@
 			mysteryG.restrict="0-9";
 			donateB.update(StringData.YES,buyDonate);
 			
-			ascendB.update(StringData.ASCEND,popAscend);
+			if (GameData.DEMO) {
+				ascendB.update(StringData.ASCEND,popDemo);
+			} else {
+				ascendB.update(StringData.ASCEND,popAscend);
+			}
 			
 			doneB.update(StringData.LETSGO,navOut,true);
 			soundB.update(null,muteSound,true);
@@ -54,6 +58,10 @@
 			}
 			updateGold();
 			addEventListener(Event.ENTER_FRAME,onTick);
+		}
+
+		public function popDemo(){
+			new ConfirmWindow("You are playing in the Demo. To ascend and unlock ARTIFACTS, please purchase the Base Game.");
 		}
 		
 		override public function closeWindow(){

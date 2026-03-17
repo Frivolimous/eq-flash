@@ -22,6 +22,7 @@
 	
 	public class GameData {
 		public static const VERSION:int=102;
+		public static const DEMO:Boolean=false;
 		
 		public static const FLAG_TUTORIAL:int=0,
 							FLAG_ARTIFACTS:int=1,
@@ -482,6 +483,7 @@
 		}
 		
 		public static function pongClocks(_date:Number,_now:Boolean=false){
+			if (!getFlag(FLAG_TUTORIAL)) return;
 			Facade.addLine(lastTime+" "+_date);
 
 			if (lastTime==0 || clocks>=500){
@@ -732,7 +734,10 @@
 				dataUpdated=2;
 				Facade.addLine("Data Processed");
 				checkVersion(_Data);
+				AchieveData.validateSteamAchievements();
 			}
+
+			if (DEMO) setFlag(FLAG_MESSAGE, true);
 		}
 		
 		public static function checkVersion(_Data:*){
@@ -852,11 +857,15 @@
 		}
 		
 		public static function getAnnounceText():String{
-			var m:String="";
-			m+="<p align='center'><font size='25'>Version Updates</font></p>\nThis probably won't change very much, since this is just a STEAM REVIVAL of an old flash game. But here you go, update notes!\n\n";
-			m+="\n\n"
-			m+=getVersionLog();
-			return m;
+			if (DEMO) {
+				return "<p align='center'><font size='25'>Eternal Quest UnAscended Demo</font></p>\nYou are playing the demo version of Eternal Quest: Ascended. You can do everything except ascend. To upgrade to the full version, visit the store page!";
+			} else {
+				var m:String="";
+				m+="<p align='center'><font size='25'>Version Updates</font></p>\nThis probably won't change very much, since this is just a STEAM REVIVAL of an old flash game. But here you go, update notes!\n\n";
+				m+="\n\n"
+				m+=getVersionLog();
+				return m;
+			}
 		}
 		
 		public static function getVersionLog(_numBack:int=10):String{
@@ -901,6 +910,13 @@
 			saveThese([COSMETICS,ACHIEVEMENTS,FLAGS,ARTIFACTS,STASH,OVERFLOW,SCORES,LASTCHAR]);
 			Facade.steamAPI.setPlayerProperties([["version",VERSION],["firstVersion",VERSION],
 							 ["player0",null],["player1",null],["player2",null],["player3",null],["player4",null]]);
+
+			if (DEMO) setFlag(FLAG_MESSAGE, true);
+		}
+
+		public static function getVersion():String {
+			if (DEMO) return "demo";
+			return String(Math.floor(VERSION));
 		}
 	}
 }
