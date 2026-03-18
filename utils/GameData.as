@@ -22,7 +22,7 @@
 	
 	public class GameData {
 		public static const VERSION:int=102;
-		public static const DEMO:Boolean=false;
+		public static const DEMO:Boolean=true;
 		
 		public static const FLAG_TUTORIAL:int=0,
 							FLAG_ARTIFACTS:int=1,
@@ -31,7 +31,7 @@
 							FLAG_GIFT2:int=4,
 							FLAG_TREASURE:int=5,
 							FLAG_FREE_PACK:int=6,
-							FLAG_CRAFT_MEGA:int=7,
+							FLAG_HAS_DLC:int=7,
 							
 							SCORE_KILLS:int=0,
 							SCORE_DEATHS:int=1,
@@ -736,8 +736,23 @@
 				checkVersion(_Data);
 				AchieveData.validateSteamAchievements();
 			}
-
+			dLCCheck();
 			if (DEMO) setFlag(FLAG_MESSAGE, true);
+		}
+
+		public static function dLCCheck(){
+			if (!getFlag(FLAG_HAS_DLC)) {
+				// new ConfirmWindow("Don't have DLC");
+				if (Facade.steamAPI.hasPremiumDLC()) {
+					setFlag(FLAG_HAS_DLC, true);
+					AchieveData.unlockDLCCosmetics();
+					new ConfirmWindow("DLC Detected: Cosmetic Pack\n22 cosmetics unlocked!");
+				} else {
+					// new ConfirmWindow("No DLC Available");
+				}
+			} else {
+				// new ConfirmWindow("Already has DLC");
+			}
 		}
 		
 		public static function checkVersion(_Data:*){

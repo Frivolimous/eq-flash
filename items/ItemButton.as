@@ -60,7 +60,7 @@
 			fill(ActionPriorities.getColor(i),ActionPriorities.isLightColor(i));
 			
 			label.text=ActionPriorities.getListName(i);
-			setDesc(ActionPriorities.getTooltipName(i),"Click to change the priority, hold the mouse button to see Advanced Options.");
+			setDesc(ActionPriorities.getTooltipName(i),"Click to change the priority\n<font color="+StringData.YELLOW+">Long Press</font> to see Advanced Options.");
 			//setDesc("","");
 		}
 		

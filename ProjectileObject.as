@@ -153,7 +153,7 @@
 				if (_filter!=null){
 					staticVector.filters=[_filter];
 				}
-				x=_v.view.display.throwPoint.x+_v.view.x;
+				x=(_v.view.display.throwPoint.x * _v.view.display.scaleX)+_v.view.x;
 				//hX=x+.3;
 				tX=x+.5;
 				y=_v.view.display.throwPoint.y+_v.view.display.y+_v.view.y;
@@ -162,7 +162,7 @@
 				if (_filter!=null){
 					projectileVector.filters=[_filter];
 				}
-				x=_v.view.display.throwPoint.x+_v.view.x;
+				x=(_v.view.display.throwPoint.x * _v.view.display.scaleX)+_v.view.x;
 				tX=_t.view.display.hitPoint.x+_t.view.x;
 				//hX=(tX+x)/2;
 				

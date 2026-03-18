@@ -32,7 +32,7 @@
 			subtitleCheck.update(null,toggleSubtitles,true);
 			
 			updateSubtitle=!GameData._Save.data.pause[GameData.OPTION_SUBTITLE];
-			
+			subtitleCheck.setToggle(!GameData._Save.data.pause[GameData.OPTION_SUBTITLE]);
 			
 			//subtitle=Facade.gameUI.subtitle;
 			/*subtitle=new TextField;

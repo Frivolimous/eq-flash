@@ -90,6 +90,8 @@
 		}
 		
 		public function keyDown(e:KeyboardEvent){
+			if (!Facade.DEBUG) return;
+
 			if (e.keyCode==Keyboard.C){
 				if (e.ctrlKey){
 					var _save = Facade.saveC.exportSave(Facade.gameM.playerM);
