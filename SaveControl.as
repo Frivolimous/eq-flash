@@ -6,6 +6,7 @@
 	import artifacts.ArtifactData;
 	import artifacts.ArtifactModel;
 	import utils.GameData;
+	import utils.Base64;
 	import flash.events.Event;
 	import limits.LimitModel;
 	import limits.LimitData;
@@ -482,10 +483,12 @@
 		public function exportSave(_v:SpriteModel):String{
 			var _a:Array=getShortArray(_v);
 			var _string:String=Facade.steamAPI.arrayToString(_a);
+			_string=Base64.compressSave(_string);
 			return _string;
 		}
 		
 		public function importSave(_player:SpriteModel,_string:String){
+			_string=Base64.decompressSave(_string);
 			var _a:Array=Facade.steamAPI.stringToArray(_string);
 			_player=loadShort(_player,_a,-1,false);
 		}
