@@ -32,7 +32,6 @@
 				medB.index=1;
 				highB.update(null,setQuality,true);
 				highB.index=2;
-				cursorB.update(null,toggleCursor,true);
 				cinematicB.update(null,toggleCinematic,true);
 				simpleB.update(null,toggleSimple,true);
 				cinematicfB.update(null,toggleCinematicFocus,true);
@@ -56,7 +55,6 @@
 						break;
 				}
 				
-				cursorB.toggled=GameData._Save.data.pause[GameData.CURSOR];
 				cinematicB.toggled=Facade.gameUI.cinematicMode;
 				simpleB.toggled=Facade.gameUI.simpleMode;
 				simplefB.toggled=GameData._Save.data.pause[GameData.FOCUS_SIMPLE];
@@ -83,12 +81,6 @@
 					highB.toggled=true;
 					break;
 			}
-		}
-		
-		function toggleCursor(){
-			GameData._Save.data.pause[GameData.CURSOR]=!GameData._Save.data.pause[GameData.CURSOR]
-			cursorB.toggled=(GameData._Save.data.pause[GameData.CURSOR]);
-			Facade.mouseC.setMouseMode(GameData._Save.data.pause[GameData.CURSOR]);
 		}
 		
 		function toggleCinematic(){

@@ -150,7 +150,7 @@
 				case GRAILED: return new BuffStats(114,label,level,BuffBase.BUFF,3,[[SpriteModel.STAT,StatModel.HREGEN,0.01+0.004*halfLevel]]);
 				
 				//React Buffs
-				case BERSERK: return new BuffStats(27,label,level,BuffBase.BUFF,4,[[SpriteModel.STAT,StatModel.STRENGTH,25+5*level],[SpriteModel.STAT,StatModel.TENACITY,0.1]]);
+				case BERSERK: return new BuffStats(27,label,level,BuffBase.BUFF,4,[[SpriteModel.STAT,StatModel.STRENGTH,25+5*level],[SpriteModel.STAT,StatModel.TENACITY,0.1+0.01*halfLevel]]);
 				case TAUNT: return new BuffStats(27,label,level,BuffBase.CURSE,3,[[SpriteModel.STAT,StatModel.STRENGTH,25-5*level],[SpriteModel.ATTACK,ActionBase.HITRATE,-2.5*level],[SpriteModel.STAT,StatModel.TENACITY,0.1]]);
 				
 				//Special Buffs
@@ -184,7 +184,7 @@
 				case RUSHED: return new BuffStats(-1,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,-0.1],[SpriteModel.STAT,StatModel.TURN_REDUCE,-0.1]]);
 				case AIMING: return new BuffStats(-1,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.HITRATE,5+5*level]]);
 				case LEAP_ATTACK: return new BuffStats(-1,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,-0.1+0.02*level],[SpriteModel.STAT,StatModel.DMGMULT,0.15*level]]);
-				
+
 				//Spell Curses
 				case WEAKENED: return new BuffStats(21,label,level,BuffBase.CURSE,5,[[SpriteModel.STAT,StatModel.DMGMULT,-0.1-0.7*Facade.diminish(0.09,halfLevel)]]);
 				case VULNERABLE: return new BuffStats(22,label,level,BuffBase.CURSE,7,[[SpriteModel.STAT,StatModel.RMAGICAL,-0.1-0.5*Facade.diminish(0.03,halfLevel)],[SpriteModel.STAT,StatModel.RCHEMICAL,-0.1-0.5*Facade.diminish(0.03,halfLevel)],[SpriteModel.STAT,StatModel.RSPIRIT,-0.1-0.5*Facade.diminish(0.03,halfLevel)]]);
@@ -199,7 +199,7 @@
 				case AUTHORITAH: return new BuffStats(106,label,level,BuffBase.CURSE,1,[[SpriteModel.STAT,StatModel.DMGMULT,-0.1-0.01*halfLevel]]);
 				case HEAL_NO: return new BuffStats(21,label,level,BuffBase.CURSE,10,[[SpriteModel.STAT,StatModel.HEALMULT,-0.5-0.5*halfLevel/20]]);
 				case SLOW: return new BuffStats(25,label,level,BuffBase.CURSE,5,[[SpriteModel.STAT,StatModel.INITIATIVE,-10-2.5*halfLevel],[SpriteModel.STAT,StatModel.DODGE,-0.075-0.3*Facade.diminish(0.05,halfLevel)]]);
-				
+
 				//Action Preventions
 				case GOLEM_CONFUSED: return new BuffAction(-1,label,level,-1,.3);
 				case STUNNED: return new BuffAction(17,label,level,1+Math.floor(level/100),1);

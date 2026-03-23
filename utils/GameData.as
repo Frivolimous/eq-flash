@@ -245,7 +245,7 @@
 		
 		public static function addRefresh():void{
 			scores[SCORE_REFRESH]+=1;
-			if (scores[SCORE_REFRESH]>150) scores[SCORE_REFRESH]=150;
+			if (scores[SCORE_REFRESH]>250) scores[SCORE_REFRESH]=250;
 		}
 		
 		public static function get clocks():int{
@@ -873,7 +873,7 @@
 		
 		public static function getAnnounceText():String{
 			if (DEMO) {
-				return "<p align='center'><font size='25'>Eternal Quest UnAscended Demo</font></p>\nYou are playing the demo version of Eternal Quest: Ascended. You can do everything except ascend. To upgrade to the full version, visit the store page!";
+				return "<p align='center'><font size='25'>Eternal Quest UnAscended Demo</font></p>\nYou are playing the demo version of Eternal Quest: Ascended. \nUpgrade to the full version to ascend when you reach zone 101. All character progress is saved.\n\n<a href='https://store.steampowered.com/app/4512620/Eternal_Quest_Ascended/'><font color='#5555ff'><u>Go to Store</u></font></a>";
 			} else {
 				var m:String="";
 				m+="<p align='center'><font size='25'>Version Updates</font></p>\nThis probably won't change very much, since this is just a STEAM REVIVAL of an old flash game. But here you go, update notes!\n\n";

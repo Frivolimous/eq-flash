@@ -68,23 +68,23 @@ package utils {
           COMPLETE_ALL:int=59,//XX
           NUM_ACHIEVEMENTS:int=60;
 
-    public static const TALENT_ACHIEVEMENTS:Array=[1,5,3,7,8,20,31,9,11,12];
+    public static const TALENT_ACHIEVEMENTS:Array=[1,5,3,7,8,21,32,9,11,13];
 
     public static const ACHIEVE_DEFS:Array=[
       {steamName: "TUTORIAL_COMPLETE", displayText: "Tutorial Complete!", awardDesc: "You made it through the entire tutorial!"},
-      {steamName: "DAMAGE_100", displayText: "Talent Unlock: Deft", awardDesc: "You dealt 100 damage in a single blow!\n\nThis achievement unlocked the Deft talent."}, //
+      {hallName: "Deft", hallDesc: "Score a massive blow", steamName: "DAMAGE_100", displayText: "Talent Unlock: Deft", awardDesc: "You dealt 100 damage in a single blow!\n\nThis achievement unlocked the Deft talent."}, //
       {steamName: "DAMAGE_1000", displayText: "1,000 Damage Dealt!", awardDesc: "You dealt a massive 1,000 damage! You may be the strongest you can ever get now."},
-      {steamName: "DEATHS_1", displayText: "Talent Unlock: Ungifted", awardDesc: "You died. Congratulations..?\n\nThis achievement unlocked the Ungifted Talent."},
+      {hallName: "Ungifted", hallDesc: "Fail at your duty", steamName: "DEATHS_1", displayText: "Talent Unlock: Ungifted", awardDesc: "You died. Congratulations..?\n\nThis achievement unlocked the Ungifted Talent."},
       {steamName: "DEATHS_100", displayText: "Secret Achievement: DEATH", awardDesc: "You died 100 times. This is a secret achievement, because I don't actually want people to do this on purpose."},
-      {steamName: "FIND_TREASURE", displayText: "Talent Unlock: Clever", awardDesc: "OMG you found the secret treasure! Was it hard to find?\n\nThis achievement unlocked the Clever Talent."},
+      {hallName: "Clever", hallDesc: "Find the hidden treasure", steamName: "FIND_TREASURE", displayText: "Talent Unlock: Clever", awardDesc: "OMG you found the secret treasure! Was it hard to find?\n\nThis achievement unlocked the Clever Talent."},
       {steamName: "BUY_ITEM", displayText: "Purchase any item", awardDesc: "You bought something from the shop! I think that deserves an award!"},//XX
-      {steamName: "READ_BOOK", displayText: "Talent Unlock: Studious", awardDesc: "Wow! You actually read one of my books! <3 err... i mean... amazing reading!\n\nThis achievement unlocked the Studious Talent."},
-      {steamName: "MAX_SKILL", displayText: "Talent Unlock: Enlightened", awardDesc: "You leveled up a skill to the max!\n\nThis achievement unlocked the Enlightened Talent."},
-      {steamName: "SKILL_5_TREES", displayText: "Talent Unlock: Wild", awardDesc: "You placed 1 skill point in 5 different trees. Make up your mind!\n\nThis achievement unlocked the Wild Talent."},
+      {hallName: "Studious", hallDesc: "Learn something important", steamName: "READ_BOOK", displayText: "Talent Unlock: Studious", awardDesc: "Wow! You actually read one of my books! <3 err... i mean... amazing reading!\n\nThis achievement unlocked the Studious Talent."},
+      {hallName: "Enlightened", hallDesc: "Achieve a degree of mastery", steamName: "MAX_SKILL", displayText: "Talent Unlock: Enlightened", awardDesc: "You leveled up a skill to the max!\n\nThis achievement unlocked the Enlightened Talent."},
+      {hallName: "Wild", hallDesc: "Grow without focus", steamName: "SKILL_5_TREES", displayText: "Talent Unlock: Wild", awardDesc: "You placed 1 skill point in 5 different trees. Make up your mind!\n\nThis achievement unlocked the Wild Talent."},
       {steamName: "ZONE_25", displayText: "Zone Complete: 25", awardDesc: "Woohoo! You made it past the second Shadow Minion! Keep going, more prizes await!"},
-      {steamName: "ZONE_50", displayText: "Talent Unlocked: Noble", awardDesc: "Amazing, you made it to Zone 50! That's halfway to ascension!\n\nThis achievement unlocked the Noble Talent."},
+      {hallName: "Noble", hallDesc: "Roam far across the land", steamName: "ZONE_50", displayText: "Talent Unlocked: Noble", awardDesc: "Amazing, you made it to Zone 50! That's halfway to ascension!\n\nThis achievement unlocked the Noble Talent."},
       {steamName: "ZONE_75", displayText: "Zone Complete: 75", awardDesc: "You have surpassed zone 75! Keep going to 100 to unlock Ascension!"},
-      {steamName: "ZONE_100", displayText: "Feature Unlock: Ascension", awardDesc: "You made it to Zone 100 and defeated the SHADOW KING!\n\nThis achievement unlocked Ascension! Go to the Temple to ascend and unlock powerful artifacts!"},
+      {hallName: "Ascend!", hallDesc: "Travel further than you can dream", steamName: "ZONE_100", displayText: "Feature Unlock: Ascension", awardDesc: "You made it to Zone 100 and defeated the SHADOW KING!\n\nThis achievement unlocked Ascension! Go to the Temple to ascend and unlock powerful artifacts!"},
       {steamName: "ZONE_200", displayText: "Class Unlock: Acolyte", awardDesc: "Wow! You made it to Zone 200! that's like... super far!\n\nThis achievement unlocked the Acolyte Skill Tree."},
       {steamName: "ZONE_300", displayText: "Building Unlocked: Mystic Forge", awardDesc: "You made it to Zone 300!\n\nThis achievement unlocked the Mystic Forge in town."},
       {steamName: "ZONE_400", displayText: "Building Unlocked: Epic Zone!", awardDesc: "You made it all the way to Zone 400! I can't believe you made it this far... now the REAL journey begins!\n\nThis achievement unlocked the Epic Zone in town."},
@@ -92,7 +92,7 @@ package utils {
       {steamName: "ZONE_800", displayText: "Zone Completed: 800", awardDesc: "Nothing rhymes with 800! Except 'Bait Hunt Dread'. Ok whatever, you do better!"},
       {steamName: "ZONE_1000", displayText: "Level 70 Unlocked!", awardDesc: "Wow, you have officially made it farther than I ever thought possible! As a reward... you can go further!\n\nThis achievement unlocked Level 70."},
       {steamName: "ZONE_2000", displayText: "Zone Completed: 2000", awardDesc: "OK that's it! you made it. Stop playing now, there's nothing else to do. Like literally... that's it."},
-      {steamName: "DUEL_50", displayText: "Talent Unlock: Powerful", awardDesc: "You have defeated all of the Arena Opponents! But wait... now they come back STRONGER!\n\nThis achievement unlocked the Powerful Talent."},
+      {hallName: "Powerful", hallDesc: "Prove your worth in the arena", steamName: "DUEL_50", displayText: "Talent Unlock: Powerful", awardDesc: "You have defeated all of the Arena Opponents! But wait... now they come back STRONGER!\n\nThis achievement unlocked the Powerful Talent."},
       {steamName: "DUEL_100", displayText: "Class Unlock: Rogue", awardDesc: "You have defeated the second set of opponents! But wait, there's more?!?\n\nThis achievement unlocked the Rogue Skill Tree"},
       {steamName: "DUEL_250", displayText: "Arena Level: 250", awardDesc: "You have defeated the level 250 opponents! Go you!"},
       {steamName: "DUEL_500", displayText: "Arena Level: 500", awardDesc: "So you probably know this by now, but the arena is a great place to make gold. You have defeated level 500, which is like... 100 guys in one ascension!"},
@@ -103,7 +103,7 @@ package utils {
       {steamName: "ASCEND_10", displayText: "Ascensions: 10", awardDesc: "You have ascended 10 times and all you got was this lousy award."},
       {steamName: "ASCEND_25", displayText: "Ascensions: 25", awardDesc: "You have ascended a grand total of 25 times! Or more, if you kept this award around and are looking at it later. Why would you do that? Sell it! Get your Power Tokens already!"},
       {steamName: "ASCEND_50", displayText: "Cosmetic Unlocked: Dark Halo", awardDesc: "You have ascended 50 times and earned yourself the DARK HALO. Because you ascended a dark amount of times. It makes sense, just don't think about it too much."},
-      {steamName: "BUY_MYTHIC", displayText: "Talent Unlocked: Holy", awardDesc: "You have purchased an amazing Mythic item from the golden temple, and proved your devotion.\n\nThis achievement unlocked the Holy Talent."},//XX talent holy
+      {hallName: "Holy", hallDesc: "Buy into the Myth", steamName: "BUY_MYTHIC", displayText: "Talent Unlocked: Holy", awardDesc: "You have purchased an amazing Mythic item from the golden temple, and proved your devotion.\n\nThis achievement unlocked the Holy Talent."},//XX talent holy
       {steamName: "UPGRADE_ITEM_1", displayText: "Item Upgraded", awardDesc: "Congratulations, you now know how to upgrade an item! You'll be doing this a lot, I guarantee it."},//XX
       {steamName: "UPGRADE_ITEM_15", displayText: "Item Upgraded 15", awardDesc: "Congratulations, you upgraded an item up to level 15! That's max level btw (for now...)"},//XX
       {steamName: "CRAFT_ITEM_1", displayText: "Class Unlock: Paladin", awardDesc: "You have crafted an item at the Mythic Forge! I'm so proud of you!\n\nThis achievement unlocked the Paladin Skill Tree."},//XX class paladin

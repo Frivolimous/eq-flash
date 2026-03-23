@@ -1,13 +1,7 @@
 ﻿package system.effects{
 	import system.actions.ActionBase;
-	import system.actions.ActionData;
 	import system.buffs.BuffBase;
-	import system.buffs.BuffData;
-	import system.buffs.BuffDOT;
-	import system.buffs.BuffDelayedDmg;
 	import items.FilterData;
-	import system.buffs.BuffShield;
-	import flash.filters.ColorMatrixFilter;
 	
 	public class EffectBuffBasic extends EffectBuff{
 		

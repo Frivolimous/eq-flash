@@ -109,8 +109,7 @@
 					if (!prestige) reEquip(i);
 					display(gameM.playerM);
 					nameTitle.text=gameM.playerM.title;
-					desc1.text=StringData.talent(gameM.playerM.skillBlock.getTalentIndex());
-					desc2.htmlText=StringData.talentDesc(gameM.playerM.skillBlock.getTalentIndex());
+					desc1.htmlText=StringData.talent(gameM.playerM.skillBlock.getTalentIndex())+"\n"+StringData.talentDesc(gameM.playerM.skillBlock.getTalentIndex());
 				}
 			}else{
 				new ConfirmWindow(StringData.CONF_LOCKED);
@@ -136,13 +135,18 @@
 					gameM.playerM.level=59;
 					gameM.playerM.levelup();
 					gameM.souls=100000;
+					GameData.gold=1000000000;
 					gameM.playerM.addItem(ItemData.spawnItem(0,31,-1));
 					gameM.playerM.addItem(ItemData.spawnItem(15,26));
+					gameM.playerM.addItem(ItemData.spawnItem(15,24));
+					gameM.playerM.addItem(ItemData.spawnItem(15,19));
+					gameM.playerM.addItem(ItemData.spawnItem(15,15));
 					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),30));
 					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),30));
 					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),30));
 					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),30));
 					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),30));
+					gameM.playerM.addItem(ItemData.suffixItem(ItemData.spawnItem(15,135),40));
 					if (inputName.text.length>4){
 						gameM.area=int(inputName.text.substring(4));
 					}
@@ -381,7 +385,9 @@
 			for (var i:int=1;i<10;i+=1){
 				talents[i].disabled=!AchieveData.hasAchieved(AchieveData.TALENT_ACHIEVEMENTS[i-1]);
 				if (talents[i].disabled){
-					talents[i].setDesc(talents[i].label.text+StringData.locked(0,true),StringData.talentDesc(i));
+					var def = AchieveData.ACHIEVE_DEFS[AchieveData.TALENT_ACHIEVEMENTS[i-1]];
+
+					talents[i].setDesc(talents[i].label.text+StringData.locked(0,true),StringData.talentDesc(i)+"\n\n<font color="+StringData.YELLOW+"><b>Locked:</b></font> "+def.hallDesc);
 				}else{
 					talents[i].setDesc(talents[i].label.text+StringData.locked(0,false),StringData.talentDesc(i));
 				}

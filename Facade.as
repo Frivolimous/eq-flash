@@ -165,9 +165,6 @@
 			if (GameData._Save.data.pause[GameData.FOCUS_SIMPLE]){
 				gameUI.setSimpleMode(true);
 			}
-			if (GameData._Save.data.pause[GameData.CURSOR]){
-				mouseC.setMouseMode(false);
-			}
 		}
 		
 		public static function refocus(e:Event){
@@ -176,9 +173,6 @@
 			}
 			if (GameData._Save.data.pause[GameData.FOCUS_SIMPLE]){
 				gameUI.setSimpleMode(false);
-			}
-			if (GameData._Save.data.pause[GameData.CURSOR]){
-				mouseC.setMouseMode(true);
 			}
 		}
 	}

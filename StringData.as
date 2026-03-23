@@ -156,7 +156,6 @@
 										["Templar","Avenger","Seer","Harrier","Meister","Zealot","Paladin","Undertaker","Blatherer"],
 										["Instigator","Ninja","Trickster","Thief","Hacker","Assassin","Masquerade","Rogue","Seether"],
 										["Destroyer","Brute","Rage Mage","Barbarian","Psychotic","Chaotical","Executioner","Hurricane","Berserker"]];
-										
 		
 		public static const enemyType:Vector.<String>=new <String>["Goblin","Savage","Demon","Shadow"];
 		public static const areaType:Vector.<String>=new <String>["Woods","Wastes","Realm","World"];
@@ -443,7 +442,7 @@
 				case PREV_PAGE: return "Go to the previous page";
 				case TABLE_CONTENTS: return "Go back to the Table of Contents";
 				case SKILL_SCROLL: return "Change skill page to a different class.";
-				case REFRESH: return "Refreshes all shops for 1 Refresh Token.  1 Token is earned every 10 zones,  Max 15.";
+				case REFRESH: return "Refreshes all shops for 1 Refresh Token.  1 Token is earned every 10 zones,  Max 25.";
 				
 				case CONTINUE: return "Go forth to the next area.";
 				case RESPEC: return "Pay the money to get back all your spent skill points.";
@@ -885,11 +884,11 @@
 			var m:String="";
 			with (skills.SkillData){
 				switch (i){
-					case ORDINARY: m="\n<font color="+RED+">RESPEC FOR FREE</font>";  break;
-					case NOBLE: m="<font color="+RED+">+1 SKILL EVERY 12 LEVELS (5 TOTAL)\n SKILL LEVEL MAX: 7"; break;
-					case HOLY: m="<font color="+RED+">NO GAMBLING\n HOLY ATTACKS\n</font>"; break;
+					case ORDINARY: m="<font color="+RED+">RESPEC FOR FREE</font>";  break;
+					case NOBLE: m="SKILL POINTS: <font color="+RED+">+1 every 12 Levels</font>\n MAX SKILL LVL: <font color="+RED+">7</font>"; break;
+					case HOLY: m="<font color="+RED+">NO GAMBLING\nHOLY ATTACKS\n</font>"; break;
 					case UNGIFTED: m="<font color="+RED+">NO MAGIC\n</font>"; break;
-					case WILD:m="<font color="+RED+">DAMAGE RANGE INCREASED, +/-\n</font>";break;
+					case WILD:m="<font color="+RED+">INCREASED DAMAGE RANGE</font>\n";break;
 					case SAVIOR: m="<font color="+RED+">RANDOM DAMAGE TYPE EACH ATTACK\n</font>";break;
 					default: m="";
 				}
@@ -975,7 +974,7 @@
 				if (b){
 					return " <font color="+TEAL+">LOCKED</font>";
 				}else{
-					return " <font color="+TEAL+">UNLOCKED</font>";
+					return "";
 				}
 			}else if (i==1){
 				if (b){

@@ -350,7 +350,7 @@
 					_skill.values=[[SpriteModel.STAT,StatModel.FURY,5*i],[SpriteModel.STAT,StatModel.FURY_DECAY,-0.01*i],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FURY_INIT,i)],[SpriteModel.STAT,StatModel.FURYTORPHYS,0.0002*i],[SpriteModel.STAT,StatModel.FURYTORALL,0.0003*i]];
 					break;
 				case BLOODLUST:
-					_skill.values=[[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.FURY_HIT,i)],[SpriteModel.ATTACK,ActionBase.FURYTOCRIT,0.0002*i],[SpriteModel.STAT,StatModel.FURYTOBASE,1]];
+					_skill.values=[[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.FURY_HIT,i)],[SpriteModel.ATTACK,ActionBase.FURYTOCRIT,0.0002*i],[SpriteModel.STAT,StatModel.FURYTODMGMULT,0.001]];
 					break;
 				case UNSTOPPABLE:
 					_skill.values=[[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FURY_DEFEND,i)],[SpriteModel.STAT,StatModel.FURYTOTENACITY,0.0002*i],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.UNSTOPPABLE,i)]];
@@ -374,19 +374,19 @@
 					_talent.values=[[SpriteModel.STAT,StatModel.DODGE,0.1],[SpriteModel.STAT,StatModel.INITIATIVE,10],[SpriteModel.STAT,StatModel.STRENGTH,-10],[SpriteModel.STAT,StatModel.MPOWER,-10]];
 					break;
 				case CLEVER:
-					_talent.values=[[SpriteModel.STAT,StatModel.ILOOT,0.1],[SpriteModel.STAT,StatModel.ITEMEFF,0.1],[SpriteModel.STAT,StatModel.HEALTH,-25],[SpriteModel.STAT,StatModel.MANA,-25]];
+					_talent.values=[[SpriteModel.STAT,StatModel.ILOOT,0.1],[SpriteModel.STAT,StatModel.IRATE,0.2],[SpriteModel.STAT,StatModel.HEALTH,-25],[SpriteModel.STAT,StatModel.MANA,-25]];
 					break;
 				case UNGIFTED:
-					_talent.values=[[SpriteModel.STAT,StatModel.RMAGICAL,0.25],[SpriteModel.STAT,StatModel.RSPIRIT,0.25],[SpriteModel.STAT,StatModel.SLOTS,-1],[SpriteModel.STAT,StatModel.MPOWER,-50]];
+					_talent.values=[[SpriteModel.STAT,StatModel.RMAGICAL,0.35],[SpriteModel.STAT,StatModel.RSPIRIT,0.35],[SpriteModel.STAT,StatModel.SLOTS,-1],[SpriteModel.STAT,StatModel.MPOWER,-50]];
 					break;
 				case STUDIOUS:
-					_talent.values=[[SpriteModel.STAT,StatModel.POTEFF,0.10],[SpriteModel.STAT,StatModel.THROWEFF,0.20],[SpriteModel.ATTACK,ActionBase.HITRATE,-20],[SpriteModel.STAT,StatModel.BLOCK,-20]];
+					_talent.values=[[SpriteModel.STAT,StatModel.CHEMEFF,0.20],[SpriteModel.STAT,StatModel.CRAFT_BELT,2],[SpriteModel.ATTACK,ActionBase.HITRATE,-20],[SpriteModel.STAT,StatModel.BLOCK,-20]];
 					break;
 				case ENLIGHTENED:
-					_talent.values=[[SpriteModel.STAT,StatModel.MREGEN,0.04],[SpriteModel.STAT,StatModel.ITEMEFF,-0.1]];
+					_talent.values=[[SpriteModel.STAT,StatModel.MREGEN,0.04],[SpriteModel.STAT,StatModel.ITEMEFF,-0.1],[SpriteModel.STAT,StatModel.IRATE,-0.2]];
 					break;
 				case POWERFUL:
-					_talent.values=[[SpriteModel.STAT,StatModel.STRENGTH,25],[SpriteModel.STAT,StatModel.MPOWER,25],[SpriteModel.STAT,StatModel.RMAGICAL,-0.1],[SpriteModel.STAT,StatModel.RCHEMICAL,-0.1],[SpriteModel.STAT,StatModel.RSPIRIT,-0.1]];
+					_talent.values=[[SpriteModel.STAT,StatModel.STRMULT,0.1],[SpriteModel.STAT,StatModel.MPOWMULT,0.1],[SpriteModel.STAT,StatModel.RMAGICAL,-0.1],[SpriteModel.STAT,StatModel.RCHEMICAL,-0.1],[SpriteModel.STAT,StatModel.RSPIRIT,-0.1]];
 					break;
 				case HOLY:
 					_talent.values=[[SpriteModel.STAT,StatModel.HOLYEFF,0.1],[SpriteModel.STAT,StatModel.RSPIRIT,0.1]];

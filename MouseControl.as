@@ -43,9 +43,6 @@
 		var timer:Timer=new Timer(200,1);
 		var timer2:Timer=new Timer(300,1);
 		
-		public var customC:Boolean=true;
-		var cursor:CustomCursor=new CustomCursor;
-		
 		public static const BUTTON:String="button",
 							ITEM_BUTTON:String="item button",
 							PULL:String="pull",
@@ -86,7 +83,6 @@
 			Facade.stage.addEventListener(MouseEvent.MOUSE_MOVE,mouseMove);
 			Facade.stage.addEventListener(KeyboardEvent.KEY_DOWN,keyDown);
 			timer.addEventListener(TimerEvent.TIMER_COMPLETE,startDrag);
-			setMouseMode(GameData._Save.data.pause[GameData.CURSOR]);
 		}
 		
 		public function keyDown(e:KeyboardEvent){
@@ -136,8 +132,6 @@
 					//Facade.menuUI.popPrestige();
 				}
 			}
-			
-			if (customC) Mouse.hide();
 			
 			if (curOver!=null){
 				Facade.popOver();
@@ -195,22 +189,6 @@
 					drag.y=e.stageY+dragOffY;
 				}
 			}else{
-				if (customC){
-					Facade.stage.addChild(cursor);
-					if (e.target == cursor) return; 
-					if (e.target is SimpleButton){
-						cursor.gotoAndStop(2);
-					}else if (e.target is Sprite){
-						if (e.target.buttonMode){
-							cursor.gotoAndStop(2);
-						}else{
-							cursor.gotoAndStop(1);
-						}
-					}else{
-						cursor.gotoAndStop(1);
-					}
-				}
-				
 				if (e.target!=curOver){
 					if (e.target is GraphicButton){
 						curOver=e.target;
@@ -320,11 +298,7 @@
 					drag.onHold();
 					drag=null;
 				}else{
-					if (customC) {
-						cursor.visible=false;
-					}else{
-						Mouse.hide();
-					}
+					Mouse.hide();
 					drag.x=Facade.stage.mouseX+dragOffX;
 					drag.y=Facade.stage.mouseY+dragOffY;
 					Facade.stage.addChild(drag);
@@ -394,19 +368,8 @@
 		}
 		
 		function endDrag(){
-			if (customC){
-				cursor.visible=true;
-			}else{
-				Mouse.show();
-			}
+			Mouse.show();
 			drag=null;
-			/*if (Facade.currentUI is ui.StatusUI){
-				if (Facade.currentUI.transTo is ui.main.HomeUI){
-					Facade.saveC.saveChar();
-				}
-			//}else if (Facade.currentUI is ui.main.ArtifactUI){
-				//Facade.saveC.saveChar();
-			}*/
 		}
 		
 		public function clearMouse(){
@@ -491,19 +454,6 @@
 			if ((e.target.name==SKILL_TREE)||(e.target is ItemButton)){
 			}else{
 				mouseClick(e);
-			}
-		}
-		
-		public function setMouseMode(b:Boolean){
-			customC=b;
-			if (customC){
-				Mouse.hide();
-				cursor.startDrag(true);
-				Facade.stage.addChild(cursor);
-			}else{
-				Mouse.show();
-				cursor.stopDrag();
-				if (Facade.stage.contains(cursor)) Facade.stage.removeChild(cursor);
 			}
 		}
 	}
