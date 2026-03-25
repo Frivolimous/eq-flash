@@ -76,6 +76,7 @@
 							BLIND:String="Blind",
 							RESPECT:String="Respect",
 							AUTHORITAH:String="Authoritah",
+							STAGGER:String="Staggered",
 							
 							GOLEM_CONFUSED:String="Extra Confused",
 							CONFUSED:String="Confused",
@@ -199,6 +200,7 @@
 				case AUTHORITAH: return new BuffStats(106,label,level,BuffBase.CURSE,1,[[SpriteModel.STAT,StatModel.DMGMULT,-0.1-0.01*halfLevel]]);
 				case HEAL_NO: return new BuffStats(21,label,level,BuffBase.CURSE,10,[[SpriteModel.STAT,StatModel.HEALMULT,-0.5-0.5*halfLevel/20]]);
 				case SLOW: return new BuffStats(25,label,level,BuffBase.CURSE,5,[[SpriteModel.STAT,StatModel.INITIATIVE,-10-2.5*halfLevel],[SpriteModel.STAT,StatModel.DODGE,-0.075-0.3*Facade.diminish(0.05,halfLevel)]]);
+				case STAGGER: return new BuffStats(BuffView.SKILL_START+44,label,level,BuffBase.CURSE,2,[[SpriteModel.ATTACK,ActionBase.HITRATE,-20-8*level],[SpriteModel.STAT,StatModel.BLOCK,-20-8*level]]);
 
 				//Action Preventions
 				case GOLEM_CONFUSED: return new BuffAction(-1,label,level,-1,.3);

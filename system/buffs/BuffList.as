@@ -130,7 +130,7 @@
 			for (var i:int=0;i<buffs.length;i+=1){
 				//var _buff:BuffBase=_v.buffList.getBuff(i);
 				if (buffs[i] is BuffAction){
-					if ((buffs[i] as BuffAction).checkRate()){
+					if ((buffs[i] as BuffAction).checkRate(origin)){
 						return buffs[i].name;
 					}
 				}

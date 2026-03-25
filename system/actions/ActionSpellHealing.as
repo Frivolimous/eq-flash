@@ -112,7 +112,7 @@
 				if (_v.stats.displays[i].trigger==EffectBase.LEVEL_BOOST){
 					switch(_v.stats.displays[i].name){
 						case EffectData.SPELL_BOOST:
-							 if (_v.stats.displays[i].checkRate()) m+=_v.stats.displays[i].values; 
+							 if (_v.stats.displays[i].checkRate(_v)) m+=_v.stats.displays[i].values; 
 							 specialEffect=GAIA;
 							 break;
 					}

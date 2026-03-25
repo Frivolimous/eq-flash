@@ -75,7 +75,7 @@
 			var _effect:EffectBase=_o.stats.findEffect(EffectData.AUTOPOT);
 			if (_effect!=null){
 				_effect=_effect.modify(_o);
-				if (_effect.checkRate()){
+				if (_effect.checkRate(_o)){
 					if (_o.mana/_o.stats.getValue(StatModel.MANA)<=0.5){
 						for (var j:int=0;j<_o.belt.length;j+=1){
 							if (_o.belt[j]!=null && (_o.belt[j].index==32 || _o.belt[j].index==96) && _o.belt[j].charges>0){
@@ -137,27 +137,6 @@
 						_dmg/=_effect.values;
 					}
 					checkAutoMana(_o);
-				}
-			}
-			
-			if ((_health-_dmg)<=0){
-				_effect=_o.stats.findDisplay(EffectData.UNSTOPPABLE);
-				if (_effect!=null){
-					//graphicEffect
-					
-					_mitigated=_o.fury*_effect.values[0]*_o.stats.getValue(StatModel.HEALTH);
-					if (_mitigated>_dmg){
-						_dmg=0;
-						graphicEffect(POP,_o,PopEffect.BROWN_BURST);
-						var _dmgModel:DamageModel=new DamageModel;
-						_dmgModel.setDmg(_effect.values[1]*_o.fury*_o.stats.getValue(StatModel.PHYSEFF)*(_o.stats.getValue(StatModel.STRENGTH)/100+1)/2,DamageModel.PHYSICAL);
-						_dmgModel.resist(_o.attackTarget);
-						_dmgModel.applyDamage(_o,_o.attackTarget,false);
-						(new EffectKnockback(EffectData.UNSTOPPABLE,0,0,1,false)).applyEffect(_o,_o.attackTarget,null,_dmgModel);
-						_o.attackTarget.buffList.addBuff(BuffData.makeBuff(BuffData.STUNNED,100));
-						_o.fury=0;
-						_o.furyLeftToGain=0;
-					}
 				}
 			}
 			

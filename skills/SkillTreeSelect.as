@@ -44,12 +44,10 @@
 				buttons[7].setDesc(StringData.PTITLES[7*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Defeat arena level 100 to unlock.");
 			}
 
-			// if (!AchieveData.hasAchieved(AchieveData.DUEL_250)){
-			// 	buttons[8].disabled = true;
-			// 	buttons[8].setDesc(StringData.PTITLES[8*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Defeat arena level 250 to unlock.");
-			// }
+			if (!AchieveData.hasAchieved(AchieveData.DUEL_250)){
 				buttons[8].disabled = true;
-				buttons[8].setDesc(StringData.PTITLES[8*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","This skill tree is unreleased. Maybe it will be, maybe not?");
+				buttons[8].setDesc(StringData.PTITLES[8*3+1]+" <font color="+StringData.RED2+">LOCKED</font>","Defeat arena level 250 to unlock.");
+			}
 			
 			for (i=0;i<_origin.skillBlock.skillT.length;i+=1){
 				if (buttons[i].disabled){

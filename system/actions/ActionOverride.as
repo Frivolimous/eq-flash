@@ -38,7 +38,7 @@
 			if (isMagic()){
 				var _effect:EffectModel=_v.stats.findDisplay(EffectData.SPELL_BOOST);
 				if (_effect!=null){
-					if (_random && _effect.checkRate()){
+					if (_random && _effect.checkRate(_v)){
 						_boost+=_effect.values;
 						specialEffect=GAIA;
 					}
@@ -46,7 +46,7 @@
 			}else if (isBuffing()){
 				_effect=_v.stats.findDisplay(EffectData.BUFF_POT_BOOST);
 				if (_effect!=null){
-					if (_random && _effect.checkRate()){
+					if (_random && _effect.checkRate(_v)){
 						_boost+=_effect.values;
 						specialEffect=GAIA;
 					}
@@ -55,7 +55,7 @@
 			if (isBuff()){
 				_effect=_v.stats.findDisplay(EffectData.BUFF_BOOST);
 				if (_effect!=null){
-					if (_random && _effect.checkRate()){
+					if (_random && _effect.checkRate(_v)){
 						_boost+=_effect.values;
 						specialEffect=GAIA;
 					}
@@ -268,7 +268,7 @@
 				}
 				
 				var _reflect:EffectModel=_t.stats.findDisplay(EffectData.CURSE_REFLECT);
-				if (_reflect!=null && isCurse() && _reflect.checkRate()){
+				if (_reflect!=null && isCurse() && _reflect.checkRate(_o)){
 					var _temp:SpriteModel=_o;
 					_o=_t;
 					_t=_temp;
@@ -308,7 +308,7 @@
 				
 				if (isProjectile() || isGrenade() || (this is ActionAttack && !(this as ActionAttack).willLeap() && gameM.distance!=GameModel.NEAR)){
 					for (var i:int=0;i<_o.stats.displays.length;i+=1){
-						if (_o.stats.displays[i].name==EffectData.DOUBLESHOT && _o.stats.displays[i].checkRate()){
+						if (_o.stats.displays[i].name==EffectData.DOUBLESHOT && _o.stats.displays[i].checkRate(_o)){
 							if (_o.shots==0) _o.shots+=1;
 							_o.shots+=_o.stats.displays[i].values;
 						}

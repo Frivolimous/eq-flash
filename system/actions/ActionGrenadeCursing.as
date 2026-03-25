@@ -75,7 +75,7 @@
 				}
 				
 				for (var i:int=0;i<_o.stats.displays.length;i+=1){
-					if (_o.stats.displays[i].name==EffectData.DOUBLESHOT && _o.stats.displays[i].checkRate()){
+					if (_o.stats.displays[i].name==EffectData.DOUBLESHOT && _o.stats.displays[i].checkRate(_o)){
 						if (_o.shots==0) _o.shots+=1;
 						_o.shots+=_o.stats.displays[i].values;
 					}
@@ -127,7 +127,7 @@
 			}else{
 				
 				var _reflect:EffectBase=_t.stats.findDisplay(EffectData.CURSE_REFLECT);
-				if (_reflect!=null && _reflect.checkRate()){
+				if (_reflect!=null && _reflect.checkRate(_t)){
 					var _temp:SpriteModel=_o;
 					_o=_t;
 					_t=_temp;

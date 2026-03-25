@@ -312,6 +312,7 @@ package utils {
       addCosmetic(2,27); addCosmetic(3,4); addCosmetic(4,10); //Hair1
       addCosmetic(1,21); addCosmetic(2,28); addCosmetic(3,5); //Hair2
       addCosmetic(1,20); addCosmetic(2,26); addCosmetic(3,3); addCosmetic(4,9); //Hair3
+      addCosmetic(4,28); addCosmetic(4,29); // Dragon/Viking
       addCosmetic(5,1); //Aura
       GameData.saveThis(GameData.COSMETICS);
     }

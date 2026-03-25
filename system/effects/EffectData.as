@@ -22,6 +22,8 @@
 							
 							SMITE:String="Holy Smite",
 							SMITE_PROC:String="Smite Ready",
+
+							FURYDAMAGE:String="Dark Fury",
 							
 							MASSIVE_BLOW:String="Claw Strike",
 							MASSIVE_CLEAR_ATTACK:String="Claw Clear Attack",
@@ -158,8 +160,7 @@
 							FURY_DEFEND:String="Fury on Defend",
 							FURY_INIT:String="Starting Fury",
 							
-							BLOODLUST:String="Vengeance of Blood",
-							UNSTOPPABLE:String="Renewed Vigor",
+							UNSTOPPABLE:String="Unstoppable",
 							PSEUDOCRIT:String="Pseudocrit",
 							
 							RPEN:String="Penetrate Resistances";
@@ -223,6 +224,7 @@
 				case FULL_POWER: return new EffectDamage(label,27+8*level,DamageModel.MAGICAL);
 				case FULL_POWER2: return new EffectDamage(label,107,DamageModel.MAGICAL);
 				case GOLD_STRIKE: return new EffectDamage(label,40+10*level,DamageModel.PHYSICAL);
+				case FURYDAMAGE: return new EffectDamage(label,0.5+0.1*level,DamageModel.DARK);
 														  
 				case SMITE: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.NEVER,Math.floor(7-level/2),BuffData.makeBuff(BuffData.SMITE_PROC,level));
 				case MASSIVE_BLOW: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.HIT,1,BuffData.makeBuff(BuffData.MASSIVE_BLOW_PROC,level));
@@ -246,8 +248,6 @@
 				case REND: return new EffectBuff(label,level,EffectBase.CURSE,EffectBase.HIT,1,BuffData.makeBuff(BuffData.REND,level));
 				case REND_HEAL: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.HIT,1,BuffData.makeBuff(BuffData.REND_HEAL,level));
 				case MANUFACTURING_HIT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HIT,1,1+level);
-				case FURY_MISS: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DEFENSE,1,5+0.5*level);
-				case BLOODLUST: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HIT,30+4.5*level,0.5);
 				case SACRIFICE: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HIT,1,0.05+0.001*level);
 				case RPEN: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HIT,1,0.01*level);
 				case KNOCKBACK: return new EffectKnockback(label,level,EffectBase.HIT,EffectKnockback.BACK,true);
@@ -314,15 +314,17 @@
 				case MUTE: return new EffectBuff(label,level,EffectBase.CURSE,EffectBase.TURN,0.2+0.08*level,BuffData.makeBuff(BuffData.SILENCED,1));
 				case ROOT: return new EffectBuff(label,level,EffectBase.CURSE,EffectBase.HIT,0.1+0.04*level,BuffData.makeBuff(BuffData.ROOTED,level));
 				case RESPECT: return new EffectBuff(label,level,EffectBase.CURSE,EffectBase.DEFENSE,1,BuffData.makeBuff(BuffData.RESPECT,level));
+				case UNSTOPPABLE: return new EffectBuff(label,level,EffectBase.CURSE,EffectBase.HITBLOCK,0.01,BuffData.makeBuff(BuffData.STAGGER,level));
 				
 				case IGNORE_ATTACK: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,BuffData.makeBuff(BuffData.ATTACK_IGNORED,level));
 				case BUILD_WALL: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.HURT,1,BuffData.makeBuff(BuffData.BUILD_WALL,level));
 				case DTHROW: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DEFENSE,Facade.diminish(0.077,level),0);
-				
-				case FURY_HURT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,10+level);
-				case FURY_INIT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.INITIAL,1,5+2*level);
-				case FURY_HIT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HIT,1,1+0.4*level);
-				case FURY_DEFEND: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DEFENSE,1,2+0.8*level);
+
+				case FURY_MISS: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DEFENSE,1,5+0.5*level); // 10
+				case FURY_HURT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,5+0.5*level); // 15
+				case FURY_INIT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.INITIAL,1,5+0.5*level); // 10
+				case FURY_HIT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HIT,1,2+0.3*level); // 5
+				case FURY_DEFEND: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DEFENSE,1,2+0.3*level); // 10
 				
 				//--- SPECIALS ---
 				
@@ -334,14 +336,12 @@
 				case AUTOBUFFFREE: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.INJURED,Facade.diminish(0.03,level),BuffData.makeBuff(BuffData.BUFF_POT,level*0.5));
 				
 				//start of each round
-				
 				case PHOENIX_THORNS: return new EffectBuff(label,level,EffectBase.CURSE,EffectBase.CONSTANT,1,BuffData.makeBuff(BuffData.PHOENIX_THORNS,level));
 				case BARRIER: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.CONSTANT,1,BuffData.makeBuff(BuffData.BARRIER,level));
 				case FREE_SPELL: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.CONSTANT,1,new ActionBase());
 				
 				case CLEANSE: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.CONSTANT,0.2+0.08*level,1);
 				case CLEANSE_HEAL: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.ALL,1,1+level/2);
-				
 				
 				//revives
 				case REVIVE_PHOENIX: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,0.1+0.06*level,0);
@@ -366,7 +366,6 @@
 				case BLOOD_BANK: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.MITIGATION,1,50+5*level);
 				case MANA_BANK: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,1,25+2*level);
 				case DEFENSIVE_ROLL: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.MITIGATION,1,0.05+0.035*level);
-				case UNSTOPPABLE: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.MITIGATION,1,[0.0005*level,0.5*level]);
 				
 				//miscellaneous
 				case CURSE_REFLECT: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.NEVER,0.05+0.015*level,0);

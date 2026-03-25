@@ -37,6 +37,10 @@
 			if (name==EffectData.GOLD_STRIKE){
 				if (GameData.gold<100) damage=0;
 			}
+
+			if (name==EffectData.FURYDAMAGE){
+				damage*=_v.fury;
+			}
 			
 			if (damageType==DamageModel.CHEMICAL)  damage*=_v.stats.getValue(StatModel.CHEMEFF);
 			if (damageType==DamageModel.HOLY)  damage*=_v.stats.getValue(StatModel.HOLYEFF);
@@ -134,6 +138,9 @@
 				m+="if you are above 75% Health, ";
 			}else if (name==EffectData.GOLD_STRIKE){
 				m+="costing 100 gold per strike, ";
+			}else if (name==EffectData.FURYDAMAGE){
+				m+="deals "+DamageModel.fullTypeName[damageType].toLowerCase()+" damage based on your fury.";
+				return m;
 			}else{
 				if (m.length==0){
 					m+="Deal bonus ";

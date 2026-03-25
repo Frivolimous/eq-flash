@@ -14,7 +14,7 @@
 	public class ActionBase{
 		public static const statNames:Vector.<String>=new <String>["TYPE","USERATE","DAMAGE","ACCURACY","HIT","Hit Mult","CRIT","C.MULT","MANA",
 																	 "LEECH","HEAL","Effect","CEffect","PHYS","MAGI","CHEM","HOLY","DARK",
-																	 "Fury to Crit","Fury to Hit"];
+																	 "Fury to Hit"];
 		public static const TYPE:int=0,
 							USERATE:int=1,
 							DAMAGE:int=2,
@@ -41,11 +41,9 @@
 							HOLY:int=16,
 							DARK:int=17,
 							
+							FURYTOHIT:int=18,
 							
-							FURYTOCRIT:int=18,
-							FURYTOHIT:int=19,
-							
-							TAG:int=20,
+							TAG:int=19,
 							
 							/*EFFECTS:String="Effects:",
 							CEFFECTS:String="Crit:",*/
@@ -69,7 +67,6 @@
 					 userate:Number,
 					 leech:Number,
 					 dodgeReduce:Number,
-					 furytocrit:Number,
 					 furytohit:Number,
 					 
 					 source:ItemModel,
@@ -124,7 +121,7 @@
 			level=damage=hitrate=critrate=critmult=userate=leech=dodgeReduce=mana=0;
 			hitmult=0;
 			specialEffect=-1;
-			furytohit=furytocrit=0;
+			furytohit=0;
 			effects=new Vector.<EffectBase>;
 			cEffects=new Vector.<EffectBase>;
 			tags=new Array;
@@ -148,7 +145,6 @@
 				case MANA: mana+=_value; break;
 				case LEECH: leech+=_value; break;
 				case DODGE_REDUCE: dodgeReduce+=_value; break;
-				case FURYTOCRIT: furytocrit+=_value; break;
 				case FURYTOHIT: furytohit+=_value; break;
 				case TAG: tags.push(_value); break;
 				default: throw(new Error("Unavailable action property: "+_id));
@@ -168,7 +164,6 @@
 				case MANA: mana-=_value; break;
 				case LEECH: leech-=_value; break;
 				case DODGE_REDUCE: dodgeReduce-=_value; break;
-				case FURYTOCRIT: furytocrit-=_value; break;
 				case FURYTOHIT: furytohit-=_value; break;
 				case TAG: tags.splice(tags.indexOf(_value),1); break;
 				default: throw(new Error("Unavailable action property: "+_id));
@@ -188,7 +183,6 @@
 				case MANA: return mana;
 				case LEECH: return leech;
 				case DODGE_REDUCE: return dodgeReduce;
-				case FURYTOCRIT: return furytocrit;
 				case FURYTOHIT: return furytohit;
 				case TAG: return tags;
 				default: throw(new Error("Unavailable action property: "+_id));
@@ -322,7 +316,7 @@
 		
 		public function useEffects(_trigger:int,_o:SpriteModel,_t:SpriteModel,_dmgModel:DamageModel,_finish:Boolean=true){
 			for (var i:int=0;i<effects.length;i+=1){
-				if (effects[i].canUse(_trigger,this) && effects[i].checkRate()){
+				if (effects[i].canUse(_trigger,this) && effects[i].checkRate(_o)){
 					effects[i].applyEffect(_o,_t,this,_dmgModel);
 				}
 			}
@@ -365,7 +359,6 @@
 			critmult+=_v.critmult;
 			cEffects=cEffects.concat(_v.cEffects);
 			furytohit+=_v.furytohit;
-			furytocrit+=_v.furytocrit;
 			leech+=_v.leech;
 			dodgeReduce+=_v.dodgeReduce;
 			if (_multDmg) damage*=_v.damage;

@@ -242,8 +242,6 @@
 		}
 		
 		public function addFury(n:Number){
-			n=Math.min(n,furyLeftToGain);
-			furyLeftToGain-=n;
 			fury+=n;
 		}
 		
@@ -253,15 +251,11 @@
 			mana=stats.getValue(StatModel.MANA);
 		}
 		
-		public var furyLeftToGain:int=0;
-		const FURY_GAIN:int=30;
-		
 		public function regen(){
 			if (!dead){
 				healthHeal(stats.getValue(StatModel.HREGEN)*stats.getValue(StatModel.HEALTH));
 				mana+=stats.getValue(StatModel.MREGEN)*stats.getValue(StatModel.MANA);
 				fury*=(1-stats.getValue(StatModel.FURY_DECAY));
-				furyLeftToGain=FURY_GAIN;
 			}
 		}
 		

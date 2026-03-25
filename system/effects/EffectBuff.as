@@ -8,6 +8,7 @@
 	import items.FilterData;
 	import system.buffs.BuffShield;
 	import flash.filters.ColorMatrixFilter;
+	import ui.effects.PopEffect;
 	
 	public class EffectBuff extends EffectBase{							
 		public var buff:BuffBase;
@@ -119,6 +120,12 @@
 					}
 				}else if (buff.name==BuffData.PHOENIX_THORNS){
 					if (_o.eDistance!=GameModel.NEAR) return;
+				}else if (name==EffectData.UNSTOPPABLE){
+					if (_o.eDistance!=GameModel.NEAR){
+						return;
+					}
+					graphicEffect(POP,_o,PopEffect.BROWN_BURST);
+					(new EffectKnockback(EffectData.UNSTOPPABLE,0,0,1,false)).applyEffect(_o,_t,null,_dmgModel);
 				}
 				
 				if (name==EffectData.DISORIENT){

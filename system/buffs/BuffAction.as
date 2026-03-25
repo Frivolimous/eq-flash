@@ -31,7 +31,7 @@
 			}
 		}
 		
-		public function checkRate():Boolean{
+		public function checkRate(_v:SpriteModel):Boolean{
 			if (rate>=1 || GameModel.random()<rate){
 				return true;
 			}else{

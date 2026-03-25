@@ -13,7 +13,7 @@
 																   "MPow Mult","Init Mult","Block Mult","HEAL","Regen Mult","Block To Resist","Buff Turns",
 																   "Curse Turns","Health from Armor","SPELLSTEAL","EFFECT","EFFECTS","PROCS","DISPLAYS",
 																   "Health Mult","Mana Mult","Far Avoid","Mana To MPow","Mana To Str","FURY","FURY DECAY","Fury to Strength",
-																   "Fury to R.Phys","Fury to Resist","DARK","Fury to Base Damage","Fury to Tenacity"];
+																   "Tenacity to R.Phys","Fury to Resist","DARK","Fury to Tenacity"];
 		public static const STRENGTH:int=0,
 							MPOWER:int=1,
 							INITIATIVE:int=2,
@@ -93,12 +93,11 @@
 							FURY:int=58,
 							FURY_DECAY:int=59,
 							FURYTOSTRENGTH:int=60,
-							FURYTORPHYS:int=61,
+							TENACITYTORPHYS:int=61,
 							FURYTORALL:int=62,
 							
 							DARKEFF:int=63,
-							FURYTOBASE:int=64,
-							FURYTOTENACITY:int=65,
+							FURYTOTENACITY:int=64,
 							NULL:int=66;
 							
 		private var strength:Number,
@@ -177,9 +176,8 @@
 					
 					furyDecay:Number,
 					furytostrength:Number,
-					furytorphys:Number,
+					tenacitytorphys:Number,
 					furytorall:Number,
-					furytobase:Number,
 					furytotenacity:Number;
 					
 		public var cfury:Number;
@@ -201,7 +199,8 @@
 			strength=mpower=initiative=100;
 			health=200;
 			mana=100;
-			fury=cfury=furyDecay=furytostrength=furytorphys=furytorall=furytobase=furytotenacity=0;
+			fury=cfury=furytostrength=tenacitytorphys=furytorall=furytotenacity=0;
+			furyDecay=0.2;
 			block=50;
 			poteff=itemeff=throweff=1;
 			mregen=0.02;
@@ -299,9 +298,8 @@
 				case FAR_AVOID: faravoid+=_value; break;
 				case FURY_DECAY: furyDecay+=_value; break;
 				case FURYTOSTRENGTH: furytostrength+=_value; break;
-				case FURYTORPHYS: furytorphys+=_value; break;
+				case TENACITYTORPHYS: tenacitytorphys+=_value; break;
 				case FURYTORALL: furytorall+=_value; break;
-				case FURYTOBASE: furytobase+=_value; break;
 				case FURYTOTENACITY: furytotenacity+=_value; break;
 				case NULL: break;
 				default: throw(new Error("Unavailable stat property: "+_id));
@@ -372,9 +370,8 @@
 				case FAR_AVOID: faravoid-=_value; break;
 				case FURY_DECAY: furyDecay-=_value; break;
 				case FURYTOSTRENGTH: furytostrength-=_value; break;
-				case FURYTORPHYS: furytorphys-=_value; break;
+				case TENACITYTORPHYS: tenacitytorphys-=_value; break;
 				case FURYTORALL: furytorall-=_value; break;
-				case FURYTOBASE: furytobase-=_value; break;
 				case FURYTOTENACITY: furytotenacity-=_value; break;
 				case NULL: break;
 				default: throw(new Error("Unavailable stat property: "+_id));
@@ -425,7 +422,7 @@
 				case RCHEMICAL: return Math.min(1,rchemical+blocktorall*block+furytorall*cfury-negChem);
 				case RSPIRIT: return Math.min(1,rdark+blocktorall*block+furytorall*cfury-negDark);
 				case RCRIT: return Math.min(1,rcrit-negCrit);
-				case RPHYS: return Math.min(1,rphys-negPhys+furytorphys*cfury);
+				case RPHYS: return Math.min(1, addMult(rphys, getValue(TENACITY)*tenacitytorphys)-negPhys);
 				
 				case ILOOT: return iloot;
 				case SLOTS: return slots;
@@ -446,7 +443,7 @@
 				case PROCEFF: return proceff;
 				case NEAR: return near;
 				case FAR: return far;
-				case DMGMULT: return dmgmult+furytobase*Math.floor(cfury/100);
+				case DMGMULT: return dmgmult;
 				case DRANGE: return drange;
 				case TENACITY: return addMult(tenacity,furytotenacity*cfury);
 				case STRMULT: return strmult;
@@ -468,9 +465,8 @@
 				
 				case FURY_DECAY: return furyDecay;
 				case FURYTOSTRENGTH: return furytostrength;
-				case FURYTORPHYS: return furytorphys;
+				case TENACITYTORPHYS: return tenacitytorphys;
 				case FURYTORALL: return furytorall;
-				case FURYTOBASE: return furytobase;
 				case FURYTOTENACITY: return furytotenacity;
 				case NULL: return 0;
 				default: throw(new Error("Unavailable stat property: "+_id));
@@ -519,7 +515,7 @@
 		public function useEffects(_trigger:int,_dmgModel:DamageModel,_o:SpriteModel,_t:SpriteModel,_action:ActionBase=null){
 			if (_dmgModel==null) _dmgModel=new DamageModel;
 			for (var i:int=0;i<effects.length;i+=1){
-				if (effects[i].canUse(_trigger,_action) && effects[i].checkRate()){
+				if (effects[i].canUse(_trigger,_action) && effects[i].checkRate(_o)){
 					effects[i].modify(_o,_action).applyEffect(_o,_t,_action,_dmgModel);
 				}
 			}
@@ -531,7 +527,7 @@
 		public function useDisplays(_trigger:int,_dmgModel:DamageModel,_o:SpriteModel,_t:SpriteModel,_action:ActionBase=null){
 			if (_dmgModel==null) _dmgModel=new DamageModel;
 			for (var i:int=0;i<displays.length;i+=1){
-				if (displays[i].canUse(_trigger,_action) && displays[i].checkRate()){
+				if (displays[i].canUse(_trigger,_action) && displays[i].checkRate(_o)){
 					displays[i].modify(_o,_action).applyEffect(_o,_t,_action,_dmgModel);
 				}
 			}

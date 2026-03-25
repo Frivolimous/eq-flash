@@ -855,7 +855,6 @@
 									_temp+=reduce(_values[i][2]);
 								}break;
 							case ActionBase.CRITMULT: case ActionBase.CRITRATE: case ActionBase.DODGE_REDUCE: case ActionBase.LEECH: case ActionBase.HITMULT:
-							case ActionBase.FURYTOCRIT:
 								_temp+=reduce(_values[i][2]*100)+"%"; break;
 								//case ActionBase.FURYTOHIT:
 								//_temp+=reduce(_values[i][2]); break;

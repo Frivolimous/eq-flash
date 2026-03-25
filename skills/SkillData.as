@@ -193,7 +193,7 @@
 					_skill.values=[[SpriteModel.STAT,StatModel.NEAR,0.01*level]];
 					break;
 				case BERSERKER:
-					_skill.values=[[SpriteModel.STAT,StatModel.HEALTHMULT,0.005*level]];
+					_skill.values=[[SpriteModel.STAT,StatModel.HEALTHMULT,0.01*level]];
 					break;
 				default:
 					throw(new Error("Invalid Skill Number: "+tree));
@@ -341,19 +341,19 @@
 					break;
 					
 				case WILDERNESS:
-					_skill.values=[[SpriteModel.STAT,StatModel.HEALTH,30*i],[SpriteModel.STAT,StatModel.DODGE,0.026*i],[SpriteModel.ATTACK,ActionBase.LEECH,0.015*i]];
+					_skill.values=[[SpriteModel.STAT,StatModel.HEALTH,15*i],[SpriteModel.ATTACK,ActionBase.LEECH,0.015*i],[SpriteModel.STAT,StatModel.TENACITYTORPHYS,0.1+0.04*i]];
 					break;
 				case FURIOUS:
-					_skill.values=[[SpriteModel.STAT,StatModel.FURY,100],[SpriteModel.STAT,StatModel.FURY_DECAY,0.2],[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.FURY_MISS,i)],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FURY_HURT,i)],[SpriteModel.STAT,StatModel.FURYTOSTRENGTH,0.15*i],[SpriteModel.ATTACK,ActionBase.FURYTOHIT,0.1*i]];
+					_skill.values=[[SpriteModel.STAT,StatModel.FURY,100],[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.FURY_MISS,i)],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FURY_HURT,i)],[SpriteModel.STAT,StatModel.FURYTOSTRENGTH,0.5+0.2*i],[SpriteModel.ATTACK,ActionBase.FURYTOHIT,0.6+0.09*i]];
 					break;
 				case LASTING_ANGER:
-					_skill.values=[[SpriteModel.STAT,StatModel.FURY,5*i],[SpriteModel.STAT,StatModel.FURY_DECAY,-0.01*i],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FURY_INIT,i)],[SpriteModel.STAT,StatModel.FURYTORPHYS,0.0002*i],[SpriteModel.STAT,StatModel.FURYTORALL,0.0003*i]];
+					_skill.values=[[SpriteModel.STAT,StatModel.FURY_DECAY,-0.01*i],[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.FURY_HIT,i)],[SpriteModel.STAT,StatModel.FURYTOTENACITY,0.001+0.0005*i],[SpriteModel.STAT,StatModel.FURYTORALL,0.001+0.0005*i]];
 					break;
 				case BLOODLUST:
-					_skill.values=[[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.FURY_HIT,i)],[SpriteModel.ATTACK,ActionBase.FURYTOCRIT,0.0002*i],[SpriteModel.STAT,StatModel.FURYTODMGMULT,0.001]];
+					_skill.values=[[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FURY_INIT,i)],[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.FURYDAMAGE,i)]];
 					break;
 				case UNSTOPPABLE:
-					_skill.values=[[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FURY_DEFEND,i)],[SpriteModel.STAT,StatModel.FURYTOTENACITY,0.0002*i],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.UNSTOPPABLE,i)]];
+					_skill.values=[[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FURY_DEFEND,i)],[SpriteModel.STAT,StatModel.BLOCK,4*i],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.UNSTOPPABLE,i)]];
 					break;
 				default:
 					throw(new Error("Invalid Skill Number: "+s));
@@ -362,7 +362,6 @@
 		}
 		
 		public static function loadTalent(i:int):SkillModel{
-			
 			var _talent:SkillModel=new SkillModel;
 			_talent.index=i;
 			
@@ -446,7 +445,6 @@
 		}
 
 		public static function getTreeAssignment(skillA: Array):Array{
-			//a: SkillModel[];
 			var m:Array=new Array(NUM_TREES);
 			for (var i:int=0;i<m.length;i+=1){
 				m[i]=0;

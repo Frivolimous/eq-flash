@@ -51,7 +51,6 @@
 			m.addBase(_v.actionList.attack,true);
 			
 			m.hitrate+=m.furytohit*_v.fury;
-			m.critrate+=m.furytocrit*_v.fury;
 			
 			var _effect:EffectBase=m.findEffect(EffectData.BASE_DMG);
 			if (_effect !=null){
@@ -97,14 +96,6 @@
 					m.crit=true;
 					if (m.cEffects.length>0){
 						for (i=0;i<m.cEffects.length;i+=1){
-							if (m.cEffects[i].name==EffectData.BLOODLUST){
-								if (_v.fury>=50){
-									m.damage+=m.cEffects[i].userate;
-									m.leech+=m.cEffects[i].values;
-								}else{
-									continue;
-								}
-							}
 							m.effects.push(m.cEffects[i].modify(_v,m));
 						}
 					}
@@ -243,7 +234,7 @@
 				
 				if (!(this as ActionAttack).willLeap() && _o.eDistance!=GameModel.NEAR){
 					for (var i:int=0;i<_o.stats.displays.length;i+=1){
-						if (_o.stats.displays[i].name==EffectData.DOUBLESHOT && _o.stats.displays[i].checkRate()){
+						if (_o.stats.displays[i].name==EffectData.DOUBLESHOT && _o.stats.displays[i].checkRate(_o)){
 							if (_o.shots==0) _o.shots+=1;
 							_o.shots+=_o.stats.displays[i].values;
 						}
@@ -339,7 +330,6 @@
 		override public function clone(_boost:int=0):ActionBase{
 			var m:ActionAttack=new ActionAttack(basePriority.basePriorityList,damage,type,effects,hitrate,critrate,critmult,cEffects,leech,dodgeReduce,tags);
 			m.hitmult=hitmult;
-			m.furytocrit=furytocrit;
 			m.furytohit=furytohit;
 			m.source=source;
 			m.specialEffect=specialEffect;

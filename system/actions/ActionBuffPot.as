@@ -54,7 +54,7 @@
 		
 		override public function postAnim(_o:SpriteModel,_t:SpriteModel){
 			var _reflect:EffectBase=_t.stats.findDisplay(EffectData.BUFF_REFLECT);
-			if (_reflect!=null && _reflect.checkRate()){
+			if (_reflect!=null && _reflect.checkRate(_o)){
 				var _temp:SpriteModel=_o;
 				_o=_t;
 				_t=_temp;
@@ -83,7 +83,7 @@
 					switch(effects[i].name){
 						case EffectData.BUFF_POT_BOOST:
 						case EffectData.BUFF_BOOST:
-							 if (effects[i].checkRate()) m+=effects[i].values; 
+							 if (effects[i].checkRate(_v)) m+=effects[i].values; 
 							 specialEffect=GAIA;
 							 break;
 					}
@@ -94,7 +94,7 @@
 					switch(_v.stats.displays[i].name){
 						case EffectData.BUFF_POT_BOOST:
 						case EffectData.BUFF_BOOST:
-							 if (_v.stats.displays[i].checkRate()) m+=_v.stats.displays[i].values; 
+							 if (_v.stats.displays[i].checkRate(_v)) m+=_v.stats.displays[i].values; 
 							 specialEffect=GAIA;
 							 break;
 					}

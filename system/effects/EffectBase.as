@@ -106,9 +106,13 @@
 			return false;
 		}
 		
-		public function checkRate():Boolean{
+		public function checkRate(_o:SpriteModel):Boolean{
 			if (userate<=0) return false;
-			if (userate>=1 || GameModel.random()<userate) return true;
+			var _userate=userate;
+			if (name === EffectData.UNSTOPPABLE) {
+				_userate *= _o.fury;
+			}
+			if (_userate>=1 || GameModel.random()<_userate) return true;
 			return false;
 		}
 		
@@ -127,7 +131,6 @@
 					_o.stats.useEffects(EffectBase.INJURED,new DamageModel,_o,_o.attackTarget);
 					graphicEffect(FLYING_TEXT,_o,String(Math.round(values*_action.damage)));
 					break;
-				
 				case EffectData.KI_STRIKE:
 					var _mana:Number=_o.mana;
 					if (_mana>values[1]) _mana=values[1];
@@ -271,10 +274,6 @@
 				case EffectData.FURY_DEFEND: case EffectData.FURY_INIT:
 				case EffectData.FURY_HIT:
 					_o.addFury(values);
-					//_o.fury+=values;
-					break;
-				case EffectData.BLOODLUST:
-					_o.fury-=50;
 					break;
 			}
 		}
@@ -510,7 +509,9 @@
 			}
 			
 			if (userate>0 && userate<1) {
-				if (m.length==0){
+				if (name==EffectData.UNSTOPPABLE){
+					m+="chance equal to your fury to ";
+				}else if (m.length==0){
 					m+="Chance to ";
 				}else{
 					m+="chance to ";

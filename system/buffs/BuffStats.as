@@ -129,6 +129,7 @@
 				case BuffData.DYING: return "Can survive below 0 health for a number of turns.";
 				
 				case BuffData.WEAKENED: return "Reduce enemy direct damage.";
+				case BuffData.STAGGER: return "Reduce enemy hit and block and knock the enemy back.";
 				case BuffData.HEAL_NO: return "Significantly reduce enemy healing.";
 				case BuffData.VULNERABLE: return "Reduce enemy resistances.";
 				case BuffData.VULNERABLE2: return "Reduce enemy physical resistance.";
@@ -185,6 +186,7 @@
 				case BuffData.LEAP_ATTACK: return "Leap at your opponent with increased base weapon damage.";
 				
 				case BuffData.WEAKENED: return "Has decreased damage.";
+				case BuffData.STAGGER: return "Has reduced Hit and Block.";
 				case BuffData.HEAL_NO: return "Has significantly reduced healing.";
 				case BuffData.VULNERABLE: return "Has resistances decreased.";
 				case BuffData.VULNERABLE2: return "Has physical resistance decreased.";
