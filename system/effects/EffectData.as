@@ -23,6 +23,9 @@
 							SMITE:String="Holy Smite",
 							SMITE_PROC:String="Smite Ready",
 
+							FLAME_CHARGE:String="Yol Toor Shul",
+							FLAME_CHARGE_PROC:String="Yol Toor Shul Ready",
+
 							FURYDAMAGE:String="Dark Fury",
 							
 							MASSIVE_BLOW:String="Claw Strike",
@@ -57,6 +60,7 @@
 							FEAR_BOOST:String="Dmg vs",
 							NEAR_DMG_BOOST:String="Near Dmg",
 							RANDOM_DMG_BOOST:String="Random Dmg",
+							TENACIOUS_BOOST:String="Tenacious Blow",
 							
 							COMBO:String="Combo",
 							COMBO_DEFENSE:String="Defensive Combo",
@@ -105,6 +109,7 @@
 							ROOT:String="Gaia's Love",
 							RESPECT:String="Respect",
 							PROTECTION:String="Embraced",
+							STACKING_RESIST:String="Mul Qah Diiv",
 							
 							PHOENIX_THORNS:String="Engulfed",
 							CLEANSE:String="Cleanse",
@@ -264,6 +269,7 @@
 				case NEAR_DMG_BOOST: return new EffectDmgBoost(label,level,EffectDmgBoost.DISTANCE,0.25,1,GameModel.NEAR);
 				case RANDOM_DMG_BOOST: return new EffectDmgBoost(label,level,EffectDmgBoost.RANDOMIZED,level/100);
 				case ASSASSINATE: return new EffectDmgBoost(label,level,EffectDmgBoost.HEALTH_FULL,0.05+0.07*level);
+				case TENACIOUS_BOOST: return new EffectDmgBoost(label,level,EffectDmgBoost.STAT_BOOST,1,1,StatModel.TENACITY);
 				
 				case RANDOM_BUFF: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.ALL,1,Math.floor(level*1.5));
 				case KI_STRIKE: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HIT,1,[0.1+0.39*level,(100-5*level<25?25:100-5*level)]);
@@ -315,7 +321,9 @@
 				case ROOT: return new EffectBuff(label,level,EffectBase.CURSE,EffectBase.HIT,0.1+0.04*level,BuffData.makeBuff(BuffData.ROOTED,level));
 				case RESPECT: return new EffectBuff(label,level,EffectBase.CURSE,EffectBase.DEFENSE,1,BuffData.makeBuff(BuffData.RESPECT,level));
 				case UNSTOPPABLE: return new EffectBuff(label,level,EffectBase.CURSE,EffectBase.HITBLOCK,0.01,BuffData.makeBuff(BuffData.STAGGER,level));
-				
+				case FLAME_CHARGE: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.HITBLOCK,1,BuffData.makeBuff(BuffData.FLAME_CHARGE_PROC,level));
+				case STACKING_RESIST: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.HITBLOCK,1,BuffData.makeBuff(BuffData.STACKING_RESIST,level));
+
 				case IGNORE_ATTACK: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.HURT,1,BuffData.makeBuff(BuffData.ATTACK_IGNORED,level));
 				case BUILD_WALL: return new EffectBuff(label,level,EffectBase.BUFF,EffectBase.HURT,1,BuffData.makeBuff(BuffData.BUILD_WALL,level));
 				case DTHROW: return new EffectBase(label,level,EffectBase.INSTANT,EffectBase.DEFENSE,Facade.diminish(0.077,level),0);

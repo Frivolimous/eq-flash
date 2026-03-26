@@ -22,7 +22,8 @@
 							DISTANCE:int=5,
 							HEALTH_PERCENT:int=6,
 							FLAT:int=7,
-							HEALTH_FULL:int=8;
+							HEALTH_FULL:int=8,
+							STAT_BOOST:int=9;
 		
 		var boostType:int;
 		var boostAmount:Number;
@@ -71,12 +72,10 @@
 				case NUM_CURSE:
 					var _boost:int=_t.buffList.countBuffs(BuffBase.CURSE,true);
 					_dmgModel.addMult(boostAmount*_boost);
-					//_dmgModel.addMult(dim(boostAmount,_boost));
 					break;
 				case NUM_BUFF:
 					_boost=_o.buffList.countBuffs(BuffBase.BUFF,false);
 					_dmgModel.addMult(boostAmount*_boost);
-					//_dmgModel.addMult(dim(boostAmount,_boost));
 					break;
 				case HEALTH_PERCENT:
 					_dmgModel.addMult(_t.healthPercent()*boostAmount);
@@ -87,6 +86,11 @@
 					break;
 				case FLAT:
 					_dmgModel.addMult(boostAmount);
+					break;
+				case STAT_BOOST:
+					var _boostN:Number=_o.stats.getValue(extra);
+					_dmgModel.addMult(boostAmount*_boostN);
+					Facade.addLine("STAT BOOST: "+extra+", "+_boostN+", "+boostAmount);
 					break;
 			}
 		}
@@ -100,6 +104,8 @@
 				m="Deal up to <font color="+StringData.RED+"><b>+"+String(Math.round(boostAmount*100))+"%</b></font> damage when enemy is at full health.";
 			}else if (boostType==HEALTH_FULL){
 				m="Deal <font color="+StringData.RED+"><b>+"+String(Math.round(boostAmount*100))+"%</b></font> damage when enemy is at full health.";
+			}else if (boostType==STAT_BOOST){
+				m="Increase your damage by <font color="+StringData.RED+"><b>+"+String(Math.round(boostAmount*100))+"%</b></font> of your "+StatModel.statNames[extra]+".";
 			}else{
 				m+=name;
 				if (boostType==HAS_CURSE){
@@ -131,6 +137,7 @@
 				case HAS_BUFF: n+="if you are "+extra+"."; break;
 				case DISTANCE: n+="at "+extra+" range."; break;
 				case FLAT: n+="by this amount."; break;
+				case STAT_BOOST: n+="based on "+StatModel.statNames[extra]; break;
 			}
 			
 			if (m.length==0){

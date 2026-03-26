@@ -150,6 +150,9 @@
 		}
 		
 		public function isShadow():Boolean{
+			if (isPremium()) return false;
+			if (index==118) return false;
+			
 			if ((primary==ItemData.WEAPON && enchantIndex>=15) || 
 				(primary==ItemData.HELMET && enchantIndex>-1 && enchantIndex<15) ||
 				(index==45 && enchantIndex==0) ||

@@ -34,6 +34,7 @@
 							ENCHANTED4:String="Insidious Weapon",
 							SHIELD:String="Shielded",
 							SMITE_PROC:String="Smite Ready",
+							FLAME_CHARGE_PROC:String="Yol Toor Shul Ready",
 							MASSIVE_BLOW_OFF:String="Claw Strike Charging",
 							MASSIVE_BLOW_PROC:String="Claw Strike",
 							HEAL_NO:String="No Healing",
@@ -57,6 +58,7 @@
 							SUPER_SAYAN2:String="Legendary",
 							SUPER_SAYAN3:String="Vegetative",
 							HIGH:String="High",
+							STACKING_RESIST:String="Mul Qah Diiv",
 							
 							BERSERK:String="Berserk",
 							TAUNT:String="Taunt",
@@ -143,6 +145,7 @@
 				case STRENGTHEN: return new BuffStats(29,label,level,BuffBase.BUFF,5,[[SpriteModel.STAT,StatModel.STRENGTH,20+5*level]]);
 				case SHIELD: return new BuffShield(23,label,level,-1,StatModel.MPOWER,39+3.3*level,3);
 				case CANNIBALISM: return new BuffStats(141,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.LEECH,0.25+0.025*level],[SpriteModel.ATTACK,ActionBase.HITRATE,10+5*level],[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,0.5],[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.CANNIBAL_CLEAR_ATTACK,0)]]);
+				
 				//Pot Buffs
 				case BUFF_POT: return new BuffStats(34,label,level,BuffBase.BUFF,5,[[SpriteModel.STAT,StatModel.STRENGTH,15+5*halfLevel],[SpriteModel.STAT,StatModel.MPOWER,15+5*halfLevel],[SpriteModel.STAT,StatModel.INITIATIVE,15+5*halfLevel],[SpriteModel.STAT,StatModel.THROWEFF,0.15+0.05*halfLevel],[SpriteModel.STAT,StatModel.RMAGICAL,0.1+0.7*Facade.diminish(0.03,level)],[SpriteModel.STAT,StatModel.RCHEMICAL,0.1+0.7*Facade.diminish(0.03,level)],[SpriteModel.STAT,StatModel.RSPIRIT,0.1+0.7*Facade.diminish(0.03,level)]]);
 				case CELERITY_POT: return new BuffStats(98,label,level,BuffBase.BUFF,5,[[SpriteModel.ATTACK,ActionBase.HITRATE,15+5*level],[SpriteModel.ATTACK,ActionBase.CRITRATE,0.01+0.6*Facade.diminish(0.01,halfLevel)],[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.QUICK,1+0.5*halfLevel)]]);
@@ -168,6 +171,7 @@
 				case COMBO: return new BuffStats(107,label,level,BuffBase.BUFF,1,[[SpriteModel.STAT,StatModel.DMGMULT,0.20+0.01*halfLevel]],3);
 				case COMBO_DEFENSE: return new BuffStats(103,label,level,BuffBase.BUFF,2,[[SpriteModel.STAT,StatModel.RPHYS,0.01+0.001*halfLevel],[SpriteModel.STAT,StatModel.RCHEMICAL,0.025+0.0025*halfLevel]],8);
 				case QUICK: return new BuffStats(-1,label,level,BuffBase.BUFF,1,[[SpriteModel.ATTACK,ActionBase.HITRATE,8*level]]);
+				case STACKING_RESIST: return new BuffStats(148,label,level,BuffBase.BUFF,2,[[SpriteModel.STAT,StatModel.RPHYS,0.015+0.0015*halfLevel],[SpriteModel.STAT,StatModel.RMAGICAL,0.025+0.0025*halfLevel]],7);
 				
 				//Init Buffs
 				case INITIAL_BLESS: return new BuffStats(116,label,level,BuffBase.BUFF,3,[[SpriteModel.STAT,StatModel.DMGMULT,0.05+0.009*level],[SpriteModel.ATTACK,ActionBase.HITRATE,10+2*level]]);
@@ -178,6 +182,7 @@
 				case BARRIER: return new BuffShield(123,label,level,-1,StatModel.MPOWER,1+1*level,20);
 				case BUILD_WALL: return new BuffShield(122,label,level,-1,-1,0.15,1);
 				case SMITE_PROC: return new BuffStats(BuffView.SKILL_START+31,label,level,BuffBase.BUFF,-1,[[SpriteModel.STAT,StatModel.PROCS,new EffectDamage(EffectData.SMITE_PROC,50+20*level,DamageModel.HOLY)]],Math.floor(7-level/2));
+				case FLAME_CHARGE_PROC: return new BuffStats(146,label,level,BuffBase.BUFF,-1,[[SpriteModel.STAT,StatModel.PROCS,new EffectDamage(EffectData.FLAME_CHARGE_PROC,27+8*level,DamageModel.MAGICAL)]],1);
 				case MASSIVE_BLOW_OFF: return new BuffDisplay(BuffView.SKILL_START+6,label,level,-1,Math.floor(14-level));
 				case MASSIVE_BLOW_PROC: return new BuffStats(BuffView.SKILL_START+6,label,level,BuffBase.BUFF,-1,[[SpriteModel.STAT,StatModel.DMGMULT,2],[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.MASSIVE_CLEAR_ATTACK,0)]],Math.floor(14-level));
 				

@@ -49,6 +49,7 @@
 		public static function initialize(_s:Stage){
 			stage=_s;
 			stage.frameRate=FRAMERATE;
+			stage.color=0x000000;
 
 			GameData.init();
 			SpriteSheets.init();

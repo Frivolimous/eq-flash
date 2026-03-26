@@ -37,26 +37,9 @@
 		}
 		
 		public function makeBitmap(_vector:MovieClip,_offX:Number=0,_offY:Number=0,_width:Number=-1){
-			// if (_width>=0){
-			// 	var _scale:Number=_width/_vector.width;
-			// 	var _matrix:Matrix=new Matrix(_scale,0,0,_scale,_offX,_offY);
-			// }
-			// if (bitmap==null){
-			// 	var _bitmapData:BitmapData=new BitmapData(_vector.width*_scale,_vector.height*_scale,true,0);
-			// 	// _bitmapData.draw(_vector,_matrix!=null?_matrix:null);
-			// 	_bitmapData.drawWithQuality(_vector,_matrix!=null?_matrix:null, null, null, null, true, StageQuality.BEST);
-				
-			// 	bitmap=new Bitmap(_bitmapData,"auto",false);
-			// 	addChildAt(bitmap,0);
-			// }else{
-			// 	// bitmap.bitmapData.draw(_vector,_matrix!=null?_matrix:null);
-			// 	bitmap.bitmapData.drawWithQuality(_vector,_matrix!=null?_matrix:null, null, null, null, true, StageQuality.BEST);
-			// }
-			// vectorIcon=null;
 			if (_width>=0){
-				var _scale:Number=_width/_vector.width;
-				vectorIcon.scaleX=vectorIcon.scaleY=_scale;
-				// var _matrix:Matrix=new Matrix(_scale,0,0,_scale,_offX,_offY);
+				vectorIcon.width = _width;
+				vectorIcon.scaleY=vectorIcon.scaleX;
 			}
 			vectorIcon.x=_offX;
 			vectorIcon.y=_offY;
@@ -65,10 +48,6 @@
 		}
 		
 		public function dispose(){
-			// if (bitmap!=null){
-			// 	bitmap.bitmapData.dispose();
-			// 	bitmap=null;
-			// }
 			vectorIcon=null;
 			if (parent!=null){
 				parent.removeChild(this);

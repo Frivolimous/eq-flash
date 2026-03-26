@@ -33,9 +33,13 @@
 		override public function addStacksFrom(_removed:BuffBase){
 			if (_removed is BuffStats){
 				if (_removed.stacks<maxStacks){
-					values[0][2]+=(_removed as BuffStats).values[0][2];
+					for (var i=0;i<values.length;i++){
+						values[i][2]+=(_removed as BuffStats).values[i][2];
+					}
 				}else{
-					values[0][2]=(_removed as BuffStats).values[0][2];
+					for (i=0;i<values.length;i++){
+						values[i][2]=(_removed as BuffStats).values[i][2];
+					}
 				}
 			}
 			super.addStacksFrom(_removed);
@@ -86,9 +90,10 @@
 			
 			if (name==BuffData.SMITE_PROC){
 				return EffectData.SMITE+": every <font color="+StringData.RED+"><b>"+maxStacks+"</b></font> turns deal <font color="+StringData.RED+"><b>"+String(Math.floor(values[0][2].damage))+" HOLY</b></font> dmg.";
-			}
-			if (name==BuffData.MASSIVE_BLOW_PROC){
+			}else if (name==BuffData.MASSIVE_BLOW_PROC){
 				return BuffData.MASSIVE_BLOW_PROC+"\n Base Damage <font color="+StringData.RED+"><b>+"+String(Math.floor(values[0][2]*100))+"%</b></font>\n  every <font color="+StringData.RED+"><b>"+maxStacks+"</b></font> attacks.";
+			}else if (name==BuffData.FLAME_CHARGE_PROC){
+				return EffectData.FLAME_CHARGE+": When struck, deal <font color="+StringData.RED+"><b>"+String(Math.floor(values[0][2].damage))+" "+DamageModel.fullTypeName[values[0][2].damageType].toUpperCase()+"</b></font> dmg on next attack.";
 			}
 			if (charges>0){
 				m+="<font color="+StringData.RED+">x"+charges+"</font>\n";
@@ -159,7 +164,7 @@
 				case BuffData.ENCHANTED2: return "Add holy damage on every attack.";
 				case BuffData.ENCHANTED3: return "Add physical damage, Hit and Crit.";
 				case BuffData.SMITE_PROC: return "Deal massive Holy Damage when you deal damage.";
-				
+				case BuffData.FLAME_CHARGE_PROC: return "Deal "+DamageModel.fullTypeName[values[0][2].damageType]+" Damage next time you deal damage.";
 				case BuffData.STRENGTHEN: return "Make you stronger and deal more damage.";
 				
 				case BuffData.BUFF_POT: return "Empower you through alchemical wonders.";
@@ -171,7 +176,8 @@
 				
 				case BuffData.COMBO: return "Increase further damage this round.";
 				case BuffData.COMBO_DEFENSE: return "Increases your defenses.";
-				case BuffData.COOLDOWN: return "Reduce your stats temporarily.";/**/
+				case BuffData.STACKING_RESIST: return "Increases your defenses.";
+				case BuffData.COOLDOWN: return "Reduce your stats temporarily.";
 				
 				case BuffData.GRAILED: return "Increase Health Regeneration by a significant amount.";
 				case BuffData.SAYAN: return "Normal mode";

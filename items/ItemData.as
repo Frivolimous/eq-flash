@@ -225,7 +225,7 @@
 					case 100: return new ItemModel(_index,"Random Premium",_level,"MYSTERY","UNKNOWN",null,2000000);
 					
 					case 101: return new ItemEquipment(_index,"Riot Helmet",_level,HELMET,HEAVY,500,null,[[SpriteModel.STAT,StatModel.HEALTH,120+62*_level],[SpriteModel.STAT,StatModel.RCRIT,.3],[SpriteModel.STAT,StatModel.INITIATIVE,-40],[SpriteModel.STAT,StatModel.DODGE,-0.2],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.RESPECT,_level)]],[EffectData.PREMIUM]);
-					case 102: return new ItemEquipment(_index,"Hell Horns",_level,HELMET,UNARMORED,500,null,[[SpriteModel.STAT,StatModel.HEALTH,60+21*_level],[SpriteModel.STAT,StatModel.RCRIT,0.05],[SpriteModel.STAT,StatModel.RPHYS,0.04+0.004*_level],[SpriteModel.STAT,StatModel.RCHEMICAL,0.1+0.01*_level]],[EffectData.PREMIUM]);
+					case 102: return new ItemEquipment(_index,"Hell Horns",_level,HELMET,UNARMORED,500,null,[[SpriteModel.STAT,StatModel.HEALTH,60+21*_level],[SpriteModel.STAT,StatModel.RCRIT,0.05],[SpriteModel.STAT,StatModel.RPHYS,0.05+0.005*_level],[SpriteModel.STAT,StatModel.RCHEMICAL,0.1+0.01*_level]],[EffectData.PREMIUM]);
 					case 103: return new ItemEquipment(_index,"Hockey Mask",_level,HELMET,MEDIUM,500,null,[[SpriteModel.STAT,StatModel.HEALTH,100+52*_level],[SpriteModel.STAT,StatModel.RCRIT,.2],[SpriteModel.STAT,StatModel.INITIATIVE,-20],[SpriteModel.STAT,StatModel.DODGE,-0.1],[SpriteModel.STAT,StatModel.PROCS,EffectData.makeEffect(EffectData.FEAR_BOOST,_level)]],[EffectData.PREMIUM]);
 					case 104: return new ItemEquipment(_index,"Propeller Beanie",_level,HELMET,LIGHT,500,null,[[SpriteModel.STAT,StatModel.HEALTH,80+40*_level],[SpriteModel.STAT,StatModel.RCRIT,.1],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.MOVE_BOOST,_level)]],[EffectData.PREMIUM]);
 					
@@ -282,10 +282,10 @@
 					case 142: return new ItemModel(_index,"Rocketman",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.TURN_REDUCE,0.05],[SpriteModel.STAT,StatModel.MANA,2+2*_level],[SpriteModel.STAT,StatModel.MANATOMPOW,0.05+0.01*_level]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 143: return new ItemModel(_index,"Monacle",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.STRENGTH,2+2*_level],[SpriteModel.STAT,StatModel.MPOWER,2+2*_level],[SpriteModel.STAT,StatModel.INITIATIVE,2+2*_level],[SpriteModel.STAT,StatModel.THROWEFF,0.02+0.02*_level],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.NO_OFFENSIVE,_level)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
 					case 144: return new ItemModel(_index,"Goggles",_level,USEABLE,TRINKET,BUFF,4000,null,[[SpriteModel.STAT,StatModel.THROWEFF,0.03+0.03*_level],[SpriteModel.STAT,StatModel.CHEMEFF,0.015+0.015*_level],[SpriteModel.ATTACK,ActionBase.DODGE_REDUCE,0.05],[SpriteModel.STAT,StatModel.RCHEMICAL,0.01+0.01*_level],[SpriteModel.STAT,StatModel.DISPLAYS,EffectData.makeEffect(EffectData.FIND_STACKS,_level)]],-1,[EffectData.RELIC,EffectData.SUPER_PREMIUM]);
-					case 145: return new ItemEquipment(_index,"Dragon Sword",_level,WEAPON,SHIELD,70,ActionData.makeWeapon(26+1.7*_level),[[SpriteModel.STAT,StatModel.BLOCK,12+11*_level]]);
-					case 146: return new ItemEquipment(_index,"Raider Sword",_level,WEAPON,SHIELD,70,ActionData.makeWeapon(26+1.7*_level),[[SpriteModel.STAT,StatModel.BLOCK,12+11*_level]]);
-					case 147: return new ItemEquipment(_index,"Dragon Helmet",_level,HELMET,HEAVY,100,null,[[SpriteModel.STAT,StatModel.HEALTH,120+62*_level],[SpriteModel.STAT,StatModel.RCRIT,.3],[SpriteModel.STAT,StatModel.INITIATIVE,-40],[SpriteModel.STAT,StatModel.DODGE,-0.2]]);
-					case 148: return new ItemEquipment(_index,"Raider Helmet",_level,HELMET,MEDIUM,80,null,[[SpriteModel.STAT,StatModel.HEALTH,100+52*_level],[SpriteModel.STAT,StatModel.RCRIT,.2],[SpriteModel.STAT,StatModel.INITIATIVE,-20],[SpriteModel.STAT,StatModel.DODGE,-0.1]]);
+					case 145: return new ItemEquipment(_index,"Dragonborn Sword",_level,WEAPON,SHIELD,70,ActionData.makeWeapon(29+1.9*_level),[[SpriteModel.STAT,StatModel.BLOCK,12+11*_level],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FLAME_CHARGE,_level)]],[EffectData.PREMIUM]); //Yol Toor Shul
+					case 146: return new ItemEquipment(_index,"Raider Sword",_level,WEAPON,SHIELD,70,ActionData.makeWeapon(29+1.9*_level,new <EffectBase>[EffectData.makeEffect(EffectData.TENACIOUS_BOOST,10)]),[[SpriteModel.STAT,StatModel.BLOCK,12+11*_level]],[EffectData.PREMIUM]);
+					case 147: return new ItemEquipment(_index,"Wyrm's Helmet",_level,HELMET,HEAVY,100,null,[[SpriteModel.STAT,StatModel.HEALTH,120+62*_level],[SpriteModel.STAT,StatModel.RCRIT,.3],[SpriteModel.STAT,StatModel.INITIATIVE,-40],[SpriteModel.STAT,StatModel.DODGE,-0.2],[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.STACKING_RESIST,_level)]],[EffectData.PREMIUM]); //Mul Qah Diiv
+					case 148: return new ItemEquipment(_index,"Raider Helmet",_level,HELMET,MEDIUM,80,null,[[SpriteModel.STAT,StatModel.HEALTH,100+52*_level],[SpriteModel.STAT,StatModel.RCRIT,.2],[SpriteModel.STAT,StatModel.INITIATIVE,-20],[SpriteModel.STAT,StatModel.DODGE,-0.1],[SpriteModel.STAT,StatModel.TENACITY, 0.1+0.008*_level]],[EffectData.PREMIUM]);
 				}
 			}
 			
@@ -483,6 +483,9 @@
 				case 18: applyEnchant(18,"Shadow",m,6,[SpriteModel.ATTACK,ActionBase.CRITMULT,0.1+0.06*m.level]);break;
 				case 19: applyEnchant(19,"Shadow",m,6,[SpriteModel.STAT,StatModel.THROWEFF,.03+.03*m.level]);break;
 				case 20: applyEnchant(20,"Shadow",m,6,[SpriteModel.ATTACK,ActionBase.EFFECT,new EffectBuffBasic(BuffData.makeBuff(BuffData.BLIND,m.level),EffectBase.CURSE)]); break;//Acolyte
+				case 21: //berserker
+					applyEnchant(21,"",m,1,[SpriteModel.ATTACK,ActionBase.DAMAGE,0.1]);
+					applyEnchant(21,"Shadow",m,6,[SpriteModel.STAT,StatModel.FURY_DECAY,-0.03]);break;
 				case 100: applyEnchant(100,"Corrupted",m,3.5,[SpriteModel.ATTACK,ActionBase.EFFECT,new EffectDamage("Corrupted",5+2*m.level,DamageModel.DARK)]); break;
 
 				default: throw(new Error("Int out of bounds."));
@@ -494,6 +497,7 @@
 			var _level:int=m.level;
 			if (m.index==9) _level=Math.ceil(1.2*m.level);
 			switch (_index){
+				case 6: applyEnchant(21,"Shadow",m,6,[SpriteModel.STAT,StatModel.FURY,5+m.level/2]);break;//berserker
 				case 7: applyEnchant(7,"Shadow",m,6,[SpriteModel.ATTACK,ActionBase.CRITRATE,0.015+0.0025*_level]); break;//rogue
 				case 8: applyEnchant(8,"Shadow",m,6,[SpriteModel.STAT,StatModel.DOTEFF,0.015+0.015*_level]); break;//acolyte
 				case 9: applyEnchant(9,"Shadow",m,6,[SpriteModel.STAT,StatModel.HOLYEFF,0.01+0.01*_level]); break;//paladin
@@ -1245,6 +1249,54 @@
 						}else if (_item1.index==111){
 							return enchantItem(_item0.clone(-1,false,true),2);
 						}break;
+					case 145: //Dragonborn Sword
+						if (_item1.isPremium()) break;
+						if (_item1.primary!=HELMET){
+							if (_item1.enchantIndex==8){
+								return enchantItem(_item0.clone(-1,false,true),0);
+							}else if (_item1.enchantIndex==9){
+								return enchantItem(_item0.clone(-1,false,true),1);
+							}else if (_item1.enchantIndex==11){
+								return enchantItem(_item0.clone(-1,false,true),2);
+							}
+						}break;
+					case 146: //Raider Sword
+						if (_item1.isPremium()) break;
+						if (_item1.primary!=WEAPON){
+							if (_item1.enchantIndex==24){
+								return enchantItem(_item0.clone(-1,false,true),1);
+							}else if (_item1.enchantIndex==15){
+								return enchantItem(_item0.clone(-1,false,true),2);
+							}
+						}
+						if (_item1.primary!=HELMET){
+							if (_item1.enchantIndex==14){
+								return enchantItem(_item0.clone(-1,false,true),0);
+							}
+						}
+						break;
+					case 147: //Wyrm's Helmet
+						if (_item1.primary!=WEAPON){
+							if (_item1.isPremium()) break;
+							switch(_item1.enchantIndex){
+								case 20: return enchantItem(_item0.clone(-1,false,true),0);
+								case 22: return enchantItem(_item0.clone(-1,false,true),1);
+								case 23: return enchantItem(_item0.clone(-1,false,true),2);
+							} 	
+						}break;
+					case 148: //Raider Helmet
+						if (_item1.isPremium()) break;
+						if (_item1.primary!=WEAPON){
+							if (_item1.enchantIndex==24){
+								return enchantItem(_item0.clone(-1,false,true),1);
+							}
+						}
+						if (_item1.primary!=HELMET){
+							if (_item1.enchantIndex==14){
+								return enchantItem(_item0.clone(-1,false,true),0);
+							}
+						}
+						break;
 				}
 			}
 			
@@ -1504,7 +1556,7 @@
 						return finishEnchantPremium(m,"Chemist's",StatModel.HOLYEFF,[[SpriteModel.STAT,StatModel.CHEMEFF,0.022+0.022*m.level]]);
 					case 66: //Phrygian Cap
 						switch(_index){
-							case 0: return finishEnchantPremium(m,"Blue",StatModel.ITEMEFF,[[SpriteModel.STAT,StatModel.ITEMEFF,0.05+0.0064*m.level],[SpriteModel.STAT,StatModel.RPHYS,0.05+0.0034*m.level]]);
+							case 0: return finishEnchantPremium(m,"Blue",StatModel.ITEMEFF,[[SpriteModel.STAT,StatModel.ITEMEFF,0.05+0.0064*m.level],[SpriteModel.STAT,StatModel.RPHYS,0.034+0.0034*m.level]]);
 							case 1: return finishEnchantPremium(m,"Red",StatModel.ITEMEFF,[[SpriteModel.STAT,StatModel.ITEMEFF,0.05+0.0064*m.level],[SpriteModel.STAT,StatModel.RMAGICAL,0.05+0.0076*m.level],[SpriteModel.STAT,StatModel.RCHEMICAL,0.05+0.0076*m.level],[SpriteModel.STAT,StatModel.RSPIRIT,0.05+0.0076*m.level]]);
 						}break;
 					case 67: //Plumber Hat
@@ -2051,6 +2103,53 @@
 								m.values[1][1]=StatModel.DARKEFF;
 								break;
 						}break;
+					case 145: //Dragonborn Sword //From HYLIAN
+						switch(_index){
+							case 0: m.name="Divine "+m.name;
+								(((m.values[1][2] as EffectBuff).buff as BuffStats).values[0][2] as EffectDamage).damageType=ActionBase.HOLY;
+								return m;
+							case 1: m.name="Venomous "+m.name;
+								(((m.values[1][2] as EffectBuff).buff as BuffStats).values[0][2] as EffectDamage).damageType=ActionBase.CHEMICAL;
+								return m;
+							case 2: m.name="Dark "+m.name;
+								(((m.values[1][2] as EffectBuff).buff as BuffStats).values[0][2] as EffectDamage).damageType=ActionBase.DARK;
+								return m;
+						}break;
+					case 146: //Raider Sword
+						switch(_index){
+							case 0: m.name = "Seidrman Sword";
+								(m.action.effects[0] as EffectDmgBoost).extra=StatModel.TURN;
+								return m;
+							case 1: m.name = "Pillager Sword";
+								(m.action.effects[0] as EffectDmgBoost).extra=StatModel.ILOOT;
+								return m;
+							case 2: m.name = "Drengr Sword";
+								(m.action.effects[0] as EffectDmgBoost).extra=StatModel.RCRIT;
+								return m;
+						}break;
+					case 147: //Wyrm's Helmet //From BOXING GEAR
+						switch(_index){
+							case 0: m.name="Alchemist "+m.name;
+								((m.values[4][2] as EffectBuff).buff as BuffStats).values[1][1] = StatModel.RCHEMICAL;
+								return m;
+							case 1: m.name="Virtuous "+m.name;
+								((m.values[4][2] as EffectBuff).buff as BuffStats).values[1][1] = StatModel.RSPIRIT;
+								return m;
+							case 2: m.name="Protector "+m.name;
+								((m.values[4][2] as EffectBuff).buff as BuffStats).values[1][1] = StatModel.RALL;
+								((m.values[4][2] as EffectBuff).buff as BuffStats).values[1][2] = 0.007+0.0007*m.level;
+								return m;
+						}break;
+					case 148: //Raider Helmet
+						switch(_index){
+							case 0: m.name = "Seidrman Helmet";
+								m.values[4][1] = StatModel.TURN;
+								return m;
+							case 1: m.name = "Pillager Helmet";
+								m.values[4][1] = StatModel.ILOOT;
+								m.values[4][2] = 0.06+0.006*m.level;
+								return m;
+						}break;
 				}
 			}
 			return m;
@@ -2066,7 +2165,7 @@
 					case 112: case 113: case 115: case 117: case 119:
 					case 121: case 122: case 123: case 124: 
 					case 130: case 133:
-					case 142: case 144:
+					case 142: case 144: case 147: case 148:
 						return true;
 				}
 			}else if (_test==UNARMED){
@@ -2078,7 +2177,7 @@
 					case 106: case 108: case 109: case 111:
 					case 114:
 					case 129: case 132:
-					case 140: 
+					case 140: case 145: case 146:
 						return true;
 				}
 			}else if (_test==WEAPON){
@@ -2090,7 +2189,7 @@
 					case 106: case 107: case 108: case 109: case 111:
 					case 114: case 116:
 					case 129: case 132: case 134:
-					case 140:
+					case 140: case 145: case 146:
 						return true;
 				}
 				
@@ -2172,6 +2271,7 @@
 					case 121: case 122: case 123: case 124:
 					case 129: case 130: case 131: case 132: case 133:
 					case 137: case 138: case 139: case 140: case 141: case 142: case 143: case 144:
+					case 145: case 146: case 147: case 148:
 						return true;
 				}
 			}else if (_test==SCROLL){
@@ -2478,6 +2578,10 @@
 					case 142: applySuffix(_index,"of Rocketeering",m,[[SpriteModel.STAT,StatModel.MANATOMPOW,0.1]]); break; //Rocketman
 					case 143: applySuffix(_index,"of Sophistication",m,[[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.NO_OFFENSIVE,7)]]); break; //Monacle
 					case 144: applySuffix(_index,"of Goggles",m,[[SpriteModel.STAT,StatModel.THROWEFF,0.25]]); break; //Goggles
+					case 145: applySuffix(_index,"of Balancing Force",m,[[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.FLAME_CHARGE,10)]]); break; //Dragonborn Sword
+					case 146: applySuffix(_index,"of Raiding",m,[[SpriteModel.ATTACK,ActionBase.EFFECT,EffectData.makeEffect(EffectData.TENACIOUS_BOOST,10)]]); break; //Raider Sword
+					case 147: applySuffix(_index,"of Strong Armor",m,[[SpriteModel.STAT,StatModel.EFFECT,EffectData.makeEffect(EffectData.STACKING_RESIST,10)]]); break; //Wyrm's Helmet
+					case 148: applySuffix(_index,"of Raiding",m,[[SpriteModel.STAT,StatModel.TENACITY,0.1]]); break; //Raider Helmet
 				}
 			}
 			
@@ -2619,7 +2723,7 @@
 		static const SUPER:Vector.<int>=new <int>[112,113,114,115,116,117,121,122,123,124,131,134,138,140,142,144];
 		static const PREMIUM:Vector.<int>=new <int>[64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,
 												83,84,85,86,87,88,89,90,91,92,93,94,95,
-												101,102,103,104,105,106,107,108,109,110,111,125,129,130,132,133,137,139,141,143];
+												101,102,103,104,105,106,107,108,109,110,111,125,129,130,132,133,137,139,141,143,145,146,147,148];
 		
 		public static function spawnPremium(_level:int,_super:Boolean=false):ItemModel{
 			if (_super && Math.random()<0.01){
@@ -2667,6 +2771,7 @@
 					case SkillData.PALADIN: return enchantHelmet(spawnItem(1,13),9);
 					case SkillData.ACOLYTE: return enchantHelmet(spawnItem(1,11),8);
 					case SkillData.ROGUE: return enchantHelmet(spawnItem(1,9),7);
+					case SkillData.BERSERKER: return enchantHelmet(spawnItem(1,9),6);
 					default: return enchantHelmet(spawnItem(1,12),13); //warrior
 				}
 			}else if (Facade.gameM.area<26){
@@ -2678,6 +2783,7 @@
 					case SkillData.PALADIN: return enchantWeapon(spawnItem(3,6),15);
 					case SkillData.ACOLYTE: return enchantWeapon(spawnItem(3,3),20);
 					case SkillData.ROGUE: return enchantWeapon(spawnItem(3,5),18);
+					case SkillData.BERSERKER: return enchantWeapon(spawnItem(3,3),21);
 					default: return enchantWeapon(spawnItem(3,1),15);
 				}
 			}else if (Facade.gameM.area<99){

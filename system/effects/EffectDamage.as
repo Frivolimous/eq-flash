@@ -65,6 +65,11 @@
 				if (_action.source.primary!=ItemData.WEAPON || _o.eDistance!=GameModel.NEAR){
 					return;
 				}
+			}else if (name==EffectData.FLAME_CHARGE_PROC){
+				if (!_o.buffList.hasBuff(BuffData.FLAME_CHARGE_PROC)){
+					return;
+				}
+				_dmgModel.oBuffs.push(BuffData.FLAME_CHARGE_PROC);
 			}
 			
 			if (name==EffectData.GOLD_STRIKE){
@@ -92,23 +97,7 @@
 						case DamageModel.PHYSICAL: _dmgModel.after=PopEffect.CRIT; break;
 					}
 				}
-			}
-			/*switch(name){
-				case EffectData.ARCANE: case EffectData.ENCHANTED: case EffectData.SCORCHING: case EffectData.FULL_POWER: case EffectData.FULL_POWER2:
-					if ((_dmgModel.after==-1)||(Math.random()<0.4)) _dmgModel.after=PopEffect.MAGIC; break;
-					
-				case EffectData.FLAMING: case EffectData.EXPLOSIVE: case EffectData.BLAZING: 
-					if ((_dmgModel.after==-1)||(Math.random()<0.4)) _dmgModel.after=PopEffect.FIRE; break;
-					
-				case EffectData.HOLY_FLAT: case EffectData.BRILLIANT: case EffectData.LUMINANT: case EffectData.SMITE_PROC: 
-					if ((_dmgModel.after==-1)||(Math.random()<0.4)) _dmgModel.after=PopEffect.HOLY; break;
-				case EffectData.CORRUPTED: case EffectData.VENOMOUS: 
-					if ((_dmgModel.after==-1)||(Math.random()<0.4)) _dmgModel.after=PopEffect.TOXIC; break;
-				case EffectData.RADIANCE: 
-					_dmgModel.after=PopEffect.RADIANCE; break;
-				default: null;
-			}*/
-				
+			}	
 		}
 		
 		override public function getDesc(_tabs:int=1):String{
