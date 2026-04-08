@@ -292,7 +292,7 @@ package utils {
 
     public static function checkArtifactsOwned(artifacts:Array):void {
       var _numUnlocked:int=0;
-      for (var i=0;i,artifacts.length;i++){
+      for (var i=0;i<artifacts.length;i++){
         if (artifacts[i]>-1){
           _numUnlocked+=1;
         }

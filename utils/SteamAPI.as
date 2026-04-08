@@ -268,9 +268,10 @@
         public function hasPremiumDLC():Boolean {
             if (GameData.DEMO) return false;
 
-            var dlcID:int = 1574174; // Your future DLC ID
             if (connected) {
-                return steam.isSubscribedApp(dlcID);
+                if (steam.isSubscribedApp(4512700) || steam.isDLCInstalled(4512700)){
+                    return true;
+                }
             }
             return false;
         }

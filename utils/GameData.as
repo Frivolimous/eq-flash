@@ -22,7 +22,7 @@
 	
 	public class GameData {
 		public static const VERSION:int=102;
-		public static const DEMO:Boolean=true;
+		public static const DEMO:Boolean=false;
 		
 		public static const FLAG_TUTORIAL:int=0,
 							FLAG_ARTIFACTS:int=1,
@@ -192,7 +192,7 @@
 		}
 		
 		public static function addAscend(){
-			scores[SCORE_ASCENDS]+=1;
+			addScore(SCORE_ASCENDS,1)
 		}
 		
 		public static function get boost():int{
@@ -658,9 +658,8 @@
 				}else{
 					stash=new Array(8);
 					for (i=0;i<8;i+=1){
-						stash[i]=["Shared Stash "+String(i+1),true,new Array(20)];
+						stash[i]=["Shared Stash "+String(i+1),false,new Array(20)];
 					}
-					stash[0][1]=false;
 				}
 				if (_Data.overflow==null){
 					overflow=[];

@@ -31,8 +31,12 @@
 			goldT.text="---";
 			forgeB.update("Forge!",confirmBuy);
 			forgeB.disabled=true;
+
+			previewB.setDesc("Craftable", "This combination has a recipe! What will you get..?");
+			blankB.setDesc("No Recipe", "This combination does not have a recipe. Try something else!");
 			
 			removeChild(previewB);
+			removeChild(blankB);
 		}
 		
 		override public function addItem(_item:ItemView):Boolean{
@@ -55,12 +59,16 @@
 			itemA[i].addItem(_item);
 			
 			if (itemA[0].hasItem() && itemA[1].hasItem()){
-				result=ItemData.getCraftingResult(itemA[0].stored.model,itemA[1].stored.model);
-				if (result==null) result=ItemData.getCraftingResult(itemA[1].stored.model,itemA[0].stored.model);
+				result=ItemCraftingData.getCraftingResult(itemA[0].stored.model,itemA[1].stored.model);
+				if (result==null) result=ItemCraftingData.getCraftingResult(itemA[1].stored.model,itemA[0].stored.model);
 				if (result!=null){
 					forgeB.disabled=false;
 					goldT.text=String(result.cost*100)+" g";
 					setPreview(itemA[0].stored.model,itemA[1].stored.model);
+				} else {
+					forgeB.disabled=true;
+					goldT.text="---";
+					addChild(blankB);
 				}
 			}
 			
@@ -92,7 +100,6 @@
 				previewAmount=1;
 			}
 			
-			previewB.setDesc("Craftable", "This combination has a recipe! What will you get..?");
 			addChild(previewB);
 		}
 		
@@ -102,6 +109,7 @@
 			goldT.text="---";
 			itemA[_item.index].removeItem();
 			if (contains(previewB)) removeChild(previewB);
+			if (contains(blankB)) removeChild(blankB);
 			if (fakeItem!=null && contains(fakeItem)) removeChild(fakeItem);
 			return true;
 		}
@@ -110,6 +118,7 @@
 			forgeB.disabled=true;
 			goldT.text="---";
 			if (contains(previewB)) removeChild(previewB);
+			if (contains(blankB)) removeChild(blankB);
 			if (fakeItem!=null && contains(fakeItem)) removeChild(fakeItem);
 			return itemA[i].removeItem();
 		}
@@ -130,6 +139,7 @@
 
 		public function makeFakeItem(){
 			if (contains(previewB)) removeChild(previewB);
+			if (contains(blankB)) removeChild(blankB);
 			if (fakeItem!=null && contains(fakeItem)) removeChild(fakeItem);
 			if (result==null) return;
 			fakeItem=new ItemView(result);

@@ -147,9 +147,7 @@
 					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),30));
 					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),30));
 					gameM.playerM.addItem(ItemData.suffixItem(ItemData.spawnItem(15,135),40));
-					if (inputName.text.length>4){
-						gameM.area=int(inputName.text.substring(4));
-					}
+					gameM.setupArea(101);
 				}else if (inputName.text=="ARTIFACT"){
 					gameM.playerM.skillBlock.skillPoints=60;
 					gameM.playerM.level=60;
@@ -190,6 +188,22 @@
 					for (i=0;i<20;i+=1){
 						gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,2),i));
 					}
+				}else if (inputName.text=="DRAGON"){
+					gameM.playerM.level=60;
+					gameM.playerM.skillBlock.skillPoints=60;
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,75),0));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,66),0));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,145),0));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,145),1));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,145),2));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,146),0));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,146),1));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,146),2));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,147),0));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,147),1));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,147),2));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,148),0));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(15,148),1));
 				}else if (inputName.text=="HELMET"){
 					gameM.playerM.skillBlock.skillPoints=50;
 					gameM.playerM.level=50;
@@ -248,6 +262,34 @@
 					gameM.playerM.levelup();
 				}else if (inputName.text=="DLC"){
 					AchieveData.unlockDLCCosmetics();
+				}else if (inputName.text=="STASH"){
+					GameData.stash[0]=["Weapons",false,new Array(20)];
+					GameData.stash[1]=["Helmets",false,new Array(20)];
+					GameData.stash[2]=["Magic",false,new Array(20)];
+					GameData.stash[3]=["Potions",false,new Array(20)];
+					GameData.stash[4]=["Premium 1",false,new Array(20)];
+					GameData.stash[5]=["Premium 2",false,new Array(20)];
+					for (i=0;i<15;i+=1){
+						GameData.stash[0][2][i]=[0,15,-1,i];
+						GameData.stash[1][2][i]=[11,15,-1,i+15];
+					}
+					for (i=14;i<=25;i+=1){
+						GameData.stash[2][2][i-14]=[i,15,-1,-1];
+					}
+					for (i=31;i<=36;i+=1){
+						GameData.stash[3][2][i-31]=[i,15,12,6];
+					}
+					for (i=96;i<=99;i+=1){
+						GameData.stash[3][2][i-96+6]=[i,15,12,6];
+					}
+					for (i=0;i<20;i+=1){
+						GameData.stash[4][2][i]=[i+64,15,-1,-1];
+						GameData.stash[5][2][i]=[i+110,15,-1,-1];
+					}
+					GameData.stash[0][2][17]=[40,15,-1,30];
+					GameData.stash[0][2][18]=[40,15,-1,30];
+					GameData.stash[0][2][19]=[40,15,-1,30];
+
 				}
 			}
 			

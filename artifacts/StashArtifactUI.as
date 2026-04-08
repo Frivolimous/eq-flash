@@ -1,6 +1,7 @@
 ﻿package artifacts {
 	import flash.display.Sprite;
 	import utils.GameData;
+	import utils.AchieveData;
 
 	public class StashArtifactUI extends ArtifactInventoryBase{
 		//UI of stash.  5x3;
@@ -115,6 +116,7 @@
 			if (_level>-1){
 				GameData.artifacts[_slot]=_level;
 				itemA[_slot].showBlank(true);
+				AchieveData.checkArtifactsOwned(GameData.artifacts);
 			}
 		}
 	}

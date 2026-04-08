@@ -105,8 +105,12 @@
 			if (userate<1){
 				m+="<font color="+StringData.RED+"><b>"+StringData.reduce(userate*100)+"%</b></font> ";
 			}
+			if (name==EffectData.FURYDAMAGE){
+				m+="DMG: <font color="+StringData.RED+"><b>+"+StringData.reduce(damage)+" "+DamageModel.shortTypeName[damageType]+"</b> per Fury</font>";
+			} else {
+				m+="DMG: <font color="+StringData.RED+"><b>+"+StringData.reduce(damage)+" "+DamageModel.shortTypeName[damageType]+"</b></font>";
+			}
 			
-			m+="DMG: <font color="+StringData.RED+"><b>+"+StringData.reduce(damage)+" "+DamageModel.shortTypeName[damageType]+"</b></font>";
 
 			if (m.length>0){
 				m=StringData.tabs(_tabs)+m;

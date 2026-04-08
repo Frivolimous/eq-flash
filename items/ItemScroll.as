@@ -5,7 +5,8 @@
 			level=_level;
 			slot=ItemData.USEABLE;
 			primary=ItemData.SCROLL;
-			
+			tags=[];
+
 			if (_v==null){
 				index=62;
 				name="Scroll";
@@ -23,10 +24,6 @@
 				if (action!=null){
 					action.addSource(this);
 				}
-				tags=[];
-				/*tags=_tags;
-				if (tags==null) tags=[];
-				if (level>15) tags.push(EffectData.EPIC);*/
 			}
 			
 			enchantIndex=-1;
