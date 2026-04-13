@@ -53,7 +53,7 @@
 				addChild(craftLockedO);
 				craftLockedO.setDesc("Essence Shop","Locked until Zone 400.  Unlock to purchase Essences and craft Epic Items.");
 			}
-			craftTooltip.setDesc("Basic Crafting","Combine two level 15 items to create a new item.\n- Not all items can combine.\n- Every Mythic Item has at least 1 special recipe\n- Try any regular Enchanted Item with a regular Unenchanted Item as an example!");
+			craftTooltip.setDesc("Basic Crafting","Combine items using hidden recipes.\n- Both items must be level 15.\n- Every Spell, Potion, or Mythic item has at least one recipe.\n- Check the Crafting Guide in the Library for more info.");
 			upgradeTooltip.setDesc("Upgrade Item","Upgrade any regular item up to Level 15 or Epic Item up to Level 20.");
 		}
 		

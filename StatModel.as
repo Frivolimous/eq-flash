@@ -220,7 +220,7 @@
 			
 			physeff=holyeff=darkeff=chemeff=magiceff=doteff=proceff=1;
 			near=1;
-			far=1.1;
+			far=1;
 			
 			drange=0.1;
 			tenacity=0;

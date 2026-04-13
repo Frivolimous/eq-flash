@@ -147,6 +147,7 @@
 					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),30));
 					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,40),30));
 					gameM.playerM.addItem(ItemData.suffixItem(ItemData.spawnItem(15,135),40));
+					gameM.playerM.addItem(ItemData.enchantItem(ItemData.spawnItem(0,45),0));
 					gameM.setupArea(101);
 				}else if (inputName.text=="ARTIFACT"){
 					gameM.playerM.skillBlock.skillPoints=60;

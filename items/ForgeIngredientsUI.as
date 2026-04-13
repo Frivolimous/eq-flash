@@ -82,7 +82,7 @@
 				return;
 			}else if (_item0.index!=135 && _item1.index!=135){
 				//special recipe
-				previewAmount=3;
+				makeFakeItem();
 			}else if ((_item0.index==135 && _item0.enchantIndex==0) || (_item1.index==135 && _item1.enchantIndex==0)){
 				//scouring
 				makeFakeItem();
@@ -94,10 +94,10 @@
 				previewAmount=10;
 			}else if ((_item0.index==135 && _item0.suffixIndex==-1) || (_item1.index==135 && _item1.suffixIndex==-1)){
 				//make suffix
-				previewAmount=5;
+				makeFakeItem();
 			}else{
 				//add suffix
-				previewAmount=1;
+				makeFakeItem();
 			}
 			
 			addChild(previewB);

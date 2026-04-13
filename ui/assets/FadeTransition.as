@@ -61,6 +61,7 @@
 		}
 		
 		function purge(){
+			Facade.removeTraceWindow(1);
 			while (Facade.stage.numChildren>0){
 				var child = Facade.stage.getChildAt(0);
 				if (child is AchievementDisplay) {

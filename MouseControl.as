@@ -112,10 +112,18 @@
 					//Facade.gameUI.togglePause();
 				}
 			}else if (e.keyCode==Keyboard.O){
-				var _item = ItemData.spawnItem(1, 118);
-				_item = ItemData.enchantItem(_item, 1);
-				Facade.gameM.addItemFallbackOverflow(_item);
-				new AchievementDisplay(313);
+				// var _item = ItemData.spawnItem(1, 118);
+				// _item = ItemData.enchantItem(_item, 1);
+				// Facade.gameM.addItemFallbackOverflow(_item);
+				// new AchievementDisplay(313);
+				GameData.refreshes+=10;
+				Facade.addLine("Refreshes: "+GameData.refreshes);
+			}else if (e.keyCode==187){ //PLUS/EQUAL
+				gameM.setupArea(gameM.area+1);
+				Facade.addLine("Area: "+gameM.area);
+			}else if (e.keyCode==189){ //MINUS
+				gameM.setupArea(gameM.area-1);
+				Facade.addLine("Area: "+gameM.area);
 			}
 		}
 		

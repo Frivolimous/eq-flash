@@ -99,7 +99,11 @@
 				}else if (_item.model.index==135 || _item.model.index==136){
 					new ConfirmWindow("Do you want to sell your "+_item.model.name+" for 1,000 Soul Power?",100,100,sellEssenceYes,0,sellNo);
 				}else{
-					new ConfirmWindow("Are you sure you want to sell your "+_item.model.name+" for "+_item.model.cost+" gold?",100,100,sellYes,0,sellNo);
+					if (_item.model.index==45 && _item.model.enchantIndex==0) {
+					new ConfirmWindow("Do you want to sell your "+_item.model.name+" for 2 Power Tokens?",100,100,sellPremiumYesTwo,0,sellNo);
+					} else {
+						new ConfirmWindow("Are you sure you want to sell your "+_item.model.name+" for "+_item.model.cost+" gold?",100,100,sellYes,0,sellNo);
+					}
 				}
 			}else{
 				toSell=_item;
@@ -121,6 +125,15 @@
 		function sellPremiumYes(i:int=0){			
 			if (origin!=null){
 				GameData.kreds+=1;
+				updateGold();
+				Facade.soundC.playEffect(SoundControl.GOLD);
+			}
+			toSell.dispose();
+			removeItem(toSell);
+		}
+		function sellPremiumYesTwo(i:int=0){			
+			if (origin!=null){
+				GameData.kreds+=2;
 				updateGold();
 				Facade.soundC.playEffect(SoundControl.GOLD);
 			}

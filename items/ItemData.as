@@ -58,11 +58,9 @@
 		public static function findItem(_level:int,find:Number):ItemModel{
 			var premiumChance:Number=0;
 			if (find>=1){
-				premiumChance = 0.007+_level/200*(0.01-0.007);
-				if (premiumChance>0.01) premiumChance = 0.01;
-			}else{
-				premiumChance = 0.0006+_level/500*(0.001-0.0006);
-				if (premiumChance>0.001) premiumChance = 0.001;
+				premiumChance = 0.0095;
+			} else {
+				premiumChance = 0.00095;
 			}
 			
 			if (Math.random()<premiumChance){
@@ -428,14 +426,13 @@
 					m.enchantIndex=3;
 					m.values.push([SpriteModel.ATTACK,ActionBase.TAG,EffectData.PLENTIFUL]);
 					return m;
-								   
 				}
 			}else if (m.primary==TRADE){
 				if (_index==0){
 					m.name="Shadow "+m.name;
 					m.level=99;
 					m.enchantIndex=0;
-					m.cost=10000000;
+					m.cost=-2;
 					return m;
 				}
 			}
