@@ -38,8 +38,7 @@
 						mouseC:MouseControl=new MouseControl(),
 						soundC:SoundControl=new SoundControl(),
 						saveC:SaveControl=new SaveControl(),
-						steamAPI:SteamAPI = new SteamAPI();
-						// steamAPI:NoSteamXAPI = new NoSteamXAPI();
+						steamAPI:NoSteamXAPI;
 
 		public static const DEBUG:Boolean=false;
 		
@@ -51,8 +50,27 @@
 			stage.frameRate=FRAMERATE;
 			stage.color=0x000000;
 
-			GameData.init();
-			SpriteSheets.init();
+			try {
+				steamAPI = new SteamAPI();
+				steamAPI.init();
+			} catch (e: Error) {
+				new ConfirmWindow("Unable to connect to Steam. The game will still be playable, but your progress will only have local save.");
+				steamAPI = new NoSteamXAPI();
+				steamAPI.init();
+			}
+
+
+			try {
+				GameData.init();
+			} catch (e: Error) {
+				new ConfirmWindow("Unknown Error: Game Data failed to initialize.");
+			}
+
+			try {
+				SpriteSheets.init();
+			} catch (e: Error) {
+				new ConfirmWindow("Unknown Error: Game Prerendering failed.");
+			}
 		}
 
 		public static function postAuthenticate(){
@@ -146,11 +164,11 @@
 		public static var traceCW:ConfirmWindow;
 		public static function addLine(s:String){
 			if (DEBUG) {
-				// if (traceCW) {
-				// 	traceCW.display.appendText("\n" + s);
-				// } else {
-				// 	traceCW = new ConfirmWindow(s, 50, 50, removeTraceWindow,0,null,3);
-				// }
+				if (traceCW) {
+					traceCW.display.appendText("\n" + s);
+				} else {
+					traceCW = new ConfirmWindow(s, 50, 50, removeTraceWindow,0,null,3);
+				}
 				trace(s);
 			}
 		}

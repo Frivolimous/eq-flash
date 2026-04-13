@@ -553,7 +553,6 @@
 			}
 			Facade.stage.addEventListener(Event.ENTER_FRAME,waiting);
 
-			Facade.steamAPI.init();
 			Facade.stage.addEventListener(Event.ENTER_FRAME,waitingSteam);
 
 			Facade.stage.addEventListener(Event.ENTER_FRAME,checkBusy);
@@ -575,7 +574,11 @@
 						
 			if (dataUpdated==0){
 				dataUpdated=1;
-				updateData();
+				try{
+					updateData();
+				} catch(e:Error){
+					new ConfirmWindow("Error retrieving save data. Your save file may be corrupted. Reset all data?", 50, 50, function(){resetPlayerData(); versionChecked=2; dataUpdated=2;});
+				}
 				return;
 			}else if (dataUpdated<2) return;
 			

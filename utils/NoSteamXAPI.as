@@ -8,11 +8,12 @@
     import ui.windows.ConfirmWindow;
 
     public class NoSteamXAPI {
+        public const ENCRYPT:Boolean=true;
         public var connected:Boolean=false;
         
         // Steam ANE instance
-        private const SAVE_FILE_NAME:String = "savegame.json";
-        private const SECRET_KEY:String = "EQ_KEY_F17eH51B";
+        internal const SAVE_FILE_NAME:String = "savegame.json";
+        internal const SECRET_KEY:String = "EQ_KEY_F17eH51B";
 
         var saveSO:SharedObject;
 
@@ -27,24 +28,22 @@
             Facade.addLine("Steam Disabled; local only");
 
             // 2. Load data into memory
-            initLocalSave();
-        }
-
-        private function initLocalSave():void {
-            // Default fallback
             saveSO = SharedObject.getLocal("OfflineSave");
+            if (saveSO.data.playerData == null)
+                saveSO.data.playerData = {};
         }
 
         /**
          * The Master Save Function
          * Syncs to both Local SO and Steam Cloud
          */
-        private function syncAll():void {
+        internal function syncAll():void {
             saveSO.flush();
         }
         
         public function deleteEverything(): void {
             saveSO.clear();
+            saveSO.data.playerData = {};
             syncAll();
         }
 
@@ -54,9 +53,9 @@
 
         public function setPlayerProperty(_key:String,_value:*):void {
             if (_value == null){
-                delete saveSO.data[_key];
+                delete saveSO.data.playerData[_key];
             }else{
-                saveSO.data[_key]=valueToJSON(_value);
+                saveSO.data.playerData[_key]=valueToJSON(_value);
             }
             delay=DELAY;
         }
@@ -64,9 +63,9 @@
         public function setPlayerProperties(_queue:Array):void {
             for(var i=0;i<_queue.length;i+=1){
                  if (_queue[i][1] == null){
-                    delete saveSO.data[_queue[i][0]];
+                    delete saveSO.data.playerData[_queue[i][0]];
                 }else{
-                    saveSO.data[_queue[i][0]]=valueToJSON(_queue[i][1]);
+                    saveSO.data.playerData[_queue[i][0]]=valueToJSON(_queue[i][1]);
                 }
             }
             delay=DELAY;
@@ -75,10 +74,10 @@
         public function submitPlayerData(_obj:*):void {
             for (var key:String in _obj) {
                 if (_obj[key] == null) {
-                    delete saveSO.data[key];
+                    delete saveSO.data.playerData[key];
                 } else {
                     // Storing as JSON-friendly format
-                    saveSO.data[key] = String(_obj[key]);
+                    saveSO.data.playerData[key] = String(_obj[key]);
                 }
             }
 
@@ -89,8 +88,8 @@
             var result:Object = {};
 
             for each (var key:String in _vars) {
-                if (saveSO.data[key] != null) {
-                    result[key] = stringToValue(saveSO.data[key]);
+                if (saveSO.data.playerData[key] != null) {
+                    result[key] = stringToValue(saveSO.data.playerData[key]);
                 }
             }
 
@@ -99,17 +98,16 @@
 
         public function retrieveAllPlayerData(_onComplete:Function):void {
             var result:Object = {};
-            for (var key:String in saveSO.data) {
-                result[key] = stringToValue(saveSO.data[key]);
+            for (var key:String in saveSO.data.playerData) {
+                result[key] = stringToValue(saveSO.data.playerData[key]);
             }
-            Facade.addLine("retrieving player data: " + JSON.stringify(result));
-
+            Facade.addLine("api retrieved...");
             _onComplete(result);
         }
 
         public function deletePlayerData(a:Array):void {
             for each (var key:String in a)
-                delete saveSO.data[key];
+                delete saveSO.data.playerData[key];
 
             delay=DELAY;
         }
@@ -148,8 +146,8 @@
             return "Debugger";
         }
 
-        private function encrypt(input:String):String {
-            // return input;
+        internal function encrypt(input:String):String {
+            if (!ENCRYPT) return input;
 
             var result:String = "";
             for (var i:int = 0; i < input.length; i++) {
@@ -161,8 +159,8 @@
             return Base64.encode(result);
         }
 
-        private function decrypt(input:String):String {
-            // return input;
+        internal function decrypt(input:String):String {
+            if (!ENCRYPT) return input;
 
             var decoded:String = Base64.decode(input);
             var result:String = "";
@@ -185,7 +183,7 @@
 
         }
 
-        private function resetAchievements():void {
+        internal function resetAchievements():void {
         }
 
         public function hasPremiumDLC(): Boolean {
