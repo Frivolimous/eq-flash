@@ -8,7 +8,7 @@
 
     import ui.windows.ConfirmWindow;
 
-    public class SteamAPI  extends NoSteamXAPI {        
+    public class SteamAPI  extends NoSteamXAPI {
         // Steam ANE instance
         internal var steam:FRESteamWorks;
         private var cloudLoaded:Boolean = false;
@@ -20,20 +20,23 @@
         // INIT / LOGIN
         // ===============================
 
-        override public function init():void {            
+        override public function init():void {
             // 1. Initialize Steam first
             steam = new FRESteamWorks();
-            if (steam.init()) {
-                connected = true;
-                Facade.addLine("Steam Connected: " + steam.getPersonaName());
+            if (!steam.init()) {
+                // Facade.initialize catches this and falls back to NoSteamXAPI
+                throw new Error("Steam Init Failed");
             }
-            
+            connected = true;
+            Facade.addLine("Steam Connected: " + steam.getPersonaName());
+
             // 2. Load data into memory
             initLocalSave();
         }
 
         internal function initLocalSave():void {
-            delay = connected ? -1 : DELAY;
+            // don't let the first tick push the local save to the cloud before we've compared them
+            delay = -1;
             saveSO = SharedObject.getLocal("OfflineSave");
             if (saveSO.data.playerData == null)
                 saveSO.data.playerData = {};
@@ -42,20 +45,21 @@
         }
 
         private function loadCloudSave():void {
-            if (!connected)
-                return;
+            cloudLoaded = false;
+            cloudCorrupt = false;
+            cloudMissing = false;
+            cloudData = null;
 
             if (!steam.fileExists(SAVE_FILE_NAME)) {
                 cloudMissing = true;
-                Facade.addLine("Steam Cloud save is not currently available.");
+                Facade.addLine("No Steam Cloud save.");
                 return;
             }
 
-            cloudMissing = false;
             var ba:ByteArray = new ByteArray();
             if (!steam.fileRead(SAVE_FILE_NAME, ba)) {
                 cloudCorrupt = true;
-                Facade.addLine("Steam Cloud Read Failed; using local save.");
+                Facade.addLine("Steam Cloud Read Failed.");
                 return;
             }
 
@@ -64,55 +68,52 @@
                 var encrypted:String = ba.readUTFBytes(ba.bytesAvailable);
                 encrypted = encrypted.replace(/\0/g, "").replace(/^\s+|\s+$/g, "");
 
-                var jsonStr:String = decrypt(encrypted);
-                var cloudData:* = JSON.parse(jsonStr);
-                if (cloudData == null || typeof cloudData != "object" || cloudData is Array)
+                var parsed:* = JSON.parse(decrypt(encrypted));
+                if (parsed == null || typeof parsed != "object" || parsed is Array)
                     throw new Error("Cloud save must contain a player data object.");
 
-                this.cloudData = cloudData;
+                cloudData = parsed;
                 cloudLoaded = true;
                 Facade.addLine("Steam Cloud Load Success");
             } catch (e:Error) {
                 cloudCorrupt = true;
-                Facade.addLine("Data Corrupt; using local save: " + e.message);
+                Facade.addLine("Steam Cloud Data Corrupt: " + e.message);
             }
         }
 
         override public function retrieveAllPlayerData(_onComplete:Function):void {
-            if (connected && !cloudLoaded)
-                loadCloudSave();
+            var localData:Object = saveSO.data.playerData;
+            var hasLocal:Boolean = hasSaveData(localData);
 
-            if (cloudMissing) {
-                if (hasSaveData(saveSO.data.playerData)) {
+            if (cloudCorrupt) {
+                if (hasLocal) {
                     new ConfirmWindow(
-                        "A Steam Cloud save is not currently available. If this is a new or recently synced device, cancel and try again later.\n\nYES: Use this computer's local save and sync it to Steam Cloud\nNO: Cancel startup",
+                        "The Steam Cloud save could not be read.\n\nYES: Use this computer's save (" + describeSaveTime(localData) + ") and replace the cloud save\nNO: Quit without changing either save",
                         50, 50,
-                        function():void { useLocalSave(_onComplete); },
+                        function(i:int = 0):void { useLocalSave(_onComplete); },
                         0,
-                        function():void { Facade.addLine("Startup cancelled; saves were not changed."); },
+                        quitGame,
                         3
                     );
                 } else {
                     new ConfirmWindow(
-                        "No Steam Cloud or local save is currently available. Start a new game only if you're sure there is no save to recover.\n\nYES: Start a new game and create a save\nNO: Cancel startup",
+                        "The Steam Cloud save could not be read and there is no save on this computer.\n\nYES: Start a new game and replace the cloud save\nNO: Quit without changing anything",
                         50, 50,
-                        function():void { startNewGame(_onComplete); },
+                        function(i:int = 0):void { startNewGame(_onComplete); },
                         0,
-                        function():void { Facade.addLine("Startup cancelled; no save was created."); },
+                        quitGame,
                         3
                     );
                 }
                 return;
             }
 
-            if (cloudLoaded) {
-                var localData:Object = saveSO.data.playerData;
-                if (hasSaveData(localData) && hasSaveData(cloudData) &&
-                    !playerDataMatches(localData, cloudData)) {
+            if (cloudLoaded && hasSaveData(cloudData)) {
+                if (hasLocal && !playerDataMatches(localData, cloudData)) {
                     new ConfirmWindow(
-                        "Your local save and Steam Cloud save are different.\n\nYES: Use Steam Cloud save\nNO: Use this computer's local save",
+                        "Your Steam Cloud save and this computer's save are different.\n\nCloud: " + describeSaveTime(cloudData) + "\nThis computer: " + describeSaveTime(localData) + "\n\nYES: Use the Steam Cloud save\nNO: Use this computer's save",
                         50, 50,
-                        function():void { useCloudSave(_onComplete); },
+                        function(i:int = 0):void { useCloudSave(_onComplete); },
                         0,
                         function():void { useLocalSave(_onComplete); },
                         3
@@ -124,37 +125,24 @@
                 return;
             }
 
-            if (cloudCorrupt) {
-                if (hasSaveData(saveSO.data.playerData)) {
-                    new ConfirmWindow(
-                        "The Steam Cloud save could not be read.\n\nYES: Use this computer's local save\nNO: Cancel startup without changing either save",
-                        50, 50,
-                        function():void { useLocalSave(_onComplete); },
-                        0,
-                        function():void { Facade.addLine("Startup cancelled; saves were not changed."); },
-                        3
-                    );
-                } else {
-                    new ConfirmWindow(
-                        "The Steam Cloud save is unreadable and no local save is available. Startup is cancelled; no save was changed.",
-                        50, 50, null, 0, null, 3
-                    );
-                }
-                return;
-            }
-
-            super.retrieveAllPlayerData(_onComplete);
+            // cloud is missing or empty: whatever is on this computer (possibly nothing) wins
+            if (hasLocal)
+                useLocalSave(_onComplete);
+            else
+                startNewGame(_onComplete);
         }
 
         private function hasSaveData(data:Object):Boolean {
             for (var key:String in data)
-                return true;
+                if (key != SAVED_AT) return true;
             return false;
         }
 
+        // compares save contents only; the save time can differ if a cloud write failed
         private function playerDataMatches(localData:Object, remoteData:Object):Boolean {
             var keyCount:int = 0;
             for (var key:String in localData) {
+                if (key == SAVED_AT) continue;
                 keyCount++;
                 if (!remoteData.hasOwnProperty(key) ||
                     JSON.stringify(localData[key]) != JSON.stringify(remoteData[key]))
@@ -163,25 +151,34 @@
 
             var remoteKeyCount:int = 0;
             for (key in remoteData)
-                remoteKeyCount++;
+                if (key != SAVED_AT) remoteKeyCount++;
 
             return keyCount == remoteKeyCount;
         }
 
+        private function describeSaveTime(data:Object):String {
+            var time:Number = Number(data[SAVED_AT]);
+            if (isNaN(time) || time <= 0)
+                return "save time unknown";
+            return "saved " + new Date(time).toLocaleString();
+        }
+
         private function useCloudSave(onComplete:Function):void {
+            Facade.addLine("Using Steam Cloud save.");
             saveSO.data.playerData = cloudData;
             saveSO.flush();
             super.retrieveAllPlayerData(onComplete);
         }
 
         private function useLocalSave(onComplete:Function):void {
-            Facade.addLine("Using local save; Steam Cloud will be updated on the next save.");
+            Facade.addLine("Using local save; Steam Cloud will be updated.");
             delay = DELAY;
             super.retrieveAllPlayerData(onComplete);
         }
 
         private function startNewGame(onComplete:Function):void {
-            Facade.addLine("Starting a new game after user confirmation.");
+            Facade.addLine("Starting a new game.");
+            saveSO.data.playerData = {};
             delay = DELAY;
             super.retrieveAllPlayerData(onComplete);
         }
@@ -191,6 +188,7 @@
          * Syncs to both Local SO and Steam Cloud
          */
         override internal function syncAll():void {
+            stampSaveTime();
             saveSO.flush();
 
             if (connected) {

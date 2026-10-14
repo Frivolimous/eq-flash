@@ -577,7 +577,7 @@
 				try{
 					updateData();
 				} catch(e:Error){
-					new ConfirmWindow("Error retrieving save data. Your save file may be corrupted. Reset all data?", 50, 50, function(){resetPlayerData(); versionChecked=2; dataUpdated=2;});
+					corruptDataPrompt();
 				}
 				return;
 			}else if (dataUpdated<2) return;
@@ -596,7 +596,18 @@
 		}
 		
 		public static function updateData(){
-			Facade.steamAPI.retrieveAllPlayerData(finishUpdateData);
+			// the steam API may finish later from a save-conflict dialog, outside the try in waiting(), so guard here too
+			Facade.steamAPI.retrieveAllPlayerData(function(_Data:Object){
+				try{
+					finishUpdateData(_Data);
+				} catch(e:Error){
+					corruptDataPrompt();
+				}
+			});
+		}
+
+		static function corruptDataPrompt(){
+			new ConfirmWindow("Error retrieving save data. Your save file may be corrupted.\n\nYES: Reset all data\nNO: Quit without changing anything", 50, 50, function(i:int=0){resetPlayerData(); versionChecked=2; dataUpdated=2;}, 0, Facade.steamAPI.quitGame, 3);
 		}
 		
 		public static function finishUpdateData(_Data:Object){
@@ -643,8 +654,9 @@
 					for (i=0;i<50;i+=1){
 						artifacts[i]=-1;
 					}
+				}else{
+					artifacts=_Data.artifacts;
 				}
-				artifacts=_Data.artifacts;
 				if (_Data.stash!=null){
 					stash=_Data.stash;
 					for (i=0;i<8;i+=1){
@@ -772,7 +784,7 @@
 				if (_version<103){
 					var _epics = getScore(SCORE_EPICS);
 					if (_epics > 0) {
-						rewards.push(["Epic Zone Compensation: for reaching Epic zone "+_epics+" we are compensating you for missed rewards with "+_epics+" Power Tokens.",[SCORE_EPICS,30]]);
+						rewards.push(["Epic Zone Compensation: for reaching Epic zone "+_epics+" we are compensating you for missed rewards with "+_epics+" Power Tokens.",[SCORE_KREDS,_epics]]);
 					}
 				}
 				// if (_version<99){

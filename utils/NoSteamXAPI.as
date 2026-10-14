@@ -4,6 +4,8 @@
     import flash.net.SharedObject;
     import utils.Base64;
     import flash.utils.ByteArray;
+    import flash.utils.getDefinitionByName;
+    import flash.system.fscommand;
 
     import ui.windows.ConfirmWindow;
 
@@ -14,6 +16,8 @@
         // Steam ANE instance
         internal const SAVE_FILE_NAME:String = "savegame.json";
         internal const SECRET_KEY:String = "EQ_KEY_F17eH51B";
+        // playerData key holding the last save time, shown when local and cloud saves conflict
+        internal const SAVED_AT:String = "savedAt";
 
         var saveSO:SharedObject;
 
@@ -38,7 +42,12 @@
          * Syncs to both Local SO and Steam Cloud
          */
         internal function syncAll():void {
+            stampSaveTime();
             saveSO.flush();
+        }
+
+        internal function stampSaveTime():void {
+            saveSO.data.playerData[SAVED_AT] = String(new Date().time);
         }
         
         public function deleteEverything(): void {
@@ -140,6 +149,16 @@
 
         public function locked(e:Event):void {
             Facade.stage.addChild(expiredMC);
+        }
+
+        public function quitGame():void {
+            // looked up at runtime: the Flash CS6 compile target doesn't include AIR classes
+            try {
+                var nativeApp:Object = getDefinitionByName("flash.desktop.NativeApplication");
+                nativeApp.nativeApplication.exit();
+            } catch (e:Error) {
+                fscommand("quit");
+            }
         }
 
         public function getName():String {
@@ -255,7 +274,9 @@
 			}else if (s=="false"){
 				return false;
 			}else if (s.search(/\d/)==0 || s.substr(0,1)=="-"){
-				return Number(s);
+				// names like "3rdKnight" start with a digit but aren't numbers
+				var n:Number=Number(s);
+				return isNaN(n) ? s : n;
 			}else if (s.charAt(0)=="["){
 				return stringToArray(s);
 			}else{

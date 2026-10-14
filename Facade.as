@@ -11,6 +11,8 @@
 	import utils.SpriteSheets;
 	import gameEvents.*;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
+	import flash.display.StageDisplayState;
 	import ui.main.HomeUI;
 	import ui.windows.ConfirmWindow;
 	import utils.SteamAPI;
@@ -49,6 +51,8 @@
 			stage=_s;
 			stage.frameRate=FRAMERATE;
 			stage.color=0x000000;
+
+			stage.addEventListener(KeyboardEvent.KEY_DOWN,fullScreenKeys);
 
 			try {
 				steamAPI = new SteamAPI();
@@ -112,6 +116,22 @@
 			//transition.finishTransition(menuUI.libraryUI,false);
 		}
 		
+		// Alt+Enter toggles fullscreen; Esc exits it (AIR default)
+		static function fullScreenKeys(e:KeyboardEvent){
+			if (e.keyCode==13 && e.altKey){
+				setFullScreen(stage.displayState==StageDisplayState.NORMAL);
+			}
+		}
+
+		public static function setFullScreen(b:Boolean){
+			try{
+				// string instead of StageDisplayState.FULL_SCREEN_INTERACTIVE, which CS6's playerglobal may not have
+				stage.displayState=b?"fullScreenInteractive":StageDisplayState.NORMAL;
+			}catch(e:Error){
+				addLine("Fullscreen unavailable: "+e.message);
+			}
+		}
+
 		public static function diminish(a:Number,_level:int):Number{
 			return 1-Math.pow(1-a,_level);
 		}
