@@ -225,8 +225,7 @@
 			gameM.setupArea(gameM.area+1);
 			gameM.deathStreak=0;
 			spawn=99;
-			
-			GameData.suns*=0.97;
+			GameData.suns*=0.9931;
 			GameEventManager.addGameEvent(GameEvent.AREA_REACHED,gameM.area);
 			
 			if (gameM.area>GameData.getScore(GameData.SCORE_FURTHEST)){

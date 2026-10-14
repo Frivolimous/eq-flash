@@ -98,6 +98,7 @@
 				_model=ItemData.suffixItem(ItemData.spawnItem(15,135),_model.index); //random mythic suffx
 			}
 			gameUI.addItem(new ItemView(_model));
+			gameUI.addItem(new ItemView(ItemData.spawnPremium(0,true)));
 			gameUI.progress+=1;
 		}
 		

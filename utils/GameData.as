@@ -21,7 +21,7 @@
 	****************/
 	
 	public class GameData {
-		public static const VERSION:int=102;
+		public static const VERSION:int=104;
 		public static const DEMO:Boolean=false;
 		
 		public static const FLAG_TUTORIAL:int=0,
@@ -759,7 +759,7 @@
 		
 		public static function checkVersion(_Data:*){
 			if (_Data.version==null){
-				_version=88;
+				_version=VERSION;
 			}else{
 				var _version:int=_Data.version;
 			}
@@ -769,6 +769,12 @@
 			
 			if (_version<VERSION){
 				//UPDATES SINCE LAST VERSION
+				if (_version<103){
+					var _epics = getScore(SCORE_EPICS);
+					if (_epics > 0) {
+						rewards.push(["Epic Zone Compensation: for reaching Epic zone "+_epics+" we are compensating you for missed rewards with "+_epics+" Power Tokens.",[SCORE_EPICS,30]]);
+					}
+				}
 				// if (_version<99){
 				// 	if (_Data.Hardcore!=null){
 				// 		hardcore=_Data.Hardcore;
@@ -888,6 +894,10 @@
 		public static function getVersionLog(_numBack:int=10):String{
 			var m:String="";
 			var i:int=0;
+			m+="<b>Steam Fix 104</b>\nFixed steam desync issues and loss of saves.";
+			m+="\n\n";
+			m+="<b>Minor Balance Patch 103</b>\nMinor changes to lategame due to player feedback.\n* Epic Zones now grant more rewards\n* Suns decay slower\n* Some later achievements grant more PT\n*Epic Items level cap changed\n\n* Bug Fix: If you ascend without items, you can go back in to rebuy.";
+			m+="\n\n";
 			m+="<b>Steam Release Update 102</b>\nThe game is finally updated, and released on STEAM! It has been 9 years since the final FLASH update\nI hope you enjoy the game, and if we get a bunch of players I'll do more updates!.";
 			i+=1;
 			if (i>=_numBack) return m;

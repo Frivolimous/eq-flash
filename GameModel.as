@@ -225,39 +225,33 @@
 			//fix when actively dueling (i get  ref error)
 			//fix when in shop (add to shop inventory)
 			if (Facade.gameC is GameControl && !(Facade.gameC is DuelControl)){
-				trace("added through game");
 				Facade.gameUI.addItem(new ItemView(_item));
 				return;
 			}
 
 			if (Facade.gameC is DuelControl) {
-				trace("added to overflow cus duel");
 				addOverflowItem(_item, true);
 				return;
 			}
 
 			if (Facade.currentUI is DuelUI) {
-				trace("added to overflow cus duel");
 				addOverflowItem(_item, true);
 				return;
 			}
 
  			if ((Facade.currentUI is HardcoreHomeUI) || (Facade.currentUI is HardcoreDuelUI) || (Facade.currentUI is ArtifactUI) || (Facade.currentUI is LoadCharacterUI) || (Facade.currentUI is NewCharacterUI)){
-				trace("added to overflow cus not perma char");
 				addOverflowItem(_item, true);
 				return;
 			}
 
 			if (Facade.currentUI is ShopUI) {
 				if (Facade.currentUI.inventory.addItem(new ItemView(_item))){
-					trace("added through shop");
 					return;
 				}
 			}
 
 			if (Facade.currentUI is ForgeUI) {
 				if (Facade.currentUI.inventoryUI.addItem(new ItemView(_item))){
-					trace("added through forge");
 					return;
 				}
 			}
@@ -265,19 +259,16 @@
 			if (Facade.currentUI is StatusUI) {
 				if (!Facade.currentUI.inventoryUI.noSell) {
 					if (Facade.currentUI.inventoryUI.addItem(new ItemView(_item))){
-						trace("added through status");
 						return;
 					}
 				}
 			} else {
 				if (playerM.addItem(_item)) {
-					trace("added to player directly");
 
 					return;
 				}
 			}
 
-			trace("added to overflow");
 			addOverflowItem(_item, true);
 		}
 		

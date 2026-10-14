@@ -62,6 +62,9 @@
 			} else {
 				premiumChance = 0.00095;
 			}
+			if (_level > 100) {
+				premiumChance *= Math.min(1 + (_level - 100) / 1000, 1.5);
+			}
 			
 			if (Math.random()<premiumChance){
 				return spawnPremium(0);
@@ -347,7 +350,7 @@
 			if (m.index === 118) {
 				m.name = m.name+" #"+_index;
 				m.enchantIndex=_index;
-				m.cost=-1;
+				m.cost=0-AchieveData.ACHIEVE_DEFS[m.enchantIndex].value;
 				return m;
 			}
 			

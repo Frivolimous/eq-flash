@@ -144,7 +144,6 @@
 							}
 						}else{
 							var _offset:int=(backs.length-3)-(Facade.gameM.eTotal-Facade.gameM.eCount)-cBG;
-							trace(_offset);
 							if (_offset>0){
 								cBG+=1;
 							}else{

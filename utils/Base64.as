@@ -127,7 +127,6 @@ package utils{
 
         public static function decompressSave(str:String):String {
             str=str.substr(1,str.length-2);
-            trace(str);
             // 2. Base64 decode
             var bytes:ByteArray = decode62(str);
             // 3. Decompress

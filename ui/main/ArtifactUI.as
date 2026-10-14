@@ -47,11 +47,16 @@
 		
 		public function restock(){
 			gambleInv.clear();
-			if (Facade.gameM.area<101) return;
-			
 			var _artifacts=GameData.artifacts;
-			var _possibles:Array=new Array;
+			var numArtifacts:int=0;
 			for (var i:int=0;i<_artifacts.length;i+=1){
+				if (_artifacts[i]!=-1) numArtifacts+=1;
+			}
+
+			if (Facade.gameM.area<101 && numArtifacts > 0) return;
+			
+			var _possibles:Array=new Array;
+			for (i=0;i<_artifacts.length;i+=1){
 				if (_artifacts[i]==-1 && ArtifactData.spawnArtifact(i,0)!=null){
 					_possibles.push(i);
 				}
